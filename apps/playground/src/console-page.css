@@ -1,0 +1,91 @@
+.console-lab__controls {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--basis-sys-space-xl);
+  margin-bottom: var(--basis-sys-space-lg);
+}
+.console-lab__controls > p {
+  color: var(--basis-sys-color-text-secondary);
+  font-size: var(--basis-sys-type-size-body);
+  margin: 0 0 var(--basis-sys-space-sm);
+}
+.console-lab__controls > .basis-field {
+  min-width: 240px;
+  width: 280px;
+  flex: 0 0 280px;
+}
+.console-lab__caption {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--basis-sys-space-lg);
+  padding-top: var(--basis-sys-space-md);
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+}
+.console-lab__rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--basis-sys-space-lg);
+}
+.console-lab__rules article {
+  padding: var(--basis-sys-space-xl);
+  background: var(--basis-sys-color-surface-base);
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-container);
+}
+.console-lab__rules svg {
+  color: var(--basis-sys-color-text-link);
+  width: 22px;
+  height: 22px;
+  display: block;
+  margin-bottom: var(--basis-sys-space-lg);
+}
+.console-lab__rules strong {
+  font-size: var(--basis-sys-type-size-control);
+}
+.console-lab__rules p,
+.console-lab__token-note {
+  color: var(--basis-sys-color-text-secondary);
+  font-size: var(--basis-sys-type-size-body);
+  line-height: var(--basis-sys-type-leading-relaxed);
+}
+.console-lab__rules p {
+  margin-bottom: 0;
+}
+.console-lab__token-note {
+  max-width: 960px;
+  margin-bottom: var(--basis-sys-space-xl);
+}
+.console-lab__floating-note {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-xl);
+  background: var(--basis-sys-color-surface-base);
+  border: var(--basis-sys-border-thin) dashed var(--basis-sys-color-border-control);
+  border-radius: var(--basis-sys-radius-workspace);
+  padding: var(--basis-sys-space-xl);
+  min-height: 160px;
+}
+.console-lab__floating-note > svg {
+  color: var(--basis-sys-color-text-link);
+  flex-shrink: 0;
+}
+.console-lab__floating-note p {
+  font-size: var(--basis-sys-type-size-body);
+  color: var(--basis-sys-color-text-secondary);
+  line-height: var(--basis-sys-type-leading-body);
+}
+@media (max-width: 900px) {
+  .console-lab__rules {
+    grid-template-columns: 1fr;
+  }
+  .console-lab__controls,
+  .console-lab__floating-note {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .console-lab__caption {
+    flex-wrap: wrap;
+  }
+}

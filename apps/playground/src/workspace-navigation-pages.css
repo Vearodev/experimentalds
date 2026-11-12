@@ -1,0 +1,146 @@
+.navigation-lab,
+.workspace-lab {
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-container);
+  background: var(--basis-sys-color-surface-base);
+  overflow: hidden;
+}
+.navigation-lab {
+  display: grid;
+  grid-template-columns: var(--basis-comp-navigation-width) minmax(0, 1fr);
+  min-height: 420px;
+}
+.navigation-lab[data-compact='true'] {
+  grid-template-columns: var(--basis-comp-navigation-compact-width) minmax(0, 1fr);
+}
+.navigation-lab__sidebar {
+  padding: var(--basis-sys-space-sm);
+  background: var(--basis-comp-navigation-background);
+  border-right: var(--basis-sys-border-thin) solid var(--basis-comp-navigation-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--basis-sys-space-md);
+}
+.navigation-lab__sidebar > .basis-tooltip-anchor {
+  margin-top: auto;
+  align-self: center;
+}
+.navigation-lab__brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--basis-sys-space-sm);
+  height: var(--basis-sys-control-lg-height);
+  color: var(--basis-sys-color-text-primary);
+}
+.navigation-lab__brand svg {
+  width: var(--basis-sys-icon-lg);
+}
+.navigation-lab__workspace,
+.workspace-lab__content {
+  padding: var(--basis-sys-space-xl);
+  min-width: 0;
+}
+.navigation-lab__workspace h2,
+.workspace-lab__content h2 {
+  margin: var(--basis-sys-space-sm) 0;
+  font-size: var(--basis-sys-type-size-section);
+  overflow-wrap: anywhere;
+}
+.navigation-lab__workspace > p,
+.workspace-lab__content > p {
+  max-width: 580px;
+  color: var(--basis-sys-color-text-muted);
+  line-height: var(--basis-sys-type-leading-body);
+  margin-bottom: var(--basis-sys-space-xl);
+}
+.navigation-lab__resource {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-md);
+  padding: var(--basis-sys-space-lg);
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-container);
+  margin-bottom: var(--basis-sys-space-lg);
+}
+.navigation-lab__resource > svg {
+  color: var(--basis-sys-color-text-accent);
+  flex-shrink: 0;
+}
+.navigation-lab__resource > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--basis-sys-space-xs);
+}
+.navigation-lab__resource span {
+  font-size: var(--basis-sys-type-size-caption);
+  color: var(--basis-sys-color-text-muted);
+}
+.navigation-rules {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--basis-sys-space-lg);
+}
+.navigation-rules article {
+  padding: var(--basis-sys-space-lg);
+  background: var(--basis-sys-color-surface-base);
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-container);
+}
+.navigation-rules p {
+  color: var(--basis-sys-color-text-muted);
+  line-height: var(--basis-sys-type-leading-body);
+  margin: var(--basis-sys-space-sm) 0 0;
+}
+.workspace-lab-controls {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--basis-sys-space-md);
+  margin-bottom: var(--basis-sys-space-lg);
+}
+.workspace-lab-controls > .basis-field {
+  width: 280px;
+  max-width: 100%;
+}
+.workspace-lab__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--basis-sys-space-sm);
+  padding: var(--basis-sys-space-sm) var(--basis-sys-space-lg);
+  border-bottom: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+}
+.workspace-lab__header > span {
+  display: flex;
+  gap: var(--basis-sys-space-sm);
+  align-items: center;
+  font-size: var(--basis-sys-type-size-label);
+  color: var(--basis-sys-color-text-muted);
+  min-width: 0;
+}
+.workspace-lab__header svg {
+  width: var(--basis-sys-icon-sm);
+  flex-shrink: 0;
+}
+@media (max-width: 780px) {
+  .navigation-rules {
+    grid-template-columns: 1fr;
+  }
+  .navigation-lab__workspace {
+    padding: var(--basis-sys-space-md);
+  }
+  .navigation-lab__resource {
+    flex-wrap: wrap;
+  }
+  .navigation-lab {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .navigation-lab[data-compact='true'] {
+    grid-template-columns: var(--basis-comp-navigation-compact-width) minmax(0, 1fr);
+  }
+  .workspace-lab-controls {
+    flex-wrap: wrap;
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "name": "basis-design-system",
+  "version": "0.7.1",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "tokens:build": "node scripts/compile-tokens.mjs",
+    "tokens:check": "node scripts/compile-tokens.mjs --check && node scripts/check-token-usage.mjs",
+    "design:check": "node scripts/check-component-boundaries.mjs",
+    "predev": "npm run tokens:build",
+    "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write apps packages scripts test *.json *.ts *.md docs .github",
+    "format:check": "prettier --check apps packages scripts test *.json *.ts *.md docs .github",
+    "test": "vitest run",
+    "prebuild": "npm run tokens:build",
+    "build": "npm run typecheck && npm run design:check && vite build && node scripts/build-standalone.mjs",
+    "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
+    "prebuild:pages": "npm run tokens:build",
+    "build:pages": "npm run typecheck && npm run design:check && vite build --mode pages && node scripts/prepare-pages.mjs && npm run pages:check",
+    "pages:check": "node scripts/check-pages.mjs",
+    "preview:pages": "node scripts/preview-pages.mjs",
+    "platform:inspect": "node scripts/inspect-platform.mjs",
+    "platform:check": "node scripts/report-platform.mjs --check"
+  },
+  "dependencies": {
+    "@basis/tokens": "*",
+    "@basis/ui": "*",
+    "@fontsource-variable/onest": "5.3.1",
+    "lucide-react": "1.72.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@babel/parser": "^8.1.2",
+    "@testing-library/jest-dom": "7.0.1",
+    "@testing-library/react": "16.3.3",
+    "@testing-library/user-event": "14.6.9",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.3.0",
+    "jsdom": "31.0.0",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@basis/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./engine": {
+      "types": "./engine.d.mts",
+      "default": "./engine.mjs"
+    },
+    "./manifest.json": "./manifest.json",
+    "./config.json": "./config.json",
+    "./legacy-map.json": "./legacy-map.json",
+    "./styles.css": "./styles.css",
+    "./tokens.json": "./tokens.json"
+  }
+}

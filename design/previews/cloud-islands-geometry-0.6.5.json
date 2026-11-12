@@ -1,0 +1,425 @@
+{
+  "light": {
+    "page": {
+      "height": 884,
+      "width": 1554
+    },
+    "rowHeight": 40,
+    "sections": [
+      {
+        "box": {
+          "bottom": 68,
+          "height": 56,
+          "left": 12,
+          "right": 1542,
+          "top": 12,
+          "width": 1530,
+          "x": 12,
+          "y": 12
+        },
+        "class": "cloud-topbar",
+        "radius": "20px"
+      },
+      {
+        "box": {
+          "bottom": 872,
+          "height": 792,
+          "left": 12,
+          "right": 236,
+          "top": 80,
+          "width": 224,
+          "x": 12,
+          "y": 80
+        },
+        "class": "cloud-sidebar",
+        "radius": "20px"
+      },
+      {
+        "box": {
+          "bottom": 872,
+          "height": 792,
+          "left": 248,
+          "right": 1542,
+          "top": 80,
+          "width": 1294,
+          "x": 248,
+          "y": 80
+        },
+        "class": "cloud-main",
+        "radius": "20px"
+      },
+      {
+        "box": {
+          "bottom": 842.5,
+          "height": 616,
+          "left": 265,
+          "right": 1525,
+          "top": 226.5,
+          "width": 1260,
+          "x": 265,
+          "y": 226.5
+        },
+        "class": "basis-data-table",
+        "radius": "12px"
+      },
+      {
+        "box": {
+          "bottom": 792.5,
+          "height": 504,
+          "left": 266,
+          "right": 1524,
+          "top": 288.5,
+          "width": 1258,
+          "x": 266,
+          "y": 288.5
+        },
+        "class": "basis-data-table__scroll",
+        "radius": "0px"
+      }
+    ],
+    "viewport": {
+      "height": 884,
+      "width": 1554
+    }
+  },
+  "selection": {
+    "selected": "1ВыбраноЗапуститьЗапуститьВыключитьВыключитьУдалитьУдалить",
+    "table": {
+      "bottom": 842.5,
+      "height": 616,
+      "left": 265,
+      "right": 1525,
+      "top": 226.5,
+      "width": 1260,
+      "x": 265,
+      "y": 226.5
+    }
+  },
+  "filters": {
+    "backdrop": "rgba(17, 29, 68, 0.18)",
+    "body": {
+      "height": 660,
+      "scrollHeight": 660,
+      "scrollWidth": 478,
+      "width": 478
+    },
+    "footer": {
+      "bottom": 867,
+      "height": 109,
+      "left": 1059,
+      "right": 1537,
+      "top": 758,
+      "width": 478,
+      "x": 1059,
+      "y": 758
+    },
+    "panel": {
+      "bottom": 868,
+      "height": 852,
+      "left": 1058,
+      "right": 1538,
+      "top": 16,
+      "width": 480,
+      "x": 1058,
+      "y": 16
+    },
+    "radius": "20px",
+    "table": {
+      "bottom": 842.5,
+      "height": 616,
+      "left": 265,
+      "right": 1525,
+      "top": 226.5,
+      "width": 1260,
+      "x": 265,
+      "y": 226.5
+    }
+  },
+  "sort": {
+    "backdrop": "rgba(17, 29, 68, 0.18)",
+    "body": {
+      "height": 660,
+      "scrollHeight": 660,
+      "scrollWidth": 478,
+      "width": 478
+    },
+    "footer": {
+      "bottom": 867,
+      "height": 109,
+      "left": 1059,
+      "right": 1537,
+      "top": 758,
+      "width": 478,
+      "x": 1059,
+      "y": 758
+    },
+    "panel": {
+      "bottom": 868,
+      "height": 852,
+      "left": 1058,
+      "right": 1538,
+      "top": 16,
+      "width": 480,
+      "x": 1058,
+      "y": 16
+    },
+    "radius": "20px",
+    "table": {
+      "bottom": 842.5,
+      "height": 616,
+      "left": 265,
+      "right": 1525,
+      "top": 226.5,
+      "width": 1260,
+      "x": 265,
+      "y": 226.5
+    }
+  },
+  "columns": {
+    "backdrop": "rgba(17, 29, 68, 0.18)",
+    "body": {
+      "height": 660,
+      "scrollHeight": 725,
+      "scrollWidth": 468,
+      "width": 468
+    },
+    "footer": {
+      "bottom": 867,
+      "height": 109,
+      "left": 1059,
+      "right": 1537,
+      "top": 758,
+      "width": 478,
+      "x": 1059,
+      "y": 758
+    },
+    "panel": {
+      "bottom": 868,
+      "height": 852,
+      "left": 1058,
+      "right": 1538,
+      "top": 16,
+      "width": 480,
+      "x": 1058,
+      "y": 16
+    },
+    "radius": "20px",
+    "table": {
+      "bottom": 842.5,
+      "height": 616,
+      "left": 265,
+      "right": 1525,
+      "top": 226.5,
+      "width": 1260,
+      "x": 265,
+      "y": 226.5
+    }
+  },
+  "dark": {
+    "canvas": "rgb(10, 18, 32)",
+    "surface": "rgb(16, 26, 42)",
+    "theme": "dark"
+  },
+  "darkPanel": {
+    "backdrop": "rgba(17, 29, 68, 0.32)",
+    "body": {
+      "height": 660,
+      "scrollHeight": 660,
+      "scrollWidth": 478,
+      "width": 478
+    },
+    "footer": {
+      "bottom": 867,
+      "height": 109,
+      "left": 1059,
+      "right": 1537,
+      "top": 758,
+      "width": 478,
+      "x": 1059,
+      "y": 758
+    },
+    "panel": {
+      "bottom": 868,
+      "height": 852,
+      "left": 1058,
+      "right": 1538,
+      "top": 16,
+      "width": 480,
+      "x": 1058,
+      "y": 16
+    },
+    "radius": "20px",
+    "table": {
+      "bottom": 842.5,
+      "height": 616,
+      "left": 265,
+      "right": 1525,
+      "top": 226.5,
+      "width": 1260,
+      "x": 265,
+      "y": 226.5
+    }
+  },
+  "narrowShell": {
+    "main": {
+      "bottom": 965.984375,
+      "height": 885.984375,
+      "left": 12,
+      "right": 363,
+      "top": 80,
+      "width": 351,
+      "x": 12,
+      "y": 80
+    },
+    "scrollWidth": 375,
+    "topbar": {
+      "bottom": 68,
+      "height": 56,
+      "left": 12,
+      "right": 363,
+      "top": 12,
+      "width": 351,
+      "x": 12,
+      "y": 12
+    },
+    "width": 390
+  },
+  "narrowPanel": {
+    "backdrop": "rgba(17, 29, 68, 0.18)",
+    "body": {
+      "height": 600,
+      "scrollHeight": 600,
+      "scrollWidth": 356,
+      "width": 356
+    },
+    "footer": {
+      "bottom": 827,
+      "height": 109,
+      "left": 17,
+      "right": 373,
+      "top": 718,
+      "width": 356,
+      "x": 17,
+      "y": 718
+    },
+    "panel": {
+      "bottom": 828,
+      "height": 812,
+      "left": 16,
+      "right": 374,
+      "top": 16,
+      "width": 358,
+      "x": 16,
+      "y": 16
+    },
+    "radius": "20px",
+    "table": {
+      "bottom": 940.984375,
+      "height": 658.390625,
+      "left": 25,
+      "right": 350,
+      "top": 282.59375,
+      "width": 325,
+      "x": 25,
+      "y": 282.59375
+    }
+  },
+  "laptop": {
+    "height": 800,
+    "main": {
+      "bottom": 788,
+      "height": 708,
+      "left": 248,
+      "right": 1268,
+      "top": 80,
+      "width": 1020,
+      "x": 248,
+      "y": 80
+    },
+    "pageHeight": 800,
+    "topbar": {
+      "bottom": 68,
+      "height": 56,
+      "left": 12,
+      "right": 1268,
+      "top": 12,
+      "width": 1256,
+      "x": 12,
+      "y": 12
+    }
+  },
+  "scrolled": {
+    "header": {
+      "bottom": 68,
+      "height": 56,
+      "left": 12,
+      "right": 1253,
+      "top": 12,
+      "width": 1241,
+      "x": 12,
+      "y": 12
+    },
+    "scroll": 747,
+    "sidebar": {
+      "bottom": 788,
+      "height": 708,
+      "left": 12,
+      "right": 236,
+      "top": 80,
+      "width": 224,
+      "x": 12,
+      "y": 80
+    }
+  },
+  "catalog": {
+    "backdrop": "rgba(17, 29, 68, 0.18)",
+    "body": {
+      "height": 576,
+      "scrollHeight": 576,
+      "scrollWidth": 478,
+      "width": 478
+    },
+    "footer": {
+      "bottom": 783,
+      "height": 109,
+      "left": 785,
+      "right": 1263,
+      "top": 674,
+      "width": 478,
+      "x": 785,
+      "y": 674
+    },
+    "panel": {
+      "bottom": 784,
+      "height": 768,
+      "left": 784,
+      "right": 1264,
+      "top": 16,
+      "width": 480,
+      "x": 784,
+      "y": 16
+    },
+    "radius": "20px",
+    "table": {
+      "bottom": 782,
+      "height": 486,
+      "left": 256,
+      "right": 1233,
+      "top": 296,
+      "width": 977,
+      "x": 256,
+      "y": 296
+    }
+  },
+  "final": {
+    "headerPosition": "sticky",
+    "mainRadius": "20px",
+    "theme": "light",
+    "version": "0.6.5",
+    "viewport": {
+      "height": 884,
+      "width": 1554
+    }
+  },
+  "logs": []
+}

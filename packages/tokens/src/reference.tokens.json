@@ -1,0 +1,1854 @@
+{
+  "$description": "Исходные шкалы по независимым доменам. Цвета, пространство, размеры, типографика и движение.",
+  "ref": {
+    "color": {
+      "neutral": {
+        "0": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 1, 1],
+            "alpha": 1
+          },
+          "$description": "neutral · 0"
+        },
+        "50": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9686274509803922, 0.9764705882352941, 0.9882352941176471],
+            "alpha": 1
+          },
+          "$description": "neutral · 50"
+        },
+        "100": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9333333333333333, 0.9490196078431372, 0.9725490196078431],
+            "alpha": 1
+          },
+          "$description": "neutral · 100"
+        },
+        "200": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.8627450980392157, 0.8941176470588236, 0.9372549019607843],
+            "alpha": 1
+          },
+          "$description": "neutral · 200"
+        },
+        "300": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.7411764705882353, 0.792156862745098, 0.8588235294117647],
+            "alpha": 1
+          },
+          "$description": "neutral · 300"
+        },
+        "400": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5686274509803921, 0.6352941176470588, 0.7294117647058823],
+            "alpha": 1
+          },
+          "$description": "neutral · 400"
+        },
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.39215686274509803, 0.4549019607843137, 0.5450980392156862],
+            "alpha": 1
+          },
+          "$description": "neutral · 500"
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.3137254901960784, 0.3843137254901961, 0.49411764705882355],
+            "alpha": 1
+          },
+          "$description": "neutral · 600"
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.21568627450980393, 0.2901960784313726, 0.40784313725490196],
+            "alpha": 1
+          },
+          "$description": "neutral · 700"
+        },
+        "800": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.14901960784313725, 0.21568627450980393, 0.32941176470588235],
+            "alpha": 1
+          },
+          "$description": "neutral · 800"
+        },
+        "900": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.09019607843137255, 0.14901960784313725, 0.24705882352941178],
+            "alpha": 1
+          },
+          "$description": "neutral · 900"
+        },
+        "950": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.06274509803921569, 0.10196078431372549, 0.16470588235294117],
+            "alpha": 1
+          },
+          "$description": "Глубокая поверхность тёмной темы."
+        },
+        "1000": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.0392156862745098, 0.07058823529411765, 0.12549019607843137],
+            "alpha": 1
+          },
+          "$description": "Фон тёмной темы."
+        }
+      },
+      "navy": {
+        "0": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9529411764705882, 0.9607843137254902, 0.9882352941176471],
+            "alpha": 1
+          },
+          "$description": "navy · 0"
+        },
+        "50": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9137254901960784, 0.9294117647058824, 0.9764705882352941],
+            "alpha": 1
+          },
+          "$description": "navy · 50"
+        },
+        "100": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.8352941176470589, 0.8666666666666667, 0.9568627450980393],
+            "alpha": 1
+          },
+          "$description": "navy · 100"
+        },
+        "200": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.6901960784313725, 0.7529411764705882, 0.9098039215686274],
+            "alpha": 1
+          },
+          "$description": "navy · 200"
+        },
+        "300": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5294117647058824, 0.611764705882353, 0.8549019607843137],
+            "alpha": 1
+          },
+          "$description": "navy · 300"
+        },
+        "400": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.3764705882352941, 0.4823529411764706, 0.7686274509803922],
+            "alpha": 1
+          },
+          "$description": "navy · 400"
+        },
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.2627450980392157, 0.36470588235294116, 0.6470588235294118],
+            "alpha": 1
+          },
+          "$description": "navy · 500"
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.18823529411764706, 0.28627450980392155, 0.5019607843137255],
+            "alpha": 1
+          },
+          "$description": "navy · 600"
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.1411764705882353, 0.21568627450980393, 0.4196078431372549],
+            "alpha": 1
+          },
+          "$description": "navy · 700"
+        },
+        "800": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.10980392156862745, 0.16470588235294117, 0.3764705882352941],
+            "alpha": 1
+          },
+          "$description": "navy · 800"
+        },
+        "900": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.06666666666666667, 0.11372549019607843, 0.26666666666666666],
+            "alpha": 1
+          },
+          "$description": "navy · 900"
+        }
+      },
+      "blue": {
+        "0": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9411764705882353, 0.9764705882352941, 1],
+            "alpha": 1
+          },
+          "$description": "blue · 0"
+        },
+        "50": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.8862745098039215, 0.9529411764705882, 1],
+            "alpha": 1
+          },
+          "$description": "blue · 50"
+        },
+        "100": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.7372549019607844, 0.9019607843137255, 1],
+            "alpha": 1
+          },
+          "$description": "blue · 100"
+        },
+        "200": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5254901960784314, 0.8156862745098039, 1],
+            "alpha": 1
+          },
+          "$description": "blue · 200"
+        },
+        "300": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.26666666666666666, 0.7137254901960784, 0.984313725490196],
+            "alpha": 1
+          },
+          "$description": "blue · 300"
+        },
+        "400": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.00392156862745098, 0.5882352941176471, 0.9411764705882353],
+            "alpha": 1
+          },
+          "$description": "blue · 400"
+        },
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0, 0.4823529411764706, 0.7725490196078432],
+            "alpha": 1
+          },
+          "$description": "blue · 500"
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0, 0.38823529411764707, 0.6196078431372549],
+            "alpha": 1
+          },
+          "$description": "blue · 600"
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0, 0.3137254901960784, 0.5019607843137255],
+            "alpha": 1
+          },
+          "$description": "blue · 700"
+        },
+        "800": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.027450980392156862, 0.24313725490196078, 0.3803921568627451],
+            "alpha": 1
+          },
+          "$description": "blue · 800"
+        },
+        "900": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.03137254901960784, 0.17254901960784313, 0.2784313725490196],
+            "alpha": 1
+          },
+          "$description": "blue · 900"
+        }
+      },
+      "green": {
+        "0": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9450980392156862, 0.9803921568627451, 0.9647058823529412],
+            "alpha": 1
+          },
+          "$description": "green · 0"
+        },
+        "50": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.8980392156862745, 0.9607843137254902, 0.9254901960784314],
+            "alpha": 1
+          },
+          "$description": "green · 50"
+        },
+        "100": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.7764705882352941, 0.9137254901960784, 0.8352941176470589],
+            "alpha": 1
+          },
+          "$description": "green · 100"
+        },
+        "200": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5803921568627451, 0.8274509803921568, 0.6941176470588235],
+            "alpha": 1
+          },
+          "$description": "green · 200"
+        },
+        "300": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.35294117647058826, 0.7176470588235294, 0.5411764705882353],
+            "alpha": 1
+          },
+          "$description": "green · 300"
+        },
+        "400": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.18823529411764706, 0.6, 0.41568627450980394],
+            "alpha": 1
+          },
+          "$description": "green · 400"
+        },
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.13333333333333333, 0.49019607843137253, 0.32941176470588235],
+            "alpha": 1
+          },
+          "$description": "green · 500"
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.09019607843137255, 0.4, 0.2784313725490196],
+            "alpha": 1
+          },
+          "$description": "green · 600"
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.0784313725490196, 0.3176470588235294, 0.23137254901960785],
+            "alpha": 1
+          },
+          "$description": "green · 700"
+        },
+        "800": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.06274509803921569, 0.24705882352941178, 0.1803921568627451],
+            "alpha": 1
+          },
+          "$description": "green · 800"
+        },
+        "900": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.0392156862745098, 0.1803921568627451, 0.12941176470588237],
+            "alpha": 1
+          },
+          "$description": "green · 900"
+        }
+      },
+      "amber": {
+        "0": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 0.984313725490196, 0.9411764705882353],
+            "alpha": 1
+          },
+          "$description": "amber · 0"
+        },
+        "50": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 0.9568627450980393, 0.8509803921568627],
+            "alpha": 1
+          },
+          "$description": "amber · 50"
+        },
+        "100": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9882352941176471, 0.8980392156862745, 0.6784313725490196],
+            "alpha": 1
+          },
+          "$description": "amber · 100"
+        },
+        "200": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9568627450980393, 0.8, 0.45098039215686275],
+            "alpha": 1
+          },
+          "$description": "amber · 200"
+        },
+        "300": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9058823529411765, 0.6823529411764706, 0.2235294117647059],
+            "alpha": 1
+          },
+          "$description": "amber · 300"
+        },
+        "400": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.792156862745098, 0.5372549019607843, 0.09803921568627451],
+            "alpha": 1
+          },
+          "$description": "amber · 400"
+        },
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.6666666666666666, 0.42745098039215684, 0.058823529411764705],
+            "alpha": 1
+          },
+          "$description": "amber · 500"
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5333333333333333, 0.3333333333333333, 0],
+            "alpha": 1
+          },
+          "$description": "amber · 600"
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.4196078431372549, 0.2627450980392157, 0.03137254901960784],
+            "alpha": 1
+          },
+          "$description": "amber · 700"
+        },
+        "800": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.3333333333333333, 0.21176470588235294, 0.050980392156862744],
+            "alpha": 1
+          },
+          "$description": "amber · 800"
+        },
+        "900": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.23137254901960785, 0.14901960784313725, 0.03529411764705882],
+            "alpha": 1
+          },
+          "$description": "amber · 900"
+        },
+        "950": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.1450980392156863, 0.13333333333333333, 0.11372549019607843],
+            "alpha": 1
+          },
+          "$description": "Приглушённый фон предупреждения в тёмной теме."
+        }
+      },
+      "red": {
+        "0": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 0.9607843137254902, 0.9647058823529412],
+            "alpha": 1
+          },
+          "$description": "red · 0"
+        },
+        "50": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [1, 0.9215686274509803, 0.9372549019607843],
+            "alpha": 1
+          },
+          "$description": "red · 50"
+        },
+        "100": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.984313725490196, 0.8274509803921568, 0.8627450980392157],
+            "alpha": 1
+          },
+          "$description": "red · 100"
+        },
+        "200": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9529411764705882, 0.6745098039215687, 0.7411764705882353],
+            "alpha": 1
+          },
+          "$description": "red · 200"
+        },
+        "300": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.9058823529411765, 0.4745098039215686, 0.5764705882352941],
+            "alpha": 1
+          },
+          "$description": "red · 300"
+        },
+        "400": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.8313725490196079, 0.29411764705882354, 0.41568627450980394],
+            "alpha": 1
+          },
+          "$description": "red · 400"
+        },
+        "500": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.7215686274509804, 0.1843137254901961, 0.27450980392156865],
+            "alpha": 1
+          },
+          "$description": "red · 500"
+        },
+        "600": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.611764705882353, 0.13725490196078433, 0.22745098039215686],
+            "alpha": 1
+          },
+          "$description": "red · 600"
+        },
+        "700": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.5019607843137255, 0.12156862745098039, 0.19607843137254902],
+            "alpha": 1
+          },
+          "$description": "red · 700"
+        },
+        "800": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.39215686274509803, 0.10196078431372549, 0.1607843137254902],
+            "alpha": 1
+          },
+          "$description": "red · 800"
+        },
+        "900": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.2784313725490196, 0.07450980392156863, 0.11764705882352941],
+            "alpha": 1
+          },
+          "$description": "red · 900"
+        },
+        "950": {
+          "$type": "color",
+          "$value": {
+            "colorSpace": "srgb",
+            "components": [0.1450980392156863, 0.10196078431372549, 0.1607843137254902],
+            "alpha": 1
+          },
+          "$description": "Приглушённый фон проблемной строки в тёмной теме."
+        }
+      },
+      "transparent": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0
+        },
+        "$description": "Прозрачный цвет."
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.067, 0.114, 0.267],
+          "alpha": 0.32
+        },
+        "$description": "Затемнение фона модального слоя."
+      },
+      "shadow-soft": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.06666666666666667, 0.11372549019607843, 0.26666666666666666],
+          "alpha": 0.09
+        },
+        "$description": "Мягкая тень в светлой теме."
+      },
+      "shadow-float": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.06666666666666667, 0.11372549019607843, 0.26666666666666666],
+          "alpha": 0.14
+        },
+        "$description": "Тень всплывающих слоёв в светлой теме."
+      },
+      "shadow-dark": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0, 0, 0],
+          "alpha": 0.4
+        },
+        "$description": "Тень в тёмной теме."
+      },
+      "overlay-subtle": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [0.067, 0.114, 0.267],
+          "alpha": 0.18
+        },
+        "$description": "Мягкое затемнение рабочей области за боковой панелью."
+      }
+    },
+    "number": {
+      "0": {
+        "$type": "number",
+        "$value": 0,
+        "$description": "Безразмерное значение 0."
+      },
+      "1": {
+        "$type": "number",
+        "$value": 1,
+        "$description": "Безразмерное значение 1."
+      },
+      "2": {
+        "$type": "number",
+        "$value": 2,
+        "$description": "Безразмерное значение 2."
+      },
+      "3": {
+        "$type": "number",
+        "$value": 3,
+        "$description": "Безразмерное значение 3."
+      },
+      "4": {
+        "$type": "number",
+        "$value": 4,
+        "$description": "Безразмерное значение 4."
+      },
+      "10": {
+        "$type": "number",
+        "$value": 10,
+        "$description": "Безразмерное значение 10."
+      },
+      "20": {
+        "$type": "number",
+        "$value": 20,
+        "$description": "Безразмерное значение 20."
+      },
+      "50": {
+        "$type": "number",
+        "$value": 50,
+        "$description": "Безразмерное значение 50."
+      },
+      "100": {
+        "$type": "number",
+        "$value": 100,
+        "$description": "Безразмерное значение 100."
+      },
+      "500": {
+        "$type": "number",
+        "$value": 500,
+        "$description": "Безразмерное значение 500."
+      },
+      "600": {
+        "$type": "number",
+        "$value": 600,
+        "$description": "Безразмерное значение 600."
+      },
+      "700": {
+        "$type": "number",
+        "$value": 700,
+        "$description": "Безразмерное значение 700."
+      },
+      "0_25": {
+        "$type": "number",
+        "$value": 0.25,
+        "$description": "Безразмерное значение 0.25."
+      },
+      "0_4": {
+        "$type": "number",
+        "$value": 0.4,
+        "$description": "Безразмерное значение 0.4."
+      },
+      "0_5": {
+        "$type": "number",
+        "$value": 0.5,
+        "$description": "Безразмерное значение 0.5."
+      },
+      "0_65": {
+        "$type": "number",
+        "$value": 0.65,
+        "$description": "Безразмерное значение 0.65."
+      },
+      "0_8": {
+        "$type": "number",
+        "$value": 0.8,
+        "$description": "Безразмерное значение 0.8."
+      },
+      "1_5": {
+        "$type": "number",
+        "$value": 1.5,
+        "$description": "Безразмерное значение 1.5."
+      },
+      "1_75": {
+        "$type": "number",
+        "$value": 1.75,
+        "$description": "Безразмерное значение 1.75."
+      }
+    },
+    "duration": {
+      "0": {
+        "$type": "duration",
+        "$value": {
+          "value": 0,
+          "unit": "ms"
+        },
+        "$description": "0 ms."
+      },
+      "80": {
+        "$type": "duration",
+        "$value": {
+          "value": 80,
+          "unit": "ms"
+        },
+        "$description": "80 ms."
+      },
+      "120": {
+        "$type": "duration",
+        "$value": {
+          "value": 120,
+          "unit": "ms"
+        },
+        "$description": "120 ms."
+      },
+      "180": {
+        "$type": "duration",
+        "$value": {
+          "value": 180,
+          "unit": "ms"
+        },
+        "$description": "180 ms."
+      },
+      "240": {
+        "$type": "duration",
+        "$value": {
+          "value": 240,
+          "unit": "ms"
+        },
+        "$description": "240 ms."
+      },
+      "320": {
+        "$type": "duration",
+        "$value": {
+          "value": 320,
+          "unit": "ms"
+        },
+        "$description": "320 ms."
+      },
+      "800": {
+        "$type": "duration",
+        "$value": {
+          "value": 800,
+          "unit": "ms"
+        },
+        "$description": "800 ms."
+      },
+      "1200": {
+        "$type": "duration",
+        "$value": {
+          "value": 1200,
+          "unit": "ms"
+        },
+        "$description": "1200 ms."
+      },
+      "1600": {
+        "$type": "duration",
+        "$value": {
+          "value": 1600,
+          "unit": "ms"
+        },
+        "$description": "1600 ms."
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "cubicBezier",
+        "$value": [0.2, 0.7, 0.2, 1],
+        "$description": "Кривая standard."
+      },
+      "enter": {
+        "$type": "cubicBezier",
+        "$value": [0, 0, 0.2, 1],
+        "$description": "Кривая enter."
+      },
+      "linear": {
+        "$type": "cubicBezier",
+        "$value": [0, 0, 1, 1],
+        "$description": "Кривая linear."
+      }
+    },
+    "font": {
+      "family": {
+        "ui": {
+          "$type": "fontFamily",
+          "$value": ["Onest Variable", "Onest", "system-ui", "sans-serif"],
+          "$description": "Onest. Web использует имя variable-face; Figma — Onest.",
+          "$extensions": {
+            "basis": {
+              "figmaFamily": "Onest"
+            }
+          }
+        },
+        "mono": {
+          "$type": "fontFamily",
+          "$value": ["Cascadia Code", "Consolas", "monospace"],
+          "$description": "Моноширинный шрифт для кода и идентификаторов."
+        }
+      },
+      "weight": {
+        "400": {
+          "$type": "fontWeight",
+          "$value": 400,
+          "$description": "Насыщенность 400."
+        },
+        "500": {
+          "$type": "fontWeight",
+          "$value": 500,
+          "$description": "Насыщенность 500."
+        },
+        "600": {
+          "$type": "fontWeight",
+          "$value": 600,
+          "$description": "Насыщенность 600."
+        },
+        "700": {
+          "$type": "fontWeight",
+          "$value": 700,
+          "$description": "Насыщенность 700."
+        }
+      },
+      "size": {
+        "caption": {
+          "$type": "dimension",
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.caption."
+        },
+        "label": {
+          "$type": "dimension",
+          "$value": {
+            "value": 12,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.label."
+        },
+        "body": {
+          "$type": "dimension",
+          "$value": {
+            "value": 14,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.body."
+        },
+        "control": {
+          "$type": "dimension",
+          "$value": {
+            "value": 14,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.control."
+        },
+        "subtitle": {
+          "$type": "dimension",
+          "$value": {
+            "value": 18,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.subtitle."
+        },
+        "heading": {
+          "$type": "dimension",
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.heading."
+        },
+        "title": {
+          "$type": "dimension",
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.size.title."
+        },
+        "compact": {
+          "$type": "dimension",
+          "$value": {
+            "value": 13,
+            "unit": "px"
+          },
+          "$description": "Промежуточный размер между подписью 12 px и основным текстом 14 px."
+        }
+      },
+      "leading": {
+        "caption": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.leading.caption."
+        },
+        "body": {
+          "$type": "dimension",
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.leading.body."
+        },
+        "relaxed": {
+          "$type": "dimension",
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.leading.relaxed."
+        },
+        "heading": {
+          "$type": "dimension",
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.leading.heading."
+        },
+        "title": {
+          "$type": "dimension",
+          "$value": {
+            "value": 40,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика font.leading.title."
+        }
+      }
+    },
+    "space": {
+      "100": {
+        "$type": "dimension",
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.100."
+      },
+      "150": {
+        "$type": "dimension",
+        "$value": {
+          "value": 6,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.150."
+      },
+      "200": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.200."
+      },
+      "250": {
+        "$type": "dimension",
+        "$value": {
+          "value": 10,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.250."
+      },
+      "300": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.300."
+      },
+      "350": {
+        "$type": "dimension",
+        "$value": {
+          "value": 14,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.350."
+      },
+      "400": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.400."
+      },
+      "450": {
+        "$type": "dimension",
+        "$value": {
+          "value": 18,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.450."
+      },
+      "500": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "Интервал 5 базовых шагов."
+      },
+      "600": {
+        "$type": "dimension",
+        "$value": {
+          "value": 24,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.600."
+      },
+      "800": {
+        "$type": "dimension",
+        "$value": {
+          "value": 32,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.800."
+      },
+      "1000": {
+        "$type": "dimension",
+        "$value": {
+          "value": 40,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.1000."
+      },
+      "1200": {
+        "$type": "dimension",
+        "$value": {
+          "value": 48,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.1200."
+      },
+      "000": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.000."
+      },
+      "025": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.025."
+      },
+      "050": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика space.050."
+      }
+    },
+    "radius": {
+      "none": {
+        "$type": "dimension",
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика radius.none."
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": {
+          "value": 4,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика radius.small."
+      },
+      "control": {
+        "$type": "dimension",
+        "$value": {
+          "value": 8,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика radius.control."
+      },
+      "container": {
+        "$type": "dimension",
+        "$value": {
+          "value": 12,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика radius.container."
+      },
+      "panel": {
+        "$type": "dimension",
+        "$value": {
+          "value": 16,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика radius.panel."
+      },
+      "pill": {
+        "$type": "dimension",
+        "$value": {
+          "value": 128,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика radius.pill."
+      },
+      "workspace": {
+        "$type": "dimension",
+        "$value": {
+          "value": 20,
+          "unit": "px"
+        },
+        "$description": "Скругление крупных самостоятельных поверхностей облачной платформы."
+      }
+    },
+    "border": {
+      "thin": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика border.thin."
+      },
+      "focus": {
+        "$type": "dimension",
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика border.focus."
+      }
+    },
+    "focus": {
+      "offset": {
+        "$type": "dimension",
+        "$value": {
+          "value": 3,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика focus.offset."
+      }
+    },
+    "size": {
+      "control": {
+        "sm": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 32,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.control.sm.height."
+          }
+        },
+        "md": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 36,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.control.md.height."
+          }
+        },
+        "lg": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 44,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.control.lg.height."
+          }
+        },
+        "switch": {
+          "track-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 36,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.control.switch.track-width."
+          },
+          "track-height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 20,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.control.switch.track-height."
+          },
+          "thumb-size": {
+            "$type": "dimension",
+            "$value": {
+              "value": 16,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.control.switch.thumb-size."
+          }
+        },
+        "xs": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 24,
+              "unit": "px"
+            },
+            "$description": "Высота компактной метки в строке."
+          }
+        }
+      },
+      "table": {
+        "row": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 40,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.table.row.height."
+          }
+        },
+        "header": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 44,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.table.header.height."
+          },
+          "min-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 160,
+              "unit": "px"
+            },
+            "$description": "Минимальная ширина колонки с пояснением и управляющими кнопками. Защищает области нажатия от пересечения; длинное название сокращается."
+          }
+        },
+        "selection": {
+          "width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 44,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.table.selection.width."
+          }
+        },
+        "column": {
+          "identity": {
+            "width": {
+              "$type": "dimension",
+              "$value": {
+                "value": 224,
+                "unit": "px"
+              },
+              "$description": "Стандартная ширина столбца: identity. Меняется в ДС, не в настройках пользовательской таблицы."
+            }
+          },
+          "status": {
+            "width": {
+              "$type": "dimension",
+              "$value": {
+                "value": 184,
+                "unit": "px"
+              },
+              "$description": "Стандартная ширина столбца: status. Меняется в ДС, не в настройках пользовательской таблицы."
+            }
+          },
+          "numeric": {
+            "width": {
+              "$type": "dimension",
+              "$value": {
+                "value": 160,
+                "unit": "px"
+              },
+              "$description": "Стандартная ширина столбца: numeric. Меняется в ДС, не в настройках пользовательской таблицы."
+            }
+          },
+          "relation": {
+            "width": {
+              "$type": "dimension",
+              "$value": {
+                "value": 176,
+                "unit": "px"
+              },
+              "$description": "Стандартная ширина столбца: relation. Меняется в ДС, не в настройках пользовательской таблицы."
+            }
+          },
+          "address": {
+            "width": {
+              "$type": "dimension",
+              "$value": {
+                "value": 184,
+                "unit": "px"
+              },
+              "$description": "Стандартная ширина столбца: address. Меняется в ДС, не в настройках пользовательской таблицы."
+            }
+          },
+          "actions": {
+            "width": {
+              "$type": "dimension",
+              "$value": {
+                "value": 48,
+                "unit": "px"
+              },
+              "$description": "Стандартная ширина столбца: actions. Меняется в ДС, не в настройках пользовательской таблицы."
+            }
+          },
+          "compact": {
+            "identity": {
+              "width": {
+                "$type": "dimension",
+                "$value": {
+                  "value": 224,
+                  "unit": "px"
+                },
+                "$description": "Ширина identity для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+              }
+            },
+            "status": {
+              "width": {
+                "$type": "dimension",
+                "$value": {
+                  "value": 184,
+                  "unit": "px"
+                },
+                "$description": "Ширина status для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+              }
+            },
+            "relation": {
+              "width": {
+                "$type": "dimension",
+                "$value": {
+                  "value": 168,
+                  "unit": "px"
+                },
+                "$description": "Ширина relation для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+              }
+            },
+            "address": {
+              "width": {
+                "$type": "dimension",
+                "$value": {
+                  "value": 168,
+                  "unit": "px"
+                },
+                "$description": "Ширина address для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+              }
+            },
+            "numeric": {
+              "width": {
+                "$type": "dimension",
+                "$value": {
+                  "value": 160,
+                  "unit": "px"
+                },
+                "$description": "Ширина numeric для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+              }
+            }
+          }
+        },
+        "toolbar": {
+          "height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 60,
+              "unit": "px"
+            },
+            "$description": "Высота панели управления реестром, одинаковая для поиска и массовых действий."
+          }
+        }
+      },
+      "layout": {
+        "sidebar": {
+          "width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 224,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.layout.sidebar.width."
+          },
+          "compact": {
+            "$type": "dimension",
+            "$value": {
+              "value": 64,
+              "unit": "px"
+            },
+            "$description": "Ширина компактного меню с иконками."
+          }
+        },
+        "content": {
+          "max": {
+            "$type": "dimension",
+            "$value": {
+              "value": 1440,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.layout.content.max."
+          }
+        },
+        "control": {
+          "max": {
+            "$type": "dimension",
+            "$value": {
+              "value": 400,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.layout.control.max."
+          }
+        },
+        "dialog": {
+          "width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 480,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.layout.dialog.width."
+          },
+          "wide": {
+            "$type": "dimension",
+            "$value": {
+              "value": 640,
+              "unit": "px"
+            },
+            "$description": "Исходная метрика size.layout.dialog.wide."
+          }
+        },
+        "picker": {
+          "width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 760,
+              "unit": "px"
+            },
+            "$description": "Стандартная ширина табличного выбора ресурсов."
+          }
+        },
+        "shell": {
+          "header-height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 56,
+              "unit": "px"
+            },
+            "$description": "Высота общей шапки облачной платформы."
+          },
+          "max-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 1920,
+              "unit": "px"
+            },
+            "$description": "Максимальная ширина облачного портала — Full HD. На больших экранах оболочка центрируется."
+          }
+        },
+        "workspace": {
+          "tab": {
+            "$type": "dimension",
+            "$value": {
+              "value": 248,
+              "unit": "px"
+            },
+            "$description": "Максимальная ширина сохранённой рабочей вкладки; длинные названия сокращаются."
+          }
+        }
+      },
+      "menu": {
+        "$type": "dimension",
+        "$value": {
+          "value": 320,
+          "unit": "px"
+        },
+        "$description": "Ширина компактного меню действий."
+      },
+      "cascade": {
+        "column-width": {
+          "$type": "dimension",
+          "$value": {
+            "value": 224,
+            "unit": "px"
+          },
+          "$description": "Ширина уровня каскадного выбора. Не зависит от ширины колонок таблицы."
+        }
+      },
+      "avatar": {
+        "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 32,
+            "unit": "px"
+          },
+          "$description": "Размер аватара sm. Независим от отступов и высоты кнопок."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": {
+            "value": 44,
+            "unit": "px"
+          },
+          "$description": "Размер аватара md. Независим от отступов и высоты кнопок."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 64,
+            "unit": "px"
+          },
+          "$description": "Размер аватара lg. Независим от отступов и высоты кнопок."
+        }
+      },
+      "badge": {
+        "height": {
+          "$type": "dimension",
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$description": "Высота счётчика событий."
+        },
+        "dot": {
+          "$type": "dimension",
+          "$value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "$description": "Диаметр точки нового события."
+        }
+      },
+      "console": {
+        "width": {
+          "$type": "dimension",
+          "$value": {
+            "value": 800,
+            "unit": "px"
+          },
+          "$description": "Консоль: width."
+        },
+        "height": {
+          "$type": "dimension",
+          "$value": {
+            "value": 480,
+            "unit": "px"
+          },
+          "$description": "Консоль: height."
+        },
+        "min-width": {
+          "$type": "dimension",
+          "$value": {
+            "value": 480,
+            "unit": "px"
+          },
+          "$description": "Консоль: min-width."
+        },
+        "min-height": {
+          "$type": "dimension",
+          "$value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "$description": "Консоль: min-height."
+        },
+        "header-height": {
+          "$type": "dimension",
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          },
+          "$description": "Консоль: header-height."
+        },
+        "footer-height": {
+          "$type": "dimension",
+          "$value": {
+            "value": 40,
+            "unit": "px"
+          },
+          "$description": "Консоль: footer-height."
+        },
+        "panel-width": {
+          "$type": "dimension",
+          "$value": {
+            "value": 376,
+            "unit": "px"
+          },
+          "$description": "Консоль: panel-width."
+        },
+        "compact-width": {
+          "$type": "dimension",
+          "$value": {
+            "value": 640,
+            "unit": "px"
+          },
+          "$description": "Ширина компактного рабочего окна; оставляет место порталу."
+        },
+        "compact-height": {
+          "$type": "dimension",
+          "$value": {
+            "value": 400,
+            "unit": "px"
+          },
+          "$description": "Высота компактного рабочего окна."
+        }
+      }
+    },
+    "icon": {
+      "size": {
+        "sm": {
+          "$type": "dimension",
+          "$value": {
+            "value": 14,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика icon.size.sm."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика icon.size.md."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика icon.size.lg."
+        },
+        "display": {
+          "$type": "dimension",
+          "$value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "$description": "Исходная метрика icon.size.display."
+        }
+      }
+    },
+    "breakpoint": {
+      "narrow": {
+        "$type": "dimension",
+        "$value": {
+          "value": 780,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика breakpoint.narrow."
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": {
+          "value": 1120,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика breakpoint.medium."
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": {
+          "value": 560,
+          "unit": "px"
+        },
+        "$description": "Исходная метрика breakpoint.small."
+      }
+    },
+    "elevation": {
+      "control": {
+        "offsetX": {
+          "$type": "dimension",
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          },
+          "$description": "control: offsetX."
+        },
+        "offsetY": {
+          "$type": "dimension",
+          "$value": {
+            "value": 1,
+            "unit": "px"
+          },
+          "$description": "control: offsetY."
+        },
+        "blur": {
+          "$type": "dimension",
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          },
+          "$description": "control: blur."
+        },
+        "spread": {
+          "$type": "dimension",
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          },
+          "$description": "control: spread."
+        }
+      },
+      "overlay": {
+        "offsetX": {
+          "$type": "dimension",
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          },
+          "$description": "overlay: offsetX."
+        },
+        "offsetY": {
+          "$type": "dimension",
+          "$value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "$description": "overlay: offsetY."
+        },
+        "blur": {
+          "$type": "dimension",
+          "$value": {
+            "value": 48,
+            "unit": "px"
+          },
+          "$description": "overlay: blur."
+        },
+        "spread": {
+          "$type": "dimension",
+          "$value": {
+            "value": 0,
+            "unit": "px"
+          },
+          "$description": "overlay: spread."
+        }
+      }
+    }
+  }
+}

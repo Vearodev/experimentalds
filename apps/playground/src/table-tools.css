@@ -1,0 +1,16 @@
+.applied-condition {
+  display: flex;
+  align-items: center;
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-control);
+  background: var(--basis-sys-color-surface-base);
+  max-width: 100%;
+}
+.applied-condition > .basis-button:first-child {
+  min-width: 0;
+  flex-shrink: 1;
+}
+.applied-condition .basis-button__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

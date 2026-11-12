@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-pages/
+playground.html
+cloud-demo.html
+.vite/
+coverage/
+*.tsbuildinfo
+.DS_Store
+.env*
+!.env.example
+.local/

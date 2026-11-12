@@ -1,0 +1,146 @@
+{
+  "cloud": {
+    ".basis-context-panel": {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(220, 228, 239)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "602px",
+      "padding": "0px",
+      "radius": "12px",
+      "width": "760px"
+    },
+    ".basis-context-panel .basis-input": {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(189, 202, 219)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "8px",
+      "height": "36px",
+      "padding": "0px 12px",
+      "radius": "8px",
+      "width": "147.656px"
+    },
+    ".basis-context-panel .basis-select__trigger": {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(189, 202, 219)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "36px",
+      "padding": "0px 14px",
+      "radius": "8px",
+      "width": "168.188px"
+    },
+    ".basis-context-panel__body": {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(28, 42, 96)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "450px",
+      "padding": "16px",
+      "radius": "0px",
+      "width": "758px"
+    },
+    ".basis-context-panel__footer > .basis-button:last-child": {
+      "background": "rgb(28, 42, 96)",
+      "border": "1px solid rgb(28, 42, 96)",
+      "font": "500 14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "36px",
+      "padding": "0px 14px",
+      "radius": "8px",
+      "width": "105.672px"
+    },
+    ".basis-tt-condition-rule": {
+      "background": "rgb(238, 242, 248)",
+      "border": "1px solid rgb(220, 228, 239)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "146px",
+      "padding": "12px",
+      "radius": "8px",
+      "width": "726px"
+    },
+    ".basis-tt-condition-rule__fields": {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(28, 42, 96)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "8px",
+      "height": "60px",
+      "padding": "0px",
+      "radius": "0px",
+      "width": "700px"
+    }
+  },
+  "playground": {
+    ".basis-context-panel": {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(220, 228, 239)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "602px",
+      "padding": "0px",
+      "radius": "12px",
+      "width": "760px"
+    },
+    ".basis-context-panel .basis-input": {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(189, 202, 219)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "8px",
+      "height": "36px",
+      "padding": "0px 12px",
+      "radius": "8px",
+      "width": "147.656px"
+    },
+    ".basis-context-panel .basis-select__trigger": {
+      "background": "rgb(255, 255, 255)",
+      "border": "1px solid rgb(189, 202, 219)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "36px",
+      "padding": "0px 14px",
+      "radius": "8px",
+      "width": "168.188px"
+    },
+    ".basis-context-panel__body": {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(28, 42, 96)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "450px",
+      "padding": "16px",
+      "radius": "0px",
+      "width": "758px"
+    },
+    ".basis-context-panel__footer > .basis-button:last-child": {
+      "background": "rgb(28, 42, 96)",
+      "border": "1px solid rgb(28, 42, 96)",
+      "font": "500 14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "36px",
+      "padding": "0px 14px",
+      "radius": "8px",
+      "width": "105.672px"
+    },
+    ".basis-tt-condition-rule": {
+      "background": "rgb(238, 242, 248)",
+      "border": "1px solid rgb(220, 228, 239)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "normal",
+      "height": "146px",
+      "padding": "12px",
+      "radius": "8px",
+      "width": "726px"
+    },
+    ".basis-tt-condition-rule__fields": {
+      "background": "rgba(0, 0, 0, 0)",
+      "border": "0px none rgb(28, 42, 96)",
+      "font": "14px / 20px \"Onest Variable\", Onest, system-ui, sans-serif",
+      "gap": "8px",
+      "height": "60px",
+      "padding": "0px",
+      "radius": "0px",
+      "width": "700px"
+    }
+  }
+}

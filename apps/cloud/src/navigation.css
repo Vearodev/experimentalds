@@ -1,0 +1,141 @@
+/* Shared navigation appearance for the permanent sidebar and its mobile dialog. */
+.cloud-sidebar {
+  grid-column: 1;
+  grid-row: 2;
+  min-height: 0;
+  overflow: hidden;
+  width: var(--cloud-sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: var(--basis-sys-space-lg) var(--basis-comp-navigation-inset);
+  border: var(--basis-sys-border-thin) solid var(--basis-comp-shell-surface-border);
+  border-radius: var(--basis-comp-shell-radius);
+  box-shadow: var(--basis-comp-shell-shadow);
+  background: var(--basis-comp-navigation-background);
+  color: var(--basis-comp-navigation-foreground);
+  z-index: 30;
+}
+.cloud-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-md);
+  min-height: var(--basis-sys-control-md-height);
+  padding: 0 var(--basis-sys-space-sm);
+  min-width: 0;
+}
+.cloud-brand img {
+  width: 104px;
+  height: 40px;
+  object-fit: cover;
+  object-position: center 32%;
+}
+[data-basis-theme='dark'] .cloud-brand img {
+  filter: brightness(0) invert(1);
+}
+.cloud-brand > span {
+  border-left: var(--basis-sys-border-thin) solid var(--basis-comp-navigation-border);
+  padding-left: var(--basis-sys-space-md);
+  color: var(--basis-comp-navigation-muted);
+  font-size: var(--basis-sys-type-size-caption);
+  font-weight: var(--basis-sys-type-weight-medium);
+}
+.cloud-scope {
+  margin: 0 0 var(--basis-sys-space-sm);
+  padding-bottom: var(--basis-sys-space-lg);
+  border-bottom: var(--basis-sys-border-thin) solid var(--basis-comp-navigation-border);
+}
+.cloud-scope .basis-field__label {
+  color: var(--basis-comp-navigation-group-color);
+  font-size: var(--basis-sys-type-size-caption);
+  font-weight: var(--basis-sys-type-weight-regular);
+  padding-left: var(--basis-comp-navigation-item-padding);
+}
+.cloud-scope .basis-select__trigger {
+  min-width: 0;
+  width: 100%;
+}
+.cloud-navigation {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--basis-comp-navigation-border) transparent;
+}
+.cloud-app[data-compact-nav='true'] {
+  --cloud-sidebar: var(--basis-comp-navigation-compact-width);
+}
+.cloud-app[data-compact-nav='true'] > .cloud-sidebar {
+  padding-inline: var(--basis-sys-space-sm);
+}
+.cloud-app[data-compact-nav='true'] > .cloud-sidebar > .cloud-scope {
+  display: flex;
+  justify-content: center;
+}
+.cloud-sidebar-bottom[data-compact='true'] {
+  align-items: center;
+}
+.cloud-app[data-favorites='true'] {
+  --cloud-favorites-height: calc(
+    var(--basis-comp-workspace-tabs-height) + var(--basis-sys-space-lg)
+  );
+}
+.cloud-favorites {
+  flex-shrink: 0;
+  border-radius: var(--basis-comp-shell-radius) var(--basis-comp-shell-radius) 0 0;
+  overflow: hidden;
+}
+.cloud-sidebar-bottom {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: var(--basis-sys-space-xs);
+  padding-top: var(--basis-sys-space-md);
+  margin-top: var(--basis-sys-space-lg);
+  border-top: var(--basis-sys-border-thin) solid var(--basis-comp-navigation-border);
+}
+.cloud-sidebar-bottom > .basis-button {
+  justify-content: flex-start;
+  color: var(--basis-comp-navigation-muted);
+}
+.cloud-sidebar-bottom > .basis-button:hover {
+  color: var(--basis-comp-navigation-foreground);
+  background: var(--basis-comp-navigation-hover);
+}
+.cloud-sidebar-bottom > a {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-sm);
+  min-height: var(--basis-sys-control-sm-height);
+  padding: 0 var(--basis-comp-navigation-item-padding);
+  border-radius: var(--basis-comp-navigation-item-radius);
+  color: var(--basis-comp-navigation-muted);
+  font-size: var(--basis-sys-type-size-label);
+}
+.cloud-sidebar-bottom > a:hover {
+  background: var(--basis-comp-navigation-hover);
+  color: var(--basis-comp-navigation-foreground);
+}
+.cloud-sidebar-bottom > a svg:last-child {
+  margin-left: auto;
+}
+.cloud-sidebar-bottom > span {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-sm);
+  padding: var(--basis-sys-space-sm) var(--basis-comp-navigation-item-padding);
+  color: var(--basis-comp-navigation-group-color);
+  font-size: var(--basis-sys-type-size-caption);
+}
+.cloud-sidebar-bottom > span small {
+  margin-left: auto;
+  font-size: inherit;
+}
+.cloud-sidebar-bottom > span i,
+.cloud-live-dot {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--basis-sys-radius-pill);
+  background: var(--basis-sys-color-status-success-marker);
+}

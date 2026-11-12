@@ -1,0 +1,111 @@
+/* Intent is independent of hierarchy. Geometry and interaction remain shared. */
+.basis-button[data-tone='neutral'] {
+  --tone-solid-default: var(--basis-comp-button-tone-neutral-solid-background-default);
+  --tone-solid-hover: var(--basis-comp-button-tone-neutral-solid-background-hover);
+  --tone-solid-pressed: var(--basis-comp-button-tone-neutral-solid-background-pressed);
+  --tone-solid-foreground: var(--basis-comp-button-tone-neutral-solid-foreground);
+  --tone-solid-border: var(--basis-comp-button-tone-neutral-solid-border);
+  --tone-soft-default: var(--basis-comp-button-tone-neutral-soft-background-default);
+  --tone-soft-hover: var(--basis-comp-button-tone-neutral-soft-background-hover);
+  --tone-soft-pressed: var(--basis-comp-button-tone-neutral-soft-background-pressed);
+  --tone-soft-foreground: var(--basis-comp-button-tone-neutral-soft-foreground);
+  --tone-soft-border: var(--basis-comp-button-tone-neutral-soft-border);
+  --tone-outline: var(--basis-comp-button-tone-neutral-outline-border);
+}
+.basis-button[data-tone='success'] {
+  --tone-solid-default: var(--basis-comp-button-tone-success-solid-background-default);
+  --tone-solid-hover: var(--basis-comp-button-tone-success-solid-background-hover);
+  --tone-solid-pressed: var(--basis-comp-button-tone-success-solid-background-pressed);
+  --tone-solid-foreground: var(--basis-comp-button-tone-success-solid-foreground);
+  --tone-solid-border: var(--basis-comp-button-tone-success-solid-border);
+  --tone-soft-default: var(--basis-comp-button-tone-success-soft-background-default);
+  --tone-soft-hover: var(--basis-comp-button-tone-success-soft-background-hover);
+  --tone-soft-pressed: var(--basis-comp-button-tone-success-soft-background-pressed);
+  --tone-soft-foreground: var(--basis-comp-button-tone-success-soft-foreground);
+  --tone-soft-border: var(--basis-comp-button-tone-success-soft-border);
+  --tone-outline: var(--basis-comp-button-tone-success-outline-border);
+}
+.basis-button[data-tone='warning'] {
+  --tone-solid-default: var(--basis-comp-button-tone-warning-solid-background-default);
+  --tone-solid-hover: var(--basis-comp-button-tone-warning-solid-background-hover);
+  --tone-solid-pressed: var(--basis-comp-button-tone-warning-solid-background-pressed);
+  --tone-solid-foreground: var(--basis-comp-button-tone-warning-solid-foreground);
+  --tone-solid-border: var(--basis-comp-button-tone-warning-solid-border);
+  --tone-soft-default: var(--basis-comp-button-tone-warning-soft-background-default);
+  --tone-soft-hover: var(--basis-comp-button-tone-warning-soft-background-hover);
+  --tone-soft-pressed: var(--basis-comp-button-tone-warning-soft-background-pressed);
+  --tone-soft-foreground: var(--basis-comp-button-tone-warning-soft-foreground);
+  --tone-soft-border: var(--basis-comp-button-tone-warning-soft-border);
+  --tone-outline: var(--basis-comp-button-tone-warning-outline-border);
+}
+.basis-button[data-tone='danger'] {
+  --tone-solid-default: var(--basis-comp-button-tone-danger-solid-background-default);
+  --tone-solid-hover: var(--basis-comp-button-tone-danger-solid-background-hover);
+  --tone-solid-pressed: var(--basis-comp-button-tone-danger-solid-background-pressed);
+  --tone-solid-foreground: var(--basis-comp-button-tone-danger-solid-foreground);
+  --tone-solid-border: var(--basis-comp-button-tone-danger-solid-border);
+  --tone-soft-default: var(--basis-comp-button-tone-danger-soft-background-default);
+  --tone-soft-hover: var(--basis-comp-button-tone-danger-soft-background-hover);
+  --tone-soft-pressed: var(--basis-comp-button-tone-danger-soft-background-pressed);
+  --tone-soft-foreground: var(--basis-comp-button-tone-danger-soft-foreground);
+  --tone-soft-border: var(--basis-comp-button-tone-danger-soft-border);
+  --tone-outline: var(--basis-comp-button-tone-danger-outline-border);
+}
+.basis-button[data-tone='info'] {
+  --tone-solid-default: var(--basis-comp-button-tone-info-solid-background-default);
+  --tone-solid-hover: var(--basis-comp-button-tone-info-solid-background-hover);
+  --tone-solid-pressed: var(--basis-comp-button-tone-info-solid-background-pressed);
+  --tone-solid-foreground: var(--basis-comp-button-tone-info-solid-foreground);
+  --tone-solid-border: var(--basis-comp-button-tone-info-solid-border);
+  --tone-soft-default: var(--basis-comp-button-tone-info-soft-background-default);
+  --tone-soft-hover: var(--basis-comp-button-tone-info-soft-background-hover);
+  --tone-soft-pressed: var(--basis-comp-button-tone-info-soft-background-pressed);
+  --tone-soft-foreground: var(--basis-comp-button-tone-info-soft-foreground);
+  --tone-soft-border: var(--basis-comp-button-tone-info-soft-border);
+  --tone-outline: var(--basis-comp-button-tone-info-outline-border);
+}
+.basis-button[data-variant='primary']:where(
+    [data-tone]:not([data-tone='brand']):not([data-feedback])
+  ) {
+  --b-bg: var(--tone-solid-default);
+  --b-fg: var(--tone-solid-foreground);
+  --b-border: var(--tone-solid-border);
+  --b-hover: var(--tone-solid-hover);
+  --b-active: var(--tone-solid-pressed);
+}
+.basis-button[data-variant='tonal']:where(
+    [data-tone]:not([data-tone='brand']):not([data-feedback])
+  ) {
+  --b-bg: var(--tone-soft-default);
+  --b-fg: var(--tone-soft-foreground);
+  --b-border: var(--tone-soft-border);
+  --b-hover: var(--tone-soft-hover);
+  --b-active: var(--tone-soft-pressed);
+}
+.basis-button[data-variant='secondary']:where(
+    [data-tone]:not([data-tone='brand']):not([data-feedback])
+  ) {
+  --b-bg: var(--basis-sys-color-surface-base);
+  --b-fg: var(--tone-soft-foreground);
+  --b-border: var(--tone-outline);
+  --b-hover: var(--tone-soft-default);
+  --b-active: var(--tone-soft-hover);
+}
+.basis-button[data-variant='ghost']:where(
+    [data-tone]:not([data-tone='brand']):not([data-feedback])
+  ) {
+  --b-bg: transparent;
+  --b-fg: var(--tone-soft-foreground);
+  --b-border: transparent;
+  --b-hover: var(--tone-soft-hover);
+  --b-active: var(--tone-soft-pressed);
+}
+.basis-button[aria-pressed='true']:where(
+    [data-tone]:not([data-tone='brand']):not([data-feedback])
+  ) {
+  --b-bg: var(--tone-soft-default);
+  --b-fg: var(--tone-soft-foreground);
+  --b-border: var(--tone-soft-border);
+  --b-hover: var(--tone-soft-hover);
+  --b-active: var(--tone-soft-pressed);
+}

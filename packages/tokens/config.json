@@ -1,0 +1,35 @@
+{
+  "version": "0.6.0",
+  "format": "DTCG 2025.10",
+  "sources": ["reference.tokens.json", "semantic.shared.tokens.json", "components.tokens.json"],
+  "themes": {
+    "light": "semantic.light.tokens.json",
+    "dark": "semantic.dark.tokens.json"
+  },
+  "typography": {
+    "body": {
+      "family": "sys.type.family.ui",
+      "size": "sys.type.size.body",
+      "weight": "sys.type.weight.regular",
+      "leading": "sys.type.leading.body"
+    },
+    "label": {
+      "family": "sys.type.family.ui",
+      "size": "sys.type.size.label",
+      "weight": "sys.type.weight.medium",
+      "leading": "sys.type.leading.caption"
+    },
+    "caption": {
+      "family": "sys.type.family.ui",
+      "size": "sys.type.size.caption",
+      "weight": "sys.type.weight.regular",
+      "leading": "sys.type.leading.caption"
+    },
+    "title": {
+      "family": "sys.type.family.ui",
+      "size": "sys.type.size.title",
+      "weight": "sys.type.weight.semibold",
+      "leading": "sys.type.leading.title"
+    }
+  }
+}

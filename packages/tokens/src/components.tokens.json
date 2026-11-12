@@ -1,0 +1,2580 @@
+{
+  "$description": "BASIS comp. DTCG 2025.10.",
+  "comp": {
+    "button": {
+      "primary": {
+        "background": {
+          "default": {
+            "$type": "color",
+            "$value": "{sys.color.action.primary.bg.default}",
+            "$description": "Button primary: фон default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{sys.color.action.primary.bg.hover}",
+            "$description": "Button primary: фон hover."
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{sys.color.action.primary.bg.pressed}",
+            "$description": "Button primary: фон pressed."
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.action.primary.fg}",
+          "$description": "Button primary: foreground."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.action.primary.border}",
+          "$description": "Button primary: border."
+        }
+      },
+      "secondary": {
+        "background": {
+          "default": {
+            "$type": "color",
+            "$value": "{sys.color.action.secondary.bg.default}",
+            "$description": "Button secondary: фон default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{sys.color.action.secondary.bg.hover}",
+            "$description": "Button secondary: фон hover."
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{sys.color.action.secondary.bg.pressed}",
+            "$description": "Button secondary: фон pressed."
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.action.secondary.fg}",
+          "$description": "Button secondary: foreground."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.action.secondary.border}",
+          "$description": "Button secondary: border."
+        }
+      },
+      "tonal": {
+        "background": {
+          "default": {
+            "$type": "color",
+            "$value": "{sys.color.action.tonal.bg.default}",
+            "$description": "Button tonal: фон default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{sys.color.action.tonal.bg.hover}",
+            "$description": "Button tonal: фон hover."
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{sys.color.action.tonal.bg.pressed}",
+            "$description": "Button tonal: фон pressed."
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.action.tonal.fg}",
+          "$description": "Button tonal: foreground."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.action.tonal.border}",
+          "$description": "Button tonal: border."
+        }
+      },
+      "ghost": {
+        "background": {
+          "default": {
+            "$type": "color",
+            "$value": "{sys.color.action.ghost.bg.default}",
+            "$description": "Button ghost: фон default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{sys.color.action.ghost.bg.hover}",
+            "$description": "Button ghost: фон hover."
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{sys.color.action.ghost.bg.pressed}",
+            "$description": "Button ghost: фон pressed."
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.action.ghost.fg}",
+          "$description": "Button ghost: foreground."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.action.ghost.border}",
+          "$description": "Button ghost: border."
+        }
+      },
+      "danger": {
+        "background": {
+          "default": {
+            "$type": "color",
+            "$value": "{sys.color.action.danger.bg.default}",
+            "$description": "Button danger: фон default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{sys.color.action.danger.bg.hover}",
+            "$description": "Button danger: фон hover."
+          },
+          "pressed": {
+            "$type": "color",
+            "$value": "{sys.color.action.danger.bg.pressed}",
+            "$description": "Button danger: фон pressed."
+          }
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.action.danger.fg}",
+          "$description": "Button danger: foreground."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.action.danger.border}",
+          "$description": "Button danger: border."
+        }
+      },
+      "disabled": {
+        "background": {
+          "$type": "color",
+          "$value": "{sys.color.action.disabled.bg}",
+          "$description": "Button: недоступное background."
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.action.disabled.fg}",
+          "$description": "Button: недоступное foreground."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.action.disabled.border}",
+          "$description": "Button: недоступное border."
+        }
+      },
+      "size": {
+        "sm": {
+          "height": {
+            "$type": "dimension",
+            "$value": "{sys.control.sm.height}",
+            "$description": "Button sm: height."
+          },
+          "padding": {
+            "$type": "dimension",
+            "$value": "{sys.control.sm.padding}",
+            "$description": "Button sm: padding."
+          },
+          "gap": {
+            "$type": "dimension",
+            "$value": "{sys.control.sm.gap}",
+            "$description": "Button sm: gap."
+          },
+          "icon": {
+            "$type": "dimension",
+            "$value": "{sys.icon.sm}",
+            "$description": "Button sm: icon."
+          },
+          "font-size": {
+            "$type": "dimension",
+            "$value": "{sys.type.size.label}",
+            "$description": "Button sm: font-size."
+          }
+        },
+        "md": {
+          "height": {
+            "$type": "dimension",
+            "$value": "{sys.control.md.height}",
+            "$description": "Button md: height."
+          },
+          "padding": {
+            "$type": "dimension",
+            "$value": "{sys.control.md.padding}",
+            "$description": "Button md: padding."
+          },
+          "gap": {
+            "$type": "dimension",
+            "$value": "{sys.control.md.gap}",
+            "$description": "Button md: gap."
+          },
+          "icon": {
+            "$type": "dimension",
+            "$value": "{sys.icon.md}",
+            "$description": "Button md: icon."
+          },
+          "font-size": {
+            "$type": "dimension",
+            "$value": "{sys.type.size.control}",
+            "$description": "Button md: font-size."
+          }
+        },
+        "lg": {
+          "height": {
+            "$type": "dimension",
+            "$value": "{sys.control.lg.height}",
+            "$description": "Button lg: height."
+          },
+          "padding": {
+            "$type": "dimension",
+            "$value": "{sys.control.lg.padding}",
+            "$description": "Button lg: padding."
+          },
+          "gap": {
+            "$type": "dimension",
+            "$value": "{sys.control.lg.gap}",
+            "$description": "Button lg: gap."
+          },
+          "icon": {
+            "$type": "dimension",
+            "$value": "{sys.icon.lg}",
+            "$description": "Button lg: icon."
+          },
+          "font-size": {
+            "$type": "dimension",
+            "$value": "{sys.type.size.control}",
+            "$description": "Button lg: font-size."
+          }
+        }
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "Скругление внешних углов всех кнопок. Изменение применяется к обеим темам."
+      },
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{sys.type.family.ui}",
+        "$description": "Шрифт подписей кнопок. Наследуется от общей типографики интерфейса."
+      },
+      "font-weight": {
+        "$type": "fontWeight",
+        "$value": "{sys.type.weight.medium}",
+        "$description": "Насыщенность подписи: обеспечивает распознаваемость действия без лишнего визуального веса."
+      },
+      "focus-color": {
+        "$type": "color",
+        "$value": "{sys.color.border.focus}",
+        "$description": "Button: focus-color."
+      },
+      "focus-width": {
+        "$type": "dimension",
+        "$value": "{sys.border.focus}",
+        "$description": "Button: focus-width."
+      },
+      "focus-offset": {
+        "$type": "dimension",
+        "$value": "{sys.focus.offset}",
+        "$description": "Button: focus-offset."
+      },
+      "transition": {
+        "$type": "duration",
+        "$value": "{sys.motion.duration.fast}",
+        "$description": "Button: transition."
+      },
+      "elevation": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.control}",
+        "$description": "Мягкий объём кнопки. Не обозначает прогресс или загрузку."
+      },
+      "tone": {
+        "neutral": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.neutral.solid.background.default}",
+                "$description": "Кнопка neutral: solid, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.neutral.solid.background.hover}",
+                "$description": "Кнопка neutral: solid, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.neutral.solid.background.pressed}",
+                "$description": "Кнопка neutral: solid, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.neutral.solid.foreground}",
+              "$description": "Кнопка neutral: текст solid."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.neutral.solid.border}",
+              "$description": "Кнопка neutral: граница solid."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.neutral.soft.background.default}",
+                "$description": "Кнопка neutral: soft, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.neutral.soft.background.hover}",
+                "$description": "Кнопка neutral: soft, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.neutral.soft.background.pressed}",
+                "$description": "Кнопка neutral: soft, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.neutral.soft.foreground}",
+              "$description": "Кнопка neutral: текст soft."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.neutral.soft.border}",
+              "$description": "Кнопка neutral: граница soft."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.neutral.outline.border}",
+              "$description": "Кнопка neutral: контур."
+            }
+          }
+        },
+        "success": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.success.solid.background.default}",
+                "$description": "Кнопка success: solid, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.success.solid.background.hover}",
+                "$description": "Кнопка success: solid, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.success.solid.background.pressed}",
+                "$description": "Кнопка success: solid, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.success.solid.foreground}",
+              "$description": "Кнопка success: текст solid."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.success.solid.border}",
+              "$description": "Кнопка success: граница solid."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.success.soft.background.default}",
+                "$description": "Кнопка success: soft, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.success.soft.background.hover}",
+                "$description": "Кнопка success: soft, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.success.soft.background.pressed}",
+                "$description": "Кнопка success: soft, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.success.soft.foreground}",
+              "$description": "Кнопка success: текст soft."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.success.soft.border}",
+              "$description": "Кнопка success: граница soft."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.success.outline.border}",
+              "$description": "Кнопка success: контур."
+            }
+          }
+        },
+        "warning": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.warning.solid.background.default}",
+                "$description": "Кнопка warning: solid, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.warning.solid.background.hover}",
+                "$description": "Кнопка warning: solid, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.warning.solid.background.pressed}",
+                "$description": "Кнопка warning: solid, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.warning.solid.foreground}",
+              "$description": "Кнопка warning: текст solid."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.warning.solid.border}",
+              "$description": "Кнопка warning: граница solid."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.warning.soft.background.default}",
+                "$description": "Кнопка warning: soft, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.warning.soft.background.hover}",
+                "$description": "Кнопка warning: soft, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.warning.soft.background.pressed}",
+                "$description": "Кнопка warning: soft, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.warning.soft.foreground}",
+              "$description": "Кнопка warning: текст soft."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.warning.soft.border}",
+              "$description": "Кнопка warning: граница soft."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.warning.outline.border}",
+              "$description": "Кнопка warning: контур."
+            }
+          }
+        },
+        "danger": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.danger.solid.background.default}",
+                "$description": "Кнопка danger: solid, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.danger.solid.background.hover}",
+                "$description": "Кнопка danger: solid, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.danger.solid.background.pressed}",
+                "$description": "Кнопка danger: solid, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.solid.foreground}",
+              "$description": "Кнопка danger: текст solid."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.solid.border}",
+              "$description": "Кнопка danger: граница solid."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.danger.soft.background.default}",
+                "$description": "Кнопка danger: soft, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.danger.soft.background.hover}",
+                "$description": "Кнопка danger: soft, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.danger.soft.background.pressed}",
+                "$description": "Кнопка danger: soft, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.soft.foreground}",
+              "$description": "Кнопка danger: текст soft."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.soft.border}",
+              "$description": "Кнопка danger: граница soft."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.outline.border}",
+              "$description": "Кнопка danger: контур."
+            }
+          }
+        },
+        "info": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.info.solid.background.default}",
+                "$description": "Кнопка info: solid, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.info.solid.background.hover}",
+                "$description": "Кнопка info: solid, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.info.solid.background.pressed}",
+                "$description": "Кнопка info: solid, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.info.solid.foreground}",
+              "$description": "Кнопка info: текст solid."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.info.solid.border}",
+              "$description": "Кнопка info: граница solid."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{sys.color.intent.info.soft.background.default}",
+                "$description": "Кнопка info: soft, фон default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{sys.color.intent.info.soft.background.hover}",
+                "$description": "Кнопка info: soft, фон hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{sys.color.intent.info.soft.background.pressed}",
+                "$description": "Кнопка info: soft, фон pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{sys.color.intent.info.soft.foreground}",
+              "$description": "Кнопка info: текст soft."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.info.soft.border}",
+              "$description": "Кнопка info: граница soft."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{sys.color.intent.info.outline.border}",
+              "$description": "Кнопка info: контур."
+            }
+          }
+        }
+      }
+    },
+    "input": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.default}",
+        "$description": "input: background."
+      },
+      "background-disabled": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.disabled}",
+        "$description": "input: background-disabled."
+      },
+      "background-readonly": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.readonly}",
+        "$description": "input: background-readonly."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.default}",
+        "$description": "input: foreground."
+      },
+      "foreground-disabled": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.disabled}",
+        "$description": "input: foreground-disabled."
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.placeholder}",
+        "$description": "input: placeholder."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.default}",
+        "$description": "input: border."
+      },
+      "border-hover": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.hover}",
+        "$description": "input: border-hover."
+      },
+      "border-focus": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.focus}",
+        "$description": "input: border-focus."
+      },
+      "border-error": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.error}",
+        "$description": "input: border-error."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "input: height."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "input: radius."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "input: padding."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "input: gap."
+      }
+    },
+    "select": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.default}",
+        "$description": "select: background."
+      },
+      "background-disabled": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.disabled}",
+        "$description": "select: background-disabled."
+      },
+      "background-readonly": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.readonly}",
+        "$description": "select: background-readonly."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.default}",
+        "$description": "select: foreground."
+      },
+      "foreground-disabled": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.disabled}",
+        "$description": "select: foreground-disabled."
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.placeholder}",
+        "$description": "select: placeholder."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.default}",
+        "$description": "select: border."
+      },
+      "border-hover": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.hover}",
+        "$description": "select: border-hover."
+      },
+      "border-focus": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.focus}",
+        "$description": "select: border-focus."
+      },
+      "border-error": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.error}",
+        "$description": "select: border-error."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "select: height."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "select: radius."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "select: padding."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "select: gap."
+      }
+    },
+    "checkbox": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{sys.icon.md}",
+        "$description": "checkbox.size: визуальное решение компонента."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.small}",
+        "$description": "checkbox.radius: визуальное решение компонента."
+      },
+      "checked-bg": {
+        "$type": "color",
+        "$value": "{sys.color.action.primary.bg.default}",
+        "$description": "checkbox.checked-bg: визуальное решение компонента."
+      },
+      "checked-fg": {
+        "$type": "color",
+        "$value": "{sys.color.action.primary.fg}",
+        "$description": "checkbox.checked-fg: визуальное решение компонента."
+      }
+    },
+    "switch": {
+      "track-width": {
+        "$type": "dimension",
+        "$value": "{sys.control.switch.track-width}",
+        "$description": "switch.track-width: визуальное решение компонента."
+      },
+      "track-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.switch.track-height}",
+        "$description": "switch.track-height: визуальное решение компонента."
+      },
+      "thumb-size": {
+        "$type": "dimension",
+        "$value": "{sys.control.switch.thumb-size}",
+        "$description": "switch.thumb-size: визуальное решение компонента."
+      }
+    },
+    "slider": {
+      "track-height": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "slider.track-height: визуальное решение компонента."
+      },
+      "thumb-size": {
+        "$type": "dimension",
+        "$value": "{sys.icon.lg}",
+        "$description": "slider.thumb-size: визуальное решение компонента."
+      },
+      "fill": {
+        "$type": "color",
+        "$value": "{sys.color.brand.accent}",
+        "$description": "slider.fill: визуальное решение компонента."
+      },
+      "track": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "slider.track: визуальное решение компонента."
+      }
+    },
+    "progress": {
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "progress.height: визуальное решение компонента."
+      },
+      "fill": {
+        "$type": "color",
+        "$value": "{sys.color.brand.accent}",
+        "$description": "progress.fill: визуальное решение компонента."
+      },
+      "track": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "progress.track: визуальное решение компонента."
+      }
+    },
+    "skeleton": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.skeleton.base}",
+        "$description": "skeleton.background: визуальное решение компонента."
+      },
+      "highlight": {
+        "$type": "color",
+        "$value": "{sys.color.skeleton.highlight}",
+        "$description": "skeleton.highlight: визуальное решение компонента."
+      },
+      "duration": {
+        "$type": "duration",
+        "$value": "{sys.motion.duration.skeleton}",
+        "$description": "skeleton.duration: визуальное решение компонента."
+      }
+    },
+    "badge": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.pill}",
+        "$description": "badge: radius. Общее решение через семантическую роль."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.feedback.badge.height}",
+        "$description": "badge: height. Общее решение через семантическую роль."
+      },
+      "dot-size": {
+        "$type": "dimension",
+        "$value": "{sys.feedback.badge.dot-size}",
+        "$description": "badge: dot-size. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "badge: padding. Общее решение через семантическую роль."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.caption}",
+        "$description": "badge: font-size. Общее решение через семантическую роль."
+      },
+      "tone": {
+        "neutral": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.solid.background.default}",
+            "$description": "badge: tone.neutral.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.solid.foreground}",
+            "$description": "badge: tone.neutral.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.solid.border}",
+            "$description": "badge: tone.neutral.border. Общее решение через семантическую роль."
+          }
+        },
+        "info": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.solid.background.default}",
+            "$description": "badge: tone.info.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.solid.foreground}",
+            "$description": "badge: tone.info.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.solid.border}",
+            "$description": "badge: tone.info.border. Общее решение через семантическую роль."
+          }
+        },
+        "success": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.solid.background.default}",
+            "$description": "badge: tone.success.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.solid.foreground}",
+            "$description": "badge: tone.success.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.solid.border}",
+            "$description": "badge: tone.success.border. Общее решение через семантическую роль."
+          }
+        },
+        "warning": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.solid.background.default}",
+            "$description": "badge: tone.warning.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.solid.foreground}",
+            "$description": "badge: tone.warning.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.solid.border}",
+            "$description": "badge: tone.warning.border. Общее решение через семантическую роль."
+          }
+        },
+        "danger": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.solid.background.default}",
+            "$description": "badge: tone.danger.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.solid.foreground}",
+            "$description": "badge: tone.danger.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.solid.border}",
+            "$description": "badge: tone.danger.border. Общее решение через семантическую роль."
+          }
+        }
+      }
+    },
+    "tooltip": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.inverse}",
+        "$description": "tooltip.background: визуальное решение компонента."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.inverse}",
+        "$description": "tooltip.foreground: визуальное решение компонента."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "tooltip.radius: визуальное решение компонента."
+      }
+    },
+    "tabs": {
+      "active-indicator": {
+        "$type": "color",
+        "$value": "{sys.color.brand.accent}",
+        "$description": "tabs.active-indicator: визуальное решение компонента."
+      },
+      "active-fg": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "tabs.active-fg: визуальное решение компонента."
+      },
+      "inactive-fg": {
+        "$type": "color",
+        "$value": "{sys.color.text.muted}",
+        "$description": "tabs.inactive-fg: визуальное решение компонента."
+      },
+      "active-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.selected}",
+        "$description": "Подложка выбранной вкладки."
+      },
+      "divider": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "Граница строки вкладок."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.small}",
+        "$description": "Радиус вкладки."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "Интервал вкладок."
+      },
+      "list-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "Вертикальный отступ списка."
+      },
+      "item-height": {
+        "$type": "dimension",
+        "$value": "{comp.button.size.md.height}",
+        "$description": "Высота наследуется от базовой кнопки."
+      },
+      "item-padding": {
+        "$type": "dimension",
+        "$value": "{comp.button.size.md.padding}",
+        "$description": "Горизонтальный отступ базовой кнопки."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{comp.button.size.md.font-size}",
+        "$description": "Размер подписи базовой кнопки."
+      },
+      "indicator-inset": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Отступ активного индикатора от краёв вкладки."
+      },
+      "indicator-height": {
+        "$type": "dimension",
+        "$value": "{sys.border.focus}",
+        "$description": "Толщина индикатора."
+      },
+      "count-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Интервал между подписью и счётчиком."
+      },
+      "count-font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.caption}",
+        "$description": "Размер счётчика."
+      },
+      "count-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.muted}",
+        "$description": "Цвет счётчика."
+      },
+      "panel-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Интервал между вкладками и содержимым."
+      },
+      "accessory-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Интервал до дополнительного контекста."
+      }
+    },
+    "dialog": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "dialog.background: визуальное решение компонента."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.panel}",
+        "$description": "dialog.radius: визуальное решение компонента."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.xl}",
+        "$description": "dialog.padding: визуальное решение компонента."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.dialog.width}",
+        "$description": "dialog.width: визуальное решение компонента."
+      }
+    },
+    "table": {
+      "footer-font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.body}",
+        "$description": "Размер текста счётчиков и пагинации таблицы."
+      },
+      "group-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "Фон заголовка группы ресурсов."
+      },
+      "group-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "Текст названия группы и выбранного поля группировки."
+      },
+      "group-height": {
+        "$type": "dimension",
+        "$value": "{sys.table.row.height}",
+        "$description": "Высота строки заголовка группы, согласованная с плотностью таблицы."
+      },
+      "group-bar-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Фон строки управления группами под инструментами таблицы."
+      },
+      "group-bar-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "Минимальная высота строки управления группами."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "table.background: визуальное решение компонента."
+      },
+      "header-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "table.header-background: визуальное решение компонента."
+      },
+      "grid": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "table.grid: визуальное решение компонента."
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{sys.color.surface.selected}",
+        "$description": "table.selected: визуальное решение компонента."
+      },
+      "row-height": {
+        "$type": "dimension",
+        "$value": "{sys.table.row.height}",
+        "$description": "table.row-height: визуальное решение компонента."
+      },
+      "header-height": {
+        "$type": "dimension",
+        "$value": "{sys.table.header.height}",
+        "$description": "table.header-height: визуальное решение компонента."
+      },
+      "cell-padding": {
+        "$type": "dimension",
+        "$value": "{sys.table.cell.inset}",
+        "$description": "table.cell-padding: визуальное решение компонента."
+      },
+      "column": {
+        "identity": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{sys.table.column.identity.width}",
+            "$description": "Стандартная ширина столбца: identity. Меняется в ДС, не в настройках пользовательской таблицы."
+          }
+        },
+        "status": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{sys.table.column.status.width}",
+            "$description": "Стандартная ширина столбца: status. Меняется в ДС, не в настройках пользовательской таблицы."
+          }
+        },
+        "numeric": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{sys.table.column.numeric.width}",
+            "$description": "Стандартная ширина столбца: numeric. Меняется в ДС, не в настройках пользовательской таблицы."
+          }
+        },
+        "relation": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{sys.table.column.relation.width}",
+            "$description": "Стандартная ширина столбца: relation. Меняется в ДС, не в настройках пользовательской таблицы."
+          }
+        },
+        "address": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{sys.table.column.address.width}",
+            "$description": "Стандартная ширина столбца: address. Меняется в ДС, не в настройках пользовательской таблицы."
+          }
+        },
+        "actions": {
+          "width": {
+            "$type": "dimension",
+            "$value": "{sys.table.column.actions.width}",
+            "$description": "Колонка действий без видимого заголовка: кнопка 32 px и по 8 px с каждой стороны. Ширина фиксирована и не растёт вместе с таблицей."
+          }
+        },
+        "compact": {
+          "identity": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{sys.table.column.compact.identity.width}",
+              "$description": "Ширина identity для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+            }
+          },
+          "status": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{sys.table.column.compact.status.width}",
+              "$description": "Ширина status для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+            }
+          },
+          "relation": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{sys.table.column.compact.relation.width}",
+              "$description": "Ширина relation для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+            }
+          },
+          "address": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{sys.table.column.compact.address.width}",
+              "$description": "Ширина address для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+            }
+          },
+          "numeric": {
+            "width": {
+              "$type": "dimension",
+              "$value": "{sys.table.column.compact.numeric.width}",
+              "$description": "Ширина numeric для компактного реестра со скалярными значениями. Пресет определяется дизайном, пользовательской настройки плотности нет."
+            }
+          }
+        }
+      },
+      "row-error": {
+        "$type": "color",
+        "$value": "{sys.color.table.row.error}",
+        "$description": "Фон строки с ошибкой. При выборе уступает фону выделения; цветной маркер сохраняется."
+      },
+      "row-warning": {
+        "$type": "color",
+        "$value": "{sys.color.table.row.warning}",
+        "$description": "Фон строки с предупреждением. Применяется мягкий тон соответствующей темы."
+      },
+      "toolbar-height": {
+        "$type": "dimension",
+        "$value": "{sys.table.toolbar.height}",
+        "$description": "Панель поиска и массовых действий: геометрия не меняется при выборе."
+      },
+      "toolbar-inset": {
+        "$type": "dimension",
+        "$value": "{sys.table.cell.inset}",
+        "$description": "Отступы инструментов согласованы с ячейками."
+      },
+      "cell-font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.label}",
+        "$description": "Размер текста в информационно плотных реестрах."
+      },
+      "header-min-width": {
+        "$type": "dimension",
+        "$value": "{sys.table.header.min-width}",
+        "$description": "Минимальная ширина колонки с пояснением и управляющими кнопками. Защищает области нажатия от пересечения; длинное название сокращается."
+      },
+      "state-symbol-size": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "Размер иллюстративного значка пустой таблицы и ошибки загрузки."
+      }
+    },
+    "table-select": {
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "Табличный выбор: height. Поле и окно используют общую семантику интерфейса."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "Табличный выбор: radius. Поле и окно используют общую семантику интерфейса."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.default}",
+        "$description": "Табличный выбор: background. Поле и окно используют общую семантику интерфейса."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.default}",
+        "$description": "Табличный выбор: foreground. Поле и окно используют общую семантику интерфейса."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.default}",
+        "$description": "Табличный выбор: border. Поле и окно используют общую семантику интерфейса."
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.placeholder}",
+        "$description": "Табличный выбор: placeholder. Поле и окно используют общую семантику интерфейса."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.picker.width}",
+        "$description": "Табличный выбор: width. Поле и окно используют общую семантику интерфейса."
+      },
+      "popup-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Табличный выбор: popup-background. Поле и окно используют общую семантику интерфейса."
+      },
+      "popup-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.panel}",
+        "$description": "Табличный выбор: popup-radius. Поле и окно используют общую семантику интерфейса."
+      },
+      "popup-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Табличный выбор: popup-padding. Поле и окно используют общую семантику интерфейса."
+      }
+    },
+    "context-panel": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.dialog.width}",
+        "$description": "Ширина компактного контекстного окна: быстрый просмотр."
+      },
+      "wide": {
+        "$type": "dimension",
+        "$value": "{sys.layout.picker.width}",
+        "$description": "Ширина расширенного контекстного окна: каскадный выбор."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.container}",
+        "$description": "Скругление контекстной панели."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Внутренний ритм заголовка и содержимого панели."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Основная поверхность контекстной панели."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "Граница панели и разделители её областей."
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.overlay}",
+        "$description": "Отделение контекстной панели от рабочей таблицы."
+      },
+      "drawer-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.dialog.width}",
+        "$description": "Единая ширина правой панели фильтров, сортировки и столбцов."
+      },
+      "drawer-backdrop": {
+        "$type": "color",
+        "$value": "{sys.color.overlay.subtle}",
+        "$description": "Мягкое затемнение фона за правой панелью. Цвет задаётся для обеих тем."
+      },
+      "drawer-inset": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Воздух со всех сторон отделённого окна фильтров, сортировки и столбцов. Сохраняется и на узком экране."
+      },
+      "drawer-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.workspace}",
+        "$description": "Скругление всех четырёх углов бокового окна."
+      }
+    },
+    "status": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.small}",
+        "$description": "badge.radius: визуальное решение компонента."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "badge.gap: визуальное решение компонента."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "badge.padding: визуальное решение компонента."
+      }
+    },
+    "radio": {
+      "size": {
+        "$type": "dimension",
+        "$value": "{sys.icon.md}",
+        "$description": "radio: size. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "radio: gap. Общее решение через семантическую роль."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.default}",
+        "$description": "radio: background. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.default}",
+        "$description": "radio: border. Общее решение через семантическую роль."
+      },
+      "checked-background": {
+        "$type": "color",
+        "$value": "{sys.color.action.primary.bg.default}",
+        "$description": "radio: checked-background. Общее решение через семантическую роль."
+      },
+      "checked-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.action.primary.fg}",
+        "$description": "radio: checked-foreground. Общее решение через семантическую роль."
+      },
+      "border-error": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.error}",
+        "$description": "radio: border-error. Общее решение через семантическую роль."
+      },
+      "card-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "radio: card-radius. Общее решение через семантическую роль."
+      },
+      "card-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "radio: card-padding. Общее решение через семантическую роль."
+      }
+    },
+    "code-input": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.default}",
+        "$description": "code-input: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.default}",
+        "$description": "code-input: foreground. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.default}",
+        "$description": "code-input: border. Общее решение через семантическую роль."
+      },
+      "border-focus": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.focus}",
+        "$description": "code-input: border-focus. Общее решение через семантическую роль."
+      },
+      "border-error": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.error}",
+        "$description": "code-input: border-error. Общее решение через семантическую роль."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "code-input: radius. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "code-input: gap. Общее решение через семантическую роль."
+      },
+      "cell-width": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "code-input: cell-width. Общее решение через семантическую роль."
+      },
+      "cell-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "code-input: cell-height. Общее решение через семантическую роль."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.subtitle}",
+        "$description": "code-input: font-size. Общее решение через семантическую роль."
+      },
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{sys.type.family.mono}",
+        "$description": "code-input: font-family. Общее решение через семантическую роль."
+      }
+    },
+    "input-tag": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.field.bg.default}",
+        "$description": "input-tag: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.field.fg.default}",
+        "$description": "input-tag: foreground. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.default}",
+        "$description": "input-tag: border. Общее решение через семантическую роль."
+      },
+      "border-focus": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.focus}",
+        "$description": "input-tag: border-focus. Общее решение через семантическую роль."
+      },
+      "border-error": {
+        "$type": "color",
+        "$value": "{sys.color.field.border.error}",
+        "$description": "input-tag: border-error. Общее решение через семантическую роль."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "input-tag: radius. Общее решение через семантическую роль."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "input-tag: height. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "input-tag: padding. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "input-tag: gap. Общее решение через семантическую роль."
+      },
+      "tag-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "input-tag: tag-gap. Общее решение через семантическую роль."
+      }
+    },
+    "input-mask": {
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{sys.type.family.mono}",
+        "$description": "input-mask: font-family. Общее решение через семантическую роль."
+      },
+      "template-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.muted}",
+        "$description": "input-mask: template-foreground. Общее решение через семантическую роль."
+      }
+    },
+    "cascade-select": {
+      "column-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.cascade.column-width}",
+        "$description": "cascade-select: column-width. Общее решение через семантическую роль."
+      },
+      "row-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "cascade-select: row-height. Общее решение через семантическую роль."
+      },
+      "column-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "cascade-select: column-background. Общее решение через семантическую роль."
+      },
+      "column-border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "cascade-select: column-border. Общее решение через семантическую роль."
+      },
+      "selected-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.selected}",
+        "$description": "cascade-select: selected-background. Общее решение через семантическую роль."
+      },
+      "selected-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.link}",
+        "$description": "cascade-select: selected-foreground. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "cascade-select: gap. Общее решение через семантическую роль."
+      }
+    },
+    "tag": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.small}",
+        "$description": "tag: radius. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "tag: padding. Общее решение через семантическую роль."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.xs.height}",
+        "$description": "tag: height. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "tag: gap. Общее решение через семантическую роль."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.caption}",
+        "$description": "tag: font-size. Общее решение через семантическую роль."
+      },
+      "tone": {
+        "neutral": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.soft.background.default}",
+            "$description": "tag: tone.neutral.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.soft.foreground}",
+            "$description": "tag: tone.neutral.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.soft.border}",
+            "$description": "tag: tone.neutral.border. Общее решение через семантическую роль."
+          }
+        },
+        "info": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.soft.background.default}",
+            "$description": "tag: tone.info.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.soft.foreground}",
+            "$description": "tag: tone.info.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.soft.border}",
+            "$description": "tag: tone.info.border. Общее решение через семантическую роль."
+          }
+        },
+        "success": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.soft.background.default}",
+            "$description": "tag: tone.success.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.soft.foreground}",
+            "$description": "tag: tone.success.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.soft.border}",
+            "$description": "tag: tone.success.border. Общее решение через семантическую роль."
+          }
+        },
+        "warning": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.soft.background.default}",
+            "$description": "tag: tone.warning.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.soft.foreground}",
+            "$description": "tag: tone.warning.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.soft.border}",
+            "$description": "tag: tone.warning.border. Общее решение через семантическую роль."
+          }
+        },
+        "danger": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.soft.background.default}",
+            "$description": "tag: tone.danger.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.soft.foreground}",
+            "$description": "tag: tone.danger.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.soft.border}",
+            "$description": "tag: tone.danger.border. Общее решение через семантическую роль."
+          }
+        }
+      }
+    },
+    "chip": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.pill}",
+        "$description": "chip: radius. Общее решение через семантическую роль."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.sm.height}",
+        "$description": "chip: height. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "chip: padding. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "chip: gap. Общее решение через семантическую роль."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "chip: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.secondary}",
+        "$description": "chip: foreground. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.control}",
+        "$description": "chip: border. Общее решение через семантическую роль."
+      },
+      "selected-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.selected}",
+        "$description": "chip: selected-background. Общее решение через семантическую роль."
+      },
+      "selected-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.link}",
+        "$description": "chip: selected-foreground. Общее решение через семантическую роль."
+      },
+      "selected-border": {
+        "$type": "color",
+        "$value": "{sys.color.border.selected}",
+        "$description": "chip: selected-border. Общее решение через семантическую роль."
+      }
+    },
+    "avatar": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.pill}",
+        "$description": "avatar: radius. Общее решение через семантическую роль."
+      },
+      "square-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "avatar: square-radius. Общее решение через семантическую роль."
+      },
+      "size": {
+        "sm": {
+          "$type": "dimension",
+          "$value": "{sys.identity.avatar.size.sm}",
+          "$description": "avatar: size.sm. Общее решение через семантическую роль."
+        },
+        "md": {
+          "$type": "dimension",
+          "$value": "{sys.identity.avatar.size.md}",
+          "$description": "avatar: size.md. Общее решение через семантическую роль."
+        },
+        "lg": {
+          "$type": "dimension",
+          "$value": "{sys.identity.avatar.size.lg}",
+          "$description": "avatar: size.lg. Общее решение через семантическую роль."
+        }
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.body}",
+        "$description": "avatar: font-size. Общее решение через семантическую роль."
+      },
+      "group-overlap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "avatar: group-overlap. Общее решение через семантическую роль."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.action.tonal.bg.default}",
+        "$description": "avatar: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.action.tonal.fg}",
+        "$description": "avatar: foreground. Общее решение через семантическую роль."
+      },
+      "ring-color": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "avatar: ring-color. Общее решение через семантическую роль."
+      }
+    },
+    "accordion": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "accordion: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "accordion: foreground. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "accordion: border. Общее решение через семантическую роль."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.container}",
+        "$description": "accordion: radius. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "accordion: padding. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "accordion: gap. Общее решение через семантическую роль."
+      },
+      "header-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "accordion: header-height. Общее решение через семантическую роль."
+      },
+      "header-hover": {
+        "$type": "color",
+        "$value": "{sys.color.surface.hover}",
+        "$description": "accordion: header-hover. Общее решение через семантическую роль."
+      },
+      "expanded-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "accordion: expanded-background. Общее решение через семантическую роль."
+      }
+    },
+    "breadcrumb": {
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "breadcrumb: gap. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.secondary}",
+        "$description": "breadcrumb: foreground. Общее решение через семантическую роль."
+      },
+      "current-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "breadcrumb: current-foreground. Общее решение через семантическую роль."
+      },
+      "separator": {
+        "$type": "color",
+        "$value": "{sys.color.border.strong}",
+        "$description": "breadcrumb: separator. Общее решение через семантическую роль."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.caption}",
+        "$description": "breadcrumb: font-size. Общее решение через семантическую роль."
+      }
+    },
+    "menu": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "menu: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "menu: foreground. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "menu: border. Общее решение через семантическую роль."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.container}",
+        "$description": "menu: radius. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "menu: padding. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "menu: gap. Общее решение через семантическую роль."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.menu.width}",
+        "$description": "menu: width. Общее решение через семантическую роль."
+      },
+      "item-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "menu: item-height. Общее решение через семантическую роль."
+      },
+      "item-padding-block": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Вертикальные отступы пункта меню, включая пункты с описанием."
+      },
+      "item-padding-inline": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Горизонтальные отступы содержимого пункта меню."
+      },
+      "label-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.micro}",
+        "$description": "Расстояние между названием пункта и его описанием."
+      },
+      "description-line-height": {
+        "$type": "dimension",
+        "$value": "{sys.type.leading.caption}",
+        "$description": "Высота строки дополнительного описания пункта меню."
+      },
+      "item-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.small}",
+        "$description": "menu: item-radius. Общее решение через семантическую роль."
+      },
+      "item-hover": {
+        "$type": "color",
+        "$value": "{sys.color.surface.hover}",
+        "$description": "menu: item-hover. Общее решение через семантическую роль."
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.overlay}",
+        "$description": "menu: shadow. Общее решение через семантическую роль."
+      },
+      "muted-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.muted}",
+        "$description": "menu: muted-foreground. Общее решение через семантическую роль."
+      }
+    },
+    "message": {
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.container}",
+        "$description": "message: radius. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "message: padding. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "message: gap. Общее решение через семантическую роль."
+      },
+      "icon-size": {
+        "$type": "dimension",
+        "$value": "{sys.icon.lg}",
+        "$description": "message: icon-size. Общее решение через семантическую роль."
+      },
+      "title-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.body}",
+        "$description": "message: title-size. Общее решение через семантическую роль."
+      },
+      "tone": {
+        "neutral": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.soft.background.default}",
+            "$description": "message: tone.neutral.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.soft.foreground}",
+            "$description": "message: tone.neutral.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.neutral.soft.border}",
+            "$description": "message: tone.neutral.border. Общее решение через семантическую роль."
+          }
+        },
+        "info": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.soft.background.default}",
+            "$description": "message: tone.info.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.soft.foreground}",
+            "$description": "message: tone.info.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.info.soft.border}",
+            "$description": "message: tone.info.border. Общее решение через семантическую роль."
+          }
+        },
+        "success": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.soft.background.default}",
+            "$description": "message: tone.success.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.soft.foreground}",
+            "$description": "message: tone.success.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.success.soft.border}",
+            "$description": "message: tone.success.border. Общее решение через семантическую роль."
+          }
+        },
+        "warning": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.soft.background.default}",
+            "$description": "message: tone.warning.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.soft.foreground}",
+            "$description": "message: tone.warning.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.warning.soft.border}",
+            "$description": "message: tone.warning.border. Общее решение через семантическую роль."
+          }
+        },
+        "danger": {
+          "background": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.soft.background.default}",
+            "$description": "message: tone.danger.background. Общее решение через семантическую роль."
+          },
+          "foreground": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.soft.foreground}",
+            "$description": "message: tone.danger.foreground. Общее решение через семантическую роль."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.soft.border}",
+            "$description": "message: tone.danger.border. Общее решение через семантическую роль."
+          }
+        }
+      }
+    },
+    "toast": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "toast: background. Общее решение через семантическую роль."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "toast: foreground. Общее решение через семантическую роль."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "toast: border. Общее решение через семантическую роль."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.container}",
+        "$description": "toast: radius. Общее решение через семантическую роль."
+      },
+      "padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "toast: padding. Общее решение через семантическую роль."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "toast: gap. Общее решение через семантическую роль."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.control.max}",
+        "$description": "toast: width. Общее решение через семантическую роль."
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.overlay}",
+        "$description": "toast: shadow. Общее решение через семантическую роль."
+      },
+      "offset": {
+        "$type": "dimension",
+        "$value": "{sys.space.xl}",
+        "$description": "toast: offset. Общее решение через семантическую роль."
+      },
+      "stack-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "toast: stack-gap. Общее решение через семантическую роль."
+      }
+    },
+    "navigation": {
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.background}",
+        "$description": "Цвет background основного вертикального меню."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.foreground}",
+        "$description": "Цвет foreground основного вертикального меню."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.muted}",
+        "$description": "Цвет muted основного вертикального меню."
+      },
+      "hover": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.hover}",
+        "$description": "Цвет hover основного вертикального меню."
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.selected}",
+        "$description": "Цвет selected основного вертикального меню."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.accent}",
+        "$description": "Цвет accent основного вертикального меню."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.border}",
+        "$description": "Цвет border основного вертикального меню."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.navigation}",
+        "$description": "Названия разделов навигации, 13 px."
+      },
+      "group-color": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.group-color}",
+        "$description": "Цвет group-color вертикальной навигации."
+      },
+      "icon-color": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.icon-color}",
+        "$description": "Цвет icon-color вертикальной навигации."
+      },
+      "selected-border": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.selected-border}",
+        "$description": "Цвет selected-border вертикальной навигации."
+      },
+      "count-background": {
+        "$type": "color",
+        "$value": "{sys.color.navigation.count-background}",
+        "$description": "Цвет count-background вертикальной навигации."
+      },
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.sidebar.width}",
+        "$description": "Ширина основного меню."
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Горизонтальный отступ содержимого меню."
+      },
+      "item-height": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "Высота пункта навигации."
+      },
+      "item-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.micro}",
+        "$description": "Интервал между пунктами."
+      },
+      "item-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Внутренний горизонтальный отступ пункта."
+      },
+      "item-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "Радиус подложки пункта."
+      },
+      "icon-size": {
+        "$type": "dimension",
+        "$value": "{sys.icon.md}",
+        "$description": "Размер иконки раздела."
+      },
+      "compact-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.sidebar.compact}",
+        "$description": "Ширина основного меню в режиме иконок."
+      },
+      "child-inset": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Отступ вложенного уровня навигации."
+      }
+    },
+    "table-tools": {
+      "$description": "Общий составной компонент фильтров, сортировки и столбцов. Используется в ДС и приложении без локальных переопределений.",
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "Фон строки условия и сортировки, скрытого столбца."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "Граница условия и списка столбцов."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "Скругление внутренних групп."
+      },
+      "rule-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Внутренний отступ строки условия или сортировки."
+      },
+      "rule-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Расстояние между условиями или уровнями сортировки."
+      },
+      "column-padding-block": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Вертикальный отступ строки настройки столбца."
+      },
+      "column-padding-inline": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Горизонтальный отступ строки настройки столбца."
+      }
+    },
+    "shell": {
+      "inset": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Постоянный отступ всех секций компоновки от края окна."
+      },
+      "gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Воздух между независимыми секциями: шапкой, навигацией и рабочей областью."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.workspace}",
+        "$description": "Скругление внешних секций компоновки."
+      },
+      "canvas": {
+        "$type": "color",
+        "$value": "{sys.color.surface.workspace}",
+        "$description": "Спокойный фон между приподнятыми секциями интерфейса."
+      },
+      "surface-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Фон шапки и основной рабочей области."
+      },
+      "surface-border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "Тонкая граница самостоятельной секции."
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.control}",
+        "$description": "Небольшая глубина постоянной поверхности; всплывающие окна используют отдельную более сильную тень."
+      },
+      "header-height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.shell.header-height}",
+        "$description": "Высота общей верхней шапки без внешних отступов."
+      },
+      "content-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Отступ рабочего содержимого от внешнего края секции. Плотность компонентов остаётся независимой."
+      },
+      "max-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.shell.max-width}",
+        "$description": "Общий предел ширины шапки, меню и области содержимого. Включает наружные отступы."
+      }
+    },
+    "workspace-tabs": {
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "Высота полосы избранных вкладок."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "Подложка полосы избранных вкладок."
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Активная вкладка визуально соединена с рабочей областью."
+      },
+      "hover-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.hover}",
+        "$description": "Подсветка всей избранной вкладки при наведении."
+      },
+      "pressed-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.selected}",
+        "$description": "Фон избранной вкладки при нажатии на её название."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "Граница вкладки и рабочей области."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.container}",
+        "$description": "Скругление верхних углов вкладки."
+      },
+      "tab-max-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.workspace.tab}",
+        "$description": "Максимальная ширина названия с иконкой и кнопкой удаления."
+      },
+      "drop-indicator": {
+        "$type": "color",
+        "$value": "{sys.color.border.focus}",
+        "$description": "Цвет места вставки при перетаскивании вкладки."
+      },
+      "drop-indicator-width": {
+        "$type": "dimension",
+        "$value": "{sys.border.focus}",
+        "$description": "Толщина указателя места вставки."
+      },
+      "drag-source-opacity": {
+        "$type": "number",
+        "$value": "{sys.opacity.disabled}",
+        "$description": "Приглушение исходной вкладки во время переноса."
+      },
+      "drag-shadow": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.overlay}",
+        "$description": "Тень перемещаемой вкладки над рабочей областью."
+      }
+    },
+    "console": {
+      "width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.width}",
+        "$description": "Начальная ширина плавающего окна. Ограничивается доступной шириной экрана."
+      },
+      "height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.height}",
+        "$description": "Начальная высота окна. На малом экране сохраняются внешние отступы."
+      },
+      "min-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.min-width}",
+        "$description": "Нижняя граница ширины при ручном изменении размера; на узком экране уступает ширине viewport."
+      },
+      "min-height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.min-height}",
+        "$description": "Нижняя граница высоты при изменении размера; сохраняет доступ к управлению."
+      },
+      "header-height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.header-height}",
+        "$description": "Единственная верхняя строка: вкладки машин, добавление сессии и управление окном."
+      },
+      "footer-height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.footer-height}",
+        "$description": "Компактная нижняя строка: соединение, пароль, команды и повторное подключение."
+      },
+      "panel-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.panel-width}",
+        "$description": "Ширина панели пароля и выбора машины; ограничена шириной окна."
+      },
+      "terminal-background": {
+        "$type": "color",
+        "$value": "{sys.color.console.background}",
+        "$description": "Постоянный тёмный фон терминала в обеих темах."
+      },
+      "terminal-foreground": {
+        "$type": "color",
+        "$value": "{sys.color.console.foreground}",
+        "$description": "Основной контрастный текст вывода терминала."
+      },
+      "terminal-muted": {
+        "$type": "color",
+        "$value": "{sys.color.console.muted}",
+        "$description": "Служебные сообщения и вторичная информация терминала."
+      },
+      "terminal-prompt": {
+        "$type": "color",
+        "$value": "{sys.color.console.prompt}",
+        "$description": "Приглашение командной строки и подтверждения отправки."
+      },
+      "terminal-accent": {
+        "$type": "color",
+        "$value": "{sys.color.console.accent}",
+        "$description": "Маркер соединения и служебные акценты терминала."
+      },
+      "terminal-error": {
+        "$type": "color",
+        "$value": "{sys.color.console.error}",
+        "$description": "Текст ошибок в терминале."
+      },
+      "terminal-border": {
+        "$type": "color",
+        "$value": "{sys.color.console.border}",
+        "$description": "Разделители внутри тёмной рабочей области."
+      },
+      "background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Поверхность оболочки окна; наследует текущую тему."
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "Подложка строки вкладок и служебных меток."
+      },
+      "foreground": {
+        "$type": "color",
+        "$value": "{sys.color.text.primary}",
+        "$description": "Основной текст оболочки окна."
+      },
+      "muted": {
+        "$type": "color",
+        "$value": "{sys.color.text.secondary}",
+        "$description": "Вторичный текст и пояснения оболочки."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{sys.color.border.default}",
+        "$description": "Внешняя рамка и разделители оболочки."
+      },
+      "radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.workspace}",
+        "$description": "Скругление плавающего рабочего окна."
+      },
+      "inset": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Минимальное расстояние от окна до краёв экрана."
+      },
+      "screen-padding": {
+        "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Внутренний отступ текста терминала."
+      },
+      "font-size": {
+        "$type": "dimension",
+        "$value": "{sys.type.size.body}",
+        "$description": "Базовый размер текста терминала; пользовательский масштаб применяется относительно него."
+      },
+      "line-height": {
+        "$type": "dimension",
+        "$value": "{sys.type.leading.relaxed}",
+        "$description": "Межстрочный интервал вывода терминала."
+      },
+      "status-size": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Диаметр индикатора соединения во вкладке и строке состояния."
+      },
+      "font-family": {
+        "$type": "fontFamily",
+        "$value": "{sys.type.family.mono}",
+        "$description": "Моноширинный шрифт терминала. Оболочка использует общий шрифт Onest."
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$value": "{sys.elevation.overlay}",
+        "$description": "Общая тень плавающих поверхностей ДС."
+      },
+      "layer": {
+        "$type": "number",
+        "$value": "{sys.layer.overlay}",
+        "$description": "Слой рабочего окна поверх портала. Нативные модальные диалоги имеют приоритет."
+      },
+      "compact-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.compact-width}",
+        "$description": "Ширина компактного рабочего окна; оставляет место порталу."
+      },
+      "compact-height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.console.compact-height}",
+        "$description": "Высота компактного рабочего окна."
+      }
+    }
+  }
+}

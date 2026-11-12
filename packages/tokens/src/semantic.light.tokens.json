@@ -1,0 +1,925 @@
+{
+  "$description": "Цветовые роли — светлая тема.",
+  "sys": {
+    "color": {
+      "brand": {
+        "anchor": {
+          "$type": "color",
+          "$value": "{ref.color.navy.800}",
+          "$description": "Смысловая роль brand.anchor."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{ref.color.blue.400}",
+          "$description": "Смысловая роль brand.accent."
+        }
+      },
+      "surface": {
+        "workspace": {
+          "$type": "color",
+          "$value": "{sys.color.surface.subtle}",
+          "$description": "Фон между отделёнными секциями облачной платформы. Светлая тема использует мягкий холодный тон."
+        },
+        "canvas": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.50}",
+          "$description": "Смысловая роль surface.canvas."
+        },
+        "base": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.0}",
+          "$description": "Смысловая роль surface.base."
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.100}",
+          "$description": "Смысловая роль surface.subtle."
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{ref.color.blue.0}",
+          "$description": "Смысловая роль surface.hover."
+        },
+        "selected": {
+          "$type": "color",
+          "$value": "{ref.color.blue.50}",
+          "$description": "Смысловая роль surface.selected."
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{ref.color.navy.900}",
+          "$description": "Смысловая роль surface.inverse."
+        }
+      },
+      "text": {
+        "primary": {
+          "$type": "color",
+          "$value": "{ref.color.navy.800}",
+          "$description": "Смысловая роль text.primary."
+        },
+        "secondary": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.700}",
+          "$description": "Смысловая роль text.secondary."
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.500}",
+          "$description": "Смысловая роль text.muted."
+        },
+        "placeholder": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.400}",
+          "$description": "Смысловая роль text.placeholder."
+        },
+        "inverse": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.0}",
+          "$description": "Смысловая роль text.inverse."
+        },
+        "link": {
+          "$type": "color",
+          "$value": "{ref.color.blue.600}",
+          "$description": "Смысловая роль text.link."
+        },
+        "disabled": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.400}",
+          "$description": "Смысловая роль text.disabled."
+        }
+      },
+      "border": {
+        "subtle": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.100}",
+          "$description": "Смысловая роль border.subtle."
+        },
+        "default": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.200}",
+          "$description": "Смысловая роль border.default."
+        },
+        "control": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.300}",
+          "$description": "Смысловая роль border.control."
+        },
+        "strong": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.500}",
+          "$description": "Смысловая роль border.strong."
+        },
+        "focus": {
+          "$type": "color",
+          "$value": "{ref.color.blue.500}",
+          "$description": "Смысловая роль border.focus."
+        },
+        "selected": {
+          "$type": "color",
+          "$value": "{ref.color.blue.200}",
+          "$description": "Смысловая роль border.selected."
+        }
+      },
+      "action": {
+        "primary": {
+          "bg": {
+            "default": {
+              "$type": "color",
+              "$value": "{ref.color.navy.800}",
+              "$description": "Смысловая роль action.primary.bg.default."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{ref.color.navy.700}",
+              "$description": "Смысловая роль action.primary.bg.hover."
+            },
+            "pressed": {
+              "$type": "color",
+              "$value": "{ref.color.navy.900}",
+              "$description": "Смысловая роль action.primary.bg.pressed."
+            }
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.0}",
+            "$description": "Смысловая роль action.primary.fg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.navy.800}",
+            "$description": "Смысловая роль action.primary.border."
+          }
+        },
+        "secondary": {
+          "bg": {
+            "default": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.0}",
+              "$description": "Смысловая роль action.secondary.bg.default."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.50}",
+              "$description": "Смысловая роль action.secondary.bg.hover."
+            },
+            "pressed": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.100}",
+              "$description": "Смысловая роль action.secondary.bg.pressed."
+            }
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.navy.800}",
+            "$description": "Смысловая роль action.secondary.fg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.300}",
+            "$description": "Смысловая роль action.secondary.border."
+          }
+        },
+        "tonal": {
+          "bg": {
+            "default": {
+              "$type": "color",
+              "$value": "{ref.color.blue.50}",
+              "$description": "Смысловая роль action.tonal.bg.default."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{ref.color.blue.100}",
+              "$description": "Смысловая роль action.tonal.bg.hover."
+            },
+            "pressed": {
+              "$type": "color",
+              "$value": "{ref.color.blue.200}",
+              "$description": "Смысловая роль action.tonal.bg.pressed."
+            }
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.blue.700}",
+            "$description": "Смысловая роль action.tonal.fg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.blue.100}",
+            "$description": "Смысловая роль action.tonal.border."
+          }
+        },
+        "ghost": {
+          "bg": {
+            "default": {
+              "$type": "color",
+              "$value": "{ref.color.transparent}",
+              "$description": "Смысловая роль action.ghost.bg.default."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.100}",
+              "$description": "Смысловая роль action.ghost.bg.hover."
+            },
+            "pressed": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.200}",
+              "$description": "Смысловая роль action.ghost.bg.pressed."
+            }
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.700}",
+            "$description": "Смысловая роль action.ghost.fg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.transparent}",
+            "$description": "Смысловая роль action.ghost.border."
+          }
+        },
+        "danger": {
+          "bg": {
+            "default": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.solid.background.default}",
+              "$description": "Смысловая роль action.danger.bg.default."
+            },
+            "hover": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.solid.background.hover}",
+              "$description": "Смысловая роль action.danger.bg.hover."
+            },
+            "pressed": {
+              "$type": "color",
+              "$value": "{sys.color.intent.danger.solid.background.pressed}",
+              "$description": "Смысловая роль action.danger.bg.pressed."
+            }
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.solid.foreground}",
+            "$description": "Смысловая роль action.danger.fg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{sys.color.intent.danger.solid.border}",
+            "$description": "Смысловая роль action.danger.border."
+          }
+        },
+        "disabled": {
+          "bg": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.100}",
+            "$description": "Смысловая роль action.disabled.bg."
+          },
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.400}",
+            "$description": "Смысловая роль action.disabled.fg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.200}",
+            "$description": "Смысловая роль action.disabled.border."
+          }
+        }
+      },
+      "field": {
+        "bg": {
+          "default": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.0}",
+            "$description": "Смысловая роль field.bg.default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.0}",
+            "$description": "Смысловая роль field.bg.hover."
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.100}",
+            "$description": "Смысловая роль field.bg.disabled."
+          },
+          "readonly": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.50}",
+            "$description": "Смысловая роль field.bg.readonly."
+          }
+        },
+        "fg": {
+          "default": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.800}",
+            "$description": "Смысловая роль field.fg.default."
+          },
+          "disabled": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.400}",
+            "$description": "Смысловая роль field.fg.disabled."
+          },
+          "placeholder": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.500}",
+            "$description": "Подсказка внутри пустого поля; сохраняет достаточный контраст."
+          }
+        },
+        "border": {
+          "default": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.300}",
+            "$description": "Смысловая роль field.border.default."
+          },
+          "hover": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.400}",
+            "$description": "Смысловая роль field.border.hover."
+          },
+          "focus": {
+            "$type": "color",
+            "$value": "{ref.color.blue.500}",
+            "$description": "Смысловая роль field.border.focus."
+          },
+          "error": {
+            "$type": "color",
+            "$value": "{ref.color.red.500}",
+            "$description": "Смысловая роль field.border.error."
+          }
+        }
+      },
+      "status": {
+        "success": {
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.green.600}",
+            "$description": "Смысловая роль status.success.fg."
+          },
+          "bg": {
+            "$type": "color",
+            "$value": "{ref.color.green.50}",
+            "$description": "Смысловая роль status.success.bg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.green.100}",
+            "$description": "Смысловая роль status.success.border."
+          },
+          "marker": {
+            "$type": "color",
+            "$value": "{ref.color.green.400}",
+            "$description": "Смысловая роль status.success.marker."
+          }
+        },
+        "warning": {
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.amber.600}",
+            "$description": "Смысловая роль status.warning.fg."
+          },
+          "bg": {
+            "$type": "color",
+            "$value": "{ref.color.amber.0}",
+            "$description": "Смысловая роль status.warning.bg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.amber.100}",
+            "$description": "Смысловая роль status.warning.border."
+          },
+          "marker": {
+            "$type": "color",
+            "$value": "{ref.color.amber.400}",
+            "$description": "Смысловая роль status.warning.marker."
+          }
+        },
+        "danger": {
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.red.600}",
+            "$description": "Смысловая роль status.danger.fg."
+          },
+          "bg": {
+            "$type": "color",
+            "$value": "{ref.color.red.0}",
+            "$description": "Смысловая роль status.danger.bg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.red.100}",
+            "$description": "Смысловая роль status.danger.border."
+          },
+          "marker": {
+            "$type": "color",
+            "$value": "{ref.color.red.400}",
+            "$description": "Смысловая роль status.danger.marker."
+          }
+        },
+        "info": {
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.blue.600}",
+            "$description": "Смысловая роль status.info.fg."
+          },
+          "bg": {
+            "$type": "color",
+            "$value": "{ref.color.blue.50}",
+            "$description": "Смысловая роль status.info.bg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.blue.100}",
+            "$description": "Смысловая роль status.info.border."
+          },
+          "marker": {
+            "$type": "color",
+            "$value": "{ref.color.blue.400}",
+            "$description": "Смысловая роль status.info.marker."
+          }
+        },
+        "neutral": {
+          "fg": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.600}",
+            "$description": "Смысловая роль status.neutral.fg."
+          },
+          "bg": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.100}",
+            "$description": "Смысловая роль status.neutral.bg."
+          },
+          "border": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.200}",
+            "$description": "Смысловая роль status.neutral.border."
+          },
+          "marker": {
+            "$type": "color",
+            "$value": "{ref.color.neutral.400}",
+            "$description": "Смысловая роль status.neutral.marker."
+          }
+        }
+      },
+      "overlay": {
+        "scrim": {
+          "$type": "color",
+          "$value": "{ref.color.overlay}",
+          "$description": "Смысловая роль overlay.scrim."
+        },
+        "subtle": {
+          "$type": "color",
+          "$value": "{ref.color.overlay-subtle}",
+          "$description": "Затемнение рабочей области за панелью инструментов."
+        }
+      },
+      "skeleton": {
+        "base": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.100}",
+          "$description": "Смысловая роль skeleton.base."
+        },
+        "highlight": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.0}",
+          "$description": "Смысловая роль skeleton.highlight."
+        }
+      },
+      "decoration": {
+        "grid": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.200}",
+          "$description": "Смысловая роль decoration.grid."
+        },
+        "plane": {
+          "$type": "color",
+          "$value": "{ref.color.blue.50}",
+          "$description": "Смысловая роль decoration.plane."
+        },
+        "trace": {
+          "$type": "color",
+          "$value": "{ref.color.blue.300}",
+          "$description": "Смысловая роль decoration.trace."
+        }
+      },
+      "shadow": {
+        "control": {
+          "$type": "color",
+          "$value": "{ref.color.shadow-soft}",
+          "$description": "Тень небольшого интерактивного элемента."
+        },
+        "overlay": {
+          "$type": "color",
+          "$value": "{ref.color.shadow-float}",
+          "$description": "Тень всплывающего слоя."
+        }
+      },
+      "table": {
+        "row": {
+          "error": {
+            "$type": "color",
+            "$value": "{ref.color.red.0}",
+            "$description": "Мягкая подсветка строки с ошибкой. Не заменяет текст статуса и маркер."
+          },
+          "warning": {
+            "$type": "color",
+            "$value": "{ref.color.amber.0}",
+            "$description": "Мягкая подсветка строки, требующей внимания."
+          }
+        }
+      },
+      "intent": {
+        "neutral": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.neutral.700}",
+                "$description": "neutral: фон сильного действия, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.neutral.800}",
+                "$description": "neutral: фон сильного действия, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.neutral.900}",
+                "$description": "neutral: фон сильного действия, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.0}",
+              "$description": "neutral: текст на сплошном акценте."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.700}",
+              "$description": "neutral: граница сильного действия."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.neutral.100}",
+                "$description": "neutral: фон мягкого акцента, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.neutral.200}",
+                "$description": "neutral: фон мягкого акцента, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.neutral.300}",
+                "$description": "neutral: фон мягкого акцента, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.700}",
+              "$description": "neutral: текст мягкого, контурного и тихого действия."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.100}",
+              "$description": "neutral: мягкая граница."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.500}",
+              "$description": "neutral: выраженный контур действия."
+            }
+          }
+        },
+        "success": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.green.600}",
+                "$description": "success: фон сильного действия, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.green.700}",
+                "$description": "success: фон сильного действия, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.green.800}",
+                "$description": "success: фон сильного действия, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.0}",
+              "$description": "success: текст на сплошном акценте."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.green.600}",
+              "$description": "success: граница сильного действия."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.green.50}",
+                "$description": "success: фон мягкого акцента, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.green.100}",
+                "$description": "success: фон мягкого акцента, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.green.200}",
+                "$description": "success: фон мягкого акцента, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.green.700}",
+              "$description": "success: текст мягкого, контурного и тихого действия."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.green.100}",
+              "$description": "success: мягкая граница."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.green.500}",
+              "$description": "success: выраженный контур действия."
+            }
+          }
+        },
+        "warning": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.amber.600}",
+                "$description": "warning: фон сильного действия, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.amber.700}",
+                "$description": "warning: фон сильного действия, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.amber.800}",
+                "$description": "warning: фон сильного действия, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.0}",
+              "$description": "warning: текст на сплошном акценте."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.amber.600}",
+              "$description": "warning: граница сильного действия."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.amber.50}",
+                "$description": "warning: фон мягкого акцента, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.amber.100}",
+                "$description": "warning: фон мягкого акцента, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.amber.200}",
+                "$description": "warning: фон мягкого акцента, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.amber.800}",
+              "$description": "warning: текст мягкого, контурного и тихого действия."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.amber.100}",
+              "$description": "warning: мягкая граница."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.amber.500}",
+              "$description": "warning: выраженный контур действия."
+            }
+          }
+        },
+        "danger": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.red.500}",
+                "$description": "danger: фон сильного действия, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.red.600}",
+                "$description": "danger: фон сильного действия, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.red.700}",
+                "$description": "danger: фон сильного действия, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.0}",
+              "$description": "danger: текст на сплошном акценте."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.red.500}",
+              "$description": "danger: граница сильного действия."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.red.50}",
+                "$description": "danger: фон мягкого акцента, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.red.100}",
+                "$description": "danger: фон мягкого акцента, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.red.200}",
+                "$description": "danger: фон мягкого акцента, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.red.700}",
+              "$description": "danger: текст мягкого, контурного и тихого действия."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.red.100}",
+              "$description": "danger: мягкая граница."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.red.500}",
+              "$description": "danger: выраженный контур действия."
+            }
+          }
+        },
+        "info": {
+          "solid": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.blue.600}",
+                "$description": "info: фон сильного действия, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.blue.700}",
+                "$description": "info: фон сильного действия, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.blue.800}",
+                "$description": "info: фон сильного действия, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.neutral.0}",
+              "$description": "info: текст на сплошном акценте."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.blue.600}",
+              "$description": "info: граница сильного действия."
+            }
+          },
+          "soft": {
+            "background": {
+              "default": {
+                "$type": "color",
+                "$value": "{ref.color.blue.50}",
+                "$description": "info: фон мягкого акцента, default."
+              },
+              "hover": {
+                "$type": "color",
+                "$value": "{ref.color.blue.100}",
+                "$description": "info: фон мягкого акцента, hover."
+              },
+              "pressed": {
+                "$type": "color",
+                "$value": "{ref.color.blue.200}",
+                "$description": "info: фон мягкого акцента, pressed."
+              }
+            },
+            "foreground": {
+              "$type": "color",
+              "$value": "{ref.color.blue.700}",
+              "$description": "info: текст мягкого, контурного и тихого действия."
+            },
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.blue.100}",
+              "$description": "info: мягкая граница."
+            }
+          },
+          "outline": {
+            "border": {
+              "$type": "color",
+              "$value": "{ref.color.blue.500}",
+              "$description": "info: выраженный контур действия."
+            }
+          }
+        }
+      },
+      "navigation": {
+        "background": {
+          "$type": "color",
+          "$value": "{sys.color.surface.base}",
+          "$description": "Отдельная поверхность основного меню, согласованная с шапкой и рабочей областью."
+        },
+        "foreground": {
+          "$type": "color",
+          "$value": "{sys.color.text.primary}",
+          "$description": "Текст активного раздела."
+        },
+        "muted": {
+          "$type": "color",
+          "$value": "{sys.color.text.secondary}",
+          "$description": "Названия неактивных разделов и служебные ссылки."
+        },
+        "hover": {
+          "$type": "color",
+          "$value": "{sys.color.surface.subtle}",
+          "$description": "Фон наведения на раздел."
+        },
+        "selected": {
+          "$type": "color",
+          "$value": "{sys.color.surface.base}",
+          "$description": "Подложка активного раздела."
+        },
+        "accent": {
+          "$type": "color",
+          "$value": "{sys.color.text.link}",
+          "$description": "Маркер и иконка активного раздела."
+        },
+        "border": {
+          "$type": "color",
+          "$value": "{sys.color.border.default}",
+          "$description": "Разделители областей навигации."
+        },
+        "group-color": {
+          "$type": "color",
+          "$value": "{sys.color.text.muted}",
+          "$description": "Подписи групп и служебная информация."
+        },
+        "icon-color": {
+          "$type": "color",
+          "$value": "{sys.color.text.muted}",
+          "$description": "Иконки неактивных разделов."
+        },
+        "selected-border": {
+          "$type": "color",
+          "$value": "{sys.color.border.default}",
+          "$description": "Тонкая граница активного раздела."
+        },
+        "count-background": {
+          "$type": "color",
+          "$value": "{sys.color.surface.subtle}",
+          "$description": "Нейтральная подложка счётчика ресурсов."
+        }
+      }
+    }
+  }
+}

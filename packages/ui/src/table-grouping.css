@@ -1,0 +1,80 @@
+.basis-data-table__group-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--basis-sys-space-sm);
+  min-height: var(--basis-comp-table-group-bar-height);
+  padding: var(--basis-sys-space-xs) var(--basis-comp-table-toolbar-inset);
+  border-bottom: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+  background: var(--basis-comp-table-group-bar-background);
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+}
+.basis-data-table__group-bar > svg {
+  width: var(--basis-sys-icon-sm);
+  height: var(--basis-sys-icon-sm);
+  color: var(--basis-sys-color-text-link);
+}
+.basis-data-table__group-bar strong {
+  color: var(--basis-comp-table-group-foreground);
+  font-weight: var(--basis-sys-type-weight-medium);
+}
+.basis-data-table__group-bar > div {
+  display: flex;
+  align-items: center;
+  margin-inline-start: auto;
+  gap: var(--basis-sys-space-xs);
+}
+.basis-data-table__group-total {
+  border-left: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+  padding-left: var(--basis-sys-space-sm);
+}
+.basis-data-table .basis-data-table__group-row > th {
+  height: var(--basis-comp-table-group-height);
+  padding: 0;
+  background: var(--basis-comp-table-group-background);
+  color: var(--basis-comp-table-group-foreground);
+}
+.basis-data-table tbody[data-group-key] + tbody[data-group-key] .basis-data-table__group-row > th {
+  border-top: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+}
+.basis-data-table__group-heading {
+  position: sticky;
+  left: 0;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-sm);
+  min-height: var(--basis-comp-table-group-height);
+  padding-right: var(--basis-comp-table-cell-padding);
+}
+.basis-data-table__group-heading > .basis-button {
+  color: var(--basis-comp-table-group-foreground);
+  font-weight: var(--basis-sys-type-weight-semibold);
+}
+.basis-data-table__group-heading > .basis-button .basis-button__icon {
+  color: var(--basis-sys-color-text-link);
+}
+.basis-data-table__group-select {
+  width: var(--basis-sys-table-selection-width);
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+}
+.basis-data-table__group-partial {
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+  font-weight: var(--basis-sys-type-weight-regular);
+}
+.basis-tt-group-settings {
+  display: grid;
+  gap: var(--basis-sys-space-lg);
+}
+.basis-tt-group-fields {
+  display: grid;
+  gap: var(--basis-sys-space-md);
+  padding: var(--basis-comp-table-tools-rule-padding);
+  border: var(--basis-sys-border-thin) solid var(--basis-comp-table-tools-border);
+  border-radius: var(--basis-comp-table-tools-radius);
+  background: var(--basis-comp-table-tools-background);
+}
