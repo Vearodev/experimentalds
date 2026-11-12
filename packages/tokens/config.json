@@ -30,6 +30,18 @@
       "size": "sys.type.size.title",
       "weight": "sys.type.weight.semibold",
       "leading": "sys.type.leading.title"
+    },
+    "metric": {
+      "family": "sys.type.family.data",
+      "size": "sys.type.size.heading",
+      "weight": "sys.type.weight.data",
+      "leading": "sys.type.leading.heading"
+    },
+    "technical": {
+      "family": "sys.type.family.mono",
+      "size": "sys.type.size.caption",
+      "weight": "sys.type.weight.medium",
+      "leading": "sys.type.leading.body"
     }
   }
 }

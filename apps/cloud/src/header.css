@@ -1,0 +1,166 @@
+.cloud-header-identity,
+.cloud-header-location,
+.cloud-header-actions {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--basis-sys-space-sm);
+}
+.cloud-header-actions {
+  justify-content: flex-end;
+}
+.cloud-header-location::before {
+  content: '';
+  flex: 0 0 var(--basis-sys-border-thin);
+  height: var(--basis-sys-space-lg);
+  margin-inline: var(--basis-sys-space-xs);
+  background: var(--basis-sys-color-border-default);
+}
+.cloud-brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  gap: var(--basis-sys-space-sm);
+  padding-inline: var(--basis-sys-space-xs);
+  color: var(--basis-sys-color-text-primary);
+  text-decoration: none;
+}
+.cloud-wordmark {
+  display: block;
+  flex: 0 0 auto;
+  width: var(--basis-comp-shell-brand-mark-width);
+  height: auto;
+}
+[data-basis-theme='dark'] .cloud-wordmark__base {
+  filter: brightness(0) invert(1);
+}
+.cloud-brand__name {
+  white-space: nowrap;
+  font-size: var(--basis-sys-type-size-body);
+  font-weight: var(--basis-sys-type-weight-semibold);
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+.cloud-brand:focus-visible {
+  border-radius: var(--basis-sys-radius-control);
+  outline: var(--basis-sys-border-focus) solid var(--basis-sys-color-border-focus);
+  outline-offset: var(--basis-sys-focus-offset);
+}
+.cloud-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-sm);
+  text-align: left;
+}
+.cloud-user-trigger__copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  max-width: var(--basis-comp-shell-user-name-max-width);
+}
+.cloud-user-trigger strong {
+  font-size: var(--basis-sys-type-size-label);
+  font-weight: var(--basis-sys-type-weight-semibold);
+  line-height: var(--basis-sys-type-leading-body);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cloud-user-trigger small {
+  font-size: var(--basis-sys-type-size-caption);
+  line-height: var(--basis-sys-type-leading-caption);
+  font-weight: var(--basis-sys-type-weight-regular);
+  color: var(--basis-sys-color-text-muted);
+}
+.cloud-user-trigger__short {
+  display: none;
+}
+.cloud-user-summary {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-md);
+  padding-block: var(--basis-sys-space-xs);
+}
+.cloud-user-summary__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--basis-sys-space-micro);
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.cloud-user-summary strong {
+  color: var(--basis-sys-color-text-primary);
+  font-size: var(--basis-sys-type-size-body);
+  font-weight: var(--basis-sys-type-weight-semibold);
+  line-height: var(--basis-sys-type-leading-body);
+}
+.cloud-user-summary__role,
+.cloud-user-summary__email {
+  font-size: var(--basis-sys-type-size-caption);
+  line-height: var(--basis-sys-type-leading-caption);
+}
+.cloud-user-summary__role {
+  color: var(--basis-sys-color-text-secondary);
+}
+.cloud-user-summary__email {
+  color: var(--basis-sys-color-text-muted);
+}
+@media (max-width: 780px) {
+  .cloud-app {
+    --basis-comp-shell-header-height: var(--basis-comp-shell-header-height-compact);
+  }
+  .cloud-topbar {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: var(--basis-sys-control-lg-height) minmax(0, 1fr);
+    padding: var(--basis-sys-space-xs) var(--basis-sys-space-sm);
+    column-gap: var(--basis-sys-space-xs);
+    row-gap: var(--basis-sys-space-xs);
+  }
+  .cloud-header-location {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    padding: 0 var(--basis-sys-space-xs) var(--basis-sys-space-xs);
+    justify-content: space-between;
+  }
+  .cloud-header-location::before {
+    display: none;
+  }
+  .cloud-header-identity,
+  .cloud-header-actions {
+    gap: var(--basis-sys-space-xs);
+  }
+  .cloud-wordmark {
+    width: var(--basis-comp-shell-brand-mark-width-compact);
+  }
+  .cloud-brand {
+    gap: var(--basis-sys-space-sm);
+  }
+  .cloud-brand__name {
+    font-size: var(--basis-sys-type-size-body);
+  }
+  .cloud-user-trigger small {
+    display: none;
+  }
+}
+@media (max-width: 520px) {
+  .cloud-user-trigger__avatar,
+  .cloud-user-trigger__name {
+    display: none;
+  }
+  .cloud-user-trigger__short {
+    display: inline;
+    max-width: 6ch;
+  }
+}
+@media (max-width: 360px) {
+  .cloud-brand {
+    gap: var(--basis-sys-space-xs);
+    padding-inline: 0;
+  }
+  .cloud-wordmark {
+    width: var(--basis-comp-shell-brand-mark-width-compact);
+  }
+  .cloud-brand__name {
+    font-size: var(--basis-sys-type-size-caption);
+  }
+}

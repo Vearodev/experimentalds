@@ -200,6 +200,8 @@ export function PlatformFacts({
       !['description', 'createdAt', ...omit].includes(f.key) &&
       (!compact || !f.hidden),
   );
+  const groups = resourceFieldGroups({ ...entity, fields });
+  const showGroups = grouped && fields.length > 6 && groups.length > 1;
   const render = (fields: PlatformField[]) => (
     <DetailFacts
       descriptions={descriptions}
@@ -216,9 +218,9 @@ export function PlatformFacts({
   );
   return (
     <div className="resource-properties" data-compact={compact}>
-      <div className={grouped ? 'resource-fact-groups' : undefined}>
-        {grouped
-          ? resourceFieldGroups({ ...entity, fields }).map((group) => (
+      <div className={showGroups ? 'resource-fact-groups' : undefined}>
+        {showGroups
+          ? groups.map((group) => (
               <DetailSection key={group.id} title={group.title} icon={group.icon}>
                 {render(group.fields)}
               </DetailSection>
@@ -327,8 +329,13 @@ export function RecentVmTasks({ tasks, href }: { tasks: Task[]; href: string }) 
     <Panel
       title="Последние операции"
       action={
-        <Button size="sm" variant="ghost" onClick={() => navigate(href)}>
-          Все операции <ArrowUpRight size={14} />
+        <Button
+          size="sm"
+          variant="ghost"
+          trailingIcon={<ArrowUpRight />}
+          onClick={() => navigate(href)}
+        >
+          Все операции
         </Button>
       }
     >
@@ -481,9 +488,10 @@ export function ResourceOverview({
                 <Button
                   size="sm"
                   variant="ghost"
+                  trailingIcon={<ArrowUpRight />}
                   onClick={() => navigate(`${entity.id}/${row.id}/activity`)}
                 >
-                  Аудит <ArrowUpRight size={14} />
+                  Аудит
                 </Button>
               }
             >

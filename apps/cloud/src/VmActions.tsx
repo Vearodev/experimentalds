@@ -97,7 +97,7 @@ export function useVmActions() {
           </Button>
           <Button
             variant="primary"
-            tone={confirmation?.action === 'delete' ? 'danger' : 'warning'}
+            tone={confirmation?.action === 'delete' ? 'danger' : 'brand'}
             loading={working}
             disabled={confirmation?.action === 'delete' && code.length !== 6}
             onClick={() =>

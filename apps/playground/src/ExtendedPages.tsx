@@ -19,12 +19,14 @@ import {
   Menu as MenuIcon,
   MessageSquare,
   Monitor,
+  Moon,
   MoreHorizontal,
   Network,
   RefreshCw,
   Server,
   ShieldCheck,
   SlidersHorizontal,
+  Sun,
   Tag as TagIcon,
   Tags,
   Trash2,
@@ -1284,6 +1286,7 @@ function BreadcrumbPage() {
 }
 
 function MenuPage() {
+  const design = useDesign();
   const [result, setResult] = useState('Выберите действие'),
     [disabled, setDisabled] = useState(false);
   const run = (name: string) => () => setResult(`${name} · демонстрация`);
@@ -1396,6 +1399,56 @@ function MenuPage() {
         </Spec>
         <Spec title="Нет действий">
           <Menu label="Доступные действия" items={[]} />
+        </Spec>
+        <Spec title="Профиль и выбор настройки">
+          <div className="extended-menu-example">
+            <Menu
+              label="Профиль: Анна Смирнова"
+              variant="ghost"
+              size="lg"
+              align="end"
+              triggerContent={
+                <span className="extended-menu-profile">
+                  <Avatar name="Анна Смирнова" size="sm" />
+                  <span>Анна Смирнова</span>
+                </span>
+              }
+              header={
+                <span className="extended-menu-identity">
+                  <strong>Анна Смирнова</strong>
+                  <span>Администратор</span>
+                </span>
+              }
+              items={[
+                {
+                  id: 'theme',
+                  label: 'Тема интерфейса',
+                  description: design.theme === 'light' ? 'Светлая' : 'Тёмная',
+                  icon: design.theme === 'light' ? <Sun /> : <Moon />,
+                  children: [
+                    {
+                      id: 'light',
+                      label: 'Светлая',
+                      icon: <Sun />,
+                      checked: design.theme === 'light',
+                      onSelect: () => design.setTheme('light'),
+                    },
+                    {
+                      id: 'dark',
+                      label: 'Тёмная',
+                      icon: <Moon />,
+                      checked: design.theme === 'dark',
+                      onSelect: () => design.setTheme('dark'),
+                    },
+                  ],
+                },
+              ]}
+            />
+            <p>
+              Выбранное значение отмечено галочкой. Меню выровнено по правому краю кнопки; вложенный
+              выбор остаётся в той же панели.
+            </p>
+          </div>
         </Spec>
       </States>
     </DesignPage>

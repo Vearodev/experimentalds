@@ -94,6 +94,7 @@
   --basis-ref-number-0_5: 0.5;
   --basis-ref-number-0_65: 0.65;
   --basis-ref-number-0_8: 0.8;
+  --basis-ref-number-0_92: 0.92;
   --basis-ref-number-1_5: 1.5;
   --basis-ref-number-1_75: 1.75;
   --basis-ref-duration-0: 0ms;
@@ -109,7 +110,7 @@
   --basis-ref-easing-enter: cubic-bezier(0, 0, 0.2, 1);
   --basis-ref-easing-linear: cubic-bezier(0, 0, 1, 1);
   --basis-ref-font-family-ui: "Onest Variable", "Onest", system-ui, sans-serif;
-  --basis-ref-font-family-mono: "Cascadia Code", "Consolas", monospace;
+  --basis-ref-font-family-mono: "JetBrains Mono Variable", "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
   --basis-ref-font-weight-400: 400;
   --basis-ref-font-weight-500: 500;
   --basis-ref-font-weight-600: 600;
@@ -178,6 +179,7 @@
   --basis-ref-size-table-toolbar-height: 60px;
   --basis-ref-size-layout-sidebar-width: 224px;
   --basis-ref-size-layout-sidebar-compact: 64px;
+  --basis-ref-size-layout-sidebar-search-max-height: 360px;
   --basis-ref-size-layout-content-max: 1440px;
   --basis-ref-size-layout-control-max: 400px;
   --basis-ref-size-layout-dialog-width: 480px;
@@ -185,6 +187,10 @@
   --basis-ref-size-layout-picker-width: 760px;
   --basis-ref-size-layout-shell-header-height: 56px;
   --basis-ref-size-layout-shell-max-width: 1920px;
+  --basis-ref-size-layout-shell-brand-mark-width: 24px;
+  --basis-ref-size-layout-shell-brand-mark-width-compact: 20px;
+  --basis-ref-size-layout-shell-header-height-compact: 88px;
+  --basis-ref-size-layout-shell-user-name-max-width: 160px;
   --basis-ref-size-layout-workspace-tab: 248px;
   --basis-ref-size-menu: 320px;
   --basis-ref-size-cascade-column-width: 224px;
@@ -271,6 +277,8 @@
   --basis-sys-type-leading-title: var(--basis-ref-font-leading-title);
   --basis-sys-type-family-ui: var(--basis-ref-font-family-ui);
   --basis-sys-type-family-mono: var(--basis-ref-font-family-mono);
+  --basis-sys-type-family-data: var(--basis-ref-font-family-mono);
+  --basis-sys-type-weight-data: var(--basis-ref-font-weight-600);
   --basis-sys-type-weight-regular: var(--basis-ref-font-weight-400);
   --basis-sys-type-weight-medium: var(--basis-ref-font-weight-500);
   --basis-sys-type-weight-semibold: var(--basis-ref-font-weight-600);
@@ -294,6 +302,7 @@
   --basis-sys-table-toolbar-height: var(--basis-ref-size-table-toolbar-height);
   --basis-sys-layout-sidebar-width: var(--basis-ref-size-layout-sidebar-width);
   --basis-sys-layout-sidebar-compact: var(--basis-ref-size-layout-sidebar-compact);
+  --basis-sys-layout-sidebar-search-max-height: var(--basis-ref-size-layout-sidebar-search-max-height);
   --basis-sys-layout-content-max: var(--basis-ref-size-layout-content-max);
   --basis-sys-layout-content-inset: var(--basis-ref-space-800);
   --basis-sys-layout-control-max: var(--basis-ref-size-layout-control-max);
@@ -304,6 +313,10 @@
   --basis-sys-layout-cascade-column-width: var(--basis-ref-size-cascade-column-width);
   --basis-sys-layout-shell-header-height: var(--basis-ref-size-layout-shell-header-height);
   --basis-sys-layout-shell-max-width: var(--basis-ref-size-layout-shell-max-width);
+  --basis-sys-layout-shell-brand-mark-width: var(--basis-ref-size-layout-shell-brand-mark-width);
+  --basis-sys-layout-shell-brand-mark-width-compact: var(--basis-ref-size-layout-shell-brand-mark-width-compact);
+  --basis-sys-layout-shell-header-height-compact: var(--basis-ref-size-layout-shell-header-height-compact);
+  --basis-sys-layout-shell-user-name-max-width: var(--basis-ref-size-layout-shell-user-name-max-width);
   --basis-sys-layout-workspace-tab: var(--basis-ref-size-layout-workspace-tab);
   --basis-sys-layout-console-width: var(--basis-ref-size-console-width);
   --basis-sys-layout-console-height: var(--basis-ref-size-console-height);
@@ -317,6 +330,7 @@
   --basis-sys-breakpoint-narrow: var(--basis-ref-breakpoint-narrow);
   --basis-sys-breakpoint-medium: var(--basis-ref-breakpoint-medium);
   --basis-sys-breakpoint-small: var(--basis-ref-breakpoint-small);
+  --basis-sys-motion-content-enter-opacity: var(--basis-ref-number-0_92);
   --basis-sys-motion-duration-instant: var(--basis-ref-duration-0);
   --basis-sys-motion-duration-fast: var(--basis-ref-duration-120);
   --basis-sys-motion-duration-normal: var(--basis-ref-duration-180);
@@ -691,6 +705,7 @@
   --basis-comp-breadcrumb-current-foreground: var(--basis-sys-color-text-primary);
   --basis-comp-breadcrumb-separator: var(--basis-sys-color-border-strong);
   --basis-comp-breadcrumb-font-size: var(--basis-sys-type-size-caption);
+  --basis-comp-menu-side-offset: var(--basis-sys-space-xl);
   --basis-comp-menu-background: var(--basis-sys-color-surface-base);
   --basis-comp-menu-foreground: var(--basis-sys-color-text-primary);
   --basis-comp-menu-border: var(--basis-sys-color-border-default);
@@ -757,7 +772,12 @@
   --basis-comp-navigation-item-radius: var(--basis-sys-radius-control);
   --basis-comp-navigation-icon-size: var(--basis-sys-icon-md);
   --basis-comp-navigation-compact-width: var(--basis-sys-layout-sidebar-compact);
-  --basis-comp-navigation-child-inset: var(--basis-sys-space-md);
+  --basis-comp-navigation-child-inset: var(--basis-sys-space-lg);
+  --basis-comp-navigation-item-padding-block: var(--basis-sys-space-sm);
+  --basis-comp-navigation-group-gap: var(--basis-sys-space-sm);
+  --basis-comp-navigation-compact-item-width: var(--basis-sys-control-lg-height);
+  --basis-comp-navigation-search-gap: var(--basis-sys-space-md);
+  --basis-comp-navigation-search-max-height: var(--basis-sys-layout-sidebar-search-max-height);
   --basis-comp-table-tools-background: var(--basis-sys-color-surface-subtle);
   --basis-comp-table-tools-border: var(--basis-sys-color-border-default);
   --basis-comp-table-tools-radius: var(--basis-sys-radius-control);
@@ -775,6 +795,13 @@
   --basis-comp-shell-header-height: var(--basis-sys-layout-shell-header-height);
   --basis-comp-shell-content-padding: var(--basis-sys-space-lg);
   --basis-comp-shell-max-width: var(--basis-sys-layout-shell-max-width);
+  --basis-comp-shell-brand-mark-width: var(--basis-sys-layout-shell-brand-mark-width);
+  --basis-comp-shell-brand-mark-width-compact: var(--basis-sys-layout-shell-brand-mark-width-compact);
+  --basis-comp-shell-header-height-compact: var(--basis-sys-layout-shell-header-height-compact);
+  --basis-comp-shell-user-name-max-width: var(--basis-sys-layout-shell-user-name-max-width);
+  --basis-comp-shell-content-enter-duration: var(--basis-sys-motion-duration-fast);
+  --basis-comp-shell-content-enter-easing: var(--basis-sys-motion-easing-enter);
+  --basis-comp-shell-content-enter-opacity: var(--basis-sys-motion-content-enter-opacity);
   --basis-comp-workspace-tabs-height: var(--basis-sys-control-lg-height);
   --basis-comp-workspace-tabs-background: var(--basis-sys-color-surface-subtle);
   --basis-comp-workspace-tabs-selected: var(--basis-sys-color-surface-base);
@@ -968,12 +995,12 @@
   --basis-sys-color-navigation-foreground: var(--basis-sys-color-text-primary);
   --basis-sys-color-navigation-muted: var(--basis-sys-color-text-secondary);
   --basis-sys-color-navigation-hover: var(--basis-sys-color-surface-subtle);
-  --basis-sys-color-navigation-selected: var(--basis-sys-color-surface-base);
+  --basis-sys-color-navigation-selected: var(--basis-sys-color-surface-selected);
   --basis-sys-color-navigation-accent: var(--basis-sys-color-text-link);
   --basis-sys-color-navigation-border: var(--basis-sys-color-border-default);
   --basis-sys-color-navigation-group-color: var(--basis-sys-color-text-muted);
   --basis-sys-color-navigation-icon-color: var(--basis-sys-color-text-muted);
-  --basis-sys-color-navigation-selected-border: var(--basis-sys-color-border-default);
+  --basis-sys-color-navigation-selected-border: var(--basis-sys-color-border-selected);
   --basis-sys-color-navigation-count-background: var(--basis-sys-color-surface-subtle);
   --basis-color-brand-navy: var(--basis-sys-color-brand-anchor);
   --basis-color-brand-blue: var(--basis-sys-color-brand-accent);
@@ -1136,6 +1163,7 @@
   --basis-ref-number-0_5: 0.5;
   --basis-ref-number-0_65: 0.65;
   --basis-ref-number-0_8: 0.8;
+  --basis-ref-number-0_92: 0.92;
   --basis-ref-number-1_5: 1.5;
   --basis-ref-number-1_75: 1.75;
   --basis-ref-duration-0: 0ms;
@@ -1151,7 +1179,7 @@
   --basis-ref-easing-enter: cubic-bezier(0, 0, 0.2, 1);
   --basis-ref-easing-linear: cubic-bezier(0, 0, 1, 1);
   --basis-ref-font-family-ui: "Onest Variable", "Onest", system-ui, sans-serif;
-  --basis-ref-font-family-mono: "Cascadia Code", "Consolas", monospace;
+  --basis-ref-font-family-mono: "JetBrains Mono Variable", "JetBrains Mono", "Cascadia Code", "Consolas", monospace;
   --basis-ref-font-weight-400: 400;
   --basis-ref-font-weight-500: 500;
   --basis-ref-font-weight-600: 600;
@@ -1220,6 +1248,7 @@
   --basis-ref-size-table-toolbar-height: 60px;
   --basis-ref-size-layout-sidebar-width: 224px;
   --basis-ref-size-layout-sidebar-compact: 64px;
+  --basis-ref-size-layout-sidebar-search-max-height: 360px;
   --basis-ref-size-layout-content-max: 1440px;
   --basis-ref-size-layout-control-max: 400px;
   --basis-ref-size-layout-dialog-width: 480px;
@@ -1227,6 +1256,10 @@
   --basis-ref-size-layout-picker-width: 760px;
   --basis-ref-size-layout-shell-header-height: 56px;
   --basis-ref-size-layout-shell-max-width: 1920px;
+  --basis-ref-size-layout-shell-brand-mark-width: 24px;
+  --basis-ref-size-layout-shell-brand-mark-width-compact: 20px;
+  --basis-ref-size-layout-shell-header-height-compact: 88px;
+  --basis-ref-size-layout-shell-user-name-max-width: 160px;
   --basis-ref-size-layout-workspace-tab: 248px;
   --basis-ref-size-menu: 320px;
   --basis-ref-size-cascade-column-width: 224px;
@@ -1313,6 +1346,8 @@
   --basis-sys-type-leading-title: var(--basis-ref-font-leading-title);
   --basis-sys-type-family-ui: var(--basis-ref-font-family-ui);
   --basis-sys-type-family-mono: var(--basis-ref-font-family-mono);
+  --basis-sys-type-family-data: var(--basis-ref-font-family-mono);
+  --basis-sys-type-weight-data: var(--basis-ref-font-weight-600);
   --basis-sys-type-weight-regular: var(--basis-ref-font-weight-400);
   --basis-sys-type-weight-medium: var(--basis-ref-font-weight-500);
   --basis-sys-type-weight-semibold: var(--basis-ref-font-weight-600);
@@ -1336,6 +1371,7 @@
   --basis-sys-table-toolbar-height: var(--basis-ref-size-table-toolbar-height);
   --basis-sys-layout-sidebar-width: var(--basis-ref-size-layout-sidebar-width);
   --basis-sys-layout-sidebar-compact: var(--basis-ref-size-layout-sidebar-compact);
+  --basis-sys-layout-sidebar-search-max-height: var(--basis-ref-size-layout-sidebar-search-max-height);
   --basis-sys-layout-content-max: var(--basis-ref-size-layout-content-max);
   --basis-sys-layout-content-inset: var(--basis-ref-space-800);
   --basis-sys-layout-control-max: var(--basis-ref-size-layout-control-max);
@@ -1346,6 +1382,10 @@
   --basis-sys-layout-cascade-column-width: var(--basis-ref-size-cascade-column-width);
   --basis-sys-layout-shell-header-height: var(--basis-ref-size-layout-shell-header-height);
   --basis-sys-layout-shell-max-width: var(--basis-ref-size-layout-shell-max-width);
+  --basis-sys-layout-shell-brand-mark-width: var(--basis-ref-size-layout-shell-brand-mark-width);
+  --basis-sys-layout-shell-brand-mark-width-compact: var(--basis-ref-size-layout-shell-brand-mark-width-compact);
+  --basis-sys-layout-shell-header-height-compact: var(--basis-ref-size-layout-shell-header-height-compact);
+  --basis-sys-layout-shell-user-name-max-width: var(--basis-ref-size-layout-shell-user-name-max-width);
   --basis-sys-layout-workspace-tab: var(--basis-ref-size-layout-workspace-tab);
   --basis-sys-layout-console-width: var(--basis-ref-size-console-width);
   --basis-sys-layout-console-height: var(--basis-ref-size-console-height);
@@ -1359,6 +1399,7 @@
   --basis-sys-breakpoint-narrow: var(--basis-ref-breakpoint-narrow);
   --basis-sys-breakpoint-medium: var(--basis-ref-breakpoint-medium);
   --basis-sys-breakpoint-small: var(--basis-ref-breakpoint-small);
+  --basis-sys-motion-content-enter-opacity: var(--basis-ref-number-0_92);
   --basis-sys-motion-duration-instant: var(--basis-ref-duration-0);
   --basis-sys-motion-duration-fast: var(--basis-ref-duration-120);
   --basis-sys-motion-duration-normal: var(--basis-ref-duration-180);
@@ -1733,6 +1774,7 @@
   --basis-comp-breadcrumb-current-foreground: var(--basis-sys-color-text-primary);
   --basis-comp-breadcrumb-separator: var(--basis-sys-color-border-strong);
   --basis-comp-breadcrumb-font-size: var(--basis-sys-type-size-caption);
+  --basis-comp-menu-side-offset: var(--basis-sys-space-xl);
   --basis-comp-menu-background: var(--basis-sys-color-surface-base);
   --basis-comp-menu-foreground: var(--basis-sys-color-text-primary);
   --basis-comp-menu-border: var(--basis-sys-color-border-default);
@@ -1799,7 +1841,12 @@
   --basis-comp-navigation-item-radius: var(--basis-sys-radius-control);
   --basis-comp-navigation-icon-size: var(--basis-sys-icon-md);
   --basis-comp-navigation-compact-width: var(--basis-sys-layout-sidebar-compact);
-  --basis-comp-navigation-child-inset: var(--basis-sys-space-md);
+  --basis-comp-navigation-child-inset: var(--basis-sys-space-lg);
+  --basis-comp-navigation-item-padding-block: var(--basis-sys-space-sm);
+  --basis-comp-navigation-group-gap: var(--basis-sys-space-sm);
+  --basis-comp-navigation-compact-item-width: var(--basis-sys-control-lg-height);
+  --basis-comp-navigation-search-gap: var(--basis-sys-space-md);
+  --basis-comp-navigation-search-max-height: var(--basis-sys-layout-sidebar-search-max-height);
   --basis-comp-table-tools-background: var(--basis-sys-color-surface-subtle);
   --basis-comp-table-tools-border: var(--basis-sys-color-border-default);
   --basis-comp-table-tools-radius: var(--basis-sys-radius-control);
@@ -1817,6 +1864,13 @@
   --basis-comp-shell-header-height: var(--basis-sys-layout-shell-header-height);
   --basis-comp-shell-content-padding: var(--basis-sys-space-lg);
   --basis-comp-shell-max-width: var(--basis-sys-layout-shell-max-width);
+  --basis-comp-shell-brand-mark-width: var(--basis-sys-layout-shell-brand-mark-width);
+  --basis-comp-shell-brand-mark-width-compact: var(--basis-sys-layout-shell-brand-mark-width-compact);
+  --basis-comp-shell-header-height-compact: var(--basis-sys-layout-shell-header-height-compact);
+  --basis-comp-shell-user-name-max-width: var(--basis-sys-layout-shell-user-name-max-width);
+  --basis-comp-shell-content-enter-duration: var(--basis-sys-motion-duration-fast);
+  --basis-comp-shell-content-enter-easing: var(--basis-sys-motion-easing-enter);
+  --basis-comp-shell-content-enter-opacity: var(--basis-sys-motion-content-enter-opacity);
   --basis-comp-workspace-tabs-height: var(--basis-sys-control-lg-height);
   --basis-comp-workspace-tabs-background: var(--basis-sys-color-surface-subtle);
   --basis-comp-workspace-tabs-selected: var(--basis-sys-color-surface-base);
@@ -2010,12 +2064,12 @@
   --basis-sys-color-navigation-foreground: var(--basis-sys-color-text-primary);
   --basis-sys-color-navigation-muted: var(--basis-sys-color-text-secondary);
   --basis-sys-color-navigation-hover: var(--basis-sys-color-surface-subtle);
-  --basis-sys-color-navigation-selected: var(--basis-sys-color-surface-subtle);
+  --basis-sys-color-navigation-selected: var(--basis-sys-color-surface-selected);
   --basis-sys-color-navigation-accent: var(--basis-sys-color-text-link);
   --basis-sys-color-navigation-border: var(--basis-sys-color-border-default);
   --basis-sys-color-navigation-group-color: var(--basis-sys-color-text-muted);
   --basis-sys-color-navigation-icon-color: var(--basis-sys-color-text-muted);
-  --basis-sys-color-navigation-selected-border: var(--basis-sys-color-border-control);
+  --basis-sys-color-navigation-selected-border: var(--basis-sys-color-border-selected);
   --basis-sys-color-navigation-count-background: var(--basis-sys-color-surface-base);
   --basis-color-brand-navy: var(--basis-sys-color-brand-anchor);
   --basis-color-brand-blue: var(--basis-sys-color-brand-accent);

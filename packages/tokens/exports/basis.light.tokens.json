@@ -1089,6 +1089,11 @@
         "$value": 0.8,
         "$description": "Безразмерное значение 0.8."
       },
+      "0_92": {
+        "$type": "number",
+        "$value": 0.92,
+        "$description": "Безразмерное значение 0.92."
+      },
       "1_5": {
         "$type": "number",
         "$value": 1.5,
@@ -1226,11 +1231,18 @@
         "mono": {
           "$type": "fontFamily",
           "$value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "$description": "Моноширинный шрифт для кода и идентификаторов."
+          "$description": "JetBrains Mono: локальный variable-шрифт. Метрики 600, технические значения 500, консоль 400. Кириллица и латиница.",
+          "$extensions": {
+            "basis": {
+              "figmaFamily": "JetBrains Mono"
+            }
+          }
         }
       },
       "weight": {
@@ -1830,6 +1842,14 @@
               "unit": "px"
             },
             "$description": "Ширина компактного меню с иконками."
+          },
+          "search-max-height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 360,
+              "unit": "px"
+            },
+            "$description": "Предельная высота результатов поиска по разделам в отдельном окне."
           }
         },
         "content": {
@@ -1896,6 +1916,38 @@
               "unit": "px"
             },
             "$description": "Максимальная ширина облачного портала — Full HD. На больших экранах оболочка центрируется."
+          },
+          "brand-mark-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 24,
+              "unit": "px"
+            },
+            "$description": "Ширина компактного знака BASIS в шапке."
+          },
+          "brand-mark-width-compact": {
+            "$type": "dimension",
+            "$value": {
+              "value": 20,
+              "unit": "px"
+            },
+            "$description": "Ширина логотипа на узком экране."
+          },
+          "header-height-compact": {
+            "$type": "dimension",
+            "$value": {
+              "value": 88,
+              "unit": "px"
+            },
+            "$description": "Высота шапки с отдельной строкой пути на узком экране."
+          },
+          "user-name-max-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 160,
+              "unit": "px"
+            },
+            "$description": "Предел ширины имени пользователя в шапке."
           }
         },
         "workspace": {
@@ -2471,15 +2523,25 @@
         "ui": {
           "$type": "fontFamily",
           "$value": "{ref.font.family.ui}",
-          "$description": "Семейство type.family.ui."
+          "$description": "Шрифт интерфейса: навигация, заголовки, подписи, формы и действия."
         },
         "mono": {
           "$type": "fontFamily",
           "$value": "{ref.font.family.mono}",
-          "$description": "Семейство type.family.mono."
+          "$description": "Шрифт точных технических значений: IP, MAC, CIDR, ID, код подтверждения, маски и терминал. Одинаковая роль в обеих темах."
+        },
+        "data": {
+          "$type": "fontFamily",
+          "$value": "{ref.font.family.mono}",
+          "$description": "Числовые показатели: CPU, RAM, ёмкость, квоты и счётчики. Отдельная роль того же второго семейства; единицы измерения остаются в ui."
         }
       },
       "weight": {
+        "data": {
+          "$type": "fontWeight",
+          "$value": "{ref.font.weight.600}",
+          "$description": "Акцентные числовые показатели; не используется для обычного текста и консоли."
+        },
         "regular": {
           "$type": "fontWeight",
           "$value": "{ref.font.weight.400}",
@@ -2636,6 +2698,11 @@
           "$type": "dimension",
           "$value": "{ref.size.layout.sidebar.compact}",
           "$description": "Компактное основное меню."
+        },
+        "search-max-height": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.sidebar.search-max-height}",
+          "$description": "Высота списка навигационного поиска; дополнительно ограничена окном браузера."
         }
       },
       "content": {
@@ -2700,6 +2767,26 @@
           "$type": "dimension",
           "$value": "{ref.size.layout.shell.max-width}",
           "$description": "Максимальная ширина рабочей оболочки без ограничения её высоты."
+        },
+        "brand-mark-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.brand-mark-width}",
+          "$description": "Ширина логотипа в шапке."
+        },
+        "brand-mark-width-compact": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.brand-mark-width-compact}",
+          "$description": "Ширина логотипа на узком экране."
+        },
+        "header-height-compact": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.header-height-compact}",
+          "$description": "Высота шапки с отдельной строкой пути на узком экране."
+        },
+        "user-name-max-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.user-name-max-width}",
+          "$description": "Предел ширины имени пользователя в шапке."
         }
       },
       "workspace": {
@@ -2775,6 +2862,11 @@
       }
     },
     "motion": {
+      "content-enter-opacity": {
+        "$type": "number",
+        "$value": "{ref.number.0_92}",
+        "$description": "Локальный отклик сменяемого содержимого. Вся страница никогда не затухает."
+      },
       "duration": {
         "instant": {
           "$type": "duration",
@@ -3845,7 +3937,7 @@
         },
         "selected": {
           "$type": "color",
-          "$value": "{sys.color.surface.base}",
+          "$value": "{sys.color.surface.selected}",
           "$description": "Подложка активного раздела."
         },
         "accent": {
@@ -3870,7 +3962,7 @@
         },
         "selected-border": {
           "$type": "color",
-          "$value": "{sys.color.border.default}",
+          "$value": "{sys.color.border.selected}",
           "$description": "Тонкая граница активного раздела."
         },
         "count-background": {
@@ -5799,6 +5891,11 @@
       }
     },
     "menu": {
+      "side-offset": {
+        "$type": "dimension",
+        "$value": "{sys.space.xl}",
+        "$description": "Зазор бокового меню от кнопки: оставляет отступ от внешней границы компактной навигации."
+      },
       "background": {
         "$type": "color",
         "$value": "{sys.color.surface.base}",
@@ -6149,8 +6246,33 @@
       },
       "child-inset": {
         "$type": "dimension",
+        "$value": "{sys.space.lg}",
+        "$description": "Направляющая вложенного уровня выровнена по центру иконки группы."
+      },
+      "item-padding-block": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Вертикальный отступ пункта; длинные названия переносятся без обрезания."
+      },
+      "group-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.sm}",
+        "$description": "Отступ перед группой верхнего уровня."
+      },
+      "compact-item-width": {
+        "$type": "dimension",
+        "$value": "{sys.control.lg.height}",
+        "$description": "Ширина компактного пункта с отдельным местом для шеврона."
+      },
+      "search-gap": {
+        "$type": "dimension",
         "$value": "{sys.space.md}",
-        "$description": "Отступ вложенного уровня навигации."
+        "$description": "Отступ между закреплённым поиском и прокручиваемыми разделами."
+      },
+      "search-max-height": {
+        "$type": "dimension",
+        "$value": "{sys.layout.sidebar.search-max-height}",
+        "$description": "Прокручиваемая область результатов в компактном режиме."
       }
     },
     "table-tools": {
@@ -6240,6 +6362,41 @@
         "$type": "dimension",
         "$value": "{sys.layout.shell.max-width}",
         "$description": "Общий предел ширины шапки, меню и области содержимого. Включает наружные отступы."
+      },
+      "brand-mark-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.shell.brand-mark-width}",
+        "$description": "Ширина логотипа в шапке."
+      },
+      "brand-mark-width-compact": {
+        "$type": "dimension",
+        "$value": "{sys.layout.shell.brand-mark-width-compact}",
+        "$description": "Ширина логотипа на узком экране."
+      },
+      "header-height-compact": {
+        "$type": "dimension",
+        "$value": "{sys.layout.shell.header-height-compact}",
+        "$description": "Высота шапки с отдельной строкой пути на узком экране."
+      },
+      "user-name-max-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.shell.user-name-max-width}",
+        "$description": "Предел ширины имени пользователя в шапке."
+      },
+      "content-enter-duration": {
+        "$type": "duration",
+        "$value": "{sys.motion.duration.fast}",
+        "$description": "Короткий отклик сменяемого содержимого. Заголовок и навигация не анимируются."
+      },
+      "content-enter-easing": {
+        "$type": "cubicBezier",
+        "$value": "{sys.motion.easing.enter}",
+        "$description": "Спокойное завершение перехода содержимого, без пружины и задержки."
+      },
+      "content-enter-opacity": {
+        "$type": "number",
+        "$value": "{sys.motion.content-enter-opacity}",
+        "$description": "Лёгкое проявление содержимого; текст читаем с первого кадра, геометрия неподвижна."
       }
     },
     "workspace-tabs": {

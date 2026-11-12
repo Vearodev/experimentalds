@@ -1,0 +1,466 @@
+[
+  {
+    "route": "http://127.0.0.1:5173/#cloud/vf-pools/vf-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/vnf-devices/vnf-1/interfaces",
+    "tab": "Интерфейсы0",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/vnf-devices/vnf-1/configuration",
+    "tab": "Конфигурация",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/vnf-devices/vnf-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-access/sdn-access-1/segments",
+    "tab": "Сегменты2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-access/sdn-access-1/ports",
+    "tab": "Порты2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-access/sdn-access-1/objects",
+    "tab": "Сетевые объекты1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-access/sdn-access-1/members",
+    "tab": "Участники0",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-access/sdn-access-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-segments/segment-1/ports",
+    "tab": "Логические порты1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-segments/segment-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-ports/port-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-networks/network-object-1/ports",
+    "tab": "Порты2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-networks/network-object-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-routers/router-1/ports",
+    "tab": "Порты2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-routers/router-1/routes",
+    "tab": "Маршруты1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-routers/router-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-external/sdn-ext-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-address-pools/address-pool-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-floating-ips/floating-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-policies/sdn-policy-1/rules",
+    "tab": "Правила1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-policies/sdn-policy-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-l2-external/l2-network-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-hypervisors/hypervisor-1/ports",
+    "tab": "Логические порты2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/sdn-hypervisors/hypervisor-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/locations/grid-1/zones",
+    "tab": "Зоны2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/locations/grid-1/seps",
+    "tab": "Хранилища1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/locations/grid-1/networks",
+    "tab": "Внешние сети1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/locations/grid-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/clusters/msk-main/nodes",
+    "tab": "Узлы3",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/clusters/msk-main/computes",
+    "tab": "Машины9",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/clusters/msk-main/networks",
+    "tab": "ViNS1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/clusters/msk-main/cpu",
+    "tab": "Совместимость CPU1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/clusters/msk-main/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/nodes/h1/computes",
+    "tab": "Машины5",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/nodes/h1/pci",
+    "tab": "PCI1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/nodes/h1/gpu",
+    "tab": "GPU1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/nodes/h1/network",
+    "tab": "Сеть",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/nodes/h1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/pgpu/pgpu-1/vgpu",
+    "tab": "Виртуальные GPU1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/pgpu/pgpu-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/vgpu/vgpu-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/pci/pci-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/optimizer/optimizer-1/recommendations",
+    "tab": "Рекомендации1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/optimizer/optimizer-1/nodes",
+    "tab": "Узлы2",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/optimizer/optimizer-1/policies",
+    "tab": "Политики",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/optimizer/optimizer-1/schedule",
+    "tab": "Расписание",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/optimizer/optimizer-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/users/user-1/memberships",
+    "tab": "Доступ к ресурсам1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/users/user-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/api-access/role-admin/permissions",
+    "tab": "Разрешения",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/api-access/role-admin/users",
+    "tab": "Пользователи1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/api-access/role-admin/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/zero-access/session-1/recording",
+    "tab": "Запись сессии",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/zero-access/session-1/activity",
+    "tab": "Аудит",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/tasks/task-3c8328e4/jobs",
+    "tab": "Выполнение1",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/jobs/job-0ac5bf14/log",
+    "tab": "Журнал выполнения",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  },
+  {
+    "route": "http://127.0.0.1:5173/#cloud/audits/audit-17ee7fb7/jobs",
+    "tab": "Связанные задания0",
+    "error": false,
+    "overflow": [],
+    "scroll": 1008,
+    "width": 1008
+  }
+]

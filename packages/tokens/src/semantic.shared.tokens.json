@@ -292,15 +292,25 @@
         "ui": {
           "$type": "fontFamily",
           "$value": "{ref.font.family.ui}",
-          "$description": "Семейство type.family.ui."
+          "$description": "Шрифт интерфейса: навигация, заголовки, подписи, формы и действия."
         },
         "mono": {
           "$type": "fontFamily",
           "$value": "{ref.font.family.mono}",
-          "$description": "Семейство type.family.mono."
+          "$description": "Шрифт точных технических значений: IP, MAC, CIDR, ID, код подтверждения, маски и терминал. Одинаковая роль в обеих темах."
+        },
+        "data": {
+          "$type": "fontFamily",
+          "$value": "{ref.font.family.mono}",
+          "$description": "Числовые показатели: CPU, RAM, ёмкость, квоты и счётчики. Отдельная роль того же второго семейства; единицы измерения остаются в ui."
         }
       },
       "weight": {
+        "data": {
+          "$type": "fontWeight",
+          "$value": "{ref.font.weight.600}",
+          "$description": "Акцентные числовые показатели; не используется для обычного текста и консоли."
+        },
         "regular": {
           "$type": "fontWeight",
           "$value": "{ref.font.weight.400}",
@@ -457,6 +467,11 @@
           "$type": "dimension",
           "$value": "{ref.size.layout.sidebar.compact}",
           "$description": "Компактное основное меню."
+        },
+        "search-max-height": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.sidebar.search-max-height}",
+          "$description": "Высота списка навигационного поиска; дополнительно ограничена окном браузера."
         }
       },
       "content": {
@@ -521,6 +536,26 @@
           "$type": "dimension",
           "$value": "{ref.size.layout.shell.max-width}",
           "$description": "Максимальная ширина рабочей оболочки без ограничения её высоты."
+        },
+        "brand-mark-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.brand-mark-width}",
+          "$description": "Ширина логотипа в шапке."
+        },
+        "brand-mark-width-compact": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.brand-mark-width-compact}",
+          "$description": "Ширина логотипа на узком экране."
+        },
+        "header-height-compact": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.header-height-compact}",
+          "$description": "Высота шапки с отдельной строкой пути на узком экране."
+        },
+        "user-name-max-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.layout.shell.user-name-max-width}",
+          "$description": "Предел ширины имени пользователя в шапке."
         }
       },
       "workspace": {
@@ -596,6 +631,11 @@
       }
     },
     "motion": {
+      "content-enter-opacity": {
+        "$type": "number",
+        "$value": "{ref.number.0_92}",
+        "$description": "Локальный отклик сменяемого содержимого. Вся страница никогда не затухает."
+      },
       "duration": {
         "instant": {
           "$type": "duration",

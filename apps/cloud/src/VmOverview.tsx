@@ -12,7 +12,6 @@ import { navigate, Panel } from './parts';
 import {
   CopyValue,
   DetailFacts,
-  DetailSection,
   RecentVmTasks,
   ResourceConnection,
   ResourceIdentity,
@@ -84,7 +83,7 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
             href: `#cloud/vms/${vm.id}/resources`,
           },
           {
-            label: 'Дисковое пространство',
+            label: 'Диски',
             icon: 'HardDrive',
             value: (
               <>
@@ -134,48 +133,44 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
               name={platformRecordName(data, 'projects', vm.projectId)}
               href={`#cloud/projects/${vm.projectId}`}
             />
-          </div>
-          <DetailSection title="Вычислительная инфраструктура" icon="Layers3">
-            <div className="vm-placement-path">
-              <ResourceConnection
-                icon="MapPin"
-                label={zone?.region || 'Зона'}
-                name={zone?.name || 'Зона не назначена'}
-                href={zone ? `#cloud/clusters/${zone.id}` : undefined}
-              />
-              <ResourceConnection
-                icon="Server"
-                label="Вычислительный узел"
-                name={host?.name || 'Узел не назначен'}
-                href={host ? `#cloud/nodes/${host.id}` : undefined}
-              />
-            </div>
-            <DetailFacts
-              items={[
-                {
-                  label: 'Образ системы',
-                  description: 'Образ, из которого создана гостевая система.',
-                  value: record.imageId ? (
-                    <a href={`#cloud/images/${record.imageId}`}>{vm.template}</a>
-                  ) : (
-                    vm.template
-                  ),
-                },
-                {
-                  label: 'Политика хранения',
-                  description: 'Правила размещения дисков машины.',
-                  value: record.policyId ? (
-                    <a href={`#cloud/storage-policies/${record.policyId}`}>
-                      {platformRecordName(data, 'storage-policies', record.policyId)}
-                    </a>
-                  ) : (
-                    <span className="resource-unset">Не задана</span>
-                  ),
-                },
-                { label: 'Чипсет', value: String(record.chipset || '—') },
-              ]}
+            <ResourceConnection
+              icon="MapPin"
+              label="Зона размещения"
+              name={zone?.name || 'Зона не назначена'}
+              href={zone ? `#cloud/clusters/${zone.id}` : undefined}
             />
-          </DetailSection>
+            <ResourceConnection
+              icon="Server"
+              label="Вычислительный узел"
+              name={host?.name || 'Узел не назначен'}
+              href={host ? `#cloud/nodes/${host.id}` : undefined}
+            />
+          </div>
+          <DetailFacts
+            items={[
+              {
+                label: 'Образ системы',
+                description: 'Образ, из которого создана гостевая система.',
+                value: record.imageId ? (
+                  <a href={`#cloud/images/${record.imageId}`}>{vm.template}</a>
+                ) : (
+                  vm.template
+                ),
+              },
+              {
+                label: 'Политика хранения',
+                description: 'Правила размещения дисков машины.',
+                value: record.policyId ? (
+                  <a href={`#cloud/storage-policies/${record.policyId}`}>
+                    {platformRecordName(data, 'storage-policies', record.policyId)}
+                  </a>
+                ) : (
+                  <span className="resource-unset">Не задана</span>
+                ),
+              },
+              { label: 'Чипсет', value: String(record.chipset || '—') },
+            ]}
+          />
           <div className="vm-labels">
             <small>Метки</small>
             {vm.tags.length ? (
@@ -190,8 +185,13 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
           <Panel
             title="Подключение"
             action={
-              <Button variant="ghost" size="sm" onClick={() => navigate(`vms/${vm.id}/network`)}>
-                Сеть <ArrowUpRight size={14} />
+              <Button
+                variant="ghost"
+                size="sm"
+                trailingIcon={<ArrowUpRight />}
+                onClick={() => navigate(`vms/${vm.id}/network`)}
+              >
+                Сеть
               </Button>
             }
           >
@@ -222,8 +222,13 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
           <Panel
             title="Защита и доступ"
             action={
-              <Button variant="ghost" size="sm" onClick={() => navigate(`vms/${vm.id}/security`)}>
-                Безопасность <ArrowUpRight size={14} />
+              <Button
+                variant="ghost"
+                size="sm"
+                trailingIcon={<ArrowUpRight />}
+                onClick={() => navigate(`vms/${vm.id}/security`)}
+              >
+                Безопасность
               </Button>
             }
           >

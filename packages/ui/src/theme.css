@@ -103,6 +103,11 @@
 .basis-button--full {
   width: 100%;
 }
+.basis-button--full-height {
+  height: auto;
+  min-height: var(--b-height);
+  align-self: stretch;
+}
 .basis-button[data-variant='primary'] {
   --b-bg: var(--basis-comp-button-primary-background-default);
   --b-fg: var(--basis-comp-button-primary-foreground);
@@ -1603,4 +1608,9 @@
 }
 .basis-data-table [data-utility='actions'] > div {
   justify-content: center;
+}
+.basis-input[data-clearable='true'] input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
 }

@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { List, Star, X } from 'lucide-react';
+import { List, X } from 'lucide-react';
 import { Button, IconButton } from './Button';
 import { Menu } from './Disclosure';
 import { Tooltip } from './Tooltip';
@@ -21,7 +21,7 @@ export function WorkspaceTabs({
   onReorder,
   onEmptyFocus,
   label = 'Избранные вкладки',
-  marker = <Star />,
+  marker = false,
   overflowLabel = 'Все избранные вкладки',
   removeLabel = 'Убрать из избранного',
   overflowMenu = 'always',

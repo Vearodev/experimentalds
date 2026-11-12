@@ -886,7 +886,7 @@
         },
         "selected": {
           "$type": "color",
-          "$value": "{sys.color.surface.base}",
+          "$value": "{sys.color.surface.selected}",
           "$description": "Подложка активного раздела."
         },
         "accent": {
@@ -911,7 +911,7 @@
         },
         "selected-border": {
           "$type": "color",
-          "$value": "{sys.color.border.default}",
+          "$value": "{sys.color.border.selected}",
           "$description": "Тонкая граница активного раздела."
         },
         "count-background": {

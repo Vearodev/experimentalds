@@ -2,6 +2,7 @@ import { useDesign } from './DesignContext';
 import { ComponentTokens } from './TokenPanel';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -12,6 +13,7 @@ import {
   List,
   Network,
   Plus,
+  Power,
   RefreshCw,
   RotateCcw,
   Server,
@@ -100,10 +102,10 @@ const tones: {
   {
     value: 'warning',
     name: 'Внимание',
-    action: 'Перезапустить',
-    busy: 'Перезапускаем',
-    hint: 'Действие требует внимания',
-    icon: <RefreshCw />,
+    action: 'Проверить риски',
+    busy: 'Проверяем',
+    hint: 'Контекст требует проверки',
+    icon: <ShieldCheck />,
   },
   {
     value: 'danger',
@@ -166,6 +168,7 @@ export function ButtonsPage() {
     [disabled, setDisabled] = useState(false),
     [view, setView] = useState('list');
   const [split, setSplit] = useState('vm'),
+    [powerChoice, setPowerChoice] = useState('stop'),
     [event, setEvent] = useState(''),
     [dialogOpen, setDialogOpen] = useState(false),
     [deleted, setDeleted] = useState(false);
@@ -418,7 +421,10 @@ export function ButtonsPage() {
         <SectionHeading number="01" title="Иерархия и смысловой тон" note="Две независимые оси" />
         <p className="foundation-note">
           Иерархия отвечает за силу действия, тон — за его смысл. Успех операции после нажатия —
-          отдельное состояние обратной связи. Выберите образец, чтобы изучить его состояния ниже.
+          отдельное состояние обратной связи. Выберите образец, чтобы изучить его состояния ниже. В
+          облачном портале запуск получает брендовый акцент, выключение и перезапуск — нейтральное
+          вторичное оформление. Последствия объясняются в подтверждении; удаление сохраняет красный
+          акцент.
         </p>
         <div className="matrix-scroll tone-matrix-scroll">
           <table className="tone-matrix">
@@ -581,6 +587,28 @@ export function ButtonsPage() {
           note="Та же кнопка · разные задачи"
         />
         <div className="composition-grid">
+          <Example
+            title="Высота по контексту"
+            note="Кнопка растёт вместе с заголовком; минимальный размер — L"
+          >
+            <div className="button-heading-example">
+              <Tooltip content="Вернуться к предыдущей странице">
+                <IconButton
+                  variant="tonal"
+                  tone="neutral"
+                  size="lg"
+                  fullHeight
+                  icon={<ArrowLeft />}
+                  aria-label="Назад к предыдущей странице"
+                  onClick={() => setEvent('Возврат к предыдущей странице')}
+                />
+              </Tooltip>
+              <div>
+                <span>Виртуальная машина</span>
+                <strong>prod-api-01</strong>
+              </div>
+            </div>
+          </Example>
           <Example title="Только текст" note="Действие понятно из подписи">
             <Button onClick={() => setEvent('Изменения сохранены')}>Сохранить</Button>
           </Example>
@@ -639,6 +667,24 @@ export function ButtonsPage() {
                 { id: 'vm', label: 'Создать ВМ', icon: <Server /> },
                 { id: 'disk', label: 'Создать диск', icon: <HardDrive /> },
                 { id: 'network', label: 'Создать сеть', icon: <Network /> },
+              ]}
+            />
+          </Example>
+          <Example
+            title="Спокойное управление питанием"
+            note="Вторичное действие; последствия объясняются при подтверждении"
+          >
+            <SplitButton
+              variant="secondary"
+              tone="neutral"
+              value={powerChoice}
+              onValueChange={setPowerChoice}
+              onAction={() =>
+                setEvent('Выбрано действие питания · в продукте требуется подтверждение')
+              }
+              actions={[
+                { id: 'stop', label: 'Выключить', icon: <Power /> },
+                { id: 'restart', label: 'Перезапустить', icon: <RotateCcw /> },
               ]}
             />
           </Example>

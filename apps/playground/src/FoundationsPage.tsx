@@ -221,7 +221,72 @@ function VisualFoundations() {
         </p>
       </section>
       <section className="ds-section">
-        <SectionHeading number="04" title="Типографика и ритм" note="Onest / локальный шрифт" />
+        <SectionHeading
+          number="04"
+          title="Типографика и ритм"
+          note="Два семейства · три смысловые роли"
+        />
+        <div className="font-family-grid">
+          <article className="font-family-spec" data-family="ui">
+            <header>
+              <div>
+                <span>Интерфейс</span>
+                <h3>{design.resolved['sys.type.family.ui'].value[0].replace(' Variable', '')}</h3>
+              </div>
+              <Button size="sm" variant="ghost" onClick={() => inspect('sys.type.family.ui')}>
+                Токен семейства
+              </Button>
+            </header>
+            <div className="font-family-spec__sample">
+              <strong>Виртуальные машины</strong>
+              <span>Ресурсы под вашим управлением</span>
+            </div>
+            <p>
+              Навигация, заголовки, описания, подписи полей и кнопки. Основной голос интерфейса.
+            </p>
+            <footer>Пропорциональный · 400 / 500 / 600 / 700</footer>
+          </article>
+          <article className="font-family-spec" data-family="mono">
+            <header>
+              <div>
+                <span>Технические значения</span>
+                <h3>{design.resolved['sys.type.family.mono'].value[0].replace(' Variable', '')}</h3>
+              </div>
+              <Button size="sm" variant="ghost" onClick={() => inspect('sys.type.family.mono')}>
+                Токен семейства
+              </Button>
+            </header>
+            <div className="font-family-spec__sample">
+              <div className="font-data-sample">
+                <strong>
+                  16 <small>vCPU</small>
+                </strong>
+                <strong>
+                  64 <small>GiB</small>
+                </strong>
+              </div>
+              <span>10.21.0.20 · vm-prod-01</span>
+            </div>
+            <p>
+              Ресурсные показатели — 600, адреса и идентификаторы — 500, консоль — 400. Единицы
+              измерения и пояснения остаются в Onest.
+            </p>
+            <footer className="font-role-actions">
+              <Button size="sm" variant="ghost" onClick={() => inspect('sys.type.family.data')}>
+                Семейство метрик
+              </Button>
+              <Button size="sm" variant="ghost" onClick={() => inspect('sys.type.weight.data')}>
+                Насыщенность метрик
+              </Button>
+            </footer>
+          </article>
+        </div>
+        <p className="foundation-note">
+          Семейство определяется назначением текста и не меняется при переключении темы. Роли data и
+          mono наследуют одно второе семейство, но управляются независимо: метрики можно менять
+          отдельно от консоли. Используются табличные цифры без лигатур. Оба семейства поставляются
+          локально; изменение токена сразу видно в примерах.
+        </p>
         <div className="foundation-grid">
           <div className="type-spec">
             {[
@@ -284,6 +349,12 @@ function VisualFoundations() {
           не изменяет размеры строк таблицы и базовых контролов.
         </p>
         <ComponentTokens component="shell" />
+        <p className="foundation-note">
+          Движение локально: при переходе меняется только содержимое внутренней вкладки или сводка
+          обзора. Заголовок, навигация и геометрия карточек остаются неподвижными. Первичная
+          загрузка, обновление данных и быстрый перебор вкладок обходятся без повторного появления.
+          При системном ограничении анимации переход отключается.
+        </p>
       </section>
       <section className="ds-section">
         <SectionHeading

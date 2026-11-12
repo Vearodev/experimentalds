@@ -730,6 +730,11 @@
 .basis-menu__item:focus-visible {
   outline-offset: calc(-1 * var(--basis-sys-border-focus));
 }
+.basis-menu__item[aria-current='page'],
+.basis-menu__item[aria-checked='true'] {
+  background: var(--basis-sys-color-surface-selected);
+  color: var(--basis-sys-color-text-link);
+}
 
 /* Persistent contextual information and ephemeral notifications share anatomy. */
 .basis-message {

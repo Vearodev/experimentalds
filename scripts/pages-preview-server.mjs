@@ -10,6 +10,8 @@ const types = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.woff2': 'font/woff2',
+  '.woff': 'font/woff',
+  '.txt': 'text/plain; charset=utf-8',
 };
 
 // A real static host: no API middleware, directory listing or SPA fallback.

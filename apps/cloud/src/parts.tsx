@@ -1,17 +1,20 @@
-import type { ReactNode } from 'react';
+import { useContext, type ReactNode } from 'react';
 import { ResourceTable, type ResourceTableProps } from './ResourceTable';
 import { useCloud } from './cloud-state';
-import { Cloud, Cpu, HardDrive, Layers3, MemoryStick, Server } from 'lucide-react';
+import { ArrowLeft, Cloud, Cpu, HardDrive, Layers3, MemoryStick, Server } from 'lucide-react';
 import {
   Button,
   CloudLoader,
+  IconButton,
   Progress,
   Skeleton,
   StatusBadge,
   TableEmptyState,
+  Tooltip,
   type StatusTone,
 } from '@basis/ui';
 import { busy, statusNames, type CloudState, type VM, type VmStatus } from '../domain';
+import { PageNavigationContext } from './usePortalNavigation';
 export const navigate = (path: string) => {
   location.hash = `#cloud/${path}`;
 };
@@ -33,9 +36,9 @@ export const toneFor: Record<VmStatus, StatusTone> = {
   error: 'danger',
   creating: 'info',
   starting: 'info',
-  stopping: 'warning',
+  stopping: 'info',
   restarting: 'info',
-  deleting: 'warning',
+  deleting: 'info',
 };
 export function VmState({ vm }: { vm: VM }) {
   return (
@@ -46,20 +49,45 @@ export function VmState({ vm }: { vm: VM }) {
   );
 }
 export function PageTitle({
-  eyebrow,
+  resourceType,
   title,
   description,
   actions,
 }: {
-  eyebrow?: string;
+  resourceType?: { label: string; href: string };
   title: ReactNode;
   description?: string;
   actions?: ReactNode;
 }) {
+  const navigation = useContext(PageNavigationContext);
   return (
     <header className="cloud-page-heading">
-      <div>
-        {eyebrow && <span className="cloud-eyebrow">{eyebrow}</span>}
+      <div className="cloud-page-identity" data-return={Boolean(navigation) || undefined}>
+        {resourceType && (
+          <a
+            className="cloud-page-type"
+            href={resourceType.href}
+            aria-label={`${resourceType.label}: открыть список`}
+          >
+            {resourceType.label}
+          </a>
+        )}
+        {navigation && (
+          <div className="cloud-page-back">
+            <Tooltip content={navigation.label}>
+              <IconButton
+                variant="tonal"
+                tone="neutral"
+                size="lg"
+                fullHeight
+                icon={<ArrowLeft />}
+                aria-label="Назад"
+                disabled={!navigation.enabled}
+                onClick={navigation.goBack}
+              />
+            </Tooltip>
+          </div>
+        )}
         <h1>{title}</h1>
         {description && <p>{description}</p>}
       </div>

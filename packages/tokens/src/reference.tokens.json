@@ -785,6 +785,11 @@
         "$value": 0.8,
         "$description": "Безразмерное значение 0.8."
       },
+      "0_92": {
+        "$type": "number",
+        "$value": 0.92,
+        "$description": "Безразмерное значение 0.92."
+      },
       "1_5": {
         "$type": "number",
         "$value": 1.5,
@@ -901,8 +906,19 @@
         },
         "mono": {
           "$type": "fontFamily",
-          "$value": ["Cascadia Code", "Consolas", "monospace"],
-          "$description": "Моноширинный шрифт для кода и идентификаторов."
+          "$value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
+            "Cascadia Code",
+            "Consolas",
+            "monospace"
+          ],
+          "$description": "JetBrains Mono: локальный variable-шрифт. Метрики 600, технические значения 500, консоль 400. Кириллица и латиница.",
+          "$extensions": {
+            "basis": {
+              "figmaFamily": "JetBrains Mono"
+            }
+          }
         }
       },
       "weight": {
@@ -1502,6 +1518,14 @@
               "unit": "px"
             },
             "$description": "Ширина компактного меню с иконками."
+          },
+          "search-max-height": {
+            "$type": "dimension",
+            "$value": {
+              "value": 360,
+              "unit": "px"
+            },
+            "$description": "Предельная высота результатов поиска по разделам в отдельном окне."
           }
         },
         "content": {
@@ -1568,6 +1592,38 @@
               "unit": "px"
             },
             "$description": "Максимальная ширина облачного портала — Full HD. На больших экранах оболочка центрируется."
+          },
+          "brand-mark-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 24,
+              "unit": "px"
+            },
+            "$description": "Ширина компактного знака BASIS в шапке."
+          },
+          "brand-mark-width-compact": {
+            "$type": "dimension",
+            "$value": {
+              "value": 20,
+              "unit": "px"
+            },
+            "$description": "Ширина логотипа на узком экране."
+          },
+          "header-height-compact": {
+            "$type": "dimension",
+            "$value": {
+              "value": 88,
+              "unit": "px"
+            },
+            "$description": "Высота шапки с отдельной строкой пути на узком экране."
+          },
+          "user-name-max-width": {
+            "$type": "dimension",
+            "$value": {
+              "value": 160,
+              "unit": "px"
+            },
+            "$description": "Предел ширины имени пользователя в шапке."
           }
         },
         "workspace": {

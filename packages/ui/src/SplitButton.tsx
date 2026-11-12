@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { Check, ChevronDown } from 'lucide-react';
-import { Button, IconButton, type ButtonSize, type ButtonTone } from './Button';
+import { Button, IconButton, type ButtonSize, type ButtonTone, type ButtonVariant } from './Button';
 
 export type SplitAction = { id: string; label: string; icon?: ReactNode; disabled?: boolean };
 export function SplitButton({
@@ -11,6 +11,7 @@ export function SplitButton({
   disabled,
   size = 'md',
   tone = 'brand',
+  variant = 'primary',
 }: {
   actions: SplitAction[];
   value: string;
@@ -19,6 +20,7 @@ export function SplitButton({
   disabled?: boolean;
   size?: ButtonSize;
   tone?: ButtonTone;
+  variant?: ButtonVariant;
 }) {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null),
@@ -50,7 +52,7 @@ export function SplitButton({
     >
       <div className="basis-split__buttons">
         <Button
-          variant="primary"
+          variant={variant}
           tone={tone}
           size={size}
           leadingIcon={selected.icon}
@@ -61,7 +63,7 @@ export function SplitButton({
         </Button>
         <IconButton
           ref={trigger}
-          variant="primary"
+          variant={variant}
           tone={tone}
           size={size}
           icon={<ChevronDown />}

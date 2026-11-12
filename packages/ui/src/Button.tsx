@@ -16,6 +16,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   progress?: number;
   feedback?: 'success' | 'error';
   fullWidth?: boolean;
+  fullHeight?: boolean;
 };
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -31,6 +32,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     progress,
     feedback,
     fullWidth = false,
+    fullHeight = false,
     children,
     className = '',
     onClick,
@@ -61,7 +63,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       data-loading={loading || undefined}
       data-feedback={feedback}
       data-icon-only={!hasLabel || undefined}
-      className={`basis-button ${fullWidth ? 'basis-button--full' : ''} ${className}`}
+      className={`basis-button ${fullWidth ? 'basis-button--full' : ''} ${fullHeight ? 'basis-button--full-height' : ''} ${className}`}
       onClick={(event) => {
         if (disabled || loading || disabledByAria) {
           event.preventDefault();

@@ -180,7 +180,7 @@ function PlaygroundApp() {
           />
         </div>
         <div className="brand-subtitle">
-          Дизайн-система<span>0.7.1</span>
+          Дизайн-система<span>0.7.5</span>
         </div>
         <Input
           className="nav-search"

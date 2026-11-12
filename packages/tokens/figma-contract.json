@@ -1,6 +1,6 @@
 {
   "version": "0.6.0",
-  "checksum": "01fb453eb43147d3",
+  "checksum": "cb9ff4a2ba02a0db",
   "description": "План коллекций и связей. Это контракт импорта, не подтверждение синхронизации с Figma.",
   "collections": [
     {
@@ -1852,6 +1852,19 @@
       }
     },
     {
+      "path": "ref.number.0_92",
+      "name": "ref/number/0_92",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "number",
+      "scopes": [],
+      "web": "var(--basis-ref-number-0_92)",
+      "description": "Безразмерное значение 0.92.",
+      "values": {
+        "Value": 0.92
+      }
+    },
+    {
       "path": "ref.number.1_5",
       "name": "ref/number/1_5",
       "collection": "ref",
@@ -2102,9 +2115,12 @@
       "tokenType": "fontFamily",
       "scopes": [],
       "web": "var(--basis-ref-font-family-mono)",
-      "description": "Моноширинный шрифт для кода и идентификаторов.",
+      "description": "JetBrains Mono: локальный variable-шрифт. Метрики 600, технические значения 500, консоль 400. Кириллица и латиница.",
+      "figmaFamily": "JetBrains Mono",
       "values": {
         "Value": [
+          "JetBrains Mono Variable",
+          "JetBrains Mono",
           "Cascadia Code",
           "Consolas",
           "monospace"
@@ -3188,6 +3204,22 @@
       }
     },
     {
+      "path": "ref.size.layout.sidebar.search-max-height",
+      "name": "ref/size/layout/sidebar/search-max-height",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-layout-sidebar-search-max-height)",
+      "description": "Предельная высота результатов поиска по разделам в отдельном окне.",
+      "values": {
+        "Value": {
+          "value": 360,
+          "unit": "px"
+        }
+      }
+    },
+    {
       "path": "ref.size.layout.content.max",
       "name": "ref/size/layout/content/max",
       "collection": "ref",
@@ -3295,6 +3327,70 @@
       "values": {
         "Value": {
           "value": 1920,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.layout.shell.brand-mark-width",
+      "name": "ref/size/layout/shell/brand-mark-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-layout-shell-brand-mark-width)",
+      "description": "Ширина компактного знака BASIS в шапке.",
+      "values": {
+        "Value": {
+          "value": 24,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.layout.shell.brand-mark-width-compact",
+      "name": "ref/size/layout/shell/brand-mark-width-compact",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-layout-shell-brand-mark-width-compact)",
+      "description": "Ширина логотипа на узком экране.",
+      "values": {
+        "Value": {
+          "value": 20,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.layout.shell.header-height-compact",
+      "name": "ref/size/layout/shell/header-height-compact",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-layout-shell-header-height-compact)",
+      "description": "Высота шапки с отдельной строкой пути на узком экране.",
+      "values": {
+        "Value": {
+          "value": 88,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.layout.shell.user-name-max-width",
+      "name": "ref/size/layout/shell/user-name-max-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-layout-shell-user-name-max-width)",
+      "description": "Предел ширины имени пользователя в шапке.",
+      "values": {
+        "Value": {
+          "value": 160,
           "unit": "px"
         }
       }
@@ -4599,7 +4695,7 @@
         "FONT_FAMILY"
       ],
       "web": "var(--basis-sys-type-family-ui)",
-      "description": "Семейство type.family.ui.",
+      "description": "Шрифт интерфейса: навигация, заголовки, подписи, формы и действия.",
       "values": {
         "Value": "{ref.font.family.ui}"
       }
@@ -4614,9 +4710,39 @@
         "FONT_FAMILY"
       ],
       "web": "var(--basis-sys-type-family-mono)",
-      "description": "Семейство type.family.mono.",
+      "description": "Шрифт точных технических значений: IP, MAC, CIDR, ID, код подтверждения, маски и терминал. Одинаковая роль в обеих темах.",
       "values": {
         "Value": "{ref.font.family.mono}"
+      }
+    },
+    {
+      "path": "sys.type.family.data",
+      "name": "sys/type/family/data",
+      "collection": "sys.metrics",
+      "type": "STRING",
+      "tokenType": "fontFamily",
+      "scopes": [
+        "FONT_FAMILY"
+      ],
+      "web": "var(--basis-sys-type-family-data)",
+      "description": "Числовые показатели: CPU, RAM, ёмкость, квоты и счётчики. Отдельная роль того же второго семейства; единицы измерения остаются в ui.",
+      "values": {
+        "Value": "{ref.font.family.mono}"
+      }
+    },
+    {
+      "path": "sys.type.weight.data",
+      "name": "sys/type/weight/data",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "fontWeight",
+      "scopes": [
+        "FONT_WEIGHT"
+      ],
+      "web": "var(--basis-sys-type-weight-data)",
+      "description": "Акцентные числовые показатели; не используется для обычного текста и консоли.",
+      "values": {
+        "Value": "{ref.font.weight.600}"
       }
     },
     {
@@ -4965,6 +5091,21 @@
       }
     },
     {
+      "path": "sys.layout.sidebar.search-max-height",
+      "name": "sys/layout/sidebar/search-max-height",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-layout-sidebar-search-max-height)",
+      "description": "Высота списка навигационного поиска; дополнительно ограничена окном браузера.",
+      "values": {
+        "Value": "{ref.size.layout.sidebar.search-max-height}"
+      }
+    },
+    {
       "path": "sys.layout.content.max",
       "name": "sys/layout/content/max",
       "collection": "sys.metrics",
@@ -5112,6 +5253,66 @@
       "description": "Максимальная ширина рабочей оболочки без ограничения её высоты.",
       "values": {
         "Value": "{ref.size.layout.shell.max-width}"
+      }
+    },
+    {
+      "path": "sys.layout.shell.brand-mark-width",
+      "name": "sys/layout/shell/brand-mark-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-layout-shell-brand-mark-width)",
+      "description": "Ширина логотипа в шапке.",
+      "values": {
+        "Value": "{ref.size.layout.shell.brand-mark-width}"
+      }
+    },
+    {
+      "path": "sys.layout.shell.brand-mark-width-compact",
+      "name": "sys/layout/shell/brand-mark-width-compact",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-layout-shell-brand-mark-width-compact)",
+      "description": "Ширина логотипа на узком экране.",
+      "values": {
+        "Value": "{ref.size.layout.shell.brand-mark-width-compact}"
+      }
+    },
+    {
+      "path": "sys.layout.shell.header-height-compact",
+      "name": "sys/layout/shell/header-height-compact",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-layout-shell-header-height-compact)",
+      "description": "Высота шапки с отдельной строкой пути на узком экране.",
+      "values": {
+        "Value": "{ref.size.layout.shell.header-height-compact}"
+      }
+    },
+    {
+      "path": "sys.layout.shell.user-name-max-width",
+      "name": "sys/layout/shell/user-name-max-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-layout-shell-user-name-max-width)",
+      "description": "Предел ширины имени пользователя в шапке.",
+      "values": {
+        "Value": "{ref.size.layout.shell.user-name-max-width}"
       }
     },
     {
@@ -5307,6 +5508,19 @@
       "description": "Метрика breakpoint.small.",
       "values": {
         "Value": "{ref.breakpoint.small}"
+      }
+    },
+    {
+      "path": "sys.motion.content-enter-opacity",
+      "name": "sys/motion/content-enter-opacity",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "number",
+      "scopes": [],
+      "web": "var(--basis-sys-motion-content-enter-opacity)",
+      "description": "Локальный отклик сменяемого содержимого. Вся страница никогда не затухает.",
+      "values": {
+        "Value": "{ref.number.0_92}"
       }
     },
     {
@@ -10987,6 +11201,21 @@
       }
     },
     {
+      "path": "comp.menu.side-offset",
+      "name": "comp/menu/side-offset",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-menu-side-offset)",
+      "description": "Зазор бокового меню от кнопки: оставляет отступ от внешней границы компактной навигации.",
+      "values": {
+        "Value": "{sys.space.xl}"
+      }
+    },
+    {
       "path": "comp.menu.background",
       "name": "comp/menu/background",
       "collection": "comp",
@@ -11981,9 +12210,84 @@
         "GAP"
       ],
       "web": "var(--basis-comp-navigation-child-inset)",
-      "description": "Отступ вложенного уровня навигации.",
+      "description": "Направляющая вложенного уровня выровнена по центру иконки группы.",
+      "values": {
+        "Value": "{sys.space.lg}"
+      }
+    },
+    {
+      "path": "comp.navigation.item-padding-block",
+      "name": "comp/navigation/item-padding-block",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-navigation-item-padding-block)",
+      "description": "Вертикальный отступ пункта; длинные названия переносятся без обрезания.",
+      "values": {
+        "Value": "{sys.space.sm}"
+      }
+    },
+    {
+      "path": "comp.navigation.group-gap",
+      "name": "comp/navigation/group-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-navigation-group-gap)",
+      "description": "Отступ перед группой верхнего уровня.",
+      "values": {
+        "Value": "{sys.space.sm}"
+      }
+    },
+    {
+      "path": "comp.navigation.compact-item-width",
+      "name": "comp/navigation/compact-item-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-navigation-compact-item-width)",
+      "description": "Ширина компактного пункта с отдельным местом для шеврона.",
+      "values": {
+        "Value": "{sys.control.lg.height}"
+      }
+    },
+    {
+      "path": "comp.navigation.search-gap",
+      "name": "comp/navigation/search-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-navigation-search-gap)",
+      "description": "Отступ между закреплённым поиском и прокручиваемыми разделами.",
       "values": {
         "Value": "{sys.space.md}"
+      }
+    },
+    {
+      "path": "comp.navigation.search-max-height",
+      "name": "comp/navigation/search-max-height",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-navigation-search-max-height)",
+      "description": "Прокручиваемая область результатов в компактном режиме.",
+      "values": {
+        "Value": "{sys.layout.sidebar.search-max-height}"
       }
     },
     {
@@ -12227,6 +12531,105 @@
       "description": "Общий предел ширины шапки, меню и области содержимого. Включает наружные отступы.",
       "values": {
         "Value": "{sys.layout.shell.max-width}"
+      }
+    },
+    {
+      "path": "comp.shell.brand-mark-width",
+      "name": "comp/shell/brand-mark-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-shell-brand-mark-width)",
+      "description": "Ширина логотипа в шапке.",
+      "values": {
+        "Value": "{sys.layout.shell.brand-mark-width}"
+      }
+    },
+    {
+      "path": "comp.shell.brand-mark-width-compact",
+      "name": "comp/shell/brand-mark-width-compact",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-shell-brand-mark-width-compact)",
+      "description": "Ширина логотипа на узком экране.",
+      "values": {
+        "Value": "{sys.layout.shell.brand-mark-width-compact}"
+      }
+    },
+    {
+      "path": "comp.shell.header-height-compact",
+      "name": "comp/shell/header-height-compact",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-shell-header-height-compact)",
+      "description": "Высота шапки с отдельной строкой пути на узком экране.",
+      "values": {
+        "Value": "{sys.layout.shell.header-height-compact}"
+      }
+    },
+    {
+      "path": "comp.shell.user-name-max-width",
+      "name": "comp/shell/user-name-max-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-shell-user-name-max-width)",
+      "description": "Предел ширины имени пользователя в шапке.",
+      "values": {
+        "Value": "{sys.layout.shell.user-name-max-width}"
+      }
+    },
+    {
+      "path": "comp.shell.content-enter-duration",
+      "name": "comp/shell/content-enter-duration",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "duration",
+      "scopes": [],
+      "web": "var(--basis-comp-shell-content-enter-duration)",
+      "description": "Короткий отклик сменяемого содержимого. Заголовок и навигация не анимируются.",
+      "values": {
+        "Value": "{sys.motion.duration.fast}"
+      }
+    },
+    {
+      "path": "comp.shell.content-enter-easing",
+      "name": "comp/shell/content-enter-easing",
+      "collection": "comp",
+      "type": "STRING",
+      "tokenType": "cubicBezier",
+      "scopes": [],
+      "web": "var(--basis-comp-shell-content-enter-easing)",
+      "description": "Спокойное завершение перехода содержимого, без пружины и задержки.",
+      "values": {
+        "Value": "{sys.motion.easing.enter}"
+      }
+    },
+    {
+      "path": "comp.shell.content-enter-opacity",
+      "name": "comp/shell/content-enter-opacity",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "number",
+      "scopes": [],
+      "web": "var(--basis-comp-shell-content-enter-opacity)",
+      "description": "Лёгкое проявление содержимого; текст читаем с первого кадра, геометрия неподвижна.",
+      "values": {
+        "Value": "{sys.motion.content-enter-opacity}"
       }
     },
     {
@@ -15383,8 +15786,8 @@
       "web": "var(--basis-sys-color-navigation-selected)",
       "description": "Подложка активного раздела.",
       "values": {
-        "Light": "{sys.color.surface.base}",
-        "Dark": "{sys.color.surface.subtle}"
+        "Light": "{sys.color.surface.selected}",
+        "Dark": "{sys.color.surface.selected}"
       }
     },
     {
@@ -15466,8 +15869,8 @@
       "web": "var(--basis-sys-color-navigation-selected-border)",
       "description": "Тонкая граница активного раздела.",
       "values": {
-        "Light": "{sys.color.border.default}",
-        "Dark": "{sys.color.border.control}"
+        "Light": "{sys.color.border.selected}",
+        "Dark": "{sys.color.border.selected}"
       }
     },
     {
@@ -15512,6 +15915,18 @@
       "size": "sys.type.size.title",
       "weight": "sys.type.weight.semibold",
       "leading": "sys.type.leading.title"
+    },
+    "metric": {
+      "family": "sys.type.family.data",
+      "size": "sys.type.size.heading",
+      "weight": "sys.type.weight.data",
+      "leading": "sys.type.leading.heading"
+    },
+    "technical": {
+      "family": "sys.type.family.mono",
+      "size": "sys.type.size.caption",
+      "weight": "sys.type.weight.medium",
+      "leading": "sys.type.leading.body"
     }
   },
   "effectStyles": [

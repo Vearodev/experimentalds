@@ -101,6 +101,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         data-disabled={props.disabled}
         data-readonly={props.readOnly}
         data-preview-state={previewState}
+        data-clearable={Boolean(onClear)}
       >
         {leadingIcon && (
           <span className="basis-input__icon" aria-hidden="true">

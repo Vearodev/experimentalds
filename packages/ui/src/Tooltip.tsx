@@ -51,21 +51,31 @@ export function Tooltip({
   }, [open, content, children, disabled]);
   useEffect(() => {
     if (!open) return;
+    const dismiss = () => setOpen(false);
     const escape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setOpen(false);
     };
     document.addEventListener('keydown', escape);
-    return () => document.removeEventListener('keydown', escape);
+    document.addEventListener('basis:menu-open', dismiss);
+    return () => {
+      document.removeEventListener('keydown', escape);
+      document.removeEventListener('basis:menu-open', dismiss);
+    };
   }, [open]);
+  const reveal = (target: EventTarget) => {
+    if (disabled || !root.current?.contains(target as Node)) return;
+    const menus = Array.from(document.querySelectorAll('[role="menu"]'));
+    // Background controls must not draw hints over an active menu.
+    if (menus.length && !menus.some((menu) => menu.contains(root.current))) return;
+    setOpen(true);
+  };
   return (
     <span
       ref={root}
       className="basis-tooltip-anchor"
-      onMouseEnter={(event) =>
-        !disabled && event.currentTarget.contains(event.target as Node) && setOpen(true)
-      }
+      onMouseEnter={(event) => reveal(event.target)}
       onMouseLeave={() => setOpen(false)}
-      onFocus={(event) => !disabled && event.currentTarget.contains(event.target) && setOpen(true)}
+      onFocus={(event) => reveal(event.target)}
       onBlur={() => setOpen(false)}
     >
       {cloneElement(children, {

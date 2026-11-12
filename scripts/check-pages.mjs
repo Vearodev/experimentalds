@@ -10,13 +10,17 @@ await access(resolve(output, '.nojekyll'));
 const rootFiles = await readdir(output);
 assert.deepEqual(
   rootFiles.sort(),
-  [...entries, '.nojekyll', 'assets', 'basis-logo.png'].sort(),
+  [...entries, '.nojekyll', 'assets', 'basis-logo.png', 'licenses'].sort(),
   'Publish only the generated static site.',
 );
 const assets = await readdir(resolve(output, 'assets'));
 assert(
-  assets.some((name) => name.endsWith('.woff2')),
+  assets.some((name) => name.startsWith('onest-') && name.endsWith('.woff2')),
   'Onest must be bundled.',
+);
+assert(
+  assets.some((name) => name.startsWith('jetbrains-mono-') && name.endsWith('.woff2')),
+  'JetBrains Mono must be bundled.',
 );
 assert(!assets.some((name) => name.endsWith('.map')), 'Do not publish source maps.');
 
@@ -56,6 +60,8 @@ for (const base of ['/', '/design-concepts/', '/nested/design-concepts/']) {
       if (name === 'cloud-demo.html') assert(html.includes('"#cloud/overview"'));
     }
     await checkAsset('./basis-logo.png', `${origin}${base}`);
+    for (const family of ['onest', 'jetbrains-mono'])
+      await checkAsset(`./licenses/${family}.txt`, `${origin}${base}`);
     const response = await fetch(`${origin}${base}`);
     assert.equal(response.status, 200, 'The site root must open the design system.');
     await response.arrayBuffer();
@@ -75,4 +81,4 @@ for (const base of ['/', '/design-concepts/', '/nested/design-concepts/']) {
 }
 
 const cloud = await readFile(resolve(output, 'cloud-demo.html'), 'utf8');
-assert(cloud.includes('<title>BASIS Cloud</title>'));
+assert(cloud.includes('<title>Basis statix</title>'));

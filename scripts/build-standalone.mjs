@@ -14,10 +14,20 @@ if (!scriptFile || !styleFile)
 let html = await readFile(resolve(output, 'index.html'), 'utf8');
 let js = await readFile(resolve(output, 'assets', scriptFile), 'utf8');
 let css = await readFile(resolve(output, 'assets', styleFile), 'utf8');
-for (const name of files.filter((file) => file.endsWith('.woff2'))) {
+for (const name of files.filter((file) => /\.woff2?$/.test(file))) {
   const data = await readFile(resolve(output, 'assets', name));
-  css = css.replaceAll(`/assets/${name}`, `data:font/woff2;base64,${data.toString('base64')}`);
+  const mime = name.endsWith('.woff2') ? 'font/woff2' : 'font/woff';
+  css = css.replaceAll(`/assets/${name}`, `data:${mime};base64,${data.toString('base64')}`);
 }
+const fontLicenses = await Promise.all(
+  ['onest', 'jetbrains-mono'].map((name) =>
+    readFile(resolve(output, 'licenses', name + '.txt'), 'utf8'),
+  ),
+);
+html = html.replace(
+  '</head>',
+  () => `<!-- Bundled font licenses\n${fontLicenses.join('\n\n')}\n-->\n</head>`,
+);
 const logo = await readFile(resolve(output, 'basis-logo.png'));
 css = css.replaceAll('/basis-logo.png', `data:image/png;base64,${logo.toString('base64')}`);
 js = js.replaceAll('/basis-logo.png', `data:image/png;base64,${logo.toString('base64')}`);

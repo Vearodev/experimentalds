@@ -747,13 +747,16 @@ export function CreateVmPage() {
               Закрыть
             </Button>
             <span />
-            <Button
-              leadingIcon={<ArrowLeft />}
-              disabled={step === 0 || working}
-              onClick={() => advance(step - 1)}
-            >
-              Назад
-            </Button>
+            {step > 0 && (
+              <Button
+                leadingIcon={<ArrowLeft />}
+                aria-label="Предыдущий шаг"
+                disabled={working}
+                onClick={() => advance(step - 1)}
+              >
+                Назад
+              </Button>
+            )}
             <Button
               type="submit"
               variant="primary"

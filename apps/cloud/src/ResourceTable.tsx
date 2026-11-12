@@ -146,6 +146,20 @@ function Registry<T extends { id: string; name?: string }>({
   const activePreset = views.findIndex(
     (preset) => JSON.stringify(view.filters) === JSON.stringify(preset.filters),
   );
+  const liveStatus = (
+    <span className="cloud-registry-live" data-state={requestState.state}>
+      <i className="cloud-live-dot" />
+      {requestState.state === 'loading'
+        ? 'Загружаем ресурсы'
+        : requestState.state === 'refreshing'
+          ? 'Обновляем данные'
+          : requestState.state === 'stale'
+            ? 'Данные требуют обновления'
+            : requestState.state === 'error'
+              ? 'Данные недоступны'
+              : 'Данные актуальны'}
+    </span>
+  );
   const table = (
     <DataTable
       state={requestState.state}
@@ -263,6 +277,7 @@ function Registry<T extends { id: string; name?: string }>({
               <span className="cloud-muted"> · всего {rows.length}</span>
             )}
           </span>
+          {!presets?.length && liveStatus}
           <span className="cloud-registry-sort-note">
             {view.sorts
               .map(
@@ -298,7 +313,7 @@ function Registry<T extends { id: string; name?: string }>({
   );
   return (
     <section className="cloud-registry" aria-label={caption}>
-      {presets ? (
+      {presets?.length ? (
         <Tabs
           label={`Представления: ${caption}`}
           value={activePreset < 0 ? 'custom' : `preset-${activePreset}`}
@@ -316,20 +331,7 @@ function Registry<T extends { id: string; name?: string }>({
             const index = views.findIndex((_, i) => `preset-${i}` === id);
             if (index >= 0) change({ filters: views[index].filters });
           }}
-          accessory={
-            <span className="cloud-registry-live" data-state={requestState.state}>
-              <i className="cloud-live-dot" />
-              {requestState.state === 'loading'
-                ? 'Загружаем ресурсы'
-                : requestState.state === 'refreshing'
-                  ? 'Обновляем данные'
-                  : requestState.state === 'stale'
-                    ? 'Данные требуют обновления'
-                    : requestState.state === 'error'
-                      ? 'Данные недоступны'
-                      : 'Данные актуальны'}
-            </span>
-          }
+          accessory={liveStatus}
         >
           {table}
         </Tabs>

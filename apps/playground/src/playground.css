@@ -97,7 +97,7 @@ kbd {
   padding: var(--basis-sys-space-xl) var(--basis-sys-space-md) var(--basis-sys-space-lg);
   background: var(--basis-sys-color-surface-base);
   border-right: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
-  z-index: var(--basis-sys-layer-overlay);
+  z-index: var(--basis-sys-layer-sticky);
 }
 .brand {
   position: relative;
@@ -2075,6 +2075,113 @@ dialog::backdrop {
   grid-template-columns: 1.2fr 1fr;
   gap: var(--basis-sys-space-lg);
 }
+.font-family-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--basis-sys-space-lg);
+}
+.button-heading-example {
+  display: flex;
+  align-items: stretch;
+  gap: var(--basis-sys-space-md);
+}
+.button-heading-example > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--basis-sys-space-xs);
+}
+.button-heading-example > div > span {
+  color: var(--basis-sys-color-text-link);
+  font-size: var(--basis-sys-type-size-caption);
+  line-height: var(--basis-sys-type-leading-caption);
+}
+.button-heading-example strong {
+  color: var(--basis-sys-color-text-primary);
+  font-size: var(--basis-sys-type-size-subtitle);
+  line-height: var(--basis-sys-type-leading-relaxed);
+  font-weight: var(--basis-sys-type-weight-semibold);
+}
+.font-family-spec {
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-container);
+  background: var(--basis-sys-color-surface-base);
+  padding: var(--basis-sys-space-xl);
+  min-width: 0;
+}
+.font-family-spec header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--basis-sys-space-sm);
+}
+.font-family-spec header span,
+.font-family-spec footer {
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+}
+.font-family-spec h3 {
+  margin-top: var(--basis-sys-space-xs);
+  font-size: var(--basis-sys-type-size-body);
+  font-weight: var(--basis-sys-type-weight-semibold);
+}
+.font-family-spec__sample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--basis-sys-space-sm);
+  padding-block: var(--basis-sys-space-xl);
+  margin-top: var(--basis-sys-space-sm);
+  color: var(--basis-sys-color-text-primary);
+  overflow-wrap: anywhere;
+}
+.font-family-spec__sample strong {
+  font-size: var(--basis-sys-type-size-heading);
+  line-height: var(--basis-sys-type-leading-relaxed);
+  font-weight: var(--basis-sys-type-weight-medium);
+}
+.font-family-spec[data-family='ui'] .font-family-spec__sample {
+  font-family: var(--basis-sys-type-family-ui);
+}
+.font-family-spec[data-family='mono'] .font-family-spec__sample {
+  font-family: var(--basis-sys-type-family-mono);
+  font-variant-numeric: tabular-nums;
+  font-variant-ligatures: none;
+}
+.font-data-sample,
+.font-role-actions {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--basis-sys-space-lg);
+}
+.font-data-sample strong {
+  font-family: var(--basis-sys-type-family-data);
+  font-weight: var(--basis-sys-type-weight-data);
+}
+.font-data-sample small {
+  font-family: var(--basis-sys-type-family-ui);
+  font-size: var(--basis-sys-type-size-label);
+  font-weight: var(--basis-sys-type-weight-regular);
+  color: var(--basis-sys-color-text-secondary);
+}
+.font-family-spec p {
+  font-size: var(--basis-sys-type-size-label);
+  line-height: var(--basis-sys-type-leading-body);
+  color: var(--basis-sys-color-text-secondary);
+}
+.font-family-spec footer {
+  border-top: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-subtle);
+  margin-top: var(--basis-sys-space-lg);
+  padding-top: var(--basis-sys-space-md);
+}
+.font-family-grid + .foundation-note {
+  margin-bottom: var(--basis-sys-space-xl);
+}
+@media (max-width: 1000px) {
+  .font-family-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .type-spec,
 .rhythm-spec {
   background: var(--basis-sys-color-surface-base);
@@ -2288,6 +2395,7 @@ dialog::backdrop {
 }
 @media (max-width: 780px) {
   .sidebar {
+    z-index: var(--basis-sys-layer-overlay);
     transform: translateX(-100%);
     width: 260px;
     transition: transform var(--basis-sys-motion-duration-enter)

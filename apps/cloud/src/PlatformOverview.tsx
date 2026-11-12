@@ -70,9 +70,6 @@ export function PlatformOverview() {
   return (
     <>
       <PageTitle
-        eyebrow={
-          scope === 'all' ? 'Рабочее пространство' : isGroup ? 'Ресурсная группа' : 'Аккаунт'
-        }
         title={scope === 'all' ? 'Обзор облака' : scopeLabel(data, scope)}
         description="Ресурсы, доступная ёмкость и операции в вашей рабочей области."
         actions={
@@ -98,13 +95,6 @@ export function PlatformOverview() {
         <span>
           <ShieldCheck size={14} />С защитой: {vms.filter((vm) => vm.backup).length} ВМ
         </span>
-        <Tag tone="info">
-          {platformState(data).mode === 'admin'
-            ? 'Администратор'
-            : platformState(data).mode === 'reader'
-              ? 'Наблюдатель'
-              : 'Участник аккаунта'}
-        </Tag>
       </div>
       <div className="cloud-metrics">
         <article className="cloud-machine-total">
@@ -255,7 +245,7 @@ export function PlatformOverview() {
                     <strong>{task.name}</strong>
                     <small>{String(task.resource || '')}</small>
                   </span>
-                  <StatusBadge tone={platformTone(task.status)}>
+                  <StatusBadge tone={platformTone(task.status)} subtle={task.status === 'SUCCESS'}>
                     {platformStatusLabels[task.status]}
                   </StatusBadge>
                 </a>
@@ -390,7 +380,7 @@ function ApiCatalog() {
                   <dt>
                     <strong>{parameter.name}</strong>
                     <Tag>{String(parameter.type || 'object')}</Tag>
-                    {parameter.required && <Tag tone="warning">Обязательный</Tag>}
+                    {parameter.required && <Tag>Обязательный</Tag>}
                   </dt>
                   <dd>
                     {parameter.description}
@@ -417,7 +407,7 @@ export function PlatformServicePage({ section }: { section: string }) {
     return (
       <>
         <PageTitle
-          title="Справочник API"
+          title={entity.label}
           description={`${api.length.toLocaleString('ru-RU')} методов исходного проекта. Поиск по сущности, операции и назначению.`}
         />
         <ApiCatalog />
@@ -432,7 +422,7 @@ export function PlatformServicePage({ section }: { section: string }) {
     return (
       <>
         <PageTitle
-          title="Использование ресурсов"
+          title={entity.label}
           description="Выделенные ресурсы и остаток квот по аккаунтам и ресурсным группам."
           actions={
             <Button
@@ -471,7 +461,7 @@ export function PlatformServicePage({ section }: { section: string }) {
           <ResourceTable
             tableId={`statistics:${view}`}
             rows={rows}
-            caption="Использование ресурсов"
+            caption={entity.label}
             columns={[
               {
                 id: 'name',
@@ -520,7 +510,7 @@ export function PlatformServicePage({ section }: { section: string }) {
     return (
       <>
         <PageTitle
-          title="Здоровье платформы"
+          title={entity.label}
           description="Контроль сервисов управления, хранения и виртуализации."
           actions={
             <Button loading={working} leadingIcon={<RefreshCw />} onClick={() => void refresh()}>
@@ -549,7 +539,7 @@ export function PlatformServicePage({ section }: { section: string }) {
   return (
     <>
       <PageTitle
-        title="Помощь и поддержка"
+        title={entity.label}
         description="Диагностика, документация и сведения о демонстрационной среде."
       />
       <div className="platform-detail-grid">
@@ -604,7 +594,7 @@ export function PlatformServicePage({ section }: { section: string }) {
         </Panel>
         <Panel title="Демонстрационная среда">
           <div className="platform-form">
-            <Tag tone="info">BASIS Cloud · 0.7.0</Tag>
+            <Tag tone="info">Basis statix · 0.7.5</Tag>
             <p>
               Изолированные ресурсы, фоновые задачи и аудит. Все изменения выполняются в
               мок-сервере.

@@ -20,6 +20,7 @@ import { ApiError } from './api';
 import { Empty, navigate, PageTitle, PlainTable, projectName } from './parts';
 import type { CloudNetwork, FieldErrors, Volume } from '../domain';
 import type { RegistryColumn, Rule } from './registry-model';
+import { DetailFacts } from './ResourceDetails';
 
 export function ResourceForm({
   kind,
@@ -522,7 +523,7 @@ export function StoragePage() {
         }
       >
         {detail && (
-          <div className="cloud-form-stack">
+          <div className="resource-preview">
             <div className="cloud-resource-preview">
               <HardDrive />
               <div>
@@ -535,18 +536,36 @@ export function StoragePage() {
                 </span>
               </div>
             </div>
-            <dl className="cloud-properties">
-              <dt>Проект</dt>
-              <dd>{projectName(data, detail.projectId)}</dd>
-              <dt>Подключение</dt>
-              <dd>{data.vms.find((v) => v.id === detail.vmId)?.name || 'Не подключён'}</dd>
-              <dt>Доступность</dt>
-              <dd>
-                <StatusBadge tone={detail.vmId ? 'info' : 'neutral'}>
-                  {detail.vmId ? 'Используется' : 'Свободен'}
-                </StatusBadge>
-              </dd>
-            </dl>
+            <DetailFacts
+              items={[
+                {
+                  label: 'Ресурсная группа',
+                  value: (
+                    <a href={`#cloud/projects/${detail.projectId}`}>
+                      {projectName(data, detail.projectId)}
+                    </a>
+                  ),
+                },
+                {
+                  label: 'Подключение',
+                  value: detail.vmId ? (
+                    <a href={`#cloud/vms/${detail.vmId}/resources`}>
+                      {data.vms.find((v) => v.id === detail.vmId)?.name || detail.vmId}
+                    </a>
+                  ) : (
+                    'Не подключён'
+                  ),
+                },
+                {
+                  label: 'Доступность',
+                  value: (
+                    <StatusBadge tone={detail.vmId ? 'info' : 'neutral'}>
+                      {detail.vmId ? 'Используется' : 'Свободен'}
+                    </StatusBadge>
+                  ),
+                },
+              ]}
+            />
             {!detail.vmId && (
               <Message tone="info" title="Готов к подключению">
                 Откройте ресурсы машины в этом проекте и выберите «Подключить диск».
@@ -708,7 +727,7 @@ export function NetworksPage() {
         footer={<Button onClick={() => setDetail(null)}>Закрыть</Button>}
       >
         {detail && (
-          <div className="cloud-form-stack">
+          <div className="resource-preview">
             <div className="cloud-resource-preview">
               <Network />
               <div>

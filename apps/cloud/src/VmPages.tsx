@@ -2,7 +2,6 @@ import { VmOverview } from './VmOverview';
 import { DetailFacts, ResourceConnection, ResourceMetrics, CopyValue } from './ResourceDetails';
 import {
   canChangePlatform,
-  scopeLabel,
   scopeContains,
   groupAccountId,
   listPlatformRecords,
@@ -50,28 +49,17 @@ import {
   type VmAction,
   type Volume,
 } from '../domain';
-import {
-  date,
-  Empty,
-  navigate,
-  PageTitle,
-  Panel,
-  PlainTable,
-  projectName,
-  ResourceMark,
-  VmState,
-} from './parts';
+import { date, Empty, navigate, PageTitle, Panel, PlainTable, VmState } from './parts';
 import { VmTable } from './VmTable';
 import { useVmActions, VmMenu } from './VmActions';
 import { TaskList } from './WorkspacePages';
 import type { RegistryColumn } from './registry-model';
 
 export function VmListPage() {
-  const { data, scope } = useCloud();
+  const { data } = useCloud();
   return (
     <>
       <PageTitle
-        eyebrow={scope === 'all' ? undefined : scopeLabel(data!, scope)}
         title="Виртуальные машины"
         description="Вычислительные ресурсы, состояние и размещение."
         actions={
@@ -103,7 +91,10 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
   if (!vm || !scopeContains(data, 'all', vm.projectId))
     return (
       <>
-        <PageTitle title="Машина не найдена" />
+        <PageTitle
+          resourceType={{ label: 'Виртуальная машина', href: '#cloud/vms' }}
+          title="Машина не найдена"
+        />
         <Empty
           title="Машина удалена или больше недоступна"
           description="Её операции сохраняются в журнале задач."
@@ -211,14 +202,13 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
   return (
     <>
       <PageTitle
-        eyebrow={`${projectName(data, vm.projectId)} / Виртуальная машина`}
         title={
           <span className="cloud-entity-title">
-            <ResourceMark />
             {vm.name}
             <VmState vm={vm} />
           </span>
         }
+        resourceType={{ label: 'Виртуальная машина', href: '#cloud/vms' }}
         description={
           vm.description === 'Управляемый ресурс облачной платформы.' ? undefined : vm.description
         }
@@ -235,7 +225,8 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
               value={chosenAction}
               onValueChange={setPowerChoice}
               onAction={(value) => act(value as VmAction, [vm])}
-              tone={chosenAction === 'stop' ? 'warning' : 'success'}
+              variant={chosenAction === 'start' ? 'primary' : 'secondary'}
+              tone={chosenAction === 'start' ? 'brand' : 'neutral'}
               disabled={working || Boolean(task)}
               actions={[
                 {
@@ -632,7 +623,8 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
               Отмена
             </Button>
             <Button
-              tone="warning"
+              variant="primary"
+              tone="brand"
               loading={working}
               onClick={async () => {
                 if (!detach) return;

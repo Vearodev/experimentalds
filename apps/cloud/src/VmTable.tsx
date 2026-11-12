@@ -6,8 +6,8 @@ import {
   vmMetadata,
 } from '../platform-model';
 import { useState } from 'react';
-import { Play, Power, Server, Trash2, Terminal } from 'lucide-react';
-import { Button, ContextPanel, Tag, StatusBadge } from '@basis/ui';
+import { ArrowUpRight, Play, Power, Server, Trash2 } from 'lucide-react';
+import { Button, ContextPanel, StatusBadge, Tag } from '@basis/ui';
 import { statusNames, type VM } from '../domain';
 import { useCloud } from './cloud-state';
 import { useDesign } from '../../playground/src/DesignContext';
@@ -16,6 +16,7 @@ import { useVmActions, VmMenu } from './VmActions';
 import { ResourceTable } from './ResourceTable';
 import { type RegistryColumn, type Rule } from './registry-model';
 import { useVmConsole } from './ConsoleProvider';
+import { VmQuickPreview } from './VmQuickPreview';
 export function VmTable({
   clusterId,
   resourceIds,
@@ -239,7 +240,7 @@ export function VmTable({
           <>
             <Button
               size="sm"
-              tone="success"
+              tone="brand"
               leadingIcon={<Play />}
               disabled={!chosen.length || !chosen.every((v) => available(v, 'start'))}
               title={
@@ -253,6 +254,7 @@ export function VmTable({
             </Button>
             <Button
               size="sm"
+              tone="neutral"
               leadingIcon={<Power />}
               disabled={!chosen.length || !chosen.every((v) => available(v, 'stop'))}
               title={
@@ -290,25 +292,15 @@ export function VmTable({
         anchor={preview?.anchor || null}
         presentation="drawer"
         title={previewVm?.name || 'Виртуальная машина'}
-        description="Быстрый просмотр"
+        description="Виртуальная машина · быстрый просмотр"
         icon={<Server />}
         onClose={() => setPreview(null)}
         footer={
           <>
             <Button onClick={() => setPreview(null)}>Закрыть</Button>
             <Button
-              leadingIcon={<Terminal />}
-              onClick={() => {
-                if (previewVm) {
-                  setPreview(null);
-                  consoles.openConsole(previewVm);
-                }
-              }}
-            >
-              Консоль
-            </Button>
-            <Button
               variant="primary"
+              trailingIcon={<ArrowUpRight />}
               onClick={() => {
                 navigate(`vms/${previewVm!.id}`);
                 setPreview(null);
@@ -320,35 +312,15 @@ export function VmTable({
         }
       >
         {previewVm && (
-          <div className="cloud-form-stack">
-            <VmState vm={previewVm} />
-            <dl className="cloud-properties">
-              <dt>Ресурсная группа</dt>
-              <dd>{projectName(data, previewVm.projectId)}</dd>
-              <dt>Узел</dt>
-              <dd>{hostName(data, previewVm.hostId)}</dd>
-              <dt>IP-адрес</dt>
-              <dd className="cloud-mono">{previewVm.ip || 'Не назначен'}</dd>
-              <dt>Конфигурация</dt>
-              <dd>
-                {previewVm.cpu} vCPU · {previewVm.memory} GiB RAM
-              </dd>
-              <dt>Образ</dt>
-              <dd>{previewVm.template}</dd>
-            </dl>
-            <div className="cloud-tags">
-              {previewVm.tags.map((tag) => (
-                <Tag key={tag}>{tag}</Tag>
-              ))}
-            </div>
-            <Button
-              tone={previewVm.status === 'running' ? 'warning' : 'success'}
-              disabled={!available(previewVm, previewVm.status === 'running' ? 'stop' : 'start')}
-              onClick={() => act(previewVm.status === 'running' ? 'stop' : 'start', [previewVm])}
-            >
-              {previewVm.status === 'running' ? 'Выключить' : 'Запустить'}
-            </Button>
-          </div>
+          <VmQuickPreview
+            vm={previewVm}
+            powerAvailable={available(previewVm, previewVm.status === 'running' ? 'stop' : 'start')}
+            onPower={() => act(previewVm.status === 'running' ? 'stop' : 'start', [previewVm])}
+            onConsole={() => {
+              setPreview(null);
+              consoles.openConsole(previewVm);
+            }}
+          />
         )}
       </ContextPanel>
       {dialog}

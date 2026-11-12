@@ -1,6 +1,6 @@
 {
   "name": "basis-design-system",
-  "version": "0.7.1",
+  "version": "0.7.5",
   "private": true,
   "type": "module",
   "workspaces": [
@@ -29,6 +29,7 @@
   "dependencies": {
     "@basis/tokens": "*",
     "@basis/ui": "*",
+    "@fontsource-variable/jetbrains-mono": "5.3.0",
     "@fontsource-variable/onest": "5.3.1",
     "lucide-react": "1.72.0",
     "react": "19.3.1",

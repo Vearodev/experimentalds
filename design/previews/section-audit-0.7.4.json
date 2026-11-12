@@ -1,0 +1,355 @@
+{
+  "version": "0.7.4",
+  "date": "2026-11-12",
+  "viewport": {
+    "width": 1440,
+    "height": 960
+  },
+  "theme": "light",
+  "scope": "Route rendering and DOM layout smoke check; screenshots inspected separately for shared templates.",
+  "sections": [
+    {
+      "section": "accounts",
+      "heading": "Аккаунты",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "projects",
+      "heading": "Ресурсные группы",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "vms",
+      "heading": "Виртуальные машины",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 12
+    },
+    {
+      "section": "bservices",
+      "heading": "Группы сервисов",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "kubernetes",
+      "heading": "Kubernetes",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "volumes",
+      "heading": "Диски",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 12
+    },
+    {
+      "section": "images",
+      "heading": "Образы",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 4
+    },
+    {
+      "section": "storage-policies",
+      "heading": "Политики хранения",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "seps",
+      "heading": "Хранилища SEP",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "networks",
+      "heading": "Сети ViNS",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "external-networks",
+      "heading": "Внешние сети",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "load-balancers",
+      "heading": "Балансировщики",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "security-groups",
+      "heading": "Группы безопасности",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "flip-groups",
+      "heading": "Плавающие адреса",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "trunks",
+      "heading": "Транки",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "dpdk",
+      "heading": "Сети DPDK",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "vf-pools",
+      "heading": "Пулы SR-IOV",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "vnf-devices",
+      "heading": "Сетевые устройства",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "locations",
+      "heading": "Площадки",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "clusters",
+      "heading": "Зоны",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "nodes",
+      "heading": "Физические узлы",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 5
+    },
+    {
+      "section": "pgpu",
+      "heading": "Физические GPU",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "vgpu",
+      "heading": "Виртуальные GPU",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "pci",
+      "heading": "PCI-устройства",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "k8ci",
+      "heading": "Конфигурации Kubernetes",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "optimizer",
+      "heading": "Оптимизация ресурсов",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "users",
+      "heading": "Пользователи",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "api-access",
+      "heading": "Роли API",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "zero-access",
+      "heading": "Сессии доступа",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "tasks",
+      "heading": "Задачи",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 11
+    },
+    {
+      "section": "jobs",
+      "heading": "Системные задания",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 5
+    },
+    {
+      "section": "audits",
+      "heading": "Аудит",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 9
+    },
+    {
+      "section": "incidents",
+      "heading": "Ошибки и события",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "health",
+      "heading": "Состояние платформы",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "statistics",
+      "heading": "Потребление ресурсов",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 3
+    },
+    {
+      "section": "recycle-bin",
+      "heading": "Корзина",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "api",
+      "heading": "Справочник API",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 12
+    },
+    {
+      "section": "support",
+      "heading": "Помощь и поддержка",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 0
+    },
+    {
+      "section": "sdn-access",
+      "heading": "Группы доступа",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-segments",
+      "heading": "Сегменты",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "sdn-ports",
+      "heading": "Логические порты",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 2
+    },
+    {
+      "section": "sdn-networks",
+      "heading": "Сетевые объекты",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-routers",
+      "heading": "Маршрутизаторы",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-external",
+      "heading": "Внешние сети SDN",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-address-pools",
+      "heading": "Пулы адресов",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-floating-ips",
+      "heading": "Floating IP",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-policies",
+      "heading": "Политики безопасности",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-l2-external",
+      "heading": "Внешние L2-сети",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    },
+    {
+      "section": "sdn-hypervisors",
+      "heading": "Гипервизоры SDN",
+      "overflow": 0,
+      "overlines": 0,
+      "rows": 1
+    }
+  ]
+}

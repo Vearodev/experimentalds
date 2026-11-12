@@ -38,8 +38,15 @@ const menuItems: SidebarItem[] = [
     label: 'Вычисления',
     icon: <Server />,
     children: [
-      { id: 'vms', label: 'Виртуальные машины', icon: <Server />, count: 16 },
+      {
+        id: 'vms',
+        label: 'Виртуальные машины',
+        icon: <Server />,
+        count: 16,
+        keywords: ['ВМ', 'VM'],
+      },
       { id: 'clusters', label: 'Кластеры и хосты', icon: <Boxes /> },
+      { id: 'k8ci', label: 'Конфигурации Kubernetes', icon: <Boxes />, keywords: ['k8s'] },
     ],
   },
   { id: 'disks', label: 'Диски', icon: <HardDrive /> },
@@ -66,7 +73,7 @@ export function MainNavigationPage() {
       <PageHeading
         category="Составной компонент · Навигация"
         title="Основное меню"
-        description="Одна вертикаль для всей платформы. Группы раскрываются внутри меню, компактный режим возвращает место рабочим данным."
+        description="Поиск, рабочие разделы и понятная иерархия. Прокручивается только список; длинные названия остаются читаемыми в обоих режимах."
       >
         <Button
           size="sm"
@@ -86,12 +93,13 @@ export function MainNavigationPage() {
           <aside className="navigation-lab__sidebar">
             <div className="navigation-lab__brand">
               <Cloud />
-              {!compact && <strong>BASIS Cloud</strong>}
+              {!compact && <strong>Basis statix</strong>}
             </div>
             <SidebarNavigation
               items={menuItems}
               activeId={active}
               compact={compact}
+              searchable
               onNavigate={(item) => setActive(item.id)}
               label="Пример основного меню"
             />
@@ -109,8 +117,8 @@ export function MainNavigationPage() {
             <span className="eyebrow">Рабочая область / Production</span>
             <h2>{activeLabel}</h2>
             <p>
-              Выбирайте разделы, сворачивайте группы и переключайте размер меню. В режиме иконок
-              подпункты открываются рядом с выбранной группой.
+              Найдите «ВМ», «k8s» или «Управление». Поиск видит закрытые группы и сохраняет их
+              состояние. В компактном режиме кнопка поиска открывает отдельное окно разделов.
             </p>
             <div className="navigation-lab__resource">
               <Server />
@@ -143,6 +151,14 @@ export function MainNavigationPage() {
               Шеврон отличает группы от обычных ссылок. Наведение открывает подменю справа без смены
               фокуса; клик закрепляет его. Поддерживает стрелки и Escape, возвращает фокус к своей
               кнопке.
+            </p>
+          </article>
+          <article>
+            <strong>Поиск разделов</strong>
+            <p>
+              По названию, группе и синонимам. Стрелка вниз переводит фокус к результатам, Enter
+              открывает раздел. Escape очищает запрос. Пустой результат объясняет, что делать
+              дальше.
             </p>
           </article>
           <article>

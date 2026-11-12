@@ -10,7 +10,6 @@ import { csvCell } from './csv';
 import { ApiPermissions, PlatformRecordSettings } from './PlatformSettings';
 import { useState } from 'react';
 import {
-  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Check,
@@ -37,7 +36,6 @@ import {
 import {
   platformEntity,
   platformDefaultColumns,
-  platformGroups,
   platformStatusLabels,
   platformTone,
 } from '../platform-catalog';
@@ -339,6 +337,17 @@ export function PlatformRegistry({
     },
   ];
   const selectedPreview = rows.find((r) => r.id === preview?.id);
+  const emptyActivity: Record<string, [string, string]> = {
+    audits: ['Событий пока нет', 'Здесь появится история изменений и обращений к ресурсу.'],
+    tasks: ['Операций пока нет', 'Выполненные и текущие операции появятся здесь автоматически.'],
+    jobs: ['Системных заданий пока нет', 'Задания появятся при выполнении операций платформы.'],
+    incidents: ['Ошибок и событий нет', 'Здесь будут показаны события, требующие внимания.'],
+    'recycle-bin': [
+      'Корзина пуста',
+      'Удалённые ресурсы, доступные для восстановления, появятся здесь.',
+    ],
+  };
+  const canCreate = Boolean(entity.create && !blocked());
   return (
     <>
       {(entity.internal || Boolean(contextKey)) && (
@@ -456,11 +465,27 @@ export function PlatformRegistry({
         )}
         empty={
           <Empty
-            title="Ресурсов пока нет"
+            title={
+              emptyActivity[entity.id]?.[0] ||
+              (contextKey ? 'Связанных ресурсов пока нет' : 'Ресурсов пока нет')
+            }
             description={
-              Object.keys(initial).length
-                ? 'Добавьте первый связанный ресурс.'
-                : 'Выберите другую рабочую область или создайте ресурс.'
+              emptyActivity[entity.id]?.[1] ||
+              (canCreate
+                ? Object.keys(initial).length
+                  ? 'Добавьте первый ресурс в этом разделе.'
+                  : 'Создайте первый ресурс в выбранной рабочей области.'
+                : 'Список заполнится, когда ресурсы появятся в этой рабочей области.')
+            }
+            action={
+              canCreate ? (
+                <Button
+                  leadingIcon={<Plus />}
+                  onClick={(event) => setForm({ anchor: event.currentTarget })}
+                >
+                  Добавить ресурс
+                </Button>
+              ) : undefined
             }
           />
         }
@@ -490,30 +515,38 @@ export function PlatformRegistry({
             </>
           }
         >
-          <div className="platform-preview">
-            <StatusBadge tone={platformTone(selectedPreview.status)}>
-              {platformStatusLabels[selectedPreview.status] || selectedPreview.status}
-            </StatusBadge>
-            {selectedPreview.description && <p>{selectedPreview.description}</p>}
+          <div className="resource-preview">
+            <div className="resource-preview__status">
+              <StatusBadge tone={platformTone(selectedPreview.status)}>
+                {platformStatusLabels[selectedPreview.status] || selectedPreview.status}
+              </StatusBadge>
+            </div>
+            {selectedPreview.description && (
+              <p className="resource-preview__description">{selectedPreview.description}</p>
+            )}
             <PlatformFacts entity={entity} row={selectedPreview} compact />
             {entity.tabs?.some((tab) => tab.entity) && (
-              <div className="platform-related-links">
-                {entity.tabs
-                  .filter((tab) => tab.entity)
-                  .map((tab) => (
-                    <Button
-                      key={tab.id}
-                      variant="ghost"
-                      trailingIcon={<ArrowRight />}
-                      onClick={() => {
-                        setPreview(null);
-                        navigate(`${entity.id}/${selectedPreview.id}/${tab.id}`);
-                      }}
-                    >
-                      {tab.label}
-                    </Button>
-                  ))}
-              </div>
+              <section className="resource-preview__related">
+                <h3>Разделы ресурса</h3>
+                <div className="platform-related-links">
+                  {entity.tabs
+                    .filter((tab) => tab.entity)
+                    .map((tab) => (
+                      <Button
+                        key={tab.id}
+                        variant="secondary"
+                        size="sm"
+                        trailingIcon={<ArrowRight />}
+                        onClick={() => {
+                          setPreview(null);
+                          navigate(`${entity.id}/${selectedPreview.id}/${tab.id}`);
+                        }}
+                      >
+                        {tab.label}
+                      </Button>
+                    ))}
+                </div>
+              </section>
             )}
           </div>
         </ContextPanel>
@@ -632,7 +665,11 @@ export function PlatformPage({
   if (id && !row)
     return currentTask ? (
       <>
-        <PageTitle title={currentTask.resource} description={currentTask.name} />
+        <PageTitle
+          resourceType={{ label: entity.singular, href: '#cloud/' + entity.id }}
+          title={currentTask.resource}
+          description={currentTask.name}
+        />
         <Panel title="Подготовка ресурса">
           <Progress value={currentTask.progress} label="Выполняется" />
           <p>Можно продолжить работу в портале. Результат появится здесь автоматически.</p>
@@ -643,7 +680,10 @@ export function PlatformPage({
       </>
     ) : failedTask ? (
       <>
-        <PageTitle title={failedTask.resource} />
+        <PageTitle
+          resourceType={{ label: entity.singular, href: '#cloud/' + entity.id }}
+          title={failedTask.resource}
+        />
         <Message
           tone="danger"
           title="Не удалось создать ресурс"
@@ -669,7 +709,6 @@ export function PlatformPage({
         action={<Button onClick={() => navigate(entityId)}>Вернуться в раздел</Button>}
       />
     );
-  const group = platformGroups.find((g) => g.id === entity.group);
   const blocked =
     canChangePlatform(data, entityId, row) || (currentTask ? 'Дождитесь завершения операции.' : '');
   const allTabs = [
@@ -685,13 +724,10 @@ export function PlatformPage({
   return (
     <>
       <PageTitle
-        eyebrow={row ? entity.singular : group?.label}
+        resourceType={row ? { label: entity.singular, href: '#cloud/' + entity.id } : undefined}
         title={
           row ? (
             <span className="platform-title">
-              <span className="cloud-resource-mark">
-                <PlatformIcon name={entity.icon} size={22} />
-              </span>
               {row.name}
               <StatusBadge tone={platformTone(row.status)}>
                 {platformStatusLabels[row.status] || row.status}
@@ -704,15 +740,6 @@ export function PlatformPage({
         description={row ? row.description || undefined : entity.description}
         actions={
           <>
-            {row && (
-              <Button
-                variant="ghost"
-                leadingIcon={<ArrowLeft />}
-                onClick={() => navigate(entityId)}
-              >
-                К списку
-              </Button>
-            )}
             {row && ['accounts', 'projects'].includes(entityId) && (
               <Button
                 leadingIcon={<Check />}

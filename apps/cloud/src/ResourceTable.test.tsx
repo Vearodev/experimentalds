@@ -224,7 +224,12 @@ describe('Registry filter transaction', () => {
         columns={columns}
         caption="Журнал"
         tableId="custom-test"
-        presets={[]}
+        presets={[
+          {
+            label: 'Первая задача',
+            filters: [{ field: 'name', operator: 'equals', value: 'task-one', to: '', values: [] }],
+          },
+        ]}
       />,
     );
     await user.click(screen.getByRole('button', { name: 'Фильтр: Имя' }));
@@ -260,9 +265,18 @@ describe('Registry filter transaction', () => {
       'true',
     );
   });
-  it('keeps the current result when a changed filter is cancelled', async () => {
+  it('cancels and resets filters without introducing tabs when no presets are available', async () => {
     const user = userEvent.setup();
-    render(<ResourceTable rows={rows} columns={columns} caption="Журнал" tableId="cancel-test" />);
+    render(
+      <ResourceTable
+        rows={rows}
+        columns={columns}
+        caption="Журнал"
+        tableId="cancel-test"
+        presets={[]}
+      />,
+    );
+    expect(screen.queryByRole('tablist')).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Фильтр: Имя' }));
     await user.type(screen.getByLabelText('Значение: Имя'), 'task-one');
     await user.click(screen.getByRole('button', { name: 'Отмена' }));
@@ -271,5 +285,12 @@ describe('Registry filter transaction', () => {
       'aria-pressed',
       'false',
     );
+    await user.click(screen.getByRole('button', { name: 'Фильтр: Имя' }));
+    await user.type(screen.getByLabelText('Значение: Имя'), 'task-one');
+    await user.click(screen.getByRole('button', { name: 'Применить' }));
+    expect(screen.queryByRole('tablist')).not.toBeInTheDocument();
+    expect(within(screen.getByRole('table')).queryByText('task-two')).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Сбросить' }));
+    expect(within(screen.getByRole('table')).getAllByRole('row')).toHaveLength(3);
   });
 });

@@ -568,7 +568,7 @@ export function TablePage() {
                 variant="primary"
                 leadingIcon={<Power />}
                 loading={pending === 'running'}
-                tone="success"
+                tone="brand"
                 disabled={pending === 'off' || !startable.length}
                 onClick={() =>
                   perform(
@@ -583,7 +583,7 @@ export function TablePage() {
                 size="sm"
                 leadingIcon={<Square />}
                 loading={pending === 'off'}
-                tone="warning"
+                tone="neutral"
                 disabled={pending === 'running' || !stoppable.length}
                 onClick={() =>
                   perform(
@@ -777,8 +777,8 @@ export function TablePage() {
           <>
             <Button onClick={() => setPreviewId(null)}>Закрыть</Button>
             <Button
-              variant="primary"
-              tone={preview?.status === 'running' ? 'warning' : 'success'}
+              variant={preview?.status === 'running' ? 'secondary' : 'primary'}
+              tone={preview?.status === 'running' ? 'neutral' : 'brand'}
               leadingIcon={<Power />}
               loading={pending !== null}
               onClick={() =>

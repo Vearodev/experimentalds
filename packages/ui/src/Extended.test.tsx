@@ -12,6 +12,7 @@ import {
   maskRaw,
 } from './StructuredFields';
 import { Accordion, Breadcrumb, Menu } from './Disclosure';
+import { Tooltip } from './Tooltip';
 import { Avatar, Badge, Chip } from './Identity';
 import { CascadeSelect } from './CascadeSelect';
 import { ToastRegion, type ToastItem } from './Notifications';
@@ -201,6 +202,69 @@ it('nested menu keyboard navigation restores the parent item and trigger', async
   expect(select).toHaveBeenCalledOnce();
   expect(trigger).toHaveFocus();
   expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+});
+it('profile menu exposes checked preferences and skips unavailable options with the keyboard', async () => {
+  const user = userEvent.setup(),
+    change = vi.fn();
+  render(
+    <Menu
+      label="Профиль: Анна"
+      triggerContent={<span>Анна</span>}
+      header={<span>Администратор</span>}
+      align="end"
+      items={[
+        {
+          id: 'theme',
+          label: 'Тема',
+          children: [
+            { id: 'light', label: 'Светлая', checked: true },
+            { id: 'system', label: 'Системная', checked: false, disabled: true },
+            { id: 'dark', label: 'Тёмная', checked: false, onSelect: change },
+          ],
+        },
+      ]}
+    />,
+  );
+  const trigger = screen.getByRole('button', { name: 'Профиль: Анна' });
+  await user.click(trigger);
+  expect(screen.getByText('Администратор')).toBeVisible();
+  await user.keyboard('{ArrowRight}');
+  expect(screen.getByRole('menuitemradio', { name: 'Светлая' })).toHaveFocus();
+  expect(screen.getByRole('menuitemradio', { name: 'Светлая' })).toHaveAttribute(
+    'aria-checked',
+    'true',
+  );
+  expect(screen.queryByText('Администратор')).not.toBeInTheDocument();
+  await user.keyboard('{ArrowDown}');
+  expect(screen.getByRole('menuitemradio', { name: 'Тёмная' })).toHaveFocus();
+  await user.keyboard('{ArrowLeft}');
+  expect(screen.getByRole('menuitem', { name: 'Тема' })).toHaveFocus();
+  await user.keyboard('{ArrowRight}{End}{Enter}');
+  expect(change).toHaveBeenCalledOnce();
+  expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+  expect(trigger).toHaveFocus();
+});
+it('background tooltips stay hidden while a menu is open and recover after it closes', async () => {
+  const user = userEvent.setup();
+  render(
+    <>
+      <Tooltip content="Изменить параметры ресурса">
+        <button>Изменить</button>
+      </Tooltip>
+      <Menu label="Профиль" items={[{ id: 'theme', label: 'Тема' }]} />
+    </>,
+  );
+  const edit = screen.getByRole('button', { name: 'Изменить' });
+  await user.hover(edit);
+  expect(screen.getByRole('tooltip')).toBeVisible();
+  await user.click(screen.getByRole('button', { name: 'Профиль' }));
+  await user.hover(edit);
+  expect(screen.getByRole('menu')).toBeVisible();
+  expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+  await user.keyboard('{Escape}');
+  await user.unhover(edit);
+  await user.hover(edit);
+  expect(screen.getByRole('tooltip')).toBeVisible();
 });
 it('cascade cancels its draft and commits only an available leaf', async () => {
   const user = userEvent.setup(),

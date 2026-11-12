@@ -71,7 +71,6 @@ export function OverviewPage() {
   return (
     <>
       <PageTitle
-        eyebrow={current ? 'Рабочая область проекта' : undefined}
         title={current ? current.name : 'Обзор инфраструктуры'}
         description={
           current?.description || 'Состояние облака, доступная ёмкость и текущие операции.'
@@ -537,8 +536,8 @@ export function ClustersPage({ id }: { id?: string }) {
   return (
     <>
       <PageTitle
-        eyebrow={cluster.region}
         title={cluster.name}
+        resourceType={{ label: 'Кластер', href: '#cloud/clusters' }}
         description={cluster.description}
         actions={<Button onClick={() => navigate('clusters')}>Все кластеры</Button>}
       />
@@ -748,7 +747,7 @@ export function SettingsPage() {
   return (
     <>
       <PageTitle
-        title="Настройки"
+        title="Настройки профиля"
         description="Профиль, уведомления и внешний вид рабочего пространства."
         actions={
           <Button variant="primary" loading={working} disabled={!dirty} onClick={() => void save()}>

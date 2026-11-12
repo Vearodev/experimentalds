@@ -1,6 +1,6 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowLeft, ChevronDown, ChevronRight, MoreHorizontal } from 'lucide-react';
+import { ArrowLeft, Check, ChevronDown, ChevronRight, MoreHorizontal } from 'lucide-react';
 import { Button, type ButtonVariant } from './Button';
 
 export type AccordionItem = {
@@ -78,6 +78,8 @@ export type MenuItem = {
   icon?: ReactNode;
   shortcut?: string;
   disabled?: boolean;
+  current?: boolean;
+  checked?: boolean;
   danger?: boolean;
   group?: string;
   onSelect?: () => void;
@@ -93,6 +95,11 @@ export function Menu({
   openOnHover = false,
   size,
   variant,
+  open: controlledOpen,
+  onOpenChange,
+  triggerContent,
+  header,
+  align = 'start',
 }: {
   label?: string;
   items: MenuItem[];
@@ -103,6 +110,11 @@ export function Menu({
   openOnHover?: boolean;
   size?: 'sm' | 'md' | 'lg';
   variant?: ButtonVariant;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  triggerContent?: ReactNode;
+  header?: ReactNode;
+  align?: 'start' | 'end';
 }) {
   const id = useId(),
     trigger = useRef<HTMLButtonElement>(null),
@@ -116,9 +128,20 @@ export function Menu({
     hoverTimer.current = null;
   };
   useEffect(() => () => clearHover(), []);
-  const [open, setOpen] = useState(false),
+  const [localOpen, setLocalOpen] = useState(false),
     [stack, setStack] = useState<MenuItem[]>([]),
     [position, setPosition] = useState({ left: 0, top: 0, maxHeight: 400 });
+  const open = controlledOpen ?? localOpen;
+  const setOpen = (next: boolean) => {
+    setLocalOpen(next);
+    onOpenChange?.(next);
+  };
+  useEffect(() => {
+    if (!open) {
+      clearHover();
+      hoverOpened.current = false;
+    }
+  }, [open]);
   const current = stack.at(-1)?.children || items;
   const close = (restore = true) => {
     clearHover();
@@ -128,8 +151,14 @@ export function Menu({
   };
   const enabled = () =>
     Array.from(
-      popup.current?.querySelectorAll<HTMLButtonElement>('[role="menuitem"]:not(:disabled)') || [],
+      popup.current?.querySelectorAll<HTMLButtonElement>('[role^="menuitem"]:not(:disabled)') || [],
     );
+  useEffect(() => {
+    if (!openOnHover) {
+      clearHover();
+      if (hoverOpened.current) close(false);
+    }
+  }, [openOnHover]);
   const hoverLeave = () => {
     clearHover();
     if (openOnHover && hoverOpened.current)
@@ -137,12 +166,25 @@ export function Menu({
   };
   useLayoutEffect(() => {
     if (!open) return;
+    // Navigation flyouts and utility menus share one interaction layer.
+    const anotherMenuOpened = (event: Event) => {
+      if ((event as CustomEvent<string>).detail !== id) close(false);
+    };
+    document.dispatchEvent(new CustomEvent('basis:menu-open', { detail: id }));
+    document.addEventListener('basis:menu-open', anotherMenuOpened);
     const place = () => {
       const r = trigger.current?.getBoundingClientRect(),
         panel = popup.current;
       if (!r || !panel) return;
       const inset = 12,
-        gap = 6,
+        gap =
+          placement === 'right'
+            ? parseFloat(
+                getComputedStyle(trigger.current!).getPropertyValue(
+                  '--basis-comp-menu-side-offset',
+                ),
+              ) || 24
+            : 6,
         width = panel.getBoundingClientRect().width,
         height = panel.scrollHeight;
       const below = innerHeight - r.bottom - inset;
@@ -160,7 +202,10 @@ export function Menu({
         return;
       }
       setPosition({
-        left: Math.max(inset, Math.min(r.left, innerWidth - width - inset)),
+        left: Math.max(
+          inset,
+          Math.min(align === 'end' ? r.right - width : r.left, innerWidth - width - inset),
+        ),
         top: down ? r.bottom + gap : Math.max(inset, r.top - Math.min(height, above) - gap),
         maxHeight: Math.max(100, down ? below - gap : above - gap),
       });
@@ -183,13 +228,14 @@ export function Menu({
     };
     document.addEventListener('keydown', escapeHover);
     return () => {
+      document.removeEventListener('basis:menu-open', anotherMenuOpened);
       resize.disconnect();
       window.removeEventListener('resize', place);
       window.removeEventListener('scroll', place, true);
       document.removeEventListener('pointerdown', outside);
       document.removeEventListener('keydown', escapeHover);
     };
-  }, [open, placement]);
+  }, [open, placement, align]);
   useEffect(() => {
     if (!open || hoverOpened.current) return;
     const choices = enabled();
@@ -222,7 +268,7 @@ export function Menu({
         variant={variant || (compact ? 'ghost' : 'secondary')}
         leadingIcon={icon || (compact ? <MoreHorizontal /> : undefined)}
         trailingIcon={!compact ? <ChevronDown /> : undefined}
-        aria-label={compact ? label : undefined}
+        aria-label={compact || triggerContent ? label : undefined}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={open ? id : undefined}
@@ -249,7 +295,10 @@ export function Menu({
           setOpen(!open);
         }}
         onKeyDown={(e) => {
-          if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+          if (
+            ['ArrowDown', 'ArrowUp'].includes(e.key) ||
+            (placement === 'right' && e.key === 'ArrowRight')
+          ) {
             e.preventDefault();
             clearHover();
             hoverOpened.current = false;
@@ -260,7 +309,7 @@ export function Menu({
           }
         }}
       >
-        {compact ? null : label}
+        {triggerContent ?? (compact ? null : label)}
       </Button>
       {open &&
         createPortal(
@@ -303,9 +352,10 @@ export function Menu({
                 close(false);
                 (next || trigger.current)?.focus();
               }
-              if (e.key === 'ArrowLeft' && stack.length) {
+              if (e.key === 'ArrowLeft' && (stack.length || placement === 'right')) {
                 e.preventDefault();
-                back();
+                if (stack.length) back();
+                else close();
               }
               if (e.key === 'ArrowRight') {
                 const item = current.find(
@@ -335,7 +385,7 @@ export function Menu({
                   Назад · {stack.at(-1)!.label}
                 </Button>
               ) : (
-                <span>{label}</span>
+                (header ?? <span>{label}</span>)
               )}
             </div>
             <div role="menu" id={id} aria-label={stack.at(-1)?.label || label}>
@@ -348,8 +398,12 @@ export function Menu({
                   )}
                   <Button
                     className="basis-menu__item"
-                    role="menuitem"
+                    role={item.checked !== undefined ? 'menuitemradio' : 'menuitem'}
+                    aria-checked={item.checked}
+                    aria-label={item.label}
+                    aria-describedby={item.description ? `${id}-${index}-description` : undefined}
                     data-item={item.id}
+                    aria-current={item.current ? 'page' : undefined}
                     tabIndex={-1}
                     variant="ghost"
                     tone={item.danger ? 'danger' : 'neutral'}
@@ -360,13 +414,17 @@ export function Menu({
                     trailingIcon={
                       item.children?.length ? (
                         <ChevronRight />
+                      ) : item.checked ? (
+                        <Check />
                       ) : item.shortcut ? (
                         <kbd>{item.shortcut}</kbd>
                       ) : undefined
                     }
                   >
                     <strong>{item.label}</strong>
-                    {item.description && <small>{item.description}</small>}
+                    {item.description && (
+                      <small id={`${id}-${index}-description`}>{item.description}</small>
+                    )}
                   </Button>
                 </div>
               ))}

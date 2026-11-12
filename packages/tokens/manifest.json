@@ -1,7 +1,7 @@
 {
   "version": "0.6.0",
   "format": "DTCG 2025.10",
-  "checksum": "01fb453eb43147d3",
+  "checksum": "cb9ff4a2ba02a0db",
   "themes": [
     "light",
     "dark"
@@ -30,6 +30,18 @@
       "size": "sys.type.size.title",
       "weight": "sys.type.weight.semibold",
       "leading": "sys.type.leading.title"
+    },
+    "metric": {
+      "family": "sys.type.family.data",
+      "size": "sys.type.size.heading",
+      "weight": "sys.type.weight.data",
+      "leading": "sys.type.leading.heading"
+    },
+    "technical": {
+      "family": "sys.type.family.mono",
+      "size": "sys.type.size.caption",
+      "weight": "sys.type.weight.medium",
+      "leading": "sys.type.leading.body"
     }
   },
   "tokens": {
@@ -4418,6 +4430,27 @@
         }
       }
     },
+    "ref.number.0_92": {
+      "type": "number",
+      "description": "Безразмерное значение 0.92.",
+      "layer": "ref",
+      "css": "--basis-ref-number-0_92",
+      "source": "reference.tokens.json",
+      "modes": {
+        "light": {
+          "raw": 0.92,
+          "value": 0.92,
+          "cssValue": "0.92",
+          "references": []
+        },
+        "dark": {
+          "raw": 0.92,
+          "value": 0.92,
+          "cssValue": "0.92",
+          "references": []
+        }
+      }
+    },
     "ref.number.1_5": {
       "type": "number",
       "description": "Безразмерное значение 1.5.",
@@ -4923,37 +4956,45 @@
     },
     "ref.font.family.mono": {
       "type": "fontFamily",
-      "description": "Моноширинный шрифт для кода и идентификаторов.",
+      "description": "JetBrains Mono: локальный variable-шрифт. Метрики 600, технические значения 500, консоль 400. Кириллица и латиница.",
       "layer": "ref",
       "css": "--basis-ref-font-family-mono",
       "source": "reference.tokens.json",
       "modes": {
         "light": {
           "raw": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": []
         },
         "dark": {
           "raw": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": []
         }
       }
@@ -7154,6 +7195,39 @@
         }
       }
     },
+    "ref.size.layout.sidebar.search-max-height": {
+      "type": "dimension",
+      "description": "Предельная высота результатов поиска по разделам в отдельном окне.",
+      "layer": "ref",
+      "css": "--basis-ref-size-layout-sidebar-search-max-height",
+      "source": "reference.tokens.json",
+      "modes": {
+        "light": {
+          "raw": {
+            "value": 360,
+            "unit": "px"
+          },
+          "value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "cssValue": "360px",
+          "references": []
+        },
+        "dark": {
+          "raw": {
+            "value": 360,
+            "unit": "px"
+          },
+          "value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "cssValue": "360px",
+          "references": []
+        }
+      }
+    },
     "ref.size.layout.content.max": {
       "type": "dimension",
       "description": "Исходная метрика size.layout.content.max.",
@@ -7381,6 +7455,138 @@
             "unit": "px"
           },
           "cssValue": "1920px",
+          "references": []
+        }
+      }
+    },
+    "ref.size.layout.shell.brand-mark-width": {
+      "type": "dimension",
+      "description": "Ширина компактного знака BASIS в шапке.",
+      "layer": "ref",
+      "css": "--basis-ref-size-layout-shell-brand-mark-width",
+      "source": "reference.tokens.json",
+      "modes": {
+        "light": {
+          "raw": {
+            "value": 24,
+            "unit": "px"
+          },
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": []
+        },
+        "dark": {
+          "raw": {
+            "value": 24,
+            "unit": "px"
+          },
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": []
+        }
+      }
+    },
+    "ref.size.layout.shell.brand-mark-width-compact": {
+      "type": "dimension",
+      "description": "Ширина логотипа на узком экране.",
+      "layer": "ref",
+      "css": "--basis-ref-size-layout-shell-brand-mark-width-compact",
+      "source": "reference.tokens.json",
+      "modes": {
+        "light": {
+          "raw": {
+            "value": 20,
+            "unit": "px"
+          },
+          "value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "cssValue": "20px",
+          "references": []
+        },
+        "dark": {
+          "raw": {
+            "value": 20,
+            "unit": "px"
+          },
+          "value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "cssValue": "20px",
+          "references": []
+        }
+      }
+    },
+    "ref.size.layout.shell.header-height-compact": {
+      "type": "dimension",
+      "description": "Высота шапки с отдельной строкой пути на узком экране.",
+      "layer": "ref",
+      "css": "--basis-ref-size-layout-shell-header-height-compact",
+      "source": "reference.tokens.json",
+      "modes": {
+        "light": {
+          "raw": {
+            "value": 88,
+            "unit": "px"
+          },
+          "value": {
+            "value": 88,
+            "unit": "px"
+          },
+          "cssValue": "88px",
+          "references": []
+        },
+        "dark": {
+          "raw": {
+            "value": 88,
+            "unit": "px"
+          },
+          "value": {
+            "value": 88,
+            "unit": "px"
+          },
+          "cssValue": "88px",
+          "references": []
+        }
+      }
+    },
+    "ref.size.layout.shell.user-name-max-width": {
+      "type": "dimension",
+      "description": "Предел ширины имени пользователя в шапке.",
+      "layer": "ref",
+      "css": "--basis-ref-size-layout-shell-user-name-max-width",
+      "source": "reference.tokens.json",
+      "modes": {
+        "light": {
+          "raw": {
+            "value": 160,
+            "unit": "px"
+          },
+          "value": {
+            "value": 160,
+            "unit": "px"
+          },
+          "cssValue": "160px",
+          "references": []
+        },
+        "dark": {
+          "raw": {
+            "value": 160,
+            "unit": "px"
+          },
+          "value": {
+            "value": 160,
+            "unit": "px"
+          },
+          "cssValue": "160px",
           "references": []
         }
       }
@@ -10049,7 +10255,7 @@
     },
     "sys.type.family.ui": {
       "type": "fontFamily",
-      "description": "Семейство type.family.ui.",
+      "description": "Шрифт интерфейса: навигация, заголовки, подписи, формы и действия.",
       "layer": "sys",
       "css": "--basis-sys-type-family-ui",
       "source": "semantic.shared.tokens.json",
@@ -10084,7 +10290,7 @@
     },
     "sys.type.family.mono": {
       "type": "fontFamily",
-      "description": "Семейство type.family.mono.",
+      "description": "Шрифт точных технических значений: IP, MAC, CIDR, ID, код подтверждения, маски и терминал. Одинаковая роль в обеих темах.",
       "layer": "sys",
       "css": "--basis-sys-type-family-mono",
       "source": "semantic.shared.tokens.json",
@@ -10092,11 +10298,13 @@
         "light": {
           "raw": "{ref.font.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "ref.font.family.mono"
           ]
@@ -10104,13 +10312,77 @@
         "dark": {
           "raw": "{ref.font.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "ref.font.family.mono"
+          ]
+        }
+      }
+    },
+    "sys.type.family.data": {
+      "type": "fontFamily",
+      "description": "Числовые показатели: CPU, RAM, ёмкость, квоты и счётчики. Отдельная роль того же второго семейства; единицы измерения остаются в ui.",
+      "layer": "sys",
+      "css": "--basis-sys-type-family-data",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.font.family.mono}",
+          "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
+            "Cascadia Code",
+            "Consolas",
+            "monospace"
+          ],
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
+          "references": [
+            "ref.font.family.mono"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.font.family.mono}",
+          "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
+            "Cascadia Code",
+            "Consolas",
+            "monospace"
+          ],
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
+          "references": [
+            "ref.font.family.mono"
+          ]
+        }
+      }
+    },
+    "sys.type.weight.data": {
+      "type": "fontWeight",
+      "description": "Акцентные числовые показатели; не используется для обычного текста и консоли.",
+      "layer": "sys",
+      "css": "--basis-sys-type-weight-data",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.font.weight.600}",
+          "value": 600,
+          "cssValue": "600",
+          "references": [
+            "ref.font.weight.600"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.font.weight.600}",
+          "value": 600,
+          "cssValue": "600",
+          "references": [
+            "ref.font.weight.600"
           ]
         }
       }
@@ -10804,6 +11076,37 @@
         }
       }
     },
+    "sys.layout.sidebar.search-max-height": {
+      "type": "dimension",
+      "description": "Высота списка навигационного поиска; дополнительно ограничена окном браузера.",
+      "layer": "sys",
+      "css": "--basis-sys-layout-sidebar-search-max-height",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.size.layout.sidebar.search-max-height}",
+          "value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "cssValue": "360px",
+          "references": [
+            "ref.size.layout.sidebar.search-max-height"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.size.layout.sidebar.search-max-height}",
+          "value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "cssValue": "360px",
+          "references": [
+            "ref.size.layout.sidebar.search-max-height"
+          ]
+        }
+      }
+    },
     "sys.layout.content.max": {
       "type": "dimension",
       "description": "Метрика layout.content.max.",
@@ -11110,6 +11413,130 @@
           "cssValue": "1920px",
           "references": [
             "ref.size.layout.shell.max-width"
+          ]
+        }
+      }
+    },
+    "sys.layout.shell.brand-mark-width": {
+      "type": "dimension",
+      "description": "Ширина логотипа в шапке.",
+      "layer": "sys",
+      "css": "--basis-sys-layout-shell-brand-mark-width",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.size.layout.shell.brand-mark-width}",
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": [
+            "ref.size.layout.shell.brand-mark-width"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.size.layout.shell.brand-mark-width}",
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": [
+            "ref.size.layout.shell.brand-mark-width"
+          ]
+        }
+      }
+    },
+    "sys.layout.shell.brand-mark-width-compact": {
+      "type": "dimension",
+      "description": "Ширина логотипа на узком экране.",
+      "layer": "sys",
+      "css": "--basis-sys-layout-shell-brand-mark-width-compact",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.size.layout.shell.brand-mark-width-compact}",
+          "value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "cssValue": "20px",
+          "references": [
+            "ref.size.layout.shell.brand-mark-width-compact"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.size.layout.shell.brand-mark-width-compact}",
+          "value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "cssValue": "20px",
+          "references": [
+            "ref.size.layout.shell.brand-mark-width-compact"
+          ]
+        }
+      }
+    },
+    "sys.layout.shell.header-height-compact": {
+      "type": "dimension",
+      "description": "Высота шапки с отдельной строкой пути на узком экране.",
+      "layer": "sys",
+      "css": "--basis-sys-layout-shell-header-height-compact",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.size.layout.shell.header-height-compact}",
+          "value": {
+            "value": 88,
+            "unit": "px"
+          },
+          "cssValue": "88px",
+          "references": [
+            "ref.size.layout.shell.header-height-compact"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.size.layout.shell.header-height-compact}",
+          "value": {
+            "value": 88,
+            "unit": "px"
+          },
+          "cssValue": "88px",
+          "references": [
+            "ref.size.layout.shell.header-height-compact"
+          ]
+        }
+      }
+    },
+    "sys.layout.shell.user-name-max-width": {
+      "type": "dimension",
+      "description": "Предел ширины имени пользователя в шапке.",
+      "layer": "sys",
+      "css": "--basis-sys-layout-shell-user-name-max-width",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.size.layout.shell.user-name-max-width}",
+          "value": {
+            "value": 160,
+            "unit": "px"
+          },
+          "cssValue": "160px",
+          "references": [
+            "ref.size.layout.shell.user-name-max-width"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.size.layout.shell.user-name-max-width}",
+          "value": {
+            "value": 160,
+            "unit": "px"
+          },
+          "cssValue": "160px",
+          "references": [
+            "ref.size.layout.shell.user-name-max-width"
           ]
         }
       }
@@ -11513,6 +11940,31 @@
           "cssValue": "560px",
           "references": [
             "ref.breakpoint.small"
+          ]
+        }
+      }
+    },
+    "sys.motion.content-enter-opacity": {
+      "type": "number",
+      "description": "Локальный отклик сменяемого содержимого. Вся страница никогда не затухает.",
+      "layer": "sys",
+      "css": "--basis-sys-motion-content-enter-opacity",
+      "source": "semantic.shared.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{ref.number.0_92}",
+          "value": 0.92,
+          "cssValue": "0.92",
+          "references": [
+            "ref.number.0_92"
+          ]
+        },
+        "dark": {
+          "raw": "{ref.number.0_92}",
+          "value": 0.92,
+          "cssValue": "0.92",
+          "references": [
+            "ref.number.0_92"
           ]
         }
       }
@@ -22719,11 +23171,13 @@
         "light": {
           "raw": "{sys.type.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "sys.type.family.mono"
           ]
@@ -22731,11 +23185,13 @@
         "dark": {
           "raw": "{sys.type.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "sys.type.family.mono"
           ]
@@ -23112,11 +23568,13 @@
         "light": {
           "raw": "{sys.type.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "sys.type.family.mono"
           ]
@@ -23124,11 +23582,13 @@
         "dark": {
           "raw": "{sys.type.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "sys.type.family.mono"
           ]
@@ -25427,6 +25887,37 @@
         }
       }
     },
+    "comp.menu.side-offset": {
+      "type": "dimension",
+      "description": "Зазор бокового меню от кнопки: оставляет отступ от внешней границы компактной навигации.",
+      "layer": "comp",
+      "css": "--basis-comp-menu-side-offset",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.space.xl}",
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": [
+            "sys.space.xl"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.space.xl}",
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": [
+            "sys.space.xl"
+          ]
+        }
+      }
+    },
     "comp.menu.background": {
       "type": "color",
       "description": "menu: background. Общее решение через семантическую роль.",
@@ -27351,13 +27842,13 @@
           "value": {
             "colorSpace": "srgb",
             "components": [
-              1,
-              1,
+              0.8862745098039215,
+              0.9529411764705882,
               1
             ],
             "alpha": 1
           },
-          "cssValue": "#ffffff",
+          "cssValue": "#e2f3ff",
           "references": [
             "sys.color.navigation.selected"
           ]
@@ -27367,13 +27858,13 @@
           "value": {
             "colorSpace": "srgb",
             "components": [
-              0.09019607843137255,
-              0.14901960784313725,
-              0.24705882352941178
+              0.1411764705882353,
+              0.21568627450980393,
+              0.4196078431372549
             ],
             "alpha": 1
           },
-          "cssValue": "#17263f",
+          "cssValue": "#24376b",
           "references": [
             "sys.color.navigation.selected"
           ]
@@ -27587,13 +28078,13 @@
           "value": {
             "colorSpace": "srgb",
             "components": [
-              0.8627450980392157,
-              0.8941176470588236,
-              0.9372549019607843
+              0.5254901960784314,
+              0.8156862745098039,
+              1
             ],
             "alpha": 1
           },
-          "cssValue": "#dce4ef",
+          "cssValue": "#86d0ff",
           "references": [
             "sys.color.navigation.selected-border"
           ]
@@ -27603,13 +28094,13 @@
           "value": {
             "colorSpace": "srgb",
             "components": [
-              0.3137254901960784,
-              0.3843137254901961,
-              0.49411764705882355
+              0,
+              0.38823529411764707,
+              0.6196078431372549
             ],
             "alpha": 1
           },
-          "cssValue": "#50627e",
+          "cssValue": "#00639e",
           "references": [
             "sys.color.navigation.selected-border"
           ]
@@ -27907,9 +28398,133 @@
     },
     "comp.navigation.child-inset": {
       "type": "dimension",
-      "description": "Отступ вложенного уровня навигации.",
+      "description": "Направляющая вложенного уровня выровнена по центру иконки группы.",
       "layer": "comp",
       "css": "--basis-comp-navigation-child-inset",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.space.lg}",
+          "value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "cssValue": "16px",
+          "references": [
+            "sys.space.lg"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.space.lg}",
+          "value": {
+            "value": 16,
+            "unit": "px"
+          },
+          "cssValue": "16px",
+          "references": [
+            "sys.space.lg"
+          ]
+        }
+      }
+    },
+    "comp.navigation.item-padding-block": {
+      "type": "dimension",
+      "description": "Вертикальный отступ пункта; длинные названия переносятся без обрезания.",
+      "layer": "comp",
+      "css": "--basis-comp-navigation-item-padding-block",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.space.sm}",
+          "value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "cssValue": "8px",
+          "references": [
+            "sys.space.sm"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.space.sm}",
+          "value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "cssValue": "8px",
+          "references": [
+            "sys.space.sm"
+          ]
+        }
+      }
+    },
+    "comp.navigation.group-gap": {
+      "type": "dimension",
+      "description": "Отступ перед группой верхнего уровня.",
+      "layer": "comp",
+      "css": "--basis-comp-navigation-group-gap",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.space.sm}",
+          "value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "cssValue": "8px",
+          "references": [
+            "sys.space.sm"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.space.sm}",
+          "value": {
+            "value": 8,
+            "unit": "px"
+          },
+          "cssValue": "8px",
+          "references": [
+            "sys.space.sm"
+          ]
+        }
+      }
+    },
+    "comp.navigation.compact-item-width": {
+      "type": "dimension",
+      "description": "Ширина компактного пункта с отдельным местом для шеврона.",
+      "layer": "comp",
+      "css": "--basis-comp-navigation-compact-item-width",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.control.lg.height}",
+          "value": {
+            "value": 44,
+            "unit": "px"
+          },
+          "cssValue": "44px",
+          "references": [
+            "sys.control.lg.height"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.control.lg.height}",
+          "value": {
+            "value": 44,
+            "unit": "px"
+          },
+          "cssValue": "44px",
+          "references": [
+            "sys.control.lg.height"
+          ]
+        }
+      }
+    },
+    "comp.navigation.search-gap": {
+      "type": "dimension",
+      "description": "Отступ между закреплённым поиском и прокручиваемыми разделами.",
+      "layer": "comp",
+      "css": "--basis-comp-navigation-search-gap",
       "source": "components.tokens.json",
       "modes": {
         "light": {
@@ -27932,6 +28547,37 @@
           "cssValue": "12px",
           "references": [
             "sys.space.md"
+          ]
+        }
+      }
+    },
+    "comp.navigation.search-max-height": {
+      "type": "dimension",
+      "description": "Прокручиваемая область результатов в компактном режиме.",
+      "layer": "comp",
+      "css": "--basis-comp-navigation-search-max-height",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.layout.sidebar.search-max-height}",
+          "value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "cssValue": "360px",
+          "references": [
+            "sys.layout.sidebar.search-max-height"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.layout.sidebar.search-max-height}",
+          "value": {
+            "value": 360,
+            "unit": "px"
+          },
+          "cssValue": "360px",
+          "references": [
+            "sys.layout.sidebar.search-max-height"
           ]
         }
       }
@@ -28555,6 +29201,221 @@
           "cssValue": "1920px",
           "references": [
             "sys.layout.shell.max-width"
+          ]
+        }
+      }
+    },
+    "comp.shell.brand-mark-width": {
+      "type": "dimension",
+      "description": "Ширина логотипа в шапке.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-brand-mark-width",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.layout.shell.brand-mark-width}",
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": [
+            "sys.layout.shell.brand-mark-width"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.layout.shell.brand-mark-width}",
+          "value": {
+            "value": 24,
+            "unit": "px"
+          },
+          "cssValue": "24px",
+          "references": [
+            "sys.layout.shell.brand-mark-width"
+          ]
+        }
+      }
+    },
+    "comp.shell.brand-mark-width-compact": {
+      "type": "dimension",
+      "description": "Ширина логотипа на узком экране.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-brand-mark-width-compact",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.layout.shell.brand-mark-width-compact}",
+          "value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "cssValue": "20px",
+          "references": [
+            "sys.layout.shell.brand-mark-width-compact"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.layout.shell.brand-mark-width-compact}",
+          "value": {
+            "value": 20,
+            "unit": "px"
+          },
+          "cssValue": "20px",
+          "references": [
+            "sys.layout.shell.brand-mark-width-compact"
+          ]
+        }
+      }
+    },
+    "comp.shell.header-height-compact": {
+      "type": "dimension",
+      "description": "Высота шапки с отдельной строкой пути на узком экране.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-header-height-compact",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.layout.shell.header-height-compact}",
+          "value": {
+            "value": 88,
+            "unit": "px"
+          },
+          "cssValue": "88px",
+          "references": [
+            "sys.layout.shell.header-height-compact"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.layout.shell.header-height-compact}",
+          "value": {
+            "value": 88,
+            "unit": "px"
+          },
+          "cssValue": "88px",
+          "references": [
+            "sys.layout.shell.header-height-compact"
+          ]
+        }
+      }
+    },
+    "comp.shell.user-name-max-width": {
+      "type": "dimension",
+      "description": "Предел ширины имени пользователя в шапке.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-user-name-max-width",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.layout.shell.user-name-max-width}",
+          "value": {
+            "value": 160,
+            "unit": "px"
+          },
+          "cssValue": "160px",
+          "references": [
+            "sys.layout.shell.user-name-max-width"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.layout.shell.user-name-max-width}",
+          "value": {
+            "value": 160,
+            "unit": "px"
+          },
+          "cssValue": "160px",
+          "references": [
+            "sys.layout.shell.user-name-max-width"
+          ]
+        }
+      }
+    },
+    "comp.shell.content-enter-duration": {
+      "type": "duration",
+      "description": "Короткий отклик сменяемого содержимого. Заголовок и навигация не анимируются.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-content-enter-duration",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.motion.duration.fast}",
+          "value": {
+            "value": 120,
+            "unit": "ms"
+          },
+          "cssValue": "120ms",
+          "references": [
+            "sys.motion.duration.fast"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.motion.duration.fast}",
+          "value": {
+            "value": 120,
+            "unit": "ms"
+          },
+          "cssValue": "120ms",
+          "references": [
+            "sys.motion.duration.fast"
+          ]
+        }
+      }
+    },
+    "comp.shell.content-enter-easing": {
+      "type": "cubicBezier",
+      "description": "Спокойное завершение перехода содержимого, без пружины и задержки.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-content-enter-easing",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.motion.easing.enter}",
+          "value": [
+            0,
+            0,
+            0.2,
+            1
+          ],
+          "cssValue": "cubic-bezier(0, 0, 0.2, 1)",
+          "references": [
+            "sys.motion.easing.enter"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.motion.easing.enter}",
+          "value": [
+            0,
+            0,
+            0.2,
+            1
+          ],
+          "cssValue": "cubic-bezier(0, 0, 0.2, 1)",
+          "references": [
+            "sys.motion.easing.enter"
+          ]
+        }
+      }
+    },
+    "comp.shell.content-enter-opacity": {
+      "type": "number",
+      "description": "Лёгкое проявление содержимого; текст читаем с первого кадра, геометрия неподвижна.",
+      "layer": "comp",
+      "css": "--basis-comp-shell-content-enter-opacity",
+      "source": "components.tokens.json",
+      "modes": {
+        "light": {
+          "raw": "{sys.motion.content-enter-opacity}",
+          "value": 0.92,
+          "cssValue": "0.92",
+          "references": [
+            "sys.motion.content-enter-opacity"
+          ]
+        },
+        "dark": {
+          "raw": "{sys.motion.content-enter-opacity}",
+          "value": 0.92,
+          "cssValue": "0.92",
+          "references": [
+            "sys.motion.content-enter-opacity"
           ]
         }
       }
@@ -29936,11 +30797,13 @@
         "light": {
           "raw": "{sys.type.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "sys.type.family.mono"
           ]
@@ -29948,11 +30811,13 @@
         "dark": {
           "raw": "{sys.type.family.mono}",
           "value": [
+            "JetBrains Mono Variable",
+            "JetBrains Mono",
             "Cascadia Code",
             "Consolas",
             "monospace"
           ],
-          "cssValue": "\"Cascadia Code\", \"Consolas\", monospace",
+          "cssValue": "\"JetBrains Mono Variable\", \"JetBrains Mono\", \"Cascadia Code\", \"Consolas\", monospace",
           "references": [
             "sys.type.family.mono"
           ]
@@ -36322,35 +37187,35 @@
       "source": "semantic.dark.tokens.json",
       "modes": {
         "light": {
-          "raw": "{sys.color.surface.base}",
+          "raw": "{sys.color.surface.selected}",
           "value": {
             "colorSpace": "srgb",
             "components": [
-              1,
-              1,
+              0.8862745098039215,
+              0.9529411764705882,
               1
             ],
             "alpha": 1
           },
-          "cssValue": "#ffffff",
+          "cssValue": "#e2f3ff",
           "references": [
-            "sys.color.surface.base"
+            "sys.color.surface.selected"
           ]
         },
         "dark": {
-          "raw": "{sys.color.surface.subtle}",
+          "raw": "{sys.color.surface.selected}",
           "value": {
             "colorSpace": "srgb",
             "components": [
-              0.09019607843137255,
-              0.14901960784313725,
-              0.24705882352941178
+              0.1411764705882353,
+              0.21568627450980393,
+              0.4196078431372549
             ],
             "alpha": 1
           },
-          "cssValue": "#17263f",
+          "cssValue": "#24376b",
           "references": [
-            "sys.color.surface.subtle"
+            "sys.color.surface.selected"
           ]
         }
       }
@@ -36527,35 +37392,35 @@
       "source": "semantic.dark.tokens.json",
       "modes": {
         "light": {
-          "raw": "{sys.color.border.default}",
+          "raw": "{sys.color.border.selected}",
           "value": {
             "colorSpace": "srgb",
             "components": [
-              0.8627450980392157,
-              0.8941176470588236,
-              0.9372549019607843
+              0.5254901960784314,
+              0.8156862745098039,
+              1
             ],
             "alpha": 1
           },
-          "cssValue": "#dce4ef",
+          "cssValue": "#86d0ff",
           "references": [
-            "sys.color.border.default"
+            "sys.color.border.selected"
           ]
         },
         "dark": {
-          "raw": "{sys.color.border.control}",
+          "raw": "{sys.color.border.selected}",
           "value": {
             "colorSpace": "srgb",
             "components": [
-              0.3137254901960784,
-              0.3843137254901961,
-              0.49411764705882355
+              0,
+              0.38823529411764707,
+              0.6196078431372549
             ],
             "alpha": 1
           },
-          "cssValue": "#50627e",
+          "cssValue": "#00639e",
           "references": [
-            "sys.color.border.control"
+            "sys.color.border.selected"
           ]
         }
       }
@@ -36648,7 +37513,7 @@
       "label": "Navigation selected",
       "foreground": "sys.color.navigation.foreground",
       "background": "sys.color.navigation.selected",
-      "ratio": 13.55,
+      "ratio": 11.94,
       "passes": true
     },
     {
@@ -37472,7 +38337,7 @@
       "label": "Navigation selected",
       "foreground": "sys.color.navigation.foreground",
       "background": "sys.color.navigation.selected",
-      "ratio": 14.37,
+      "ratio": 10.86,
       "passes": true
     },
     {

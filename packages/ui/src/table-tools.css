@@ -179,14 +179,12 @@
   grid-column: 1 / -1;
 }
 .basis-tt-tool-keyboard {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--basis-sys-space-xs);
+  display: block;
   padding-top: var(--basis-sys-space-md);
   border-top: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-subtle);
 }
 .basis-tt-tool-keyboard kbd {
+  margin-inline-end: var(--basis-sys-space-xs);
   padding: var(--basis-sys-space-micro) var(--basis-sys-space-xs);
   border: var(--basis-sys-border-thin) solid var(--basis-comp-table-tools-border);
   border-radius: var(--basis-sys-radius-small);

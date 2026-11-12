@@ -15,7 +15,7 @@ await writeFile(
       '<head>',
       '<head><script>if (!location.hash) location.hash = "#cloud/overview";</script>',
     )
-    .replace('<title>BASIS — дизайн-система</title>', '<title>BASIS Cloud</title>'),
+    .replace('<title>BASIS — дизайн-система</title>', '<title>Basis statix</title>'),
 );
 await writeFile(resolve(output, '.nojekyll'), '');
 console.log('Pages ready: dist-pages/ · design system + cloud demo · browser-local data');

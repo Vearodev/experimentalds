@@ -6,18 +6,14 @@ import {
   Component,
   FlaskConical,
   Menu as MenuIcon,
-  Moon,
   PanelLeftClose,
   PanelLeftOpen,
   RefreshCw,
   Search,
-  Settings2,
-  Sun,
   Star,
   Terminal,
 } from 'lucide-react';
 import {
-  Avatar,
   Badge,
   Breadcrumb,
   Button,
@@ -32,7 +28,9 @@ import {
   WorkspaceTabs,
   type SidebarItem,
 } from '@basis/ui';
-import { useDesign } from '../../playground/src/DesignContext';
+import { CloudBrand, CloudUserMenu } from './CloudHeader';
+import { PageNavigationContext, usePortalNavigation } from './usePortalNavigation';
+import { usePageEntrance } from './usePageEntrance';
 import { CloudProvider } from './CloudContext';
 import { ConsoleProvider, useVmConsole } from './ConsoleProvider';
 import { useCloud } from './cloud-state';
@@ -63,12 +61,22 @@ import {
 } from './workspace-navigation';
 import './navigation.css';
 import './cloud.css';
+import './header.css';
 
 const navigation = [
   { id: 'overview', label: 'Обзор', icon: 'LayoutDashboard' },
   ...topLevelEntities,
   { id: 'settings', label: 'Настройки профиля', icon: 'Settings2' },
 ];
+const navigationKeywords: Record<string, string[]> = {
+  vms: ['ВМ', 'VM', 'виртуальная машина'],
+  volumes: ['диск', 'том', 'volume'],
+  networks: ['сеть', 'ViNS'],
+  clusters: ['кластер', 'кластеры'],
+  nodes: ['хост', 'сервер', 'host'],
+  kubernetes: ['k8s'],
+  k8ci: ['k8s'],
+};
 export function CloudApp() {
   return (
     <CloudProvider>
@@ -80,17 +88,17 @@ export function CloudApp() {
 }
 function CloudShell() {
   const consoles = useVmConsole();
-  const design = useDesign(),
-    { data, loading, error, refresh, scope, setScope } = useCloud();
-  const [route, setRoute] = useState(location.hash.slice('#cloud/'.length) || 'overview'),
-    [mobile, setMobile] = useState(false),
+  const { data, loading, error, refresh, scope, setScope } = useCloud();
+  const { route, backTarget, showBack, goBack } = usePortalNavigation(scope, setScope);
+  const [mobile, setMobile] = useState(false),
     [search, setSearch] = useState(false),
     [query, setQuery] = useState(''),
     [environment, setEnvironment] = useState(false);
   const [navigationPreferences, setNavigationPreferences] = useState(loadNavigationPreferences);
   const favoriteTrigger = useRef<HTMLButtonElement>(null);
   const pageScroll = useRef<HTMLDivElement>(null);
-  useEffect(() => {
+  usePageEntrance(pageScroll, `${scope}/${route}`, loading);
+  useLayoutEffect(() => {
     pageScroll.current?.scrollTo({ top: 0 });
   }, [route, scope]);
   const menuSizeTrigger = useRef<HTMLButtonElement>(null),
@@ -112,14 +120,7 @@ function CloudShell() {
       /* Session still works when storage is unavailable. */
     }
   }, [navigationPreferences]);
-  useEffect(() => {
-    const update = () => {
-      setRoute(location.hash.slice('#cloud/'.length) || 'overview');
-      setMobile(false);
-    };
-    window.addEventListener('hashchange', update);
-    return () => window.removeEventListener('hashchange', update);
-  }, []);
+  useEffect(() => setMobile(false), [route]);
   useEffect(() => {
     const shortcut = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
@@ -135,7 +136,7 @@ function CloudShell() {
     title = navigation.find((n) => n.id === active)?.label || 'Облако';
   const activeTasks = data?.tasks.filter((t) => t.status === 'running').length || 0;
   useEffect(() => {
-    document.title = `BASIS Cloud · ${page === 'create' ? 'Создание машины' : title}`;
+    document.title = `Basis statix · ${page === 'create' ? 'Создание машины' : title}`;
     return () => {
       document.title = 'BASIS — дизайн-система';
     };
@@ -149,6 +150,7 @@ function CloudShell() {
       label: item.label,
       icon: <PlatformIcon name={item.icon} />,
       href: '#cloud/' + item.id,
+      keywords: navigationKeywords[section],
       count: section === 'tasks' && activeTasks ? activeTasks : undefined,
     };
   };
@@ -208,6 +210,7 @@ function CloudShell() {
                   id: option.value,
                   label: option.label,
                   icon: option.icon,
+                  current: option.value === scope,
                   description:
                     option.value === scope ? 'Текущая рабочая область' : option.description,
                   onSelect: () => changeScope(option.value),
@@ -229,6 +232,7 @@ function CloudShell() {
           items={navItems}
           activeId={active}
           compact={compact}
+          searchable
           expanded={navigationPreferences.expanded}
           onExpandedChange={(expanded) =>
             setNavigationPreferences((value) => ({ ...value, expanded }))
@@ -241,7 +245,15 @@ function CloudShell() {
         />
       </div>
       <div className="cloud-sidebar-bottom" data-compact={compact}>
-        {compact ? (
+        {!compact && (
+          <span className="cloud-sidebar-status">
+            <i />
+            <span>
+              Демо<small>0.7.5</small>
+            </span>
+          </span>
+        )}
+        <div className="cloud-sidebar-tools">
           <Tooltip content="Среда демонстрации">
             <IconButton
               variant="ghost"
@@ -251,18 +263,7 @@ function CloudShell() {
               onClick={() => setEnvironment(true)}
             />
           </Tooltip>
-        ) : (
-          <Button
-            variant="ghost"
-            size="sm"
-            leadingIcon={<FlaskConical />}
-            onClick={() => setEnvironment(true)}
-          >
-            Среда демонстрации
-          </Button>
-        )}
-        {compact ? (
-          <Tooltip content="Дизайн-система">
+          <Tooltip content="Открыть дизайн-систему">
             <IconButton
               variant="ghost"
               size="sm"
@@ -273,43 +274,19 @@ function CloudShell() {
               }}
             />
           </Tooltip>
-        ) : (
-          <a href="#foundations">
-            <Component size={16} />
-            Дизайн-система
-            <ArrowUpRight size={14} />
-          </a>
-        )}
-        {!isMobile &&
-          (compact ? (
-            <Tooltip content="Развернуть меню">
+          {!isMobile && (
+            <Tooltip content={compact ? 'Развернуть меню' : 'Свернуть меню'}>
               <IconButton
                 ref={menuSizeTrigger}
                 variant="ghost"
                 size="sm"
-                icon={<PanelLeftOpen />}
-                aria-label="Развернуть меню"
-                onClick={() => setCompactMenu(false)}
+                icon={compact ? <PanelLeftOpen /> : <PanelLeftClose />}
+                aria-label={compact ? 'Развернуть меню' : 'Свернуть меню'}
+                onClick={() => setCompactMenu(!compact)}
               />
             </Tooltip>
-          ) : (
-            <Button
-              ref={menuSizeTrigger}
-              variant="ghost"
-              size="sm"
-              leadingIcon={<PanelLeftClose />}
-              onClick={() => setCompactMenu(true)}
-            >
-              Свернуть меню
-            </Button>
-          ))}
-        {!compact && (
-          <span>
-            <i />
-            Демо-режим
-            <small>0.7.1</small>
-          </span>
-        )}
+          )}
+        </div>
       </div>
     </>
   );
@@ -362,12 +339,7 @@ function CloudShell() {
   };
   const favoriteItems = navigationPreferences.favorites.map(describeWorkspace);
   const crumbs = [
-    {
-      label: 'Облако',
-      icon: <Cloud />,
-      href: '#cloud/overview',
-      onNavigate: () => setScope('all'),
-    },
+    ...(page === 'overview' && scope === 'all' ? [{ label: 'Обзор' }] : []),
     ...(scope !== 'all' && data
       ? [{ label: scopeLabel(data, scope), href: '#cloud/overview' }]
       : []),
@@ -429,11 +401,7 @@ function CloudShell() {
         К содержимому
       </a>
       <header className="cloud-topbar">
-        <a className="cloud-brand" href="#cloud/overview" aria-label="BASIS Cloud — обзор">
-          <img src={`${import.meta.env.BASE_URL}basis-logo.png`} alt="BASIS" />
-          <span>Cloud</span>
-        </a>
-        <div>
+        <div className="cloud-header-identity">
           <IconButton
             className="cloud-mobile-toggle"
             variant="ghost"
@@ -441,6 +409,9 @@ function CloudShell() {
             aria-label="Открыть меню платформы"
             onClick={() => setMobile(true)}
           />
+          <CloudBrand />
+        </div>
+        <div className="cloud-header-location">
           <Breadcrumb items={crumbs} maxItems={4} />
           {currentRoute && (
             <Tooltip
@@ -480,28 +451,7 @@ function CloudShell() {
             </Tooltip>
           )}
         </div>
-        <div>
-          <Button
-            variant="ghost"
-            size="sm"
-            className="cloud-global-search"
-            leadingIcon={<Search />}
-            onClick={() => {
-              setQuery('');
-              setSearch(true);
-            }}
-          >
-            Найти ресурс <kbd>Ctrl K</kbd>
-          </Button>
-          <Tooltip content={design.theme === 'light' ? 'Тёмная тема' : 'Светлая тема'}>
-            <IconButton
-              variant="ghost"
-              size="sm"
-              aria-label="Переключить тему"
-              icon={design.theme === 'light' ? <Moon /> : <Sun />}
-              onClick={() => design.setTheme(design.theme === 'light' ? 'dark' : 'light')}
-            />
-          </Tooltip>
+        <div className="cloud-header-actions">
           {consoles.count > 0 && (
             <Tooltip content="Открытые консоли">
               <Badge count={consoles.count} tone="info">
@@ -526,34 +476,7 @@ function CloudShell() {
               />
             </Badge>
           </Tooltip>
-          <Menu
-            compact
-            label="Меню профиля"
-            icon={<Avatar name={data?.profile.name || 'Анна Смирнова'} size="sm" />}
-            items={[
-              {
-                id: 'profile',
-                label: data?.profile.name || 'Анна Смирнова',
-                description: 'Профиль и уведомления',
-                icon: <Settings2 />,
-                onSelect: () => navigate('settings'),
-              },
-              {
-                id: 'env',
-                label: 'Среда демонстрации',
-                icon: <FlaskConical />,
-                onSelect: () => setEnvironment(true),
-              },
-              {
-                id: 'ds',
-                label: 'Открыть дизайн-систему',
-                icon: <Component />,
-                onSelect: () => {
-                  location.hash = '#foundations';
-                },
-              },
-            ]}
-          />
+          <CloudUserMenu profile={data?.profile} mode={mode} />
         </div>
       </header>
       <aside className="cloud-sidebar">{nav(navigationPreferences.compact)}</aside>
@@ -599,58 +522,72 @@ function CloudShell() {
             tabIndex={0}
             aria-label="Содержимое страницы"
           >
-            {error && (
-              <Message
-                tone="danger"
-                title="Данные временно недоступны"
-                action={{ label: 'Повторить', onClick: () => void refresh(true) }}
-              >
-                {error}
-              </Message>
-            )}
-            {loading ? (
-              <LoadingPage />
-            ) : data ? (
-              page === 'overview' ? (
-                <PlatformOverview />
-              ) : page === 'create' ? (
-                <CreateVmPage />
-              ) : page === 'vms' ? (
-                id ? (
-                  <VmDetailPage key={id} id={id} tab={route.split('/')[2] || 'overview'} />
-                ) : (
-                  <VmListPage />
-                )
-              ) : ['health', 'statistics', 'api', 'support'].includes(page) ? (
-                <PlatformServicePage key={page} section={page} />
-              ) : platformEntity(page) ? (
-                <PlatformPage
-                  key={page + '/' + (id || '')}
-                  entityId={page}
-                  id={id}
-                  tab={route.split('/')[2]}
-                />
-              ) : page === 'settings' ? (
-                <SettingsPage />
-              ) : (
+            <PageNavigationContext.Provider
+              value={
+                showBack
+                  ? {
+                      enabled: Boolean(backTarget),
+                      label: backTarget
+                        ? `Назад: ${backTarget.route === 'create' ? 'Создание машины' : describeWorkspace(backTarget).label}`
+                        : 'Это начало рабочего пространства',
+                      goBack,
+                    }
+                  : null
+              }
+            >
+              {error && (
                 <Message
-                  title="Страница не найдена"
-                  action={{ label: 'Открыть обзор', onClick: () => navigate('overview') }}
+                  tone="danger"
+                  title="Данные временно недоступны"
+                  action={{ label: 'Повторить', onClick: () => void refresh(true) }}
                 >
-                  Выберите раздел в навигации.
+                  {error}
                 </Message>
-              )
-            ) : !error ? (
-              <LoadingPage />
-            ) : (
-              <Button onClick={() => void refresh(true)} leadingIcon={<RefreshCw />}>
-                Загрузить данные
-              </Button>
-            )}
+              )}
+              {loading ? (
+                <LoadingPage />
+              ) : data ? (
+                page === 'overview' ? (
+                  <PlatformOverview />
+                ) : page === 'create' ? (
+                  <CreateVmPage />
+                ) : page === 'vms' ? (
+                  id ? (
+                    <VmDetailPage key={id} id={id} tab={route.split('/')[2] || 'overview'} />
+                  ) : (
+                    <VmListPage />
+                  )
+                ) : ['health', 'statistics', 'api', 'support'].includes(page) ? (
+                  <PlatformServicePage key={page} section={page} />
+                ) : platformEntity(page) ? (
+                  <PlatformPage
+                    key={page + '/' + (id || '')}
+                    entityId={page}
+                    id={id}
+                    tab={route.split('/')[2]}
+                  />
+                ) : page === 'settings' ? (
+                  <SettingsPage />
+                ) : (
+                  <Message
+                    title="Страница не найдена"
+                    action={{ label: 'Открыть обзор', onClick: () => navigate('overview') }}
+                  >
+                    Выберите раздел в навигации.
+                  </Message>
+                )
+              ) : !error ? (
+                <LoadingPage />
+              ) : (
+                <Button onClick={() => void refresh(true)} leadingIcon={<RefreshCw />}>
+                  Загрузить данные
+                </Button>
+              )}
+            </PageNavigationContext.Provider>
           </div>
         </main>
       </div>
-      <Dialog open={mobile} onOpenChange={setMobile} title="BASIS Cloud">
+      <Dialog open={mobile} onOpenChange={setMobile} title="Basis statix">
         <div className="cloud-mobile-nav">{nav(false, true)}</div>
       </Dialog>
       <Dialog
