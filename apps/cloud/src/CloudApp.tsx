@@ -63,6 +63,7 @@ import './navigation.css';
 import './cloud.css';
 import './header.css';
 
+const hiddenPortalSections = new Set(['api', 'support']);
 const navigation = [
   { id: 'overview', label: 'Обзор', icon: 'LayoutDashboard' },
   ...topLevelEntities,
@@ -142,7 +143,9 @@ function CloudShell() {
     };
   }, [page, title]);
   const mode = data ? platformState(data).mode : 'admin';
-  const allowedEntities = topLevelEntities.filter((entry) => mode === 'admin' || !entry.admin);
+  const allowedEntities = topLevelEntities.filter(
+    (entry) => !hiddenPortalSections.has(entry.id) && (mode === 'admin' || !entry.admin),
+  );
   const navItem = (section: string): SidebarItem => {
     const item = navigation.find((entry) => entry.id === section)!;
     return {
@@ -290,7 +293,7 @@ function CloudShell() {
       </div>
     </>
   );
-  const currentRoute = canonicalWorkspaceRoute(route);
+  const currentRoute = hiddenPortalSections.has(page) ? null : canonicalWorkspaceRoute(route);
   const currentKey = currentRoute ? workspaceKey({ route: currentRoute, scope }) : undefined;
   const isFavorite = navigationPreferences.favorites.some(
     (item) => workspaceKey(item) === currentKey,
@@ -337,7 +340,9 @@ function CloudShell() {
       disabled: unavailable,
     };
   };
-  const favoriteItems = navigationPreferences.favorites.map(describeWorkspace);
+  const favoriteItems = navigationPreferences.favorites
+    .filter((item) => !hiddenPortalSections.has(item.route.split('/')[0]))
+    .map(describeWorkspace);
   const crumbs = [
     ...(page === 'overview' && scope === 'all' ? [{ label: 'Обзор' }] : []),
     ...(scope !== 'all' && data
