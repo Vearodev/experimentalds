@@ -93,6 +93,8 @@ export function Select({
   onValueChange,
   options,
   label,
+  hideLabel = false,
+  variant = 'secondary',
   required,
   placeholder = 'Выберите значение',
   hint,
@@ -106,6 +108,10 @@ export function Select({
   onValueChange: (value: any) => void;
   options: SelectOption[];
   label: string;
+  /** Keeps the accessible name when the surrounding context makes a visible label redundant. */
+  hideLabel?: boolean;
+  /** A quiet context switcher uses the same ghost Button as other navigation controls. */
+  variant?: 'secondary' | 'ghost';
   placeholder?: string;
   hint?: string;
   required?: boolean;
@@ -190,12 +196,20 @@ export function Select({
     }
   };
   return (
-    <Field label={label} id={id} hint={hint} error={error} required={required}>
+    <Field
+      label={hideLabel ? undefined : label}
+      id={id}
+      hint={hint}
+      error={error}
+      required={required}
+    >
       <div className="basis-select" data-invalid={Boolean(error)}>
         <Button
           ref={trigger}
           id={id}
           className="basis-select__trigger"
+          variant={variant}
+          tone="neutral"
           fullWidth
           role="combobox"
           aria-required={required || undefined}

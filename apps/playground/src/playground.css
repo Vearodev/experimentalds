@@ -591,6 +591,10 @@ kbd {
   font-size: var(--basis-sys-type-size-caption);
   color: var(--basis-sys-color-text-muted);
 }
+.context-select-demo {
+  width: var(--basis-comp-navigation-width);
+  max-width: 100%;
+}
 .metric-strip {
   display: flex;
   gap: var(--basis-sys-space-xl);
@@ -1528,6 +1532,9 @@ kbd {
 }
 .unit {
   color: var(--basis-sys-color-text-muted);
+  font-family: var(--basis-sys-type-family-ui);
+  font-size: var(--basis-sys-type-size-caption);
+  font-weight: var(--basis-sys-type-weight-regular);
 }
 .project-cell {
   font-size: var(--basis-sys-type-size-caption);
@@ -1929,6 +1936,60 @@ dialog::backdrop {
   color: var(--basis-sys-color-text-muted);
   line-height: var(--basis-sys-type-leading-body);
   margin-top: var(--basis-sys-space-md);
+}
+.composition-roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--basis-sys-space-md);
+  margin-block: var(--basis-sys-space-lg);
+}
+.composition-roles > button {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--basis-sys-space-md);
+  padding: var(--basis-sys-space-lg);
+  text-align: left;
+  background: var(--basis-sys-color-surface-base);
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-default);
+  border-radius: var(--basis-sys-radius-container);
+  cursor: pointer;
+}
+.composition-roles > button:hover {
+  border-color: var(--basis-sys-color-border-selected);
+}
+.composition-roles > button:focus-visible {
+  outline: var(--basis-sys-border-focus) solid var(--basis-sys-color-border-focus);
+  outline-offset: var(--basis-sys-space-xs);
+}
+.composition-roles i {
+  width: 100%;
+  height: var(--basis-sys-space-2xl);
+  border: var(--basis-sys-border-thin) solid var(--basis-sys-color-border-subtle);
+  border-radius: var(--basis-sys-radius-control);
+}
+.composition-roles strong {
+  color: var(--basis-sys-color-text-primary);
+  font-size: var(--basis-sys-type-size-body);
+  font-weight: 600;
+}
+.composition-roles p {
+  color: var(--basis-sys-color-text-secondary);
+  font-size: var(--basis-sys-type-size-label);
+  line-height: var(--basis-sys-type-leading-body);
+}
+.composition-roles > button > span {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-xs);
+  margin-top: auto;
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+  overflow-wrap: anywhere;
+}
+.composition-roles svg {
+  flex: none;
 }
 .token-architecture {
   display: grid;
@@ -2749,4 +2810,18 @@ dialog::backdrop {
   gap: var(--basis-sys-space-lg);
   margin-bottom: var(--basis-sys-space-md);
   font-size: var(--basis-sys-type-size-label);
+}
+.table-search-field {
+  flex: 1;
+  min-width: 180px;
+  max-width: 400px;
+}
+/* A bounded viewport makes batch loading observable in the component showcase. */
+.table-showcase:has([data-fill-height='true']) {
+  display: flex;
+  flex-direction: column;
+  height: min(640px, 75dvh);
+}
+.table-showcase .basis-data-table__scroll {
+  max-height: 400px;
 }

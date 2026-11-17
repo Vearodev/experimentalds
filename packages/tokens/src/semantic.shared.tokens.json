@@ -334,6 +334,25 @@
       }
     },
     "table": {
+      "resize": {
+        "min-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.table.resize.min-width}",
+          "$description": "Минимальная ширина при ручном изменении столбца."
+        },
+        "max-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.table.resize.max-width}",
+          "$description": "Максимальная ширина при ручном изменении столбца."
+        }
+      },
+      "tile": {
+        "min-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.table.tile.min-width}",
+          "$description": "Порог адаптивной сетки плиток ресурсов; общий для светлой и тёмной темы."
+        }
+      },
       "row": {
         "height": {
           "$type": "dimension",
@@ -453,6 +472,18 @@
           "$type": "dimension",
           "$value": "{ref.size.table.toolbar.height}",
           "$description": "Постоянная высота панели реестра."
+        }
+      },
+      "navigator": {
+        "range-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.table.navigator.range-width}",
+          "$description": "Минимальная ширина счётчика; резерв для полного числа страниц предотвращает сдвиги при переходах."
+        },
+        "compact-width": {
+          "$type": "dimension",
+          "$value": "{ref.size.table.navigator.compact-width}",
+          "$description": "Компактный счётчик на узкой таблице."
         }
       }
     },

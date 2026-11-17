@@ -42,7 +42,7 @@ describe('DataTable composition', () => {
     onNavigate = vi.fn(),
     selectOnRowClick = false,
   }: {
-    onPreview: (row: (typeof rows)[number], origin: HTMLTableRowElement) => void;
+    onPreview: (row: (typeof rows)[number], origin: HTMLElement) => void;
     onSelect?: (selected: Set<string>) => void;
     onNavigate?: (row: (typeof rows)[number]) => void;
     selectOnRowClick?: boolean;

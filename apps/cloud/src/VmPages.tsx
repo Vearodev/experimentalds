@@ -61,6 +61,7 @@ export function VmListPage() {
     <>
       <PageTitle
         title="Виртуальные машины"
+        inlineDescription
         description="Вычислительные ресурсы, состояние и размещение."
         actions={
           <Button
@@ -215,6 +216,7 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
         actions={
           <>
             <Button
+              variant={vm.status === 'running' ? 'primary' : 'secondary'}
               leadingIcon={<Terminal />}
               disabled={vm.status !== 'running' || Boolean(canChangePlatform(data, 'vms'))}
               onClick={() => consoles.openConsole(vm)}
@@ -394,6 +396,7 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
                 {vm.ip && <CopyValue value={vm.ip} label="сетевой адрес" />}
               </div>
               <DetailFacts
+                layout="grid"
                 items={[
                   {
                     label: 'Сеть ViNS',
@@ -537,33 +540,29 @@ export function VmDetailPage({ id, tab }: { id: string; tab: string }) {
               entity={vmConfiguration}
               row={listPlatformRecords(data, 'vms').find((r) => r.id === vm.id)!}
               title="Аппаратная конфигурация"
-              fields={['nodeId', 'chipset', 'numa', 'cpuPin', 'hugepages']}
+              fields={['chipset', 'numa', 'cpuPin', 'hugepages']}
+              featured="chipset"
+              note={
+                vm.status === 'stopped'
+                  ? 'Машина выключена — аппаратные параметры доступны для изменения.'
+                  : 'Чипсет, NUMA и параметры памяти можно изменить после выключения машины.'
+              }
             />
             <aside className="platform-detail-aside">
-              <Panel title="Размещение сейчас">
-                <ResourceConnection
-                  icon="MapPin"
-                  label={zone?.region || 'Зона'}
-                  name={zone?.name || 'Не назначена'}
-                  href={zone ? `#cloud/clusters/${zone.id}` : undefined}
-                />
-                <ResourceConnection
-                  icon="Server"
-                  label="Вычислительный узел"
-                  name={host?.name || 'Не назначен'}
-                  href={host ? `#cloud/nodes/${host.id}` : undefined}
-                />
-              </Panel>
-              <Message
-                title={
-                  vm.status === 'stopped' ? 'Машина выключена' : 'Изменение аппаратных параметров'
+              <PlatformRecordSettings
+                entity={vmConfiguration}
+                row={listPlatformRecords(data, 'vms').find((r) => r.id === vm.id)!}
+                title="Размещение"
+                fields={['nodeId']}
+                context={
+                  <ResourceConnection
+                    icon="MapPin"
+                    label={zone?.region || 'Зона'}
+                    name={zone?.name || 'Не назначена'}
+                    href={zone ? `#cloud/clusters/${zone.id}` : undefined}
+                  />
                 }
-                tone="info"
-              >
-                {vm.status === 'stopped'
-                  ? 'Можно изменять чипсет, NUMA и параметры памяти. При переносе проверяется доступная ёмкость узла.'
-                  : 'Для изменения чипсета, NUMA и параметров памяти выключите машину. Параметры размещения доступны в окне настройки.'}
-              </Message>
+              />
             </aside>
           </div>
         )}

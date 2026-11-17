@@ -1,8 +1,7 @@
-import { platformEntities, platformEntity, platformGroups } from '../platform-catalog';
+import { platformEntities, platformEntity } from '../platform-catalog';
 export type SavedWorkspace = { route: string; scope: string; label?: string };
 export type NavigationPreferences = {
   compact: boolean;
-  expanded: string[];
   favorites: SavedWorkspace[];
 };
 export const navigationStorageKey = 'basis.cloud.navigation.v1';
@@ -54,7 +53,6 @@ export function reorderSavedWorkspaces(favorites: SavedWorkspace[], order: strin
 export function parseNavigationPreferences(raw: string | null): NavigationPreferences {
   const defaults: NavigationPreferences = {
     compact: false,
-    expanded: ['compute', 'tenants'],
     favorites: [],
   };
   try {
@@ -82,16 +80,6 @@ export function parseNavigationPreferences(raw: string | null): NavigationPrefer
       }
     return {
       compact: value.compact === true,
-      expanded: Array.isArray(value.expanded)
-        ? [
-            ...new Set<string>(
-              value.expanded.filter(
-                (id: unknown) =>
-                  platformGroups.some((group) => group.id === id) || id === 'management',
-              ),
-            ),
-          ]
-        : defaults.expanded,
       favorites,
     };
   } catch {

@@ -82,8 +82,11 @@
 .basis-table-select__header > div {
   min-width: 0;
   flex: 1;
+  display: grid;
+  gap: var(--basis-comp-table-select-label-gap);
 }
 .basis-table-select__header h2 {
+  margin: 0;
   font-size: var(--basis-sys-type-size-subtitle);
   line-height: var(--basis-sys-type-leading-relaxed);
   font-weight: var(--basis-sys-type-weight-semibold);
@@ -91,9 +94,9 @@
 }
 .basis-table-select__header p {
   font-size: var(--basis-sys-type-size-caption);
-  line-height: var(--basis-sys-type-leading-body);
+  line-height: var(--basis-comp-table-select-description-line-height);
   color: var(--basis-sys-color-text-muted);
-  margin: var(--basis-sys-space-xs) 0 0;
+  margin: 0;
 }
 .basis-table-select__symbol {
   display: flex;
@@ -169,9 +172,6 @@
 @media (max-width: 560px) {
   .basis-table-select__header {
     padding: var(--basis-sys-space-lg);
-  }
-  .basis-table-select__header p {
-    line-height: var(--basis-sys-type-leading-caption);
   }
   .basis-table-select__symbol {
     display: none;

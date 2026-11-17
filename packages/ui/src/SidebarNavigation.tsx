@@ -52,6 +52,12 @@ function highlight(label: string, query: string) {
 }
 const contains = (item: SidebarItem, id: string): boolean =>
   item.id === id || Boolean(item.children?.some((child) => contains(child, id)));
+const ancestorsOf = (items: SidebarItem[], activeId: string): string[] =>
+  items.flatMap((item) =>
+    item.children?.some((child) => contains(child, activeId))
+      ? [item.id, ...ancestorsOf(item.children, activeId)]
+      : [],
+  );
 function revealNavigationItem(root: HTMLElement, compact: boolean) {
   const current = root.querySelector<HTMLElement>(
     compact ? '[data-active="true"], a[aria-current="page"]' : 'a[aria-current="page"]',
@@ -112,9 +118,7 @@ export function SidebarNavigation({
       .every((word) => terms.includes(word)),
   );
   const reveal = useRef({ key: '', pending: false });
-  const [localExpanded, setLocalExpanded] = useState(() =>
-    items.filter((item) => item.children).map((item) => item.id),
-  );
+  const [localExpanded, setLocalExpanded] = useState(() => ancestorsOf(items, activeId));
   const opened = expanded ?? localExpanded;
   useEffect(() => {
     setSearchOpen(false);
@@ -164,16 +168,9 @@ export function SidebarNavigation({
     onExpandedChange?.(ids);
   };
   useEffect(() => {
-    const ancestors: string[] = [];
-    const visit = (nodes: SidebarItem[]) =>
-      nodes.forEach((item) => {
-        if (item.children && contains(item, activeId)) {
-          ancestors.push(item.id);
-          visit(item.children);
-        }
-      });
-    visit(items);
-    if (ancestors.some((id) => !opened.includes(id)))
+    const ancestors = ancestorsOf(items, activeId);
+    if (expanded === undefined) setLocalExpanded(ancestors);
+    else if (ancestors.some((id) => !opened.includes(id)))
       update([...new Set([...opened, ...ancestors])]);
   }, [activeId]);
   const menuItems = (nodes: SidebarItem[]): MenuItem[] =>
@@ -369,7 +366,7 @@ export function SidebarNavigation({
             <Tooltip content="Найти раздел">
               <IconButton
                 icon={<Search />}
-                variant="secondary"
+                variant="ghost"
                 aria-label="Найти раздел"
                 aria-haspopup="dialog"
                 aria-expanded={searchOpen}

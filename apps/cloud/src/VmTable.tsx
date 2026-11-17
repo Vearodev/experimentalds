@@ -58,6 +58,7 @@ export function VmTable({
     },
     {
       id: 'status',
+      tile: { span: 'full' },
       header: 'Состояние',
       width: width('status'),
       kind: 'enum',

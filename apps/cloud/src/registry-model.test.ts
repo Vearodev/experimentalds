@@ -84,6 +84,43 @@ const rule = (field: string, patch: Partial<Rule>) => ({
 });
 const ids = (result: Row[]) => result.map((r) => r.id);
 describe('Registry query contract for every resource type', () => {
+  it('sanitizes saved page sizes and widths without accepting utility or obsolete columns', () => {
+    const definitions: RegistryColumn<Row>[] = [
+      ...columns,
+      {
+        id: 'actions',
+        header: 'Действия',
+        width: 48,
+        utility: 'actions',
+        value: () => null,
+        render: () => null,
+      },
+    ];
+    const fallback = defaultView(definitions);
+    const restored = restoreView(
+      JSON.stringify({
+        pageSize: 24,
+        columnWidths: {
+          name: 280,
+          vlan: 160,
+          project: '240',
+          ip: 0,
+          created: 10000,
+          actions: 200,
+          missing: 200,
+        },
+      }),
+      definitions,
+      fallback,
+    );
+    expect(restored.pageSize).toBe(24);
+    expect(restored.columnWidths).toEqual({ name: 280, vlan: 160 });
+    for (const pageSize of [0, -1, 1.5, 100, '24', null])
+      expect(restoreView(JSON.stringify({ pageSize }), definitions, fallback).pageSize).toBe(12);
+    expect(
+      restoreView(JSON.stringify({ columnWidths: [200, 300] }), definitions, fallback).columnWidths,
+    ).toEqual({});
+  });
   it('migrates older views without grouping and discards unavailable grouping fields', () => {
     const fallback = defaultView(columns);
     expect(restoreView(JSON.stringify({ query: 'prod' }), columns, fallback).grouping).toBeNull();
@@ -211,6 +248,11 @@ describe('Registry query contract for every resource type', () => {
       fallback,
     );
     expect(restored).toEqual({
+      display: 'table',
+      paging: 'pages',
+      navigation: 'both',
+      pageSize: 12,
+      columnWidths: {},
       query: '',
       columns: ['vlan', 'name'],
       columnOrder: ['name', 'vlan', 'project', 'ip', 'created'],

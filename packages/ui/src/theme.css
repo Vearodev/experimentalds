@@ -622,11 +622,16 @@
 .basis-select__trigger.basis-button {
   height: var(--basis-comp-select-height);
   border-radius: var(--basis-comp-select-radius);
+  font-weight: var(--basis-sys-type-weight-regular);
+  justify-items: stretch;
+}
+.basis-select__trigger.basis-button[data-variant='secondary'] {
   background: var(--basis-comp-select-background);
   border-color: var(--basis-comp-select-border);
   color: var(--basis-comp-select-foreground);
-  font-weight: var(--basis-sys-type-weight-regular);
-  justify-items: stretch;
+}
+.basis-select__trigger.basis-button[data-variant='ghost'] {
+  font-weight: var(--basis-sys-type-weight-medium);
 }
 .basis-select__trigger .basis-button__content,
 .basis-select__trigger .basis-button__busy {
@@ -1193,6 +1198,20 @@
   padding: var(--basis-comp-tabs-panel-padding) 0;
   color: var(--basis-sys-color-text-secondary);
   outline-offset: var(--basis-sys-space-xs);
+}
+/* Carry the available height through nested tabs to a bounded content viewport. */
+.basis-tabs:has([data-fill-height='true']),
+.basis-tabs__panel:has([data-fill-height='true']) {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.basis-tabs:has([data-fill-height='true']) > .basis-tabs__header {
+  flex-shrink: 0;
+}
+.basis-tabs__panel:has([data-fill-height='true']) {
+  padding-bottom: 0;
 }
 .basis-tabs__list .basis-button:disabled {
   color: var(--basis-comp-button-disabled-foreground);

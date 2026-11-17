@@ -105,6 +105,8 @@ export function PlatformForm({
   const staged = fields.length > 7;
   const hardwareFields = ['chipset', 'numa', 'cpuPin', 'hugepages'];
   const hardwareLocked = entity.id === 'vms' && row && row.status !== 'STOPPED';
+  const hasEditableFields =
+    !onlyFields || fields.some((field) => !hardwareLocked || !hardwareFields.includes(field.key));
   const choicesFor = (field: PlatformField) => {
     if (!field.reference) return [];
     return visiblePlatformRecords(data, field.reference).filter((r) => {
@@ -211,6 +213,7 @@ export function PlatformForm({
     return true;
   };
   const submit = async () => {
+    if (!hasEditableFields) return;
     if (!check()) {
       setStep('parameters');
       return;
@@ -404,6 +407,7 @@ export function PlatformForm({
               staged && step === 'parameters' ? <ArrowRight /> : row ? <Save /> : <Check />
             }
             loading={working}
+            disabled={!hasEditableFields}
             type="submit"
             form={formId}
           >
@@ -442,8 +446,8 @@ export function PlatformForm({
         )}
         {hardwareLocked && fields.some((field) => hardwareFields.includes(field.key)) && (
           <Message tone="info" title="Аппаратные параметры доступны после выключения" compact>
-            Выключите машину, чтобы изменить чипсет, NUMA и параметры памяти. Выбор узла остаётся
-            доступен.
+            Выключите машину, чтобы изменить чипсет, NUMA и параметры памяти.
+            {fields.some((field) => field.key === 'nodeId') && ' Выбор узла остаётся доступен.'}
           </Message>
         )}
         {step === 'review' ? (

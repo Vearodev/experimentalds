@@ -11,6 +11,7 @@ export function ContextPanel({
   description,
   icon,
   wide = false,
+  compact = false,
   presentation = 'popover',
   align = 'end',
   children,
@@ -23,6 +24,7 @@ export function ContextPanel({
   description?: string;
   icon: ReactNode;
   wide?: boolean;
+  compact?: boolean;
   presentation?: 'popover' | 'drawer';
   align?: 'start' | 'end';
   children: ReactNode;
@@ -112,6 +114,7 @@ export function ContextPanel({
       ref={dialog}
       className="basis-context-panel"
       data-wide={wide}
+      data-compact={compact}
       data-presentation={presentation}
       aria-labelledby={titleId}
       aria-describedby={description ? descriptionId : undefined}
@@ -150,7 +153,7 @@ export function ContextPanel({
         />
       </header>
       <div className="basis-context-panel__body">{children}</div>
-      <footer className="basis-context-panel__footer">{footer}</footer>
+      {footer && <footer className="basis-context-panel__footer">{footer}</footer>}
     </dialog>,
     document.body,
   );

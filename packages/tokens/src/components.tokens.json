@@ -1013,7 +1013,7 @@
       },
       "active-background": {
         "$type": "color",
-        "$value": "{sys.color.surface.selected}",
+        "$value": "{sys.color.surface.selected-subtle}",
         "$description": "Подложка выбранной вкладки."
       },
       "divider": {
@@ -1110,6 +1110,65 @@
       }
     },
     "table": {
+      "resize": {
+        "min-width": {
+          "$type": "dimension",
+          "$value": "{sys.table.resize.min-width}",
+          "$description": "Минимальная ширина. Заголовки с пояснением и действиями дополнительно защищены header.min-width."
+        },
+        "max-width": {
+          "$type": "dimension",
+          "$value": "{sys.table.resize.max-width}",
+          "$description": "Ограничитель ручного растягивания. Автоматически растянутый столбец сохраняет свой текущий максимум."
+        },
+        "hit-area": {
+          "$type": "dimension",
+          "$value": "{sys.space.sm}",
+          "$description": "Зона захвата на правой границе заголовка, не пересекается с кнопками."
+        },
+        "keyboard-step": {
+          "$type": "dimension",
+          "$value": "{sys.space.lg}",
+          "$description": "Шаг клавиатуры. Shift увеличивает его в четыре раза."
+        },
+        "indicator": {
+          "$type": "color",
+          "$value": "{sys.color.border.focus}",
+          "$description": "Индикатор границы при наведении, фокусе и перетаскивании."
+        }
+      },
+      "tile": {
+        "min-width": {
+          "$type": "dimension",
+          "$value": "{sys.table.tile.min-width}",
+          "$description": "Минимум ширины плитки, определяющий количество колонок сетки."
+        },
+        "gap": {
+          "$type": "dimension",
+          "$value": "{sys.space.md}",
+          "$description": "Расстояние между плитками и отступ сетки от края."
+        },
+        "padding": {
+          "$type": "dimension",
+          "$value": "{sys.space.lg}",
+          "$description": "Внутренние отступы шапки и полей плитки."
+        },
+        "radius": {
+          "$type": "dimension",
+          "$value": "{sys.radius.panel}",
+          "$description": "Скругление плитки, согласованное с таблицей."
+        },
+        "canvas": {
+          "$type": "color",
+          "$value": "{sys.color.surface.base}",
+          "$description": "Спокойный фон между плитками. Сами плитки наследуют фон, границы и семантические состояния таблицы."
+        },
+        "metric-size": {
+          "$type": "dimension",
+          "$value": "{sys.type.size.subtitle}",
+          "$description": "Размер акцентного числового значения. Семейство и насыщенность наследуют роли type.family.data и type.weight.data."
+        }
+      },
       "footer-font-size": {
         "$type": "dimension",
         "$value": "{sys.type.size.body}",
@@ -1147,8 +1206,8 @@
       },
       "header-background": {
         "$type": "color",
-        "$value": "{sys.color.surface.subtle}",
-        "$description": "table.header-background: визуальное решение компонента."
+        "$value": "{sys.color.surface.canvas}",
+        "$description": "Спокойный фон заголовков, отделяющий подписи полей от белого полотна данных."
       },
       "grid": {
         "$type": "color",
@@ -1290,9 +1349,59 @@
         "$type": "dimension",
         "$value": "{sys.control.lg.height}",
         "$description": "Размер иллюстративного значка пустой таблицы и ошибки загрузки."
+      },
+      "footer-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Спокойное полотно подвала, общее с таблицей."
+      },
+      "footer-padding-block": {
+        "$type": "dimension",
+        "$value": "{sys.space.xs}",
+        "$description": "Вертикальный отступ компактного подвала."
+      },
+      "footer-padding-inline": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Горизонтальный отступ подвала."
+      },
+      "footer-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Разделение итогов, размера страницы и навигации."
+      },
+      "navigator-range-width": {
+        "$type": "dimension",
+        "$value": "{sys.table.navigator.range-width}",
+        "$description": "Минимальная ширина кнопки страницы в шапке и подвале."
+      },
+      "navigator-compact-width": {
+        "$type": "dimension",
+        "$value": "{sys.table.navigator.compact-width}",
+        "$description": "Ширина компактного счётчика в обоих расположениях."
+      },
+      "navigator-control-size": {
+        "$type": "dimension",
+        "$value": "{sys.control.md.height}",
+        "$description": "Единая высота и область нажатия навигации."
+      },
+      "navigator-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.micro}",
+        "$description": "Ритм трёх действий навигации."
       }
     },
     "table-select": {
+      "label-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.micro}",
+        "$description": "Расстояние между заголовком окна выбора и поясняющей строкой."
+      },
+      "description-line-height": {
+        "$type": "dimension",
+        "$value": "{sys.type.leading.caption}",
+        "$description": "Высота строки краткого пояснения под заголовком выбора."
+      },
       "height": {
         "$type": "dimension",
         "$value": "{sys.control.md.height}",
@@ -1345,6 +1454,21 @@
       }
     },
     "context-panel": {
+      "label-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.micro}",
+        "$description": "Заголовок и пояснение воспринимаются одним блоком: интервал 2 px без складывания внешних отступов."
+      },
+      "title-line-height": {
+        "$type": "dimension",
+        "$value": "{sys.type.leading.body}",
+        "$description": "Высота строки компактного заголовка контекстного окна."
+      },
+      "description-line-height": {
+        "$type": "dimension",
+        "$value": "{sys.type.leading.caption}",
+        "$description": "Высота строки уточнения: диапазон ресурсов, назначение окна, описание действия."
+      },
       "width": {
         "$type": "dimension",
         "$value": "{sys.layout.dialog.width}",
@@ -1399,6 +1523,11 @@
         "$type": "dimension",
         "$value": "{sys.radius.workspace}",
         "$description": "Скругление всех четырёх углов бокового окна."
+      },
+      "compact-width": {
+        "$type": "dimension",
+        "$value": "{sys.layout.menu.width}",
+        "$description": "Компактное контекстное окно быстрых настроек."
       }
     },
     "status": {
@@ -2283,7 +2412,7 @@
       },
       "group-gap": {
         "$type": "dimension",
-        "$value": "{sys.space.sm}",
+        "$value": "{sys.space.xs}",
         "$description": "Отступ перед группой верхнего уровня."
       },
       "compact-item-width": {
@@ -2293,8 +2422,23 @@
       },
       "search-gap": {
         "$type": "dimension",
-        "$value": "{sys.space.md}",
+        "$value": "{sys.space.sm}",
         "$description": "Отступ между закреплённым поиском и прокручиваемыми разделами."
+      },
+      "search-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.subtle}",
+        "$description": "Мягкая заливка поиска в основном меню. Применяется к общему Input; состояния наведения и фокуса сохраняются."
+      },
+      "search-border": {
+        "$type": "color",
+        "$value": "{sys.color.action.ghost.border}",
+        "$description": "Спокойная граница поиска до взаимодействия. Вложенное поле использует ту же модель прозрачной границы, что и ghost-действия."
+      },
+      "search-placeholder": {
+        "$type": "color",
+        "$value": "{sys.color.text.secondary}",
+        "$description": "Название поиска на мягкой подложке. Проверяется контраст текста в обеих темах."
       },
       "search-max-height": {
         "$type": "dimension",
@@ -2338,6 +2482,31 @@
         "$type": "dimension",
         "$value": "{sys.space.md}",
         "$description": "Горизонтальный отступ строки настройки столбца."
+      },
+      "preset-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Полотно сохранённого набора фильтров."
+      },
+      "preset-selected": {
+        "$type": "color",
+        "$value": "{sys.color.surface.selected}",
+        "$description": "Условия совпадают с сохранённым набором."
+      },
+      "preset-border": {
+        "$type": "color",
+        "$value": "{sys.color.border.subtle}",
+        "$description": "Спокойное разделение наборов фильтров."
+      },
+      "preset-radius": {
+        "$type": "dimension",
+        "$value": "{sys.radius.control}",
+        "$description": "Скругление карточки сохранённого набора."
+      },
+      "preset-gap": {
+        "$type": "dimension",
+        "$value": "{sys.space.md}",
+        "$description": "Расстояние между блоками сохранённых фильтров."
       }
     },
     "shell": {
@@ -2364,7 +2533,7 @@
       "surface-background": {
         "$type": "color",
         "$value": "{sys.color.surface.base}",
-        "$description": "Фон шапки и основной рабочей области."
+        "$description": "Поверхность шапки. Основное содержимое использует отдельную роль открытого полотна."
       },
       "surface-border": {
         "$type": "color",
@@ -2425,6 +2594,11 @@
         "$type": "number",
         "$value": "{sys.motion.content-enter-opacity}",
         "$description": "Лёгкое проявление содержимого; текст читаем с первого кадра, геометрия неподвижна."
+      },
+      "content-background": {
+        "$type": "color",
+        "$value": "{sys.color.surface.base}",
+        "$description": "Единая рабочая поверхность без внешней обводки и тени. Смысловые секции внутри отделены отступами, таблицы сохраняют собственную сетку."
       }
     },
     "workspace-tabs": {
@@ -2435,7 +2609,7 @@
       },
       "background": {
         "$type": "color",
-        "$value": "{sys.color.surface.subtle}",
+        "$value": "{sys.color.surface.canvas}",
         "$description": "Подложка полосы избранных вкладок."
       },
       "selected": {

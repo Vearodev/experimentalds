@@ -207,12 +207,13 @@
 }
 .platform-event-list {
   display: grid;
-  gap: var(--basis-sys-space-lg);
+  gap: var(--basis-sys-space-sm);
 }
 .platform-event-list > a {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  align-items: flex-start;
+  align-items: center;
+  min-height: var(--basis-sys-control-lg-height);
   gap: var(--basis-sys-space-md);
   color: inherit;
   text-decoration: none;
@@ -231,7 +232,7 @@
 .platform-event-list small {
   display: block;
   color: var(--basis-sys-color-text-muted);
-  margin-top: var(--basis-sys-space-xs);
+  margin-top: var(--basis-sys-space-micro);
   font-size: var(--basis-sys-type-size-caption);
 }
 .platform-quota-list {
@@ -247,7 +248,10 @@
   margin-bottom: var(--basis-sys-space-sm);
 }
 .platform-quota-list strong {
-  font-size: 16px;
+  font-family: var(--basis-sys-type-family-data);
+  font-size: var(--basis-sys-type-size-body);
+  font-weight: var(--basis-sys-type-weight-data);
+  color: var(--basis-sys-color-text-primary);
   font-variant-numeric: tabular-nums;
 }
 .platform-quota-list small {

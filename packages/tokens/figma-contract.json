@@ -1,6 +1,6 @@
 {
   "version": "0.6.0",
-  "checksum": "cb9ff4a2ba02a0db",
+  "checksum": "8b3591483cf9b49e",
   "description": "План коллекций и связей. Это контракт импорта, не подтверждение синхронизации с Figma.",
   "collections": [
     {
@@ -69,8 +69,8 @@
           "colorSpace": "srgb",
           "components": [
             0.9686274509803922,
-            0.9764705882352941,
-            0.9882352941176471
+            0.9725490196078431,
+            0.9803921568627451
           ],
           "alpha": 1
         }
@@ -90,8 +90,8 @@
           "colorSpace": "srgb",
           "components": [
             0.9333333333333333,
-            0.9490196078431372,
-            0.9725490196078431
+            0.9450980392156862,
+            0.9607843137254902
           ],
           "alpha": 1
         }
@@ -111,8 +111,8 @@
           "colorSpace": "srgb",
           "components": [
             0.8627450980392157,
-            0.8941176470588236,
-            0.9372549019607843
+            0.8862745098039215,
+            0.9176470588235294
           ],
           "alpha": 1
         }
@@ -131,9 +131,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.7411764705882353,
-            0.792156862745098,
-            0.8588235294117647
+            0.7333333333333333,
+            0.7725490196078432,
+            0.8235294117647058
           ],
           "alpha": 1
         }
@@ -152,9 +152,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.5686274509803921,
-            0.6352941176470588,
-            0.7294117647058823
+            0.5803921568627451,
+            0.6274509803921569,
+            0.6941176470588235
           ],
           "alpha": 1
         }
@@ -173,9 +173,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.39215686274509803,
-            0.4549019607843137,
-            0.5450980392156862
+            0.38823529411764707,
+            0.44313725490196076,
+            0.5254901960784314
           ],
           "alpha": 1
         }
@@ -194,9 +194,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.3137254901960784,
-            0.3843137254901961,
-            0.49411764705882355
+            0.3058823529411765,
+            0.36470588235294116,
+            0.4470588235294118
           ],
           "alpha": 1
         }
@@ -215,9 +215,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.21568627450980393,
-            0.2901960784313726,
-            0.40784313725490196
+            0.23921568627450981,
+            0.29411764705882354,
+            0.37254901960784315
           ],
           "alpha": 1
         }
@@ -236,9 +236,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.14901960784313725,
-            0.21568627450980393,
-            0.32941176470588235
+            0.1803921568627451,
+            0.23137254901960785,
+            0.30196078431372547
           ],
           "alpha": 1
         }
@@ -257,9 +257,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.09019607843137255,
-            0.14901960784313725,
-            0.24705882352941178
+            0.12156862745098039,
+            0.16470588235294117,
+            0.22745098039215686
           ],
           "alpha": 1
         }
@@ -278,9 +278,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.06274509803921569,
-            0.10196078431372549,
-            0.16470588235294117
+            0.08235294117647059,
+            0.12156862745098039,
+            0.1803921568627451
           ],
           "alpha": 1
         }
@@ -299,9 +299,9 @@
         "Value": {
           "colorSpace": "srgb",
           "components": [
-            0.0392156862745098,
-            0.07058823529411765,
-            0.12549019607843137
+            0.047058823529411764,
+            0.0784313725490196,
+            0.12156862745098039
           ],
           "alpha": 1
         }
@@ -2916,6 +2916,54 @@
       }
     },
     {
+      "path": "ref.size.table.resize.min-width",
+      "name": "ref/size/table/resize/min-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-table-resize-min-width)",
+      "description": "Минимальная ширина простого столбца при ресайзе.",
+      "values": {
+        "Value": {
+          "value": 96,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.table.resize.max-width",
+      "name": "ref/size/table/resize/max-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-table-resize-max-width)",
+      "description": "Верхняя граница ручного растягивания столбца.",
+      "values": {
+        "Value": {
+          "value": 720,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.table.tile.min-width",
+      "name": "ref/size/table/tile/min-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-table-tile-min-width)",
+      "description": "Минимальная ширина плитки ресурса. В более узкой области плитка занимает всю доступную ширину.",
+      "values": {
+        "Value": {
+          "value": 272,
+          "unit": "px"
+        }
+      }
+    },
+    {
       "path": "ref.size.table.row.height",
       "name": "ref/size/table/row/height",
       "collection": "ref",
@@ -3167,6 +3215,38 @@
       "values": {
         "Value": {
           "value": 60,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.table.navigator.range-width",
+      "name": "ref/size/table/navigator/range-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-table-navigator-range-width)",
+      "description": "Минимальная ширина счётчика страницы в общем навигаторе таблицы.",
+      "values": {
+        "Value": {
+          "value": 112,
+          "unit": "px"
+        }
+      }
+    },
+    {
+      "path": "ref.size.table.navigator.compact-width",
+      "name": "ref/size/table/navigator/compact-width",
+      "collection": "ref",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [],
+      "web": "var(--basis-ref-size-table-navigator-compact-width)",
+      "description": "Ширина счётчика навигации на узком экране.",
+      "values": {
+        "Value": {
+          "value": 56,
           "unit": "px"
         }
       }
@@ -4806,6 +4886,51 @@
       }
     },
     {
+      "path": "sys.table.resize.min-width",
+      "name": "sys/table/resize/min-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-table-resize-min-width)",
+      "description": "Минимальная ширина при ручном изменении столбца.",
+      "values": {
+        "Value": "{ref.size.table.resize.min-width}"
+      }
+    },
+    {
+      "path": "sys.table.resize.max-width",
+      "name": "sys/table/resize/max-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-table-resize-max-width)",
+      "description": "Максимальная ширина при ручном изменении столбца.",
+      "values": {
+        "Value": "{ref.size.table.resize.max-width}"
+      }
+    },
+    {
+      "path": "sys.table.tile.min-width",
+      "name": "sys/table/tile/min-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-table-tile-min-width)",
+      "description": "Порог адаптивной сетки плиток ресурсов; общий для светлой и тёмной темы.",
+      "values": {
+        "Value": "{ref.size.table.tile.min-width}"
+      }
+    },
+    {
       "path": "sys.table.row.height",
       "name": "sys/table/row/height",
       "collection": "sys.metrics",
@@ -5058,6 +5183,36 @@
       "description": "Постоянная высота панели реестра.",
       "values": {
         "Value": "{ref.size.table.toolbar.height}"
+      }
+    },
+    {
+      "path": "sys.table.navigator.range-width",
+      "name": "sys/table/navigator/range-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-table-navigator-range-width)",
+      "description": "Минимальная ширина счётчика; резерв для полного числа страниц предотвращает сдвиги при переходах.",
+      "values": {
+        "Value": "{ref.size.table.navigator.range-width}"
+      }
+    },
+    {
+      "path": "sys.table.navigator.compact-width",
+      "name": "sys/table/navigator/compact-width",
+      "collection": "sys.metrics",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-sys-table-navigator-compact-width)",
+      "description": "Компактный счётчик на узкой таблице.",
+      "values": {
+        "Value": "{ref.size.table.navigator.compact-width}"
       }
     },
     {
@@ -8670,7 +8825,7 @@
       "web": "var(--basis-comp-tabs-active-background)",
       "description": "Подложка выбранной вкладки.",
       "values": {
-        "Value": "{sys.color.surface.selected}"
+        "Value": "{sys.color.surface.selected-subtle}"
       }
     },
     {
@@ -8947,6 +9102,173 @@
       }
     },
     {
+      "path": "comp.table.resize.min-width",
+      "name": "comp/table/resize/min-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-resize-min-width)",
+      "description": "Минимальная ширина. Заголовки с пояснением и действиями дополнительно защищены header.min-width.",
+      "values": {
+        "Value": "{sys.table.resize.min-width}"
+      }
+    },
+    {
+      "path": "comp.table.resize.max-width",
+      "name": "comp/table/resize/max-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-resize-max-width)",
+      "description": "Ограничитель ручного растягивания. Автоматически растянутый столбец сохраняет свой текущий максимум.",
+      "values": {
+        "Value": "{sys.table.resize.max-width}"
+      }
+    },
+    {
+      "path": "comp.table.resize.hit-area",
+      "name": "comp/table/resize/hit-area",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-resize-hit-area)",
+      "description": "Зона захвата на правой границе заголовка, не пересекается с кнопками.",
+      "values": {
+        "Value": "{sys.space.sm}"
+      }
+    },
+    {
+      "path": "comp.table.resize.keyboard-step",
+      "name": "comp/table/resize/keyboard-step",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-resize-keyboard-step)",
+      "description": "Шаг клавиатуры. Shift увеличивает его в четыре раза.",
+      "values": {
+        "Value": "{sys.space.lg}"
+      }
+    },
+    {
+      "path": "comp.table.resize.indicator",
+      "name": "comp/table/resize/indicator",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-table-resize-indicator)",
+      "description": "Индикатор границы при наведении, фокусе и перетаскивании.",
+      "values": {
+        "Value": "{sys.color.border.focus}"
+      }
+    },
+    {
+      "path": "comp.table.tile.min-width",
+      "name": "comp/table/tile/min-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-tile-min-width)",
+      "description": "Минимум ширины плитки, определяющий количество колонок сетки.",
+      "values": {
+        "Value": "{sys.table.tile.min-width}"
+      }
+    },
+    {
+      "path": "comp.table.tile.gap",
+      "name": "comp/table/tile/gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-tile-gap)",
+      "description": "Расстояние между плитками и отступ сетки от края.",
+      "values": {
+        "Value": "{sys.space.md}"
+      }
+    },
+    {
+      "path": "comp.table.tile.padding",
+      "name": "comp/table/tile/padding",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-tile-padding)",
+      "description": "Внутренние отступы шапки и полей плитки.",
+      "values": {
+        "Value": "{sys.space.lg}"
+      }
+    },
+    {
+      "path": "comp.table.tile.radius",
+      "name": "comp/table/tile/radius",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "CORNER_RADIUS"
+      ],
+      "web": "var(--basis-comp-table-tile-radius)",
+      "description": "Скругление плитки, согласованное с таблицей.",
+      "values": {
+        "Value": "{sys.radius.panel}"
+      }
+    },
+    {
+      "path": "comp.table.tile.canvas",
+      "name": "comp/table/tile/canvas",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-table-tile-canvas)",
+      "description": "Спокойный фон между плитками. Сами плитки наследуют фон, границы и семантические состояния таблицы.",
+      "values": {
+        "Value": "{sys.color.surface.base}"
+      }
+    },
+    {
+      "path": "comp.table.tile.metric-size",
+      "name": "comp/table/tile/metric-size",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-tile-metric-size)",
+      "description": "Размер акцентного числового значения. Семейство и насыщенность наследуют роли type.family.data и type.weight.data.",
+      "values": {
+        "Value": "{sys.type.size.subtitle}"
+      }
+    },
+    {
       "path": "comp.table.footer-font-size",
       "name": "comp/table/footer-font-size",
       "collection": "comp",
@@ -9066,9 +9388,9 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-comp-table-header-background)",
-      "description": "table.header-background: визуальное решение компонента.",
+      "description": "Спокойный фон заголовков, отделяющий подписи полей от белого полотна данных.",
       "values": {
-        "Value": "{sys.color.surface.subtle}"
+        "Value": "{sys.color.surface.canvas}"
       }
     },
     {
@@ -9420,6 +9742,157 @@
       }
     },
     {
+      "path": "comp.table.footer-background",
+      "name": "comp/table/footer-background",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-table-footer-background)",
+      "description": "Спокойное полотно подвала, общее с таблицей.",
+      "values": {
+        "Value": "{sys.color.surface.base}"
+      }
+    },
+    {
+      "path": "comp.table.footer-padding-block",
+      "name": "comp/table/footer-padding-block",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-footer-padding-block)",
+      "description": "Вертикальный отступ компактного подвала.",
+      "values": {
+        "Value": "{sys.space.xs}"
+      }
+    },
+    {
+      "path": "comp.table.footer-padding-inline",
+      "name": "comp/table/footer-padding-inline",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-footer-padding-inline)",
+      "description": "Горизонтальный отступ подвала.",
+      "values": {
+        "Value": "{sys.space.md}"
+      }
+    },
+    {
+      "path": "comp.table.footer-gap",
+      "name": "comp/table/footer-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-footer-gap)",
+      "description": "Разделение итогов, размера страницы и навигации.",
+      "values": {
+        "Value": "{sys.space.md}"
+      }
+    },
+    {
+      "path": "comp.table.navigator-range-width",
+      "name": "comp/table/navigator-range-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-navigator-range-width)",
+      "description": "Минимальная ширина кнопки страницы в шапке и подвале.",
+      "values": {
+        "Value": "{sys.table.navigator.range-width}"
+      }
+    },
+    {
+      "path": "comp.table.navigator-compact-width",
+      "name": "comp/table/navigator-compact-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-navigator-compact-width)",
+      "description": "Ширина компактного счётчика в обоих расположениях.",
+      "values": {
+        "Value": "{sys.table.navigator.compact-width}"
+      }
+    },
+    {
+      "path": "comp.table.navigator-control-size",
+      "name": "comp/table/navigator-control-size",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-navigator-control-size)",
+      "description": "Единая высота и область нажатия навигации.",
+      "values": {
+        "Value": "{sys.control.md.height}"
+      }
+    },
+    {
+      "path": "comp.table.navigator-gap",
+      "name": "comp/table/navigator-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-navigator-gap)",
+      "description": "Ритм трёх действий навигации.",
+      "values": {
+        "Value": "{sys.space.micro}"
+      }
+    },
+    {
+      "path": "comp.table-select.label-gap",
+      "name": "comp/table-select/label-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-select-label-gap)",
+      "description": "Расстояние между заголовком окна выбора и поясняющей строкой.",
+      "values": {
+        "Value": "{sys.space.micro}"
+      }
+    },
+    {
+      "path": "comp.table-select.description-line-height",
+      "name": "comp/table-select/description-line-height",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-table-select-description-line-height)",
+      "description": "Высота строки краткого пояснения под заголовком выбора.",
+      "values": {
+        "Value": "{sys.type.leading.caption}"
+      }
+    },
+    {
       "path": "comp.table-select.height",
       "name": "comp/table-select/height",
       "collection": "comp",
@@ -9574,6 +10047,51 @@
       }
     },
     {
+      "path": "comp.context-panel.label-gap",
+      "name": "comp/context-panel/label-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-context-panel-label-gap)",
+      "description": "Заголовок и пояснение воспринимаются одним блоком: интервал 2 px без складывания внешних отступов.",
+      "values": {
+        "Value": "{sys.space.micro}"
+      }
+    },
+    {
+      "path": "comp.context-panel.title-line-height",
+      "name": "comp/context-panel/title-line-height",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-context-panel-title-line-height)",
+      "description": "Высота строки компактного заголовка контекстного окна.",
+      "values": {
+        "Value": "{sys.type.leading.body}"
+      }
+    },
+    {
+      "path": "comp.context-panel.description-line-height",
+      "name": "comp/context-panel/description-line-height",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-context-panel-description-line-height)",
+      "description": "Высота строки уточнения: диапазон ресурсов, назначение окна, описание действия.",
+      "values": {
+        "Value": "{sys.type.leading.caption}"
+      }
+    },
+    {
       "path": "comp.context-panel.width",
       "name": "comp/context-panel/width",
       "collection": "comp",
@@ -9723,6 +10241,21 @@
       "description": "Скругление всех четырёх углов бокового окна.",
       "values": {
         "Value": "{sys.radius.workspace}"
+      }
+    },
+    {
+      "path": "comp.context-panel.compact-width",
+      "name": "comp/context-panel/compact-width",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "web": "var(--basis-comp-context-panel-compact-width)",
+      "description": "Компактное контекстное окно быстрых настроек.",
+      "values": {
+        "Value": "{sys.layout.menu.width}"
       }
     },
     {
@@ -12242,7 +12775,7 @@
       "web": "var(--basis-comp-navigation-group-gap)",
       "description": "Отступ перед группой верхнего уровня.",
       "values": {
-        "Value": "{sys.space.sm}"
+        "Value": "{sys.space.xs}"
       }
     },
     {
@@ -12272,7 +12805,54 @@
       "web": "var(--basis-comp-navigation-search-gap)",
       "description": "Отступ между закреплённым поиском и прокручиваемыми разделами.",
       "values": {
-        "Value": "{sys.space.md}"
+        "Value": "{sys.space.sm}"
+      }
+    },
+    {
+      "path": "comp.navigation.search-background",
+      "name": "comp/navigation/search-background",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-navigation-search-background)",
+      "description": "Мягкая заливка поиска в основном меню. Применяется к общему Input; состояния наведения и фокуса сохраняются.",
+      "values": {
+        "Value": "{sys.color.surface.subtle}"
+      }
+    },
+    {
+      "path": "comp.navigation.search-border",
+      "name": "comp/navigation/search-border",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "web": "var(--basis-comp-navigation-search-border)",
+      "description": "Спокойная граница поиска до взаимодействия. Вложенное поле использует ту же модель прозрачной границы, что и ghost-действия.",
+      "values": {
+        "Value": "{sys.color.action.ghost.border}"
+      }
+    },
+    {
+      "path": "comp.navigation.search-placeholder",
+      "name": "comp/navigation/search-placeholder",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-navigation-search-placeholder)",
+      "description": "Название поиска на мягкой подложке. Проверяется контраст текста в обеих темах.",
+      "values": {
+        "Value": "{sys.color.text.secondary}"
       }
     },
     {
@@ -12397,6 +12977,83 @@
       }
     },
     {
+      "path": "comp.table-tools.preset-background",
+      "name": "comp/table-tools/preset-background",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-table-tools-preset-background)",
+      "description": "Полотно сохранённого набора фильтров.",
+      "values": {
+        "Value": "{sys.color.surface.base}"
+      }
+    },
+    {
+      "path": "comp.table-tools.preset-selected",
+      "name": "comp/table-tools/preset-selected",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-table-tools-preset-selected)",
+      "description": "Условия совпадают с сохранённым набором.",
+      "values": {
+        "Value": "{sys.color.surface.selected}"
+      }
+    },
+    {
+      "path": "comp.table-tools.preset-border",
+      "name": "comp/table-tools/preset-border",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "web": "var(--basis-comp-table-tools-preset-border)",
+      "description": "Спокойное разделение наборов фильтров.",
+      "values": {
+        "Value": "{sys.color.border.subtle}"
+      }
+    },
+    {
+      "path": "comp.table-tools.preset-radius",
+      "name": "comp/table-tools/preset-radius",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "CORNER_RADIUS"
+      ],
+      "web": "var(--basis-comp-table-tools-preset-radius)",
+      "description": "Скругление карточки сохранённого набора.",
+      "values": {
+        "Value": "{sys.radius.control}"
+      }
+    },
+    {
+      "path": "comp.table-tools.preset-gap",
+      "name": "comp/table-tools/preset-gap",
+      "collection": "comp",
+      "type": "FLOAT",
+      "tokenType": "dimension",
+      "scopes": [
+        "GAP"
+      ],
+      "web": "var(--basis-comp-table-tools-preset-gap)",
+      "description": "Расстояние между блоками сохранённых фильтров.",
+      "values": {
+        "Value": "{sys.space.md}"
+      }
+    },
+    {
       "path": "comp.shell.inset",
       "name": "comp/shell/inset",
       "collection": "comp",
@@ -12468,7 +13125,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-comp-shell-surface-background)",
-      "description": "Фон шапки и основной рабочей области.",
+      "description": "Поверхность шапки. Основное содержимое использует отдельную роль открытого полотна.",
       "values": {
         "Value": "{sys.color.surface.base}"
       }
@@ -12633,6 +13290,22 @@
       }
     },
     {
+      "path": "comp.shell.content-background",
+      "name": "comp/shell/content-background",
+      "collection": "comp",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-comp-shell-content-background)",
+      "description": "Единая рабочая поверхность без внешней обводки и тени. Смысловые секции внутри отделены отступами, таблицы сохраняют собственную сетку.",
+      "values": {
+        "Value": "{sys.color.surface.base}"
+      }
+    },
+    {
       "path": "comp.workspace-tabs.height",
       "name": "comp/workspace-tabs/height",
       "collection": "comp",
@@ -12660,7 +13333,7 @@
       "web": "var(--basis-comp-workspace-tabs-background)",
       "description": "Подложка полосы избранных вкладок.",
       "values": {
-        "Value": "{sys.color.surface.subtle}"
+        "Value": "{sys.color.surface.canvas}"
       }
     },
     {
@@ -13288,7 +13961,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-surface-workspace)",
-      "description": "Фон между отделёнными секциями облачной платформы. Светлая тема использует мягкий холодный тон.",
+      "description": "Спокойный фон вокруг шапки, навигации и единой рабочей поверхности.",
       "values": {
         "Light": "{sys.color.surface.subtle}",
         "Dark": "{sys.color.surface.canvas}"
@@ -13305,7 +13978,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-surface-canvas)",
-      "description": "Смысловая роль surface.canvas.",
+      "description": "Рабочее полотно между секциями данных. На нём размещаются заголовки, локальная навигация и вспомогательный контекст.",
       "values": {
         "Light": "{ref.color.neutral.50}",
         "Dark": "{ref.color.neutral.1000}"
@@ -13322,7 +13995,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-surface-base)",
-      "description": "Смысловая роль surface.base.",
+      "description": "Основная поверхность таблиц, форм, конфигурации и контекстных окон. Светлее рабочего полотна.",
       "values": {
         "Light": "{ref.color.neutral.0}",
         "Dark": "{ref.color.neutral.950}"
@@ -13339,7 +14012,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-surface-subtle)",
-      "description": "Смысловая роль surface.subtle.",
+      "description": "Спокойная вложенная или служебная область, не требующая отдельного акцента.",
       "values": {
         "Light": "{ref.color.neutral.100}",
         "Dark": "{ref.color.neutral.900}"
@@ -13356,7 +14029,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-surface-hover)",
-      "description": "Смысловая роль surface.hover.",
+      "description": "Временная подложка наведения на интерактивный элемент. Не обозначает постоянный выбор.",
       "values": {
         "Light": "{ref.color.blue.0}",
         "Dark": "{ref.color.neutral.800}"
@@ -13373,10 +14046,27 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-surface-selected)",
-      "description": "Смысловая роль surface.selected.",
+      "description": "Заметная подложка выбранных данных: строк таблицы, пунктов выбора и сохранённых наборов.",
       "values": {
         "Light": "{ref.color.blue.50}",
         "Dark": "{ref.color.navy.700}"
+      }
+    },
+    {
+      "path": "sys.color.surface.selected-subtle",
+      "name": "sys/color/surface/selected-subtle",
+      "collection": "sys.color",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-sys-color-surface-selected-subtle)",
+      "description": "Мягкая подложка активной вкладки или текущего локального контекста. Выбор данных использует surface.selected.",
+      "values": {
+        "Light": "{ref.color.blue.0}",
+        "Dark": "{ref.color.neutral.900}"
       }
     },
     {
@@ -13397,6 +14087,23 @@
       }
     },
     {
+      "path": "sys.color.surface.emphasis",
+      "name": "sys/color/surface/emphasis",
+      "collection": "sys.color",
+      "type": "COLOR",
+      "tokenType": "color",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "web": "var(--basis-sys-color-surface-emphasis)",
+      "description": "Локальная подложка ключевой сводки или значения. Не означает статус, выбор строки или действие.",
+      "values": {
+        "Light": "{ref.color.blue.0}",
+        "Dark": "{ref.color.blue.900}"
+      }
+    },
+    {
       "path": "sys.color.text.primary",
       "name": "sys/color/text/primary",
       "collection": "sys.color",
@@ -13407,9 +14114,9 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-text-primary)",
-      "description": "Смысловая роль text.primary.",
+      "description": "Заголовки и основные значения. Максимальный текстовый акцент, нейтральный относительно фирменного цвета.",
       "values": {
-        "Light": "{ref.color.navy.800}",
+        "Light": "{ref.color.neutral.950}",
         "Dark": "{ref.color.neutral.50}"
       }
     },
@@ -13424,9 +14131,9 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-text-secondary)",
-      "description": "Смысловая роль text.secondary.",
+      "description": "Подписи полей и второстепенный текст. Читается уверенно, не конкурирует с основными значениями.",
       "values": {
-        "Light": "{ref.color.neutral.700}",
+        "Light": "{ref.color.neutral.600}",
         "Dark": "{ref.color.neutral.200}"
       }
     },
@@ -13441,7 +14148,7 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-text-muted)",
-      "description": "Смысловая роль text.muted.",
+      "description": "Пояснения, метаданные и служебные подписи с сохранением читаемого контраста.",
       "values": {
         "Light": "{ref.color.neutral.500}",
         "Dark": "{ref.color.neutral.400}"
@@ -15716,9 +16423,9 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-navigation-background)",
-      "description": "Отдельная поверхность основного меню, согласованная с шапкой и рабочей областью.",
+      "description": "Спокойная поверхность навигации: второстепенна относительно данных рабочей области.",
       "values": {
-        "Light": "{sys.color.surface.base}",
+        "Light": "{sys.color.surface.canvas}",
         "Dark": "{sys.color.surface.base}"
       }
     },
@@ -15784,10 +16491,10 @@
         "SHAPE_FILL"
       ],
       "web": "var(--basis-sys-color-navigation-selected)",
-      "description": "Подложка активного раздела.",
+      "description": "Нейтральная подложка текущего раздела; фирменный акцент остаётся у маркера и иконки.",
       "values": {
-        "Light": "{sys.color.surface.selected}",
-        "Dark": "{sys.color.surface.selected}"
+        "Light": "{sys.color.surface.base}",
+        "Dark": "{sys.color.surface.subtle}"
       }
     },
     {
@@ -15869,8 +16576,8 @@
       "web": "var(--basis-sys-color-navigation-selected-border)",
       "description": "Тонкая граница активного раздела.",
       "values": {
-        "Light": "{sys.color.border.selected}",
-        "Dark": "{sys.color.border.selected}"
+        "Light": "{sys.color.border.default}",
+        "Dark": "{sys.color.border.default}"
       }
     },
     {

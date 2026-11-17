@@ -2,8 +2,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TableToolsPanel, type TableToolsPanelProps, type TableToolsValue } from './TableTools';
+import { useTableFilterPresets } from './table-filter-presets';
 
 beforeEach(() => {
+  localStorage.clear();
   vi.stubGlobal(
     'ResizeObserver',
     class {
@@ -82,6 +84,49 @@ function props(
   };
 }
 describe('Shared table tool transactions', () => {
+  it('saves a draft without applying it, renames with focus recovery and reverses deletion', async () => {
+    const user = userEvent.setup(),
+      config = props('filters');
+    function Example() {
+      const library = useTableFilterPresets('panel-drafts', config.validateFilter);
+      return <TableToolsPanel {...config} filterPresets={library} />;
+    }
+    render(<Example />);
+    await user.clear(screen.getByLabelText('Значение: Имя'));
+    await user.type(screen.getByLabelText('Значение: Имя'), 'dev');
+    await user.click(screen.getByRole('button', { name: 'Сохранить' }));
+    expect(screen.getByRole('textbox', { name: 'Название нового набора' })).toHaveFocus();
+    await user.type(
+      screen.getByRole('textbox', { name: 'Название нового набора' }),
+      'Разработка{Enter}',
+    );
+    expect(config.onApply).not.toHaveBeenCalled();
+    expect(initial.filters).toEqual([nameRule]);
+    expect(JSON.parse(localStorage.getItem('panel-drafts')!).items[0].rules[0].value).toBe('dev');
+    expect(screen.getByRole('tab', { name: 'Условия, 1' })).toHaveFocus();
+    expect(
+      screen.queryByRole('button', { name: /Сохранить как|Создать копию/ }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole('switch')).not.toBeInTheDocument();
+    await user.click(screen.getByRole('tab', { name: 'Мои наборы, 1' }));
+    await user.click(screen.getByRole('button', { name: 'Действия с набором «Разработка»' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Переименовать' }));
+    await user.clear(screen.getByRole('textbox', { name: 'Название набора' }));
+    await user.type(screen.getByRole('textbox', { name: 'Название набора' }), 'Дежурные{Enter}');
+    expect(screen.getByRole('button', { name: 'Применить набор «Дежурные»' })).toHaveFocus();
+    await user.click(screen.getByRole('button', { name: 'Действия с набором «Дежурные»' }));
+    await user.click(screen.getByRole('menuitem', { name: 'Удалить набор' }));
+    expect(
+      screen.queryByRole('button', { name: 'Применить набор «Дежурные»' }),
+    ).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Отменить изменение' }));
+    expect(screen.getByRole('button', { name: 'Применить набор «Дежурные»' })).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Применить набор «Дежурные»' }));
+    expect(config.onApply).toHaveBeenCalledWith(
+      expect.objectContaining({ filters: [{ ...nameRule, value: 'dev' }] }),
+    );
+    expect(config.onClose).toHaveBeenCalledOnce();
+  });
   it('edits grouping as a draft, supports hidden fields, and resets without disturbing other settings', async () => {
     const user = userEvent.setup(),
       config = props('group', { countGroups: () => 2 });

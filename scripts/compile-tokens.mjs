@@ -94,12 +94,26 @@ for (const [theme, { resolved }] of Object.entries(modes)) {
     ['Основной текст', 'sys.color.text.primary', 'sys.color.surface.base'],
     ['Вторичный текст', 'sys.color.text.secondary', 'sys.color.surface.base'],
     ['Подписи', 'sys.color.text.muted', 'sys.color.surface.base'],
+    ['Текст на полотне', 'sys.color.text.primary', 'sys.color.surface.canvas'],
+    ['Пояснение на полотне', 'sys.color.text.muted', 'sys.color.surface.canvas'],
+    ['Текст открытой рабочей области', 'sys.color.text.primary', 'comp.shell.content-background'],
+    ['Подпись открытой рабочей области', 'sys.color.text.muted', 'comp.shell.content-background'],
+    ['Ключевое значение', 'sys.color.text.primary', 'sys.color.surface.emphasis'],
+    ['Подпись ключевого значения', 'sys.color.text.muted', 'sys.color.surface.emphasis'],
+    ['Текст активной вкладки', 'sys.color.text.primary', 'sys.color.surface.selected-subtle'],
+    ['Счётчик активной вкладки', 'sys.color.text.muted', 'sys.color.surface.selected-subtle'],
     ['Navigation text', 'sys.color.navigation.foreground', 'sys.color.navigation.background'],
     ['Navigation muted', 'sys.color.navigation.muted', 'sys.color.navigation.background'],
     ['Navigation selected', 'sys.color.navigation.foreground', 'sys.color.navigation.selected'],
     ['Navigation hover', 'sys.color.navigation.foreground', 'sys.color.navigation.hover'],
     ['Navigation group', 'sys.color.navigation.group-color', 'sys.color.navigation.background'],
     ['Navigation count', 'sys.color.navigation.muted', 'sys.color.navigation.count-background'],
+    ['Navigation search value', 'comp.input.foreground', 'comp.navigation.search-background'],
+    [
+      'Navigation search placeholder',
+      'comp.navigation.search-placeholder',
+      'comp.navigation.search-background',
+    ],
   ];
   for (const variant of ['primary', 'secondary', 'tonal', 'danger'])
     for (const state of ['default', 'hover', 'pressed'])

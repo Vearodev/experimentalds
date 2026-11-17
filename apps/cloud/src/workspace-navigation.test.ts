@@ -39,7 +39,7 @@ describe('Saved workspaces', () => {
       }),
     );
     expect(value.compact).toBe(true);
-    expect(value.expanded).toEqual(['compute']);
+    expect(value).not.toHaveProperty('expanded');
     expect(value.favorites.map(workspaceKey)).toEqual([
       'production::vms/vm-1',
       'production::vms/vm-1/network',

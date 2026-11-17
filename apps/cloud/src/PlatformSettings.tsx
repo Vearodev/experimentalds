@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Pencil, Save } from 'lucide-react';
-import { Button, Message, Select, StatusBadge, TableSelect } from '@basis/ui';
+import { useState, type ReactNode } from 'react';
+import { Info, Pencil, Save } from 'lucide-react';
+import { Button, Message, Select, StatusBadge, TableSelect, Tooltip } from '@basis/ui';
 import { platformEntity } from '../platform-catalog';
 import { canChangePlatform } from '../platform-model';
 import type { PlatformEntity, PlatformRecord } from '../platform-types';
@@ -16,15 +16,22 @@ export function PlatformRecordSettings({
   fields,
   title,
   description,
+  featured,
+  context,
+  note,
 }: {
   entity: PlatformEntity;
   row: PlatformRecord;
   fields: string[];
   title: string;
   description?: string;
+  featured?: string;
+  context?: ReactNode;
+  note?: ReactNode;
 }) {
   const { data } = useCloud();
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
+  const blocked = canChangePlatform(data!, entity.id, row);
   return (
     <>
       <Panel
@@ -32,16 +39,20 @@ export function PlatformRecordSettings({
         title={title}
         subtitle={description}
         action={
-          <Button
-            size="sm"
-            leadingIcon={<Pencil />}
-            disabled={Boolean(canChangePlatform(data!, entity.id, row))}
-            onClick={(event) => setAnchor(event.currentTarget)}
-          >
-            Изменить
-          </Button>
+          <Tooltip content={blocked || 'Изменить параметры'}>
+            <Button
+              size="sm"
+              variant="ghost"
+              leadingIcon={<Pencil />}
+              disabled={Boolean(blocked)}
+              onClick={(event) => setAnchor(event.currentTarget)}
+            >
+              Изменить
+            </Button>
+          </Tooltip>
         }
       >
+        {context && <div className="resource-settings-context">{context}</div>}
         <PlatformFacts
           entity={{
             ...entity,
@@ -49,8 +60,15 @@ export function PlatformRecordSettings({
           }}
           row={row}
           identity={false}
-          descriptions
+          layout="grid"
+          featured={featured}
         />
+        {note && (
+          <p className="resource-setting-note">
+            <Info size={15} />
+            <span>{note}</span>
+          </p>
+        )}
       </Panel>
       {anchor && (
         <PlatformForm

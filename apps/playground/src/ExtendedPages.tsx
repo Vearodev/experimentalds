@@ -1287,6 +1287,7 @@ function BreadcrumbPage() {
 
 function MenuPage() {
   const design = useDesign();
+  const [rememberFilter, setRememberFilter] = useState(false);
   const [result, setResult] = useState('Выберите действие'),
     [disabled, setDisabled] = useState(false);
   const run = (name: string) => () => setResult(`${name} · демонстрация`);
@@ -1399,6 +1400,22 @@ function MenuPage() {
         </Spec>
         <Spec title="Нет действий">
           <Menu label="Доступные действия" items={[]} />
+        </Spec>
+        <Spec title="Независимый флажок">
+          <Menu
+            label="Настройки таблицы"
+            items={[
+              {
+                id: 'default-filter',
+                label: 'Запомнить выбор',
+                hint: 'Применять «Работающие машины» при открытии этой таблицы.',
+                checked: rememberFilter,
+                checkType: 'checkbox',
+                keepOpen: true,
+                onSelect: () => setRememberFilter((value) => !value),
+              },
+            ]}
+          />
         </Spec>
         <Spec title="Профиль и выбор настройки">
           <div className="extended-menu-example">

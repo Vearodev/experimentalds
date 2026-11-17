@@ -775,15 +775,21 @@ export function CreateVmPage() {
           <div className="cloud-summary-specs">
             <span>
               <Cpu />
-              {draft.cpu} vCPU
+              <span>
+                <strong>{draft.cpu}</strong> vCPU
+              </span>
             </span>
             <span>
               <MemoryStick />
-              {draft.memory} GiB
+              <span>
+                <strong>{draft.memory}</strong> GiB
+              </span>
             </span>
             <span>
               <HardDrive />
-              {draft.rootSize} GiB
+              <span>
+                <strong>{draft.rootSize}</strong> GiB
+              </span>
             </span>
           </div>
           <hr />

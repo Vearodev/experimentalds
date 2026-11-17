@@ -17,19 +17,13 @@
 }
 .cloud-scope {
   flex-shrink: 0;
-  margin: 0 0 var(--basis-sys-space-md);
-  padding-bottom: var(--basis-sys-space-md);
-  border-bottom: var(--basis-sys-border-thin) solid var(--basis-comp-navigation-border);
-}
-.cloud-scope .basis-field__label {
-  color: var(--basis-comp-navigation-group-color);
-  font-size: var(--basis-sys-type-size-caption);
-  font-weight: var(--basis-sys-type-weight-regular);
-  padding-left: var(--basis-sys-space-xs);
+  margin: 0 0 var(--basis-sys-space-sm);
 }
 .cloud-scope .basis-select__trigger {
   min-width: 0;
   width: 100%;
+  padding-inline: var(--basis-comp-navigation-item-padding);
+  font-size: var(--basis-comp-navigation-font-size);
 }
 .cloud-navigation {
   flex: 1;
@@ -86,14 +80,6 @@
   padding-left: var(--basis-sys-space-xs);
   color: var(--basis-comp-navigation-group-color);
   font-size: var(--basis-sys-type-size-caption);
-}
-.cloud-sidebar-status > span {
-  display: flex;
-  flex-direction: column;
-  gap: var(--basis-sys-space-micro);
-}
-.cloud-sidebar-status small {
-  font-size: inherit;
 }
 .cloud-sidebar-status > i,
 .cloud-live-dot {

@@ -54,6 +54,33 @@ afterEach(() => {
   Reflect.deleteProperty(HTMLDialogElement.prototype, 'close');
 });
 
+it('opens only the active route ancestors by default and collapses them when leaving the branch', () => {
+  const nav = vi.fn();
+  const ui = render(<SidebarNavigation items={items} activeId="vms" onNavigate={nav} />);
+  expect(screen.getByRole('button', { name: 'Вычисления' })).toHaveAttribute(
+    'aria-expanded',
+    'true',
+  );
+  expect(screen.getByRole('button', { name: 'Инструменты' })).toHaveAttribute(
+    'aria-expanded',
+    'false',
+  );
+  ui.rerender(<SidebarNavigation items={items} activeId="reports" onNavigate={nav} />);
+  expect(screen.getByRole('button', { name: 'Вычисления' })).toHaveAttribute(
+    'aria-expanded',
+    'false',
+  );
+  expect(screen.getByRole('button', { name: 'Инструменты' })).toHaveAttribute(
+    'aria-expanded',
+    'true',
+  );
+  ui.rerender(<SidebarNavigation items={items} activeId="overview" onNavigate={nav} />);
+  expect(screen.getByRole('button', { name: 'Инструменты' })).toHaveAttribute(
+    'aria-expanded',
+    'false',
+  );
+});
+
 it('finds aliases inside closed groups without changing saved expansion, and restores it on Escape', async () => {
   const user = userEvent.setup(),
     expanded = vi.fn();

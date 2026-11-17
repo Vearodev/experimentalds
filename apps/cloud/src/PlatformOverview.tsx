@@ -145,11 +145,6 @@ export function PlatformOverview() {
       <div className="cloud-overview-grid">
         <Panel
           title={isGroup ? 'Виртуальные машины' : isAccount ? 'Ресурсные группы' : 'Аккаунты'}
-          subtitle={
-            isGroup
-              ? 'Вычисления в выбранной группе'
-              : 'От рабочей области — к её ресурсам и квотам'
-          }
           action={
             <Button
               size="sm"
@@ -157,7 +152,7 @@ export function PlatformOverview() {
               trailingIcon={<ArrowRight />}
               onClick={() => navigate(isGroup ? 'vms' : isAccount ? 'projects' : 'accounts')}
             >
-              Открыть реестр
+              {isGroup ? 'Все машины' : isAccount ? 'Все группы' : 'Все аккаунты'}
             </Button>
           }
         >
@@ -200,9 +195,11 @@ export function PlatformOverview() {
                       </StatusBadge>
                     </div>
                     <div>
-                      <span>{value.vms.length} ВМ</span>
                       <span>
-                        {value.cpu} / {value.cpuQuota} vCPU
+                        <strong>{value.vms.length}</strong> ВМ
+                      </span>
+                      <span>
+                        <strong>{value.cpu}</strong> / {value.cpuQuota} vCPU
                       </span>
                       <Button
                         size="sm"
@@ -210,13 +207,14 @@ export function PlatformOverview() {
                         trailingIcon={<ArrowRight />}
                         onClick={() => setScope(record.id)}
                       >
-                        В область
+                        Открыть ресурсы
                       </Button>
                     </div>
                     <Progress
                       label={`Квота CPU · ${record.name}`}
                       value={value.cpuQuota ? (value.cpu / value.cpuQuota) * 100 : 0}
                       compact
+                      hideLabel
                     />
                   </article>
                 );
@@ -227,6 +225,7 @@ export function PlatformOverview() {
         <div className="platform-overview-aside">
           <Panel
             title="Последние операции"
+            emphasis="quiet"
             action={
               <Button
                 size="sm"
@@ -239,11 +238,21 @@ export function PlatformOverview() {
             }
           >
             <div className="platform-event-list">
+              {!recent.length && (
+                <div className="resource-quiet">
+                  <Activity size={20} aria-hidden="true" />
+                  <div>
+                    <strong>В этой области пока нет операций</strong>
+                  </div>
+                </div>
+              )}
               {recent.map((task) => (
                 <a key={task.id} href={`#cloud/tasks/${task.id}`}>
                   <span>
                     <strong>{task.name}</strong>
-                    <small>{String(task.resource || '')}</small>
+                    {task.resource && !task.name.includes(String(task.resource)) && (
+                      <small>{String(task.resource)}</small>
+                    )}
                   </span>
                   <StatusBadge tone={platformTone(task.status)} subtle={task.status === 'SUCCESS'}>
                     {platformStatusLabels[task.status]}
@@ -252,7 +261,7 @@ export function PlatformOverview() {
               ))}
             </div>
           </Panel>
-          <Panel title="Связанные ресурсы" subtitle="Одна рабочая область для всех сервисов">
+          <Panel title="Связанные ресурсы" emphasis="quiet">
             <div className="platform-resource-shortcuts">
               {[
                 'volumes',
@@ -424,6 +433,7 @@ export function PlatformServicePage({ section }: { section: string }) {
         <PageTitle
           title={entity.label}
           description="Выделенные ресурсы и остаток квот по аккаунтам и ресурсным группам."
+          inlineDescription
           actions={
             <Button
               leadingIcon={<Download />}

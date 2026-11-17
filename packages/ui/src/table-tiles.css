@@ -1,0 +1,198 @@
+/* Alternate DataTable presentation. Data, actions and semantic states are shared. */
+.basis-data-table[data-view='tiles'] .basis-data-table__scroll {
+  background: var(--basis-comp-table-tile-canvas);
+}
+.basis-data-table__tile-bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--basis-sys-layer-sticky);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--basis-sys-space-md);
+  min-height: var(--basis-sys-control-md-height);
+  padding: var(--basis-sys-space-xs) var(--basis-comp-table-tile-padding);
+  box-sizing: border-box;
+  background: var(--basis-comp-table-background);
+  border-bottom: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+}
+.basis-data-table__tile-bar label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--basis-sys-space-sm);
+  cursor: pointer;
+  color: var(--basis-sys-color-text-primary);
+}
+.basis-data-table__tiles {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(100%, var(--basis-comp-table-tile-min-width)), 1fr)
+  );
+  gap: var(--basis-comp-table-tile-gap);
+  padding: var(--basis-comp-table-tile-gap);
+}
+.basis-data-table__tile {
+  min-width: 0;
+  border: var(--basis-sys-border-thin) solid var(--tile-border, var(--basis-comp-table-grid));
+  border-radius: var(--basis-comp-table-tile-radius);
+  background: var(--tile-background, var(--basis-comp-table-background));
+  box-shadow: inset var(--basis-sys-border-focus) 0 0 var(--tile-marker, transparent);
+  color: var(--basis-sys-color-text-primary);
+  font-size: var(--basis-comp-table-cell-font-size);
+  line-height: var(--basis-sys-type-leading-body);
+}
+.basis-data-table__tile[data-activatable='true'] {
+  cursor: pointer;
+}
+.basis-data-table__tile:hover,
+.basis-data-table__tile[data-preview='true'] {
+  --tile-background: var(--basis-sys-color-surface-hover);
+  --tile-border: var(--basis-sys-color-border-control);
+}
+.basis-data-table__tile[data-tone='error'] {
+  --tile-background: var(--basis-comp-table-row-error);
+  --tile-marker: var(--basis-sys-color-status-danger-marker);
+}
+.basis-data-table__tile[data-tone='warning'] {
+  --tile-background: var(--basis-comp-table-row-warning);
+  --tile-marker: var(--basis-sys-color-status-warning-marker);
+}
+.basis-data-table__tile[data-selected='true'] {
+  --tile-background: var(--basis-comp-table-selected);
+  --tile-border: var(--basis-sys-color-border-focus);
+}
+.basis-data-table__tile:focus-visible {
+  outline: var(--basis-sys-border-focus) solid var(--basis-sys-color-border-focus);
+  outline-offset: var(--basis-sys-focus-offset);
+}
+.basis-data-table__tile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--basis-sys-space-sm);
+  min-height: var(--basis-sys-control-md-height);
+  padding: var(--basis-comp-table-tile-padding) var(--basis-comp-table-tile-padding)
+    var(--basis-sys-space-sm);
+}
+.basis-data-table__tile-select,
+.basis-data-table__tile-actions {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+.basis-data-table__tile-identity {
+  min-width: 0;
+  flex: 1;
+  font-size: var(--basis-sys-type-size-body);
+  font-weight: var(--basis-sys-type-weight-semibold);
+  overflow-wrap: anywhere;
+}
+.basis-data-table__tile-identity a {
+  max-width: 100%;
+  color: var(--basis-sys-color-text-primary);
+}
+.basis-data-table__tile-identity a:hover {
+  color: var(--basis-sys-color-text-link);
+}
+.basis-data-table__tile-identity a > svg {
+  padding: var(--basis-sys-space-sm);
+  width: var(--basis-sys-control-sm-height);
+  height: var(--basis-sys-control-sm-height);
+  box-sizing: border-box;
+  background: var(--basis-sys-color-surface-subtle);
+  color: var(--basis-sys-color-text-link);
+  border-radius: var(--basis-sys-radius-control);
+}
+.basis-data-table__tile-fields {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--basis-sys-space-sm) var(--basis-sys-space-lg);
+  padding: var(--basis-sys-space-sm) var(--basis-comp-table-tile-padding)
+    var(--basis-comp-table-tile-padding);
+}
+.basis-data-table__tile-field {
+  min-width: 0;
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  align-content: start;
+  gap: var(--basis-sys-space-xs);
+  min-height: var(--basis-comp-table-row-height);
+}
+.basis-data-table__tile-field[data-span='full'] {
+  grid-column: 1 / -1;
+  grid-row: span 1;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto;
+  align-items: center;
+  min-height: var(--basis-sys-control-sm-height);
+  padding-bottom: var(--basis-sys-space-sm);
+  border-bottom: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+}
+.basis-data-table__tile-field[data-span='full'] dd {
+  justify-self: end;
+}
+.basis-data-table__tile-field dt {
+  color: var(--basis-sys-color-text-muted);
+  font-size: var(--basis-sys-type-size-caption);
+  line-height: var(--basis-sys-type-leading-caption);
+}
+.basis-data-table__tile-label {
+  display: inline;
+  cursor: help;
+  border-radius: var(--basis-sys-radius-small);
+}
+.basis-data-table__tile-label svg {
+  width: var(--basis-sys-icon-sm);
+  height: var(--basis-sys-icon-sm);
+  vertical-align: text-bottom;
+  margin-inline-start: var(--basis-sys-space-xs);
+}
+.basis-data-table__tile-field dd {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  align-self: baseline;
+}
+.basis-data-table__tile-label-end {
+  display: inline-block;
+  white-space: nowrap;
+}
+.basis-data-table__tile-field dd > a {
+  white-space: normal;
+}
+.basis-data-table__tile-field[data-emphasis='metric'] dd {
+  font-family: var(--basis-sys-type-family-data);
+  font-size: var(--basis-comp-table-tile-metric-size);
+  font-weight: var(--basis-sys-type-weight-data);
+  font-variant-numeric: tabular-nums;
+}
+.basis-data-table__tile-field[data-emphasis='metric'] {
+  border-top: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+  padding-top: var(--basis-sys-space-sm);
+}
+.basis-data-table__tile-field[data-emphasis='metric'] dd > * {
+  font: inherit;
+}
+.basis-data-table__tile-group > .basis-data-table__group-heading {
+  position: static;
+  width: auto;
+  padding-inline: var(--basis-sys-space-xs);
+  flex-wrap: wrap;
+  background: var(--basis-comp-table-group-background);
+  border-bottom: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+}
+.basis-data-table__tile-group + .basis-data-table__tile-group {
+  border-top: var(--basis-sys-border-thin) solid var(--basis-comp-table-grid);
+}
+@media (forced-colors: active) {
+  .basis-data-table__tile[data-selected='true'] {
+    border-color: Highlight;
+  }
+  .basis-data-table__tile[data-tone] {
+    border-inline-start-width: var(--basis-sys-border-focus);
+  }
+}

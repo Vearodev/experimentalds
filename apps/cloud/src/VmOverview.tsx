@@ -1,4 +1,4 @@
-import { ArrowUpRight, Pencil, Shield, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight, Pencil } from 'lucide-react';
 import { Button, StatusBadge, Tag } from '@basis/ui';
 import { busy, type VM } from '../domain';
 import {
@@ -27,6 +27,7 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
   const volumes = data.volumes.filter((v) => v.vmId === vm.id);
   const record = listPlatformRecords(data, 'vms').find((r) => r.id === vm.id)!;
   const accountId = groupAccountId(data, vm.projectId);
+  const tasks = data.tasks.filter((task) => task.vmIds.includes(vm.id));
   const running = vm.status === 'running';
   const measured = (percent: number) =>
     running ? (
@@ -94,20 +95,11 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
             note: `Подключено дисков: ${volumes.length} · ${volumes.filter((v) => v.boot).length} системный`,
             href: `#cloud/vms/${vm.id}/resources`,
           },
-          {
-            label: 'Снимки',
-            icon: 'Layers3',
-            value: vm.snapshots.length,
-            note: vm.snapshots.length
-              ? 'Сохранённые состояния машины'
-              : 'Сохранённых состояний пока нет',
-            href: `#cloud/vms/${vm.id}/snapshots`,
-          },
         ]}
       />
       <div className="platform-detail-grid resource-detail-grid">
         <Panel
-          title="Среда и размещение"
+          title="Конфигурация"
           action={
             <Button
               size="sm"
@@ -120,33 +112,8 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
             </Button>
           }
         >
-          <div className="vm-context-pair">
-            <ResourceConnection
-              icon="Building2"
-              label="Аккаунт"
-              name={platformRecordName(data, 'accounts', accountId)}
-              href={`#cloud/accounts/${accountId}`}
-            />
-            <ResourceConnection
-              icon="FolderKanban"
-              label="Ресурсная группа"
-              name={platformRecordName(data, 'projects', vm.projectId)}
-              href={`#cloud/projects/${vm.projectId}`}
-            />
-            <ResourceConnection
-              icon="MapPin"
-              label="Зона размещения"
-              name={zone?.name || 'Зона не назначена'}
-              href={zone ? `#cloud/clusters/${zone.id}` : undefined}
-            />
-            <ResourceConnection
-              icon="Server"
-              label="Вычислительный узел"
-              name={host?.name || 'Узел не назначен'}
-              href={host ? `#cloud/nodes/${host.id}` : undefined}
-            />
-          </div>
           <DetailFacts
+            layout="grid"
             items={[
               {
                 label: 'Образ системы',
@@ -168,18 +135,53 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
                   <span className="resource-unset">Не задана</span>
                 ),
               },
-              { label: 'Чипсет', value: String(record.chipset || '—') },
+              {
+                label: 'Чипсет',
+                value: <span className="cloud-mono">{String(record.chipset || '—')}</span>,
+              },
+              {
+                label: 'Метки',
+                value: vm.tags.length ? (
+                  <span className="platform-tags">
+                    {vm.tags.map((tag) => (
+                      <Tag key={tag}>{tag}</Tag>
+                    ))}
+                  </span>
+                ) : (
+                  <span className="resource-unset">Не назначены</span>
+                ),
+              },
             ]}
           />
-          <div className="vm-labels">
-            <small>Метки</small>
-            {vm.tags.length ? (
-              vm.tags.map((tag) => <Tag key={tag}>{tag}</Tag>)
-            ) : (
-              <span className="resource-unset">Не назначены</span>
-            )}
-          </div>
-          <ResourceIdentity row={vm} />
+          <section className="resource-subsection">
+            <h3>Рабочая область и размещение</h3>
+            <div className="vm-context-pair">
+              <ResourceConnection
+                icon="Building2"
+                label="Аккаунт"
+                name={platformRecordName(data, 'accounts', accountId)}
+                href={accountId ? `#cloud/accounts/${accountId}` : undefined}
+              />
+              <ResourceConnection
+                icon="FolderKanban"
+                label="Ресурсная группа"
+                name={platformRecordName(data, 'projects', vm.projectId)}
+                href={`#cloud/projects/${vm.projectId}`}
+              />
+              <ResourceConnection
+                icon="MapPin"
+                label="Зона размещения"
+                name={zone?.name || 'Зона не назначена'}
+                href={zone ? `#cloud/clusters/${zone.id}` : undefined}
+              />
+              <ResourceConnection
+                icon="Server"
+                label="Вычислительный узел"
+                name={host?.name || 'Узел не назначен'}
+                href={host ? `#cloud/nodes/${host.id}` : undefined}
+              />
+            </div>
+          </section>
         </Panel>
         <aside className="platform-detail-aside">
           <Panel
@@ -203,6 +205,7 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
               {vm.ip && <CopyValue value={vm.ip} label="IP-адрес" />}
             </div>
             <DetailFacts
+              layout="grid"
               items={[
                 {
                   label: 'Сеть ViNS',
@@ -214,13 +217,14 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
                 },
                 {
                   label: 'Назначение адреса',
-                  value: vm.dhcp ? 'Автоматическое · DHCP' : 'Статическое',
+                  value: vm.dhcp ? 'DHCP' : 'Статическое',
                 },
               ]}
             />
           </Panel>
           <Panel
-            title="Защита и доступ"
+            title="Защита"
+            emphasis="quiet"
             action={
               <Button
                 variant="ghost"
@@ -228,27 +232,29 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
                 trailingIcon={<ArrowUpRight />}
                 onClick={() => navigate(`vms/${vm.id}/security`)}
               >
-                Безопасность
+                Подробнее
               </Button>
             }
           >
-            <div className="vm-protection" data-enabled={vm.backup}>
-              {vm.backup ? <ShieldCheck size={23} /> : <Shield size={23} />}
-              <div>
-                <strong>Политика защиты</strong>
-                <p>{vm.backup ? 'Включена' : 'Не назначена'}</p>
-              </div>
-              <Button
-                size="sm"
-                variant="ghost"
-                disabled={busy(vm) || Boolean(canChangePlatform(data, 'vms'))}
-                onClick={onEdit}
-              >
-                {vm.backup ? 'Изменить' : 'Настроить'}
-              </Button>
-            </div>
             <DetailFacts
+              layout="grid"
               items={[
+                {
+                  label: 'Политика защиты',
+                  value: vm.backup ? (
+                    <StatusBadge tone="success">Включена</StatusBadge>
+                  ) : (
+                    <span className="resource-unset">Не назначена</span>
+                  ),
+                },
+                {
+                  label: 'Снимки',
+                  value: (
+                    <a href={`#cloud/vms/${vm.id}/snapshots`} className="cloud-number">
+                      {vm.snapshots.length}
+                    </a>
+                  ),
+                },
                 {
                   label: 'Группа безопасности',
                   value: record.securityGroupId ? (
@@ -261,10 +267,10 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
                 },
                 {
                   label: 'Изменения',
-                  value: (
-                    <StatusBadge tone={record.locked ? 'warning' : 'neutral'}>
-                      {record.locked ? 'Заблокированы' : 'Разрешены'}
-                    </StatusBadge>
+                  value: record.locked ? (
+                    <StatusBadge tone="warning">Заблокированы</StatusBadge>
+                  ) : (
+                    'Разрешены'
                   ),
                 },
               ]}
@@ -272,15 +278,9 @@ export function VmOverview({ vm, onEdit }: { vm: VM; onEdit: () => void }) {
           </Panel>
         </aside>
       </div>
-      <div className="platform-tab-content">
-        <RecentVmTasks
-          tasks={data.tasks.filter((t) => t.vmIds.includes(vm.id))}
-          href={`vms/${vm.id}/activity`}
-        />
-      </div>
-      <p className="resource-demo-note">
-        Показатели нагрузки демонстрационные. Конфигурация и связи соответствуют данным демо.
-      </p>
+      {tasks.length > 0 && <RecentVmTasks tasks={tasks} href={`vms/${vm.id}/activity`} />}
+      <ResourceIdentity row={vm} />
+      <p className="resource-demo-note">Показатели нагрузки — демонстрационные.</p>
     </div>
   );
 }

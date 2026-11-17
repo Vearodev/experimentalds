@@ -53,15 +53,20 @@ export function PageTitle({
   title,
   description,
   actions,
+  inlineDescription = false,
 }: {
   resourceType?: { label: string; href: string };
   title: ReactNode;
   description?: string;
   actions?: ReactNode;
+  inlineDescription?: boolean;
 }) {
   const navigation = useContext(PageNavigationContext);
   return (
-    <header className="cloud-page-heading">
+    <header
+      className="cloud-page-heading"
+      data-inline-description={(inlineDescription && !resourceType && !navigation) || undefined}
+    >
       <div className="cloud-page-identity" data-return={Boolean(navigation) || undefined}>
         {resourceType && (
           <a
@@ -101,15 +106,17 @@ export function Panel({
   action,
   children,
   className = '',
+  emphasis = 'default',
 }: {
   title: string;
   subtitle?: string;
   action?: ReactNode;
   children: ReactNode;
   className?: string;
+  emphasis?: 'default' | 'quiet';
 }) {
   return (
-    <section className={`cloud-panel ${className}`}>
+    <section className={`cloud-panel ${className}`} data-emphasis={emphasis}>
       <header>
         <div>
           <h2>{title}</h2>

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from 'react';
-import { ArrowUpRight, Check, CircleDashed, Copy, Info, Clock3 } from 'lucide-react';
+import { ArrowUpRight, Check, Copy, Info, Clock3 } from 'lucide-react';
 import { Button, IconButton, Progress, StatusBadge, Tag, Tooltip } from '@basis/ui';
 import { platformEntity, platformStatusLabels, platformTone } from '../platform-catalog';
 import { listPlatformRecords, platformRecordName, recordVisible } from '../platform-model';
@@ -17,6 +17,8 @@ import {
   resourceFieldGroups,
   resourceHighlights,
   relatedResourceRows,
+  resourceContextFields,
+  resourceSectionTitle,
 } from './resource-presentation';
 import './resource-details.css';
 
@@ -47,8 +49,14 @@ export function PlatformValueView({
   if (field.kind === 'boolean')
     return (
       <span className="resource-boolean" data-enabled={Boolean(value)}>
-        {value ? <Check size={14} /> : <CircleDashed size={14} />}
-        {value ? 'Да' : 'Нет'}
+        {value && <Check size={14} />}
+        {['cpuPin', 'hugepages'].includes(field.key)
+          ? value
+            ? 'Включено'
+            : 'Отключено'
+          : value
+            ? 'Да'
+            : 'Нет'}
       </span>
     );
   if (field.kind === 'date')
@@ -76,7 +84,25 @@ export function PlatformValueView({
     );
   const option = field.options?.find((o) => o.value === String(value));
   return (
-    <span className={field.kind === 'ip' ? 'cloud-mono' : undefined}>
+    <span
+      className={
+        field.kind === 'ip' ||
+        [
+          'cidr',
+          'gateway',
+          'startIp',
+          'endIp',
+          'ip',
+          'address',
+          'mac',
+          'pciAddress',
+          'chipset',
+          'endpoint',
+        ].includes(field.key)
+          ? 'cloud-mono'
+          : undefined
+      }
+    >
       {option && option.label !== option.value
         ? option.label
         : platformStatusLabels[String(value)] || option?.label || String(value)}
@@ -109,14 +135,26 @@ export function CopyValue({ value, label }: { value: string; label: string }) {
 export function DetailFacts({
   items,
   descriptions = false,
+  layout = 'rows',
 }: {
-  items: { label: string; value: ReactNode; description?: string }[];
+  items: {
+    label: string;
+    value: ReactNode;
+    description?: string;
+    featured?: boolean;
+    wide?: boolean;
+  }[];
   descriptions?: boolean;
+  layout?: 'rows' | 'grid';
 }) {
   return (
-    <dl className="resource-facts" data-descriptions={descriptions}>
+    <dl className="resource-facts" data-descriptions={descriptions} data-layout={layout}>
       {items.map((item) => (
-        <div key={item.label}>
+        <div
+          key={item.label}
+          data-featured={item.featured || undefined}
+          data-wide={item.wide || undefined}
+        >
           <dt>
             <span>{item.label}</span>
             {!descriptions && item.description && (
@@ -184,6 +222,8 @@ export function PlatformFacts({
   descriptions = false,
   grouped = false,
   omit = [],
+  layout = 'rows',
+  featured,
 }: {
   entity: PlatformEntity;
   row: PlatformRecord;
@@ -192,6 +232,8 @@ export function PlatformFacts({
   descriptions?: boolean;
   grouped?: boolean;
   omit?: string[];
+  layout?: 'rows' | 'grid';
+  featured?: string;
 }) {
   const { data } = useCloud();
   const fields = entity.fields.filter(
@@ -205,8 +247,11 @@ export function PlatformFacts({
   const render = (fields: PlatformField[]) => (
     <DetailFacts
       descriptions={descriptions}
+      layout={layout}
       items={fields.map((field) => ({
         label: field.label,
+        featured: field.key === featured,
+        wide: field.kind === 'textarea' || field.kind === 'tags',
         description: [field.label + '.', field.label + ', ' + field.unit + '.'].includes(
           field.description,
         )
@@ -248,11 +293,19 @@ export function ResourceMetrics({
   }[];
 }) {
   if (!items.length) return null;
+  const hasNotes = items.some((item) => item.note !== undefined);
+  const hasProgress = items.some((item) => item.progress !== undefined);
+  const rows = 2 + Number(hasNotes) + Number(hasProgress);
   return (
     <div
       className="resource-metrics"
       aria-label="Ключевые параметры"
-      style={{ '--resource-metric-count': items.length } as CSSProperties}
+      style={
+        {
+          '--resource-metric-count': items.length,
+          '--resource-metric-rows': rows,
+        } as CSSProperties
+      }
     >
       {items.map((item) => (
         <article key={item.label}>
@@ -275,13 +328,15 @@ export function ResourceMetrics({
             </div>
           )}
           {item.progress !== undefined && (
-            <Progress
-              label={item.progressLabel || 'Использование'}
-              value={item.progress}
-              compact
-              hideLabel
-              status="active"
-            />
+            <div className="resource-metric-progress">
+              <Progress
+                label={item.progressLabel || item.label}
+                value={item.progress}
+                compact
+                hideLabel
+                status="active"
+              />
+            </div>
           )}
         </article>
       ))}
@@ -328,6 +383,7 @@ export function RecentVmTasks({ tasks, href }: { tasks: Task[]; href: string }) 
   return (
     <Panel
       title="Последние операции"
+      emphasis="quiet"
       action={
         <Button
           size="sm"
@@ -370,13 +426,7 @@ export function RecentVmTasks({ tasks, href }: { tasks: Task[]; href: string }) 
           ))}
         </ol>
       ) : (
-        <div className="resource-quiet">
-          <Clock3 size={20} />
-          <div>
-            <strong>Операций пока нет</strong>
-            <p>Здесь появятся запуск, изменения конфигурации и другие действия с машиной.</p>
-          </div>
-        </div>
+        <p className="resource-empty-note">Операций с этой машиной пока нет.</p>
       )}
     </Panel>
   );
@@ -416,86 +466,168 @@ export function ResourceOverview({
     .slice(0, 3);
   const activity = !['audits', 'jobs', 'tasks', 'recycle-bin', 'incidents'].includes(entity.id);
   const scopeEntity = ['accounts', 'projects'].includes(entity.id);
-  const related = relations.length > 0 && (
-    <Panel title="Связанные ресурсы">
-      <div className="resource-relations">
-        {relations.map(({ tab, rows }) => (
-          <a key={tab.id} href={`#cloud/${entity.id}/${row.id}/${tab.id}`}>
-            <span className="resource-connection-icon">
-              <PlatformIcon name={platformEntity(tab.entity!)?.icon} size={18} />
-            </span>
-            <span>
-              <strong>{tab.label}</strong>
-              <small>
-                {rows.length
-                  ? rows
-                      .slice(0, 2)
-                      .map((r) => r.name)
-                      .join(' · ') + (rows.length > 2 ? ` и ещё ${rows.length - 2}` : '')
-                  : 'Пока не добавлены'}
-              </small>
-            </span>
-            <b>{rows.length}</b>
-            <ArrowUpRight size={15} />
-          </a>
+  const contextFields = resourceContextFields(entity);
+  const relatedMetrics =
+    (
+      {
+        clusters: ['computes', 'networks'],
+        bservices: ['groups', 'snapshots'],
+        'security-groups': ['computes'],
+      } as Record<string, string[]>
+    )[entity.id] || [];
+  const fieldOmissions = [
+    ...highlights.map((h) => h.key),
+    ...contextFields.map((field) => field.key),
+    ...(scopeEntity ? ['cpuQuota', 'memoryQuota', 'diskQuota'] : []),
+    ...(entity.id === 'volumes'
+      ? [
+          'readIops',
+          'writeIops',
+          'readBandwidth',
+          'writeBandwidth',
+          ...(!row.replicaPolicyId ? ['replicaPolicyId'] : []),
+        ]
+      : []),
+  ];
+  const hasProperties = entity.fields.some(
+    (field) =>
+      field.kind !== 'password' &&
+      !['description', 'createdAt', ...fieldOmissions].includes(field.key),
+  );
+  const contextInMain = !scopeEntity && !hasProperties && relations.length === 0;
+  const hasAside =
+    scopeEntity || (!contextInMain && contextFields.length > 0) || (activity && events.length > 0);
+  const context = contextFields.length > 0 && (
+    <Panel title="Размещение и принадлежность">
+      <div className="resource-context-list">
+        {contextFields.map((field) => (
+          <ResourceConnection
+            key={field.key}
+            icon={platformEntity(field.reference!)?.icon || 'Layers3'}
+            label={field.label}
+            name={
+              row[field.key]
+                ? platformRecordName(data, field.reference!, row[field.key])
+                : 'Не назначено'
+            }
+            href={row[field.key] ? `#cloud/${field.reference}/${row[field.key]}` : undefined}
+          />
         ))}
       </div>
     </Panel>
   );
+  const related = relations.length > 0 && (
+    <div
+      className="resource-relations"
+      data-inventory={scopeEntity || relations.length > 1 || undefined}
+    >
+      {relations.map(({ tab, rows }) => (
+        <a key={tab.id} href={`#cloud/${entity.id}/${row.id}/${tab.id}`}>
+          <span className="resource-connection-icon">
+            <PlatformIcon name={platformEntity(tab.entity!)?.icon} size={18} />
+          </span>
+          <span>
+            <strong>{tab.label}</strong>
+            <small title={rows.map((r) => r.name).join(' · ')}>
+              {rows.length
+                ? rows
+                    .slice(0, 2)
+                    .map((r) => r.name)
+                    .join(' · ') + (rows.length > 2 ? ` и ещё ${rows.length - 2}` : '')
+                : 'Нет ресурсов'}
+            </small>
+          </span>
+          <b>{rows.length}</b>
+          <ArrowUpRight size={15} />
+        </a>
+      ))}
+    </div>
+  );
   return (
     <div className="resource-overview">
+      {children}
       <ResourceMetrics
-        items={highlights.map(({ key, icon, field }) => ({
-          label: field.label,
-          icon,
-          value: <PlatformValueView state={data} field={field} value={row[key]} />,
-          compactValue: field.kind !== 'number',
-        }))}
+        items={[
+          ...highlights.map(({ key, icon, field }) => ({
+            label: field.label,
+            icon,
+            value: <PlatformValueView state={data} field={field} value={row[key]} />,
+            compactValue: field.kind !== 'number',
+          })),
+          ...relations
+            .filter(({ tab }) => relatedMetrics.includes(tab.id))
+            .map(({ tab, rows }) => ({
+              label: tab.label,
+              icon: platformEntity(tab.entity!)?.icon || 'Layers3',
+              value: rows.length,
+              href: `#cloud/${entity.id}/${row.id}/${tab.id}`,
+            })),
+        ]}
       />
-      <div className="platform-detail-grid resource-detail-grid">
+      <div className="platform-detail-grid resource-detail-grid" data-aside={hasAside}>
         <div className="resource-detail-main">
-          <Panel title={entity.group === 'operations' ? 'Сведения о записи' : 'Конфигурация'}>
-            <PlatformFacts
-              entity={entity}
-              row={row}
-              grouped
-              omit={[
-                ...highlights.map((h) => h.key),
-                ...(['accounts', 'projects'].includes(entity.id)
-                  ? ['cpuQuota', 'memoryQuota', 'diskQuota']
-                  : []),
-                ...(entity.id === 'volumes'
-                  ? [
-                      'readIops',
-                      'writeIops',
-                      'readBandwidth',
-                      'writeBandwidth',
-                      ...(!row.replicaPolicyId ? ['replicaPolicyId'] : []),
-                    ]
-                  : []),
-              ]}
-            />
-          </Panel>
-          {scopeEntity && related}
-        </div>
-        <aside className="platform-detail-aside">
-          {children}
-          {!scopeEntity && related}
-          {activity && (
+          {contextInMain && context}
+          {!scopeEntity && hasProperties && (
+            <Panel title={resourceSectionTitle(entity)}>
+              <PlatformFacts
+                entity={entity}
+                row={row}
+                grouped
+                identity={false}
+                layout="grid"
+                omit={fieldOmissions}
+              />
+              {related && (
+                <section className="resource-subsection">
+                  <h3>Связанные ресурсы</h3>
+                  {related}
+                </section>
+              )}
+            </Panel>
+          )}
+          {(scopeEntity || !hasProperties) && related && (
             <Panel
-              title="Последние события"
-              action={
-                <Button
-                  size="sm"
-                  variant="ghost"
-                  trailingIcon={<ArrowUpRight />}
-                  onClick={() => navigate(`${entity.id}/${row.id}/activity`)}
-                >
-                  Аудит
-                </Button>
+              title={
+                scopeEntity
+                  ? entity.id === 'accounts'
+                    ? 'Ресурсы аккаунта'
+                    : 'Ресурсы группы'
+                  : 'Связанные ресурсы'
               }
             >
-              {events.length ? (
+              {related}
+            </Panel>
+          )}
+        </div>
+        {hasAside && (
+          <aside className="platform-detail-aside">
+            {scopeEntity && (
+              <Panel title="Параметры области">
+                <PlatformFacts
+                  entity={entity}
+                  row={row}
+                  identity={false}
+                  layout="grid"
+                  omit={fieldOmissions}
+                />
+              </Panel>
+            )}
+            {!contextInMain && context}
+            {activity && events.length > 0 && (
+              <Panel
+                title="Последние события"
+                emphasis="quiet"
+                action={
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    trailingIcon={<ArrowUpRight />}
+                    onClick={() => navigate(`${entity.id}/${row.id}/activity`)}
+                  >
+                    Аудит
+                  </Button>
+                }
+              >
                 <ol className="resource-timeline">
                   {events.map((event) => (
                     <li key={event.id}>
@@ -510,30 +642,12 @@ export function ResourceOverview({
                     </li>
                   ))}
                 </ol>
-              ) : (
-                <div className="resource-quiet">
-                  <Clock3 size={20} />
-                  <div>
-                    <strong>Событий пока нет</strong>
-                    <p>Здесь будут последние изменения ресурса.</p>
-                  </div>
-                </div>
-              )}
-            </Panel>
-          )}
-          {!activity && !relations.length && (
-            <Panel title="Контекст записи">
-              <div className="resource-quiet">
-                <PlatformIcon name={entity.icon} size={22} />
-                <div>
-                  <strong>{platformStatusLabels[row.status] || row.status}</strong>
-                  <p>{row.description || entity.description}</p>
-                </div>
-              </div>
-            </Panel>
-          )}
-        </aside>
+              </Panel>
+            )}
+          </aside>
+        )}
       </div>
+      <ResourceIdentity row={row} />
     </div>
   );
 }

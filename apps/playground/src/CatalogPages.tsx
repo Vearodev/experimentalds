@@ -453,6 +453,7 @@ const projectOptions: SelectOption[] = [
 ].map((label) => ({ label, value: label, icon: <Folder /> }));
 function SelectsPage() {
   const [region, setRegion] = useState('msk'),
+    [context, setContext] = useState('all'),
     [projects, setProjects] = useState<string[]>(['Production', 'Staging']),
     [empty, setEmpty] = useState('');
   return (
@@ -566,7 +567,30 @@ function SelectsPage() {
         </div>
       </section>
       <section className="ds-section">
-        <SectionHeading number="02" title="Правила выбора" />
+        <SectionHeading number="02" title="Выбор контекста" />
+        <Example
+          title="Спокойный селект для навигации"
+          note="Без постоянной рамки и отдельной подписи. Название остаётся доступным скринридеру; наведение, фокус и открытое меню различимы. В формах используем обычный селект с видимой подписью."
+        >
+          <div className="context-select-demo">
+            <Select
+              label="Рабочая область"
+              hideLabel
+              variant="ghost"
+              value={context}
+              onValueChange={setContext}
+              options={[
+                { value: 'all', label: 'Вся платформа', icon: <Cloud /> },
+                { value: 'prod', label: 'Production', icon: <Folder /> },
+                { value: 'dev', label: 'Development', icon: <Folder /> },
+              ]}
+              searchable
+            />
+          </div>
+        </Example>
+      </section>
+      <section className="ds-section">
+        <SectionHeading number="03" title="Правила выбора" />
         <Rules
           items={[
             ['Одиночный выбор', 'Применяется сразу. Меню закрывается, фокус возвращается на поле.'],

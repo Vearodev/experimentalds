@@ -18,6 +18,7 @@ import {
   Button,
   IconButton,
   Message,
+  Menu,
   Select,
   SidebarNavigation,
   StatusBadge,
@@ -64,7 +65,13 @@ const menuItems: SidebarItem[] = [
 export function MainNavigationPage() {
   const design = useDesign();
   const [compact, setCompact] = useState(false),
-    [active, setActive] = useState('vms');
+    [active, setActive] = useState('vms'),
+    [scope, setScope] = useState('all');
+  const scopes = [
+    { value: 'all', label: 'Вся платформа', icon: <Cloud /> },
+    { value: 'production', label: 'Production', icon: <FolderKanban /> },
+    { value: 'development', label: 'Development', icon: <FolderKanban /> },
+  ];
   const activeLabel = menuItems
     .flatMap((item) => item.children || [item])
     .find((item) => item.id === active)?.label;
@@ -91,9 +98,33 @@ export function MainNavigationPage() {
         />
         <div className="navigation-lab" data-compact={compact}>
           <aside className="navigation-lab__sidebar">
-            <div className="navigation-lab__brand">
-              <Cloud />
-              {!compact && <strong>Basis statix</strong>}
+            <div className="navigation-lab__context">
+              {compact ? (
+                <Menu
+                  compact
+                  size="md"
+                  label="Рабочая область"
+                  icon={<Cloud />}
+                  placement="right"
+                  items={scopes.map((option) => ({
+                    id: option.value,
+                    label: option.label,
+                    icon: option.icon,
+                    current: option.value === scope,
+                    onSelect: () => setScope(option.value),
+                  }))}
+                />
+              ) : (
+                <Select
+                  label="Рабочая область"
+                  hideLabel
+                  variant="ghost"
+                  searchable
+                  value={scope}
+                  onValueChange={setScope}
+                  options={scopes}
+                />
+              )}
             </div>
             <SidebarNavigation
               items={menuItems}
@@ -114,7 +145,9 @@ export function MainNavigationPage() {
             </Tooltip>
           </aside>
           <div className="navigation-lab__workspace">
-            <span className="eyebrow">Рабочая область / Production</span>
+            <span className="eyebrow">
+              {scopes.find((option) => option.value === scope)?.label}
+            </span>
             <h2>{activeLabel}</h2>
             <p>
               Найдите «ВМ», «k8s» или «Управление». Поиск видит закрытые группы и сохраняет их

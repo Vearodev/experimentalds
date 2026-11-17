@@ -206,6 +206,7 @@ function CloudShell() {
             <Tooltip content={'Рабочая область: ' + scopeLabel(data, scope)}>
               <Menu
                 compact
+                size="md"
                 placement="right"
                 label="Рабочая область"
                 icon={<Cloud />}
@@ -223,6 +224,9 @@ function CloudShell() {
           ) : (
             <Select
               label="Рабочая область"
+              hideLabel
+              variant="ghost"
+              searchable
               value={scope}
               onValueChange={changeScope}
               options={scopeOptions}
@@ -236,10 +240,6 @@ function CloudShell() {
           activeId={active}
           compact={compact}
           searchable
-          expanded={navigationPreferences.expanded}
-          onExpandedChange={(expanded) =>
-            setNavigationPreferences((value) => ({ ...value, expanded }))
-          }
           onNavigate={(item) => {
             navigate(item.id);
             setMobile(false);
@@ -249,12 +249,12 @@ function CloudShell() {
       </div>
       <div className="cloud-sidebar-bottom" data-compact={compact}>
         {!compact && (
-          <span className="cloud-sidebar-status">
-            <i />
-            <span>
-              Демо<small>0.7.5</small>
+          <Tooltip content="Демонстрационная среда · версия 0.7.5">
+            <span className="cloud-sidebar-status">
+              <i />
+              <span>Демо</span>
             </span>
-          </span>
+          </Tooltip>
         )}
         <div className="cloud-sidebar-tools">
           <Tooltip content="Среда демонстрации">

@@ -5,6 +5,7 @@ import {
   ResourceOverview,
   DetailFacts,
   CopyValue,
+  ResourceMetrics,
 } from './ResourceDetails';
 import { csvCell } from './csv';
 import { ApiPermissions, PlatformRecordSettings } from './PlatformSettings';
@@ -725,6 +726,7 @@ export function PlatformPage({
     <>
       <PageTitle
         resourceType={row ? { label: entity.singular, href: '#cloud/' + entity.id } : undefined}
+        inlineDescription={!row}
         title={
           row ? (
             <span className="platform-title">
@@ -742,13 +744,14 @@ export function PlatformPage({
           <>
             {row && ['accounts', 'projects'].includes(entityId) && (
               <Button
+                variant="primary"
                 leadingIcon={<Check />}
                 onClick={() => {
                   setScope(row.id);
                   navigate('overview');
                 }}
               >
-                Работать в этой области
+                Открыть ресурсы
               </Button>
             )}
             {row
@@ -869,55 +872,61 @@ function QuotaSummary({ id }: { id: string }) {
     listPlatformRecords(data, 'accounts').find((r) => r.id === id) ||
     listPlatformRecords(data, 'projects').find((r) => r.id === id);
   return (
-    <Panel
-      className="resource-settings"
-      title="Выделено и доступно"
-      subtitle="Квоты учитывают выделенные ресурсы всех машин, включая выключенные."
-    >
-      <div className="platform-quota-list">
-        {[
+    <section className="resource-quota-summary" aria-label="Ресурсные квоты">
+      <ResourceMetrics
+        items={[
           {
             label: 'Процессоры',
+            icon: 'Cpu',
             value: usage.cpu,
             total: Number(owner?.cpuQuota || 0),
             unit: 'vCPU',
           },
           {
             label: 'Оперативная память',
+            icon: 'CircuitBoard',
             value: usage.memory,
             total: Number(owner?.memoryQuota || 0),
             unit: 'GiB',
           },
-          { label: 'Диски', value: usage.disk, total: Number(owner?.diskQuota || 0), unit: 'GiB' },
-        ].map((q) => (
-          <div key={q.label}>
-            <div>
-              <span>
-                {q.label}
-                {q.value > q.total * 0.85 && (
-                  <StatusBadge tone={q.value > q.total ? 'danger' : 'warning'}>
-                    {q.value > q.total ? 'Превышена' : 'Почти исчерпана'}
-                  </StatusBadge>
-                )}
+          {
+            label: 'Диски',
+            icon: 'HardDrive',
+            value: usage.disk,
+            total: Number(owner?.diskQuota || 0),
+            unit: 'GiB',
+          },
+        ].map((q) => ({
+          label: q.label,
+          icon: q.icon,
+          value: (
+            <>
+              {q.value.toLocaleString('ru-RU')}
+              <small>{q.unit}</small>
+            </>
+          ),
+          note: (
+            <>
+              Лимит <b className="cloud-number">{q.total.toLocaleString('ru-RU')}</b>
+              <span className="resource-metric-remainder">
+                {q.value > q.total ? 'Превышен на' : 'Доступно'}{' '}
+                <b className="cloud-number">
+                  {Math.abs(q.total - q.value).toLocaleString('ru-RU')}
+                </b>
               </span>
-              <strong>
-                {q.value.toLocaleString('ru-RU')}{' '}
-                <small>
-                  / {q.total.toLocaleString('ru-RU')} {q.unit}
-                </small>
-              </strong>
-            </div>
-            <Progress
-              value={q.total ? (q.value / q.total) * 100 : 0}
-              label={q.label}
-              hideLabel
-              compact
-              status="active"
-            />
-          </div>
-        ))}
-      </div>
-    </Panel>
+              {q.value > q.total * 0.85 && (
+                <StatusBadge tone={q.value > q.total ? 'danger' : 'warning'}>
+                  {q.value > q.total ? 'Превышена' : 'Почти исчерпана'}
+                </StatusBadge>
+              )}
+            </>
+          ),
+          progress: q.total ? (q.value / q.total) * 100 : 0,
+          progressLabel: `Использовано: ${q.label.toLocaleLowerCase()}`,
+        }))}
+      />
+      <p className="resource-caption">Выделенные ресурсы всех машин, включая выключенные.</p>
+    </section>
   );
 }
 function ResourceScenario({
@@ -969,6 +978,7 @@ function ResourceScenario({
           />
         </div>
         <DetailFacts
+          layout="grid"
           items={[
             {
               label: 'Сеть',
@@ -1053,18 +1063,20 @@ function ResourceScenario({
   return (
     <Panel
       title={entity.tabs?.find((t) => t.id === tab)?.label || 'Конфигурация'}
-      subtitle={row.description ? String(row.description) : entity.description}
+      action={
+        mutable(entity) && (
+          <Button
+            size="sm"
+            leadingIcon={<Pencil />}
+            disabled={Boolean(canChangePlatform(data!, entity.id, row))}
+            onClick={(event) => onEdit(event.currentTarget)}
+          >
+            Изменить параметры
+          </Button>
+        )
+      }
     >
-      <PlatformFacts entity={entity} row={row} grouped />
-      {mutable(entity) && (
-        <Button
-          leadingIcon={<Pencil />}
-          disabled={Boolean(canChangePlatform(data!, entity.id, row))}
-          onClick={(event) => onEdit(event.currentTarget)}
-        >
-          Изменить параметры
-        </Button>
-      )}
+      <PlatformFacts entity={entity} row={row} grouped layout="grid" />
     </Panel>
   );
 }

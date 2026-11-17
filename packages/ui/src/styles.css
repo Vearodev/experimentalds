@@ -6,7 +6,11 @@
 @import './extended.css';
 
 @import './table-tools.css';
+@import './table-filter-presets.css';
 @import './table-grouping.css';
 @import './table-states.css';
+@import './table-tiles.css';
+@import './table-paging.css';
+@import './table-resize.css';
 @import './workspace-navigation.css';
 @import './console-workspace.css';

@@ -461,6 +461,7 @@ export function StoragePage() {
     <>
       <PageTitle
         title="Диски"
+        inlineDescription
         description={`${rows.reduce((n, v) => n + v.size, 0).toLocaleString('ru-RU')} GiB выделено · системные и дополнительные тома`}
         actions={
           <Button variant="primary" leadingIcon={<Plus />} onClick={() => setCreate(true)}>
@@ -670,6 +671,7 @@ export function NetworksPage() {
     <>
       <PageTitle
         title="Сети"
+        inlineDescription
         description={`Приватная инфраструктура · ${rows.reduce((n, r) => n + vmCount(r.id), 0)} подключений к машинам`}
         actions={
           <Button variant="primary" leadingIcon={<Plus />} onClick={() => setCreate(true)}>

@@ -4,6 +4,9 @@ import {
   type TableGroupRule,
   type TableGrouping,
   type DataColumn,
+  type DataTableView,
+  type TablePagingMode,
+  type TableNavigationPlacement,
   type SortState,
   type TableFilterRule,
   type TableFilterKind,
@@ -25,6 +28,11 @@ export type RegistryColumn<T> = Omit<DataColumn<T>, 'filter'> & {
 export type Operator = TableFilterOperator;
 export type Rule = TableFilterRule;
 export type RegistryView = {
+  display: DataTableView;
+  paging: TablePagingMode;
+  navigation: TableNavigationPlacement;
+  pageSize: number;
+  columnWidths: Record<string, number>;
   query: string;
   filters: Rule[];
   sorts: SortState[];
@@ -236,6 +244,11 @@ export function defaultView<T>(
   sorts: SortState[] = [],
 ): RegistryView {
   return {
+    display: 'table',
+    paging: 'pages',
+    navigation: 'both',
+    pageSize: 12,
+    columnWidths: {},
     query: '',
     filters: [],
     sorts,
@@ -263,6 +276,27 @@ export function restoreView<T>(
         if (!visible.includes(c.id)) visible.push(c.id);
       });
     return {
+      display: value.display === 'tiles' ? 'tiles' : 'table',
+      paging: value.paging === 'infinite' ? 'infinite' : 'pages',
+      navigation: ['top', 'bottom', 'both'].includes(value.navigation) ? value.navigation : 'both',
+      pageSize: [12, 24, 48, 96].includes(value.pageSize) ? value.pageSize : 12,
+      columnWidths:
+        value.columnWidths &&
+        typeof value.columnWidths === 'object' &&
+        !Array.isArray(value.columnWidths)
+          ? Object.fromEntries(
+              Object.entries(value.columnWidths)
+                .filter(
+                  ([id, width]) =>
+                    columns.some((c) => c.id === id && c.utility !== 'actions') &&
+                    typeof width === 'number' &&
+                    Number.isFinite(width) &&
+                    width >= 64 &&
+                    width <= 4096,
+                )
+                .map(([id, width]) => [id, Number(width)]),
+            )
+          : {},
       query: typeof value.query === 'string' ? value.query : '',
       filters: Array.isArray(value.filters)
         ? value.filters.filter(

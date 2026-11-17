@@ -305,6 +305,7 @@ export function ProjectsPage() {
     <>
       <PageTitle
         title="Проекты"
+        inlineDescription
         description="Рабочие области с собственными квотами, сетями, машинами и участниками."
         actions={
           <Button variant="primary" leadingIcon={<Plus />} onClick={() => setCreate(true)}>
@@ -458,6 +459,7 @@ export function ClustersPage({ id }: { id?: string }) {
       <>
         <PageTitle
           title="Кластеры и хосты"
+          inlineDescription
           description="Размещение ресурсов, доступная ёмкость и состояние физических узлов."
         />
         <div className="cloud-cluster-grid">
@@ -719,6 +721,7 @@ export function TasksPage() {
     <>
       <PageTitle
         title="Журнал задач"
+        inlineDescription
         description="Ход выполнения, результаты и история операций с ресурсами."
       />
       <TaskList tasks={tasks} />

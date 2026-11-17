@@ -43,9 +43,9 @@
 
 - comp.navigation.child-inset → sys.space.lg: 16 px, направляющая под центром иконки группы.
 - comp.navigation.item-padding-block → sys.space.sm: 8 px, перенос названий сохраняет вертикальный ритм.
-- comp.navigation.group-gap → sys.space.sm: 8 px между группами полного меню; компактное использует item-gap.
+- comp.navigation.group-gap → sys.space.xs: 4 px между группами полного меню; компактное использует item-gap.
 - comp.navigation.compact-item-width → sys.control.lg.height: 44 px, шеврон отделён от иконки.
-- comp.navigation.search-gap → sys.space.md: 12 px между поиском и списком.
+- comp.navigation.search-gap → sys.space.sm: 8 px между поиском и списком.
 - comp.navigation.search-max-height → sys.layout.sidebar.search-max-height → ref.size.layout.sidebar.search-max-height: 360 px, дополнительно ограничено половиной высоты экрана.
 
 ## Компактный режим

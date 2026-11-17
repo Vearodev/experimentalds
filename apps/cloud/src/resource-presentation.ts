@@ -14,6 +14,36 @@ export function relatedResourceRows(state: CloudState, row: PlatformRecord, tab:
   );
 }
 
+// Ownership and placement belong beside the configuration, rather than in its field list.
+// Workspaces keep their short set of properties together; their inventory is the main content.
+const contextKeys = new Set([
+  'accountId',
+  'rgId',
+  'gridId',
+  'zoneId',
+  'nodeId',
+  'accessGroupId',
+  'clusterId',
+  'serviceId',
+]);
+export function resourceContextFields(entity: PlatformEntity) {
+  if (['accounts', 'projects'].includes(entity.id)) return [];
+  return entity.fields.filter((field) => field.reference && contextKeys.has(field.key));
+}
+
+export function resourceSectionTitle(entity: PlatformEntity) {
+  if (entity.id === 'nodes') return 'Подключение и ресурсы';
+  if (entity.id === 'clusters') return 'Конфигурация зоны';
+  if (entity.id === 'locations') return 'Параметры площадки';
+  if (entity.id === 'optimizer') return 'Политика оптимизации';
+  if (entity.group === 'operations') return 'Сведения об операции';
+  if (entity.group === 'access') return 'Параметры доступа';
+  if (['network', 'sdn'].includes(entity.group)) return 'Сеть и подключения';
+  if (entity.group === 'storage') return 'Параметры хранения';
+  if (entity.group === 'infrastructure') return 'Конфигурация оборудования';
+  return 'Конфигурация';
+}
+
 // Product information hierarchy. The DS still owns controls, states and visual tokens.
 const groups = [
   {
@@ -225,6 +255,7 @@ export function resourceFieldGroups(entity: PlatformEntity, omitted: string[] = 
 export const resourceHighlights: Record<string, { key: string; icon: string }[]> = {
   accounts: [],
   projects: [],
+  bservices: [{ key: 'computeCount', icon: 'Server' }],
   kubernetes: [
     { key: 'masterCount', icon: 'ServerCog' },
     { key: 'workerCount', icon: 'Server' },
@@ -258,6 +289,35 @@ export const resourceHighlights: Record<string, { key: string; icon: string }[]>
     { key: 'cidr', icon: 'Network' },
     { key: 'freeIps', icon: 'Waypoints' },
     { key: 'vlan', icon: 'Cable' },
+  ],
+  clusters: [{ key: 'nodeCount', icon: 'Server' }],
+  'load-balancers': [
+    { key: 'address', icon: 'Globe2' },
+    { key: 'highlyAvailable', icon: 'ShieldCheck' },
+  ],
+  'security-groups': [{ key: 'ruleCount', icon: 'ShieldCheck' }],
+  'sdn-segments': [
+    { key: 'cidr', icon: 'Network' },
+    { key: 'vni', icon: 'Cable' },
+    { key: 'mtu', icon: 'Waypoints' },
+  ],
+  'sdn-address-pools': [
+    { key: 'cidr', icon: 'Network' },
+    { key: 'free', icon: 'Waypoints' },
+  ],
+  pools: [
+    { key: 'capacity', icon: 'Database' },
+    { key: 'used', icon: 'HardDrive' },
+  ],
+  'worker-groups': [
+    { key: 'count', icon: 'Server' },
+    { key: 'cpu', icon: 'Cpu' },
+    { key: 'memory', icon: 'CircuitBoard' },
+  ],
+  'service-groups': [
+    { key: 'count', icon: 'Server' },
+    { key: 'cpu', icon: 'Cpu' },
+    { key: 'memory', icon: 'CircuitBoard' },
   ],
   nodes: [
     { key: 'cpu', icon: 'Cpu' },

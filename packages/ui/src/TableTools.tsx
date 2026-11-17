@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   ArrowDown,
   ArrowUp,
@@ -11,13 +11,21 @@ import {
   Plus,
   Search,
   X,
+  Bookmark,
+  BookmarkPlus,
+  Pin,
+  ChevronDown,
+  Settings2,
 } from 'lucide-react';
 import { Button, IconButton } from './Button';
 import { Checkbox, Select, type SelectOption } from './Choice';
 import { Input } from './Fields';
 import { ContextPanel } from './ContextPanel';
 import { Tooltip } from './Tooltip';
-import type { SortState } from './DataTable';
+import { Menu } from './Disclosure';
+import { FilterPresetSettings } from './TableFilterPresets';
+import { filterPresetKey, type TableFilterPresetLibrary } from './table-filter-presets';
+import type { DataTableView, SortState } from './DataTable';
 import type { TableGroupRule } from './table-grouping';
 
 export type TableFilterKind = 'text' | 'number' | 'enum' | 'date' | 'ip';
@@ -57,62 +65,206 @@ export type TableToolsValue<F extends string = string> = {
   grouping?: TableGroupRule | null;
 };
 export type TableToolsMode = 'filters' | 'sort' | 'group' | 'columns';
-export function TableToolbarActions({
+export function TableToolbarActions<F extends string = string>({
+  view = 'table',
+  primaryOnly = false,
   filterCount,
   sortCount,
   groupLabel,
   onOpen,
+  presets,
 }: {
+  view?: DataTableView;
+  primaryOnly?: boolean;
   filterCount: number;
   sortCount: number;
   groupLabel?: string;
   onOpen: (mode: TableToolsMode, anchor: HTMLElement) => void;
+  presets?: {
+    library: TableFilterPresetLibrary<F>;
+    rules: TableFilterRule<F>[];
+    describe: (rule: TableFilterRule<F>) => string;
+    validate: (rule: TableFilterRule<F>) => string;
+    onApply: (rules: TableFilterRule<F>[]) => void;
+    onManage: (action: 'library' | 'save', anchor: HTMLElement) => void;
+  };
 }) {
+  const presetTrigger = useRef<HTMLSpanElement>(null);
+  const matchingPreset =
+    presets &&
+    (presets.library.items.find(
+      (p) =>
+        p.id === presets.library.currentId &&
+        filterPresetKey(p.rules) === filterPresetKey(presets.rules),
+    ) ||
+      presets.library.items.find(
+        (p) =>
+          p.id === presets.library.defaultId &&
+          filterPresetKey(p.rules) === filterPresetKey(presets.rules),
+      ) ||
+      presets.library.items.find(
+        (p) => filterPresetKey(p.rules) === filterPresetKey(presets.rules),
+      ));
+  const isDefault = Boolean(matchingPreset && matchingPreset.id === presets?.library.defaultId);
+  const manage = (action: 'library' | 'save') => {
+    const anchor = presetTrigger.current?.querySelector('button');
+    if (anchor) presets?.onManage(action, anchor);
+  };
   return (
     <div className="basis-table-tools-actions">
-      <Button
-        size="sm"
-        leadingIcon={<ListFilter />}
-        aria-pressed={filterCount > 0}
-        onClick={(event) => onOpen('filters', event.currentTarget)}
-      >
-        Фильтры{filterCount ? ` · ${filterCount}` : ''}
-      </Button>
-      <Button
-        size="sm"
-        leadingIcon={<ArrowDownUp />}
-        className="basis-table-tools-actions__secondary"
-        aria-label="Настроить сортировку"
-        onClick={(event) => onOpen('sort', event.currentTarget)}
-      >
-        Сортировка{sortCount ? ` · ${sortCount}` : ''}
-      </Button>
-      <Tooltip
-        content={groupLabel ? `Группировка по полю «${groupLabel}»` : 'Объединить ресурсы по полю'}
-      >
-        <Button
-          size="sm"
-          leadingIcon={<Group />}
-          className="basis-table-tools-actions__secondary"
-          aria-label="Настроить группировку"
-          aria-pressed={Boolean(groupLabel)}
-          onClick={(event) => onOpen('group', event.currentTarget)}
-        >
-          Группировка{groupLabel ? ' · 1' : ''}
-        </Button>
-      </Tooltip>
-      <Tooltip content="Видимость и порядок столбцов">
+      <div className="basis-table-filter-group" data-presets={Boolean(presets)}>
+        <Tooltip content={filterCount ? `Фильтры · условий: ${filterCount}` : 'Фильтры'}>
+          <Button
+            className="basis-table-tools-filter"
+            size="sm"
+            variant={filterCount ? 'tonal' : 'ghost'}
+            leadingIcon={<ListFilter />}
+            aria-label={filterCount ? `Фильтры · ${filterCount}` : 'Фильтры'}
+            aria-pressed={filterCount > 0}
+            onClick={(event) => onOpen('filters', event.currentTarget)}
+          >
+            Фильтры{filterCount ? ` · ${filterCount}` : ''}
+          </Button>
+        </Tooltip>
+        {presets && (
+          <span ref={presetTrigger} className="basis-table-preset-trigger">
+            <Tooltip content="Сохранённые наборы фильтров">
+              <Menu
+                compact
+                size="sm"
+                label="Сохранённые фильтры"
+                icon={<ChevronDown />}
+                variant={filterCount ? 'tonal' : 'ghost'}
+                align="end"
+                onOpenChange={(open) => {
+                  if (!open) presets.library.dismiss();
+                }}
+                items={[
+                  ...presets.library.items.map((p) => ({
+                    id: p.id,
+                    label: p.name,
+                    icon: p.id === presets.library.defaultId ? <Pin /> : <Bookmark />,
+                    iconAlign: 'center' as const,
+                    description: p.rules.map(presets.describe).join(' · ').slice(0, 120),
+                    hint:
+                      p.id === presets.library.defaultId
+                        ? `«${p.name}» — набор по умолчанию для этой таблицы.`
+                        : `Применить набор «${p.name}».`,
+                    checked: matchingPreset?.id === p.id,
+                    disabled: p.rules.some(presets.validate),
+                    onSelect: () => {
+                      presets.library.select(p.id);
+                      presets.onApply(p.rules.map((r) => ({ ...r, values: [...r.values] })));
+                    },
+                  })),
+                  ...(!presets.library.items.length
+                    ? [
+                        {
+                          id: 'empty',
+                          label: 'Пока нет сохранённых наборов',
+                          description: 'Настройте фильтры и сохраните условия.',
+                          disabled: true,
+                        },
+                      ]
+                    : []),
+                  ...(matchingPreset
+                    ? [
+                        {
+                          id: 'default',
+                          separatorBefore: true,
+                          label: 'Запомнить выбор',
+                          hint: `Применять «${matchingPreset.name}» при открытии этой таблицы.`,
+                          checked: isDefault,
+                          checkType: 'checkbox' as const,
+                          keepOpen: true,
+                          disabled: !isDefault && matchingPreset.rules.some(presets.validate),
+                          onSelect: () =>
+                            presets.library.setDefault(isDefault ? null : matchingPreset.id),
+                        },
+                      ]
+                    : []),
+                  ...(!matchingPreset && presets.rules.length
+                    ? [
+                        {
+                          id: 'save',
+                          label: 'Сохранить текущие условия',
+                          icon: <BookmarkPlus />,
+                          disabled: !presets.rules.length || presets.rules.some(presets.validate),
+                          onSelect: () => manage('save'),
+                        },
+                      ]
+                    : []),
+                  {
+                    id: 'manage',
+                    label: 'Управление наборами',
+                    icon: <Settings2 />,
+                    onSelect: () => manage('library'),
+                  },
+                  ...(presets.library.notice?.error
+                    ? [
+                        {
+                          id: 'error',
+                          group: 'Не удалось сохранить',
+                          label: presets.library.notice.text,
+                          disabled: true,
+                        },
+                      ]
+                    : []),
+                ]}
+              />
+            </Tooltip>
+          </span>
+        )}
+      </div>
+      <Tooltip content={sortCount ? `Сортировка · условий: ${sortCount}` : 'Настроить сортировку'}>
         <IconButton
           size="sm"
-          icon={<Columns3 />}
-          aria-label="Настроить столбцы таблицы"
-          onClick={(event) => onOpen('columns', event.currentTarget)}
+          variant={sortCount ? 'tonal' : 'ghost'}
+          icon={<ArrowDownUp />}
+          aria-label="Настроить сортировку"
+          aria-pressed={sortCount > 0}
+          onClick={(event) => onOpen('sort', event.currentTarget)}
         />
       </Tooltip>
+      {!primaryOnly && (
+        <>
+          <Tooltip
+            content={
+              groupLabel ? `Группировка по полю «${groupLabel}»` : 'Объединить ресурсы по полю'
+            }
+          >
+            <IconButton
+              size="sm"
+              variant={groupLabel ? 'tonal' : 'ghost'}
+              icon={<Group />}
+              aria-label="Настроить группировку"
+              aria-pressed={Boolean(groupLabel)}
+              onClick={(event) => onOpen('group', event.currentTarget)}
+            />
+          </Tooltip>
+          <Tooltip
+            content={
+              view === 'tiles' ? 'Состав и порядок полей плиток' : 'Видимость и порядок столбцов'
+            }
+          >
+            <IconButton
+              size="sm"
+              variant="ghost"
+              icon={<Columns3 />}
+              aria-label={view === 'tiles' ? 'Настроить поля плиток' : 'Настроить столбцы таблицы'}
+              onClick={(event) => onOpen('columns', event.currentTarget)}
+            />
+          </Tooltip>
+        </>
+      )}
     </div>
   );
 }
 export type TableToolsPanelProps<F extends string = string> = {
+  filterPresets?: TableFilterPresetLibrary<F>;
+  presetAction?: 'library' | 'save';
+  describeFilter?: (rule: TableFilterRule<F>) => string;
+  view?: DataTableView;
   mode: TableToolsMode;
   anchor: HTMLElement | null;
   field?: F | null;
@@ -588,12 +740,14 @@ function GroupSettings({
 }
 
 function ColumnSettings({
+  view = 'table',
   columns,
   order,
   hidden,
   onOrder,
   onHidden,
 }: {
+  view?: DataTableView;
   columns: TableToolColumn[];
   order: string[];
   hidden: Set<string>;
@@ -618,8 +772,8 @@ function ColumnSettings({
   return (
     <div className="basis-tt-table-column-settings">
       <Input
-        aria-label="Найти столбец"
-        placeholder="Найти столбец"
+        aria-label={view === 'tiles' ? 'Найти поле' : 'Найти столбец'}
+        placeholder={view === 'tiles' ? 'Найти поле' : 'Найти столбец'}
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         leadingIcon={<Search />}
@@ -670,7 +824,7 @@ function ColumnSettings({
                     <IconButton
                       size="sm"
                       variant="ghost"
-                      aria-label={`Переместить влево: ${column.label}`}
+                      aria-label={`Переместить ${view === 'tiles' ? 'выше' : 'влево'}: ${column.label}`}
                       icon={<ArrowUp />}
                       disabled={!canMove(index, -1)}
                       onClick={() => move(index, -1)}
@@ -678,7 +832,7 @@ function ColumnSettings({
                     <IconButton
                       size="sm"
                       variant="ghost"
-                      aria-label={`Переместить вправо: ${column.label}`}
+                      aria-label={`Переместить ${view === 'tiles' ? 'ниже' : 'вправо'}: ${column.label}`}
                       icon={<ArrowDown />}
                       disabled={!canMove(index, 1)}
                       onClick={() => move(index, 1)}
@@ -692,13 +846,14 @@ function ColumnSettings({
       )}
       {!shown.length && (
         <div className="basis-tt-tool-empty">
-          <strong>Столбец не найден</strong>
+          <strong>{view === 'tiles' ? 'Поле не найдено' : 'Столбец не найден'}</strong>
           <p>Попробуйте другое название.</p>
         </div>
       )}
       <p className="basis-tt-tool-note">
-        Скрытие столбца сохраняет его фильтр, сортировку и группировку. Закреплённые столбцы
-        остаются на своих местах.
+        {view === 'tiles'
+          ? 'Состав и порядок полей общие с таблицей. Имя и действия остаются в шапке плитки. Скрытие поля сохраняет его фильтр, сортировку и группировку.'
+          : 'Скрытие столбца сохраняет его фильтр, сортировку и группировку. Закреплённые столбцы остаются на своих местах.'}
       </p>
     </div>
   );
@@ -731,6 +886,10 @@ export function TableToolsPanel<F extends string = string>(props: TableToolsPane
   const [grouping, setGrouping] = useState<TableGroupRule | null>(() =>
     value.grouping ? { ...value.grouping } : null,
   );
+  const [filterSection, setFilterSection] = useState<'conditions' | 'saved'>(
+    props.presetAction === 'library' ? 'saved' : 'conditions',
+  );
+  const hasPresets = mode === 'filters' && !field && Boolean(props.filterPresets);
   const valid = filters.every((r) => !validateFilter(r));
   const title =
     mode === 'filters'
@@ -741,7 +900,9 @@ export function TableToolsPanel<F extends string = string>(props: TableToolsPane
         ? 'Сортировка'
         : mode === 'group'
           ? 'Группировка'
-          : 'Столбцы таблицы';
+          : props.view === 'tiles'
+            ? 'Поля плиток'
+            : 'Столбцы таблицы';
   const reset = () => {
     if (mode === 'filters') setFilters(field ? filters.filter((r) => r.field !== field) : []);
     else if (mode === 'sort') setSorts([]);
@@ -764,7 +925,9 @@ export function TableToolsPanel<F extends string = string>(props: TableToolsPane
             ? 'Порядок ресурсов и приоритет полей'
             : mode === 'group'
               ? `${caption} · объединение по полю`
-              : 'Видимость и порядок столбцов'
+              : props.view === 'tiles'
+                ? 'Состав и порядок · общие с таблицей'
+                : 'Видимость и порядок столбцов'
       }
       icon={
         mode === 'filters' ? (
@@ -779,66 +942,102 @@ export function TableToolsPanel<F extends string = string>(props: TableToolsPane
       }
       onClose={onClose}
       footer={
-        <>
-          <Button size="sm" variant="ghost" onClick={reset}>
-            {mode === 'columns' ? 'По умолчанию' : 'Сбросить'}
-          </Button>
-          <span className="panel-result" aria-live="polite">
-            {mode === 'filters' ? (
-              valid ? (
+        hasPresets && filterSection === 'saved' ? (
+          <div className="basis-filter-preset-footer">
+            <span>Хранятся в этом браузере</span>
+            <Button onClick={onClose}>Готово</Button>
+          </div>
+        ) : (
+          <>
+            <Button size="sm" variant="ghost" onClick={reset}>
+              {mode === 'columns' ? 'По умолчанию' : 'Сбросить'}
+            </Button>
+            <span className="panel-result" aria-live="polite">
+              {mode === 'filters' ? (
+                valid ? (
+                  <>
+                    Найдено: <strong>{countResults(filters)}</strong>
+                  </>
+                ) : (
+                  'Заполните условия'
+                )
+              ) : mode === 'sort' ? (
                 <>
-                  Найдено: <strong>{countResults(filters)}</strong>
+                  Уровней: <strong>{sorts.length}</strong>
                 </>
+              ) : mode === 'group' ? (
+                grouping ? (
+                  <>
+                    Групп: <strong>{props.countGroups?.(grouping) ?? '—'}</strong>
+                  </>
+                ) : (
+                  'Без группировки'
+                )
               ) : (
-                'Заполните условия'
-              )
-            ) : mode === 'sort' ? (
-              <>
-                Уровней: <strong>{sorts.length}</strong>
-              </>
-            ) : mode === 'group' ? (
-              grouping ? (
                 <>
-                  Групп: <strong>{props.countGroups?.(grouping) ?? '—'}</strong>
+                  Видно: <strong>{order.length - hidden.size}</strong>
                 </>
-              ) : (
-                'Без группировки'
-              )
-            ) : (
-              <>
-                Видно: <strong>{order.length - hidden.size}</strong>
-              </>
-            )}
-          </span>
-          <Button onClick={onClose}>Отмена</Button>
-          <Button
-            variant="primary"
-            disabled={mode === 'filters' && !valid}
-            onClick={() => {
-              onApply({
-                filters,
-                sorts,
-                order,
-                hidden,
-                ...(grouping !== null || value.grouping !== undefined ? { grouping } : {}),
-              });
-              onClose();
-            }}
-          >
-            Применить
-          </Button>
-        </>
+              )}
+            </span>
+            <Button onClick={onClose}>Отмена</Button>
+            <Button
+              variant="primary"
+              disabled={mode === 'filters' && !valid}
+              onClick={() => {
+                onApply({
+                  filters,
+                  sorts,
+                  order,
+                  hidden,
+                  ...(grouping !== null || value.grouping !== undefined ? { grouping } : {}),
+                });
+                onClose();
+              }}
+            >
+              Применить
+            </Button>
+          </>
+        )
       }
     >
       <div className="basis-table-tools" data-tool={mode}>
         {mode === 'filters' ? (
-          <FilterSettings
-            rules={filters}
-            onChange={setFilters}
-            field={field}
-            fields={fields}
-            validate={validateFilter}
-          />
+          hasPresets ? (
+            <FilterPresetSettings
+              library={props.filterPresets!}
+              rules={filters}
+              describe={
+                props.describeFilter ||
+                ((rule) =>
+                  `${fields.find((f) => f.id === rule.field)?.label || rule.field}: ${rule.values.length ? rule.values.join(', ') : rule.value}`)
+              }
+              validate={(rule) =>
+                fields.some((f) => f.id === rule.field) ? validateFilter(rule) : 'Поле недоступно'
+              }
+              section={filterSection}
+              onSectionChange={setFilterSection}
+              initialSave={props.presetAction === 'save'}
+              onApply={(rules) => {
+                onApply({ ...value, filters: rules });
+                onClose();
+              }}
+            >
+              <FilterSettings
+                rules={filters}
+                onChange={setFilters}
+                fields={fields}
+                validate={validateFilter}
+              />
+            </FilterPresetSettings>
+          ) : (
+            <FilterSettings
+              rules={filters}
+              onChange={setFilters}
+              field={field}
+              fields={fields}
+              validate={validateFilter}
+            />
+          )
         ) : mode === 'sort' ? (
           <SortSettings
             rules={sorts}
@@ -850,6 +1049,7 @@ export function TableToolsPanel<F extends string = string>(props: TableToolsPane
           <GroupSettings value={grouping} onChange={setGrouping} fields={fields} hidden={hidden} />
         ) : (
           <ColumnSettings
+            view={props.view}
             columns={columns}
             order={order}
             hidden={hidden}

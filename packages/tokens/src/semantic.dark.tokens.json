@@ -23,49 +23,59 @@
         "canvas": {
           "$type": "color",
           "$value": "{ref.color.neutral.1000}",
-          "$description": "Тёмная тема: surface.canvas."
+          "$description": "Рабочее полотно между секциями данных. На нём размещаются заголовки, локальная навигация и вспомогательный контекст."
         },
         "base": {
           "$type": "color",
           "$value": "{ref.color.neutral.950}",
-          "$description": "Тёмная тема: surface.base."
+          "$description": "Основная поверхность таблиц, форм, конфигурации и контекстных окон. Светлее рабочего полотна."
         },
         "subtle": {
           "$type": "color",
           "$value": "{ref.color.neutral.900}",
-          "$description": "Тёмная тема: surface.subtle."
+          "$description": "Спокойная вложенная или служебная область, не требующая отдельного акцента."
         },
         "hover": {
           "$type": "color",
           "$value": "{ref.color.neutral.800}",
-          "$description": "Тёмная тема: surface.hover."
+          "$description": "Временная подложка наведения на интерактивный элемент. Не обозначает постоянный выбор."
         },
         "selected": {
           "$type": "color",
           "$value": "{ref.color.navy.700}",
-          "$description": "Тёмная тема: surface.selected."
+          "$description": "Заметная подложка выбранных данных: строк таблицы, пунктов выбора и сохранённых наборов."
+        },
+        "selected-subtle": {
+          "$type": "color",
+          "$value": "{ref.color.neutral.900}",
+          "$description": "Мягкая подложка активной вкладки или текущего локального контекста. Выбор данных использует surface.selected."
         },
         "inverse": {
           "$type": "color",
           "$value": "{ref.color.neutral.50}",
           "$description": "Тёмная тема: surface.inverse."
+        },
+        "emphasis": {
+          "$type": "color",
+          "$value": "{ref.color.blue.900}",
+          "$description": "Локальная подложка ключевой сводки или значения. Не означает статус, выбор строки или действие."
         }
       },
       "text": {
         "primary": {
           "$type": "color",
           "$value": "{ref.color.neutral.50}",
-          "$description": "Тёмная тема: text.primary."
+          "$description": "Заголовки и основные значения. Максимальный текстовый акцент, нейтральный относительно фирменного цвета."
         },
         "secondary": {
           "$type": "color",
           "$value": "{ref.color.neutral.200}",
-          "$description": "Тёмная тема: text.secondary."
+          "$description": "Подписи полей и второстепенный текст. Читается уверенно, не конкурирует с основными значениями."
         },
         "muted": {
           "$type": "color",
           "$value": "{ref.color.neutral.400}",
-          "$description": "Тёмная тема: text.muted."
+          "$description": "Пояснения, метаданные и служебные подписи с сохранением читаемого контраста."
         },
         "placeholder": {
           "$type": "color",
@@ -867,7 +877,7 @@
         "background": {
           "$type": "color",
           "$value": "{sys.color.surface.base}",
-          "$description": "Отдельная поверхность основного меню, согласованная с шапкой и рабочей областью."
+          "$description": "Спокойная поверхность навигации: второстепенна относительно данных рабочей области."
         },
         "foreground": {
           "$type": "color",
@@ -886,8 +896,8 @@
         },
         "selected": {
           "$type": "color",
-          "$value": "{sys.color.surface.selected}",
-          "$description": "Подложка активного раздела."
+          "$value": "{sys.color.surface.subtle}",
+          "$description": "Нейтральная подложка текущего раздела; фирменный акцент остаётся у маркера и иконки."
         },
         "accent": {
           "$type": "color",
@@ -911,7 +921,7 @@
         },
         "selected-border": {
           "$type": "color",
-          "$value": "{sys.color.border.selected}",
+          "$value": "{sys.color.border.default}",
           "$description": "Тонкая граница активного раздела."
         },
         "count-background": {

@@ -111,6 +111,9 @@ it('allows collapsing a group and reveals it when navigation enters a child', as
   const user = userEvent.setup(),
     navigate = vi.fn();
   const ui = render(<SidebarNavigation items={items} activeId="overview" onNavigate={navigate} />);
+  expect(screen.queryByRole('link', { name: 'Машины' })).not.toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: 'Вычисления' }));
+  expect(screen.getByRole('link', { name: 'Машины' })).toBeVisible();
   await user.click(screen.getByRole('button', { name: 'Вычисления' }));
   expect(screen.queryByRole('link', { name: 'Машины' })).not.toBeInTheDocument();
   ui.rerender(<SidebarNavigation items={items} activeId="vms" onNavigate={navigate} />);

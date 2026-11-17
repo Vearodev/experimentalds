@@ -10,10 +10,17 @@ export {
   DataTable,
   TableEmptyState,
   type DataTableState,
+  type DataTableView,
   type DataTableProps,
   type DataColumn,
   type SortState,
 } from './DataTable';
+export {
+  useIncrementalPages,
+  type TablePagingMode,
+  type TableNavigationPlacement,
+  type DataTablePagination,
+} from './table-paging';
 export {
   groupTableRows,
   tableGroupValue,
@@ -80,3 +87,11 @@ export {
   type TableToolsValue,
   type TableToolsMode,
 } from './TableTools';
+
+export {
+  useTableFilterPresets,
+  loadDefaultFilterRules,
+  filterPresetKey,
+  type TableFilterPresetLibrary,
+  type TableFilterPreset,
+} from './table-filter-presets';

@@ -1,7 +1,24 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState, type ReactNode } from 'react';
+import {
+  Fragment,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react';
 import { createPortal } from 'react-dom';
-import { ArrowLeft, Check, ChevronDown, ChevronRight, MoreHorizontal } from 'lucide-react';
+import {
+  ArrowLeft,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  MoreHorizontal,
+  Square,
+  SquareCheck,
+} from 'lucide-react';
 import { Button, type ButtonVariant } from './Button';
+import { Tooltip } from './Tooltip';
 
 export type AccordionItem = {
   id: string;
@@ -77,9 +94,14 @@ export type MenuItem = {
   description?: string;
   icon?: ReactNode;
   shortcut?: string;
+  iconAlign?: 'start' | 'center';
+  hint?: string;
+  separatorBefore?: boolean;
   disabled?: boolean;
   current?: boolean;
   checked?: boolean;
+  checkType?: 'radio' | 'checkbox';
+  keepOpen?: boolean;
   danger?: boolean;
   group?: string;
   onSelect?: () => void;
@@ -100,6 +122,7 @@ export function Menu({
   triggerContent,
   header,
   align = 'start',
+  'aria-describedby': describedBy,
 }: {
   label?: string;
   items: MenuItem[];
@@ -115,6 +138,7 @@ export function Menu({
   triggerContent?: ReactNode;
   header?: ReactNode;
   align?: 'start' | 'end';
+  'aria-describedby'?: string;
 }) {
   const id = useId(),
     trigger = useRef<HTMLButtonElement>(null),
@@ -123,6 +147,7 @@ export function Menu({
     returnItem = useRef<string | null>(null);
   const hoverTimer = useRef<ReturnType<typeof setTimeout> | null>(null),
     hoverOpened = useRef(false);
+  const actionFocus = useRef<string | null>(null);
   const clearHover = () => {
     if (hoverTimer.current) clearTimeout(hoverTimer.current);
     hoverTimer.current = null;
@@ -143,6 +168,15 @@ export function Menu({
     }
   }, [open]);
   const current = stack.at(-1)?.children || items;
+  const sections = current.reduce<{ label?: string; items: { item: MenuItem; index: number }[] }[]>(
+    (result, item, index) => {
+      if (!result.length || result.at(-1)?.label !== item.group)
+        result.push({ label: item.group, items: [] });
+      result.at(-1)!.items.push({ item, index });
+      return result;
+    },
+    [],
+  );
   const close = (restore = true) => {
     clearHover();
     hoverOpened.current = false;
@@ -252,10 +286,17 @@ export function Menu({
     if (item.disabled) return;
     if (item.children?.length) setStack([...stack, item]);
     else {
-      close();
+      if (item.keepOpen) actionFocus.current = item.id;
+      else close();
       item.onSelect?.();
     }
   };
+  useLayoutEffect(() => {
+    if (!open || !actionFocus.current) return;
+    const choices = enabled();
+    (choices.find((el) => el.dataset.item === actionFocus.current) || choices[0])?.focus();
+    actionFocus.current = null;
+  }, [open, items, stack]);
   const back = () => {
     returnItem.current = stack.at(-1)?.id || null;
     setStack(stack.slice(0, -1));
@@ -269,6 +310,7 @@ export function Menu({
         leadingIcon={icon || (compact ? <MoreHorizontal /> : undefined)}
         trailingIcon={!compact ? <ChevronDown /> : undefined}
         aria-label={compact || triggerContent ? label : undefined}
+        aria-describedby={describedBy}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={open ? id : undefined}
@@ -389,43 +431,79 @@ export function Menu({
               )}
             </div>
             <div role="menu" id={id} aria-label={stack.at(-1)?.label || label}>
-              {current.map((item, index) => (
-                <div role="none" key={item.id}>
-                  {item.group && item.group !== current[index - 1]?.group && (
+              {sections.map((section, sectionIndex) => (
+                <div
+                  role={section.label ? 'group' : 'none'}
+                  aria-label={section.label}
+                  key={sectionIndex}
+                >
+                  {section.label && (
                     <div className="basis-menu__group" role="presentation">
-                      {item.group}
+                      {section.label}
                     </div>
                   )}
-                  <Button
-                    className="basis-menu__item"
-                    role={item.checked !== undefined ? 'menuitemradio' : 'menuitem'}
-                    aria-checked={item.checked}
-                    aria-label={item.label}
-                    aria-describedby={item.description ? `${id}-${index}-description` : undefined}
-                    data-item={item.id}
-                    aria-current={item.current ? 'page' : undefined}
-                    tabIndex={-1}
-                    variant="ghost"
-                    tone={item.danger ? 'danger' : 'neutral'}
-                    disabled={item.disabled}
-                    leadingIcon={item.icon}
-                    aria-haspopup={item.children?.length ? 'menu' : undefined}
-                    onClick={() => activate(item)}
-                    trailingIcon={
-                      item.children?.length ? (
-                        <ChevronRight />
-                      ) : item.checked ? (
-                        <Check />
-                      ) : item.shortcut ? (
-                        <kbd>{item.shortcut}</kbd>
-                      ) : undefined
-                    }
-                  >
-                    <strong>{item.label}</strong>
-                    {item.description && (
-                      <small id={`${id}-${index}-description`}>{item.description}</small>
-                    )}
-                  </Button>
+                  {section.items.map(({ item, index }) => {
+                    const control = (
+                      <Button
+                        key={item.id}
+                        className="basis-menu__item"
+                        role={
+                          item.checked !== undefined
+                            ? item.checkType === 'checkbox'
+                              ? 'menuitemcheckbox'
+                              : 'menuitemradio'
+                            : 'menuitem'
+                        }
+                        aria-checked={item.checked}
+                        aria-label={item.label}
+                        aria-describedby={
+                          item.description ? `${id}-${index}-description` : undefined
+                        }
+                        data-item={item.id}
+                        data-icon-align={item.iconAlign}
+                        aria-current={item.current ? 'page' : undefined}
+                        tabIndex={-1}
+                        variant="ghost"
+                        tone={item.danger ? 'danger' : 'neutral'}
+                        disabled={item.disabled}
+                        leadingIcon={item.icon}
+                        aria-haspopup={item.children?.length ? 'menu' : undefined}
+                        onClick={() => activate(item)}
+                        trailingIcon={
+                          item.children?.length ? (
+                            <ChevronRight />
+                          ) : item.checkType === 'checkbox' ? (
+                            item.checked ? (
+                              <SquareCheck />
+                            ) : (
+                              <Square />
+                            )
+                          ) : item.checked !== undefined ? (
+                            item.checked ? (
+                              <Check />
+                            ) : (
+                              <span className="basis-menu__selection-slot" />
+                            )
+                          ) : item.shortcut ? (
+                            <kbd>{item.shortcut}</kbd>
+                          ) : undefined
+                        }
+                      >
+                        <strong>{item.label}</strong>
+                        {item.description && (
+                          <small id={`${id}-${index}-description`}>{item.description}</small>
+                        )}
+                      </Button>
+                    );
+                    return (
+                      <Fragment key={item.id}>
+                        {item.separatorBefore && (
+                          <div role="separator" className="basis-menu__separator" />
+                        )}
+                        {item.hint ? <Tooltip content={item.hint}>{control}</Tooltip> : control}
+                      </Fragment>
+                    );
+                  })}
                 </div>
               ))}
             </div>

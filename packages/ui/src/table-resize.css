@@ -1,0 +1,53 @@
+.basis-data-table th[data-column-id] {
+  position: relative;
+}
+.basis-data-table th[data-resizable='true'] {
+  padding-inline-end: calc(var(--basis-comp-table-resize-hit-area) + var(--basis-sys-space-xs));
+}
+@media (min-width: 561px) {
+  .basis-data-table th[data-pinned] {
+    position: sticky;
+  }
+}
+@media (max-width: 560px) {
+  .basis-data-table th[data-pinned] {
+    inset-inline: auto;
+  }
+}
+.basis-data-table__resize {
+  position: absolute;
+  inset-block: 0;
+  right: 0;
+  width: var(--basis-comp-table-resize-hit-area);
+  cursor: col-resize;
+  touch-action: none;
+  user-select: none;
+  z-index: 1;
+  outline: none;
+}
+.basis-data-table__resize::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: var(--basis-sys-space-sm);
+  bottom: var(--basis-sys-space-sm);
+  width: var(--basis-sys-border-focus);
+  border-radius: var(--basis-sys-radius-small);
+  background: transparent;
+}
+.basis-data-table__resize:hover::after,
+.basis-data-table__resize:focus-visible::after,
+.basis-data-table[data-resizing] .basis-data-table__resize:focus::after {
+  background: var(--basis-comp-table-resize-indicator);
+}
+.basis-data-table__resize:focus-visible {
+  outline: var(--basis-sys-border-focus) solid var(--basis-sys-color-border-focus);
+  outline-offset: calc(-1 * var(--basis-sys-border-focus));
+}
+.basis-data-table[data-resizing] {
+  cursor: col-resize;
+  user-select: none;
+}
+.basis-data-table[data-resizing] * {
+  cursor: col-resize;
+}

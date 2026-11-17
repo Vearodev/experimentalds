@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
   type MouseEvent,
+  type KeyboardEvent,
 } from 'react';
 import {
   ArrowDown,
@@ -21,15 +22,26 @@ import {
   Database,
   RefreshCw,
   SearchX,
+  LayoutGrid,
+  Table2,
+  ListEnd,
+  Rows3,
+  Columns3,
+  RotateCcw,
 } from 'lucide-react';
 import { Button, IconButton } from './Button';
+import { Menu, type MenuItem } from './Disclosure';
 import { Tooltip } from './Tooltip';
 import { Badge } from './Identity';
-import { groupTableRows, type TableGrouping } from './table-grouping';
+import { groupTableRows, type TableGrouping, type TableRowGroup } from './table-grouping';
 import { Skeleton } from './Feedback';
 import { Message } from './Notifications';
+import { TablePageNavigation, TablePagingFooter } from './TablePagination';
+import type { DataTablePagination, TableNavigationPlacement } from './table-paging';
+import { useTableColumnResize } from './table-resize';
 
 export type DataTableState = 'ready' | 'loading' | 'refreshing' | 'error' | 'stale';
+export type DataTableView = 'table' | 'tiles';
 
 export function TableEmptyState({
   kind = 'empty',
@@ -62,7 +74,7 @@ export function TableEmptyState({
             ? 'Повторите запрос. Настройки таблицы сохранены.'
             : kind === 'filtered'
               ? 'Измените запрос или уберите часть условий.'
-              : 'Новые ресурсы появятся в этой таблице.')}
+              : 'Новые ресурсы появятся здесь.')}
       </p>
       {action && <div className="basis-table-empty__action">{action}</div>}
     </div>
@@ -74,6 +86,8 @@ export type DataColumn<T> = {
   id: string;
   header: string;
   width: number;
+  minWidth?: number;
+  maxWidth?: number;
   /** Compact, fixed-width utility cell; its heading stays available to screen readers. */
   utility?: 'actions';
   description?: string;
@@ -81,12 +95,16 @@ export type DataColumn<T> = {
   align?: 'left' | 'right';
   /** One leading data column and one trailing action column may be pinned. */
   pinned?: 'start' | 'end';
+  /** Tile layout only; values and descriptions still come from this column. */
+  tile?: { span?: 'full'; emphasis?: 'metric' };
   render: (row: T) => ReactNode;
   filter?: { active?: boolean; onClick: (event: MouseEvent<HTMLButtonElement>) => void };
 };
 export type DataTableProps<T> = {
   rows: T[];
   columns: DataColumn<T>[];
+  columnWidths?: Record<string, number>;
+  onColumnWidthsChange?: (widths: Record<string, number>) => void;
   getRowId: (row: T) => string;
   getRowLabel: (row: T) => string;
   selected: Set<string>;
@@ -96,7 +114,7 @@ export type DataTableProps<T> = {
   replaceToolbarOnSelection?: boolean;
   selectOnRowClick?: boolean;
   /** Free row space opens its details; embedded controls keep their own actions. */
-  onRowActivate?: (row: T, origin: HTMLTableRowElement) => void;
+  onRowActivate?: (row: T, origin: HTMLElement) => void;
   previewRowId?: string;
   sort?: SortState;
   sorts?: SortState[];
@@ -105,6 +123,13 @@ export type DataTableProps<T> = {
   error?: string;
   onRefresh?: () => void;
   loadingRows?: number;
+  view?: DataTableView;
+  /** Providing a callback exposes the persistent view switch beside refresh. */
+  onViewChange?: (view: DataTableView) => void;
+  pagination?: DataTablePagination;
+  /** Persistent query tools, including while bulk actions replace the search slot. */
+  tools?: ReactNode;
+  onToolsOpen?: (mode: 'group' | 'columns', anchor: HTMLElement) => void;
   onSortChange?: (sort: SortState, additive?: boolean) => void;
   rowTone?: (row: T) => 'error' | 'warning' | undefined;
   toolbar: ReactNode;
@@ -119,6 +144,8 @@ export type DataTableProps<T> = {
 export function DataTable<T>({
   rows,
   columns,
+  columnWidths: savedWidths = {},
+  onColumnWidthsChange,
   getRowId,
   getRowLabel,
   selected,
@@ -136,6 +163,11 @@ export function DataTable<T>({
   error,
   onRefresh,
   loadingRows = 8,
+  view = 'table',
+  onViewChange,
+  pagination,
+  tools,
+  onToolsOpen,
   onSortChange,
   rowTone,
   toolbar,
@@ -147,7 +179,58 @@ export function DataTable<T>({
 }: DataTableProps<T>) {
   const busy = state === 'loading' || state === 'refreshing';
   const blocking = state === 'loading' || state === 'error';
+  const scrollRoot = useRef<HTMLDivElement>(null);
+  const sentinel = useRef<HTMLDivElement>(null);
+  const infinite = pagination?.mode === 'infinite';
+  const [localNavigationPlacement, setNavigationPlacement] =
+    useState<TableNavigationPlacement>('both');
+  const navigationPlacement = pagination?.placement ?? localNavigationPlacement;
+  const placementLabels: Record<TableNavigationPlacement, string> = {
+    top: 'Только в шапке',
+    bottom: 'Только внизу',
+    both: 'В шапке и внизу',
+  };
+  const hasMore = Boolean(pagination && pagination.page * pagination.pageSize < pagination.total);
+  const loadMore = useRef(pagination?.onLoadMore);
+  useLayoutEffect(() => {
+    loadMore.current = pagination?.onLoadMore;
+  });
+  useLayoutEffect(() => {
+    if (scrollRoot.current) scrollRoot.current.scrollTop = 0;
+  }, [pagination?.resetKey, pagination?.mode, infinite ? undefined : pagination?.page]);
+  useEffect(() => {
+    if (
+      !infinite ||
+      !hasMore ||
+      busy ||
+      blocking ||
+      pagination?.loadingMore ||
+      pagination?.loadMoreError ||
+      !sentinel.current ||
+      typeof IntersectionObserver === 'undefined'
+    )
+      return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) loadMore.current?.();
+      },
+      { root: scrollRoot.current, rootMargin: '0px 0px 80px 0px' },
+    );
+    observer.observe(sentinel.current);
+    return () => observer.disconnect();
+  }, [
+    infinite,
+    hasMore,
+    busy,
+    blocking,
+    pagination?.page,
+    pagination?.resetKey,
+    pagination?.loadingMore,
+    pagination?.loadMoreError,
+    view,
+  ]);
   const refreshButton = useRef<HTMLButtonElement>(null);
+  const presentationRoot = useRef<HTMLSpanElement>(null);
   const tableRoot = useRef<HTMLDivElement>(null),
     requestNotice = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
@@ -167,12 +250,125 @@ export function DataTable<T>({
     onRefresh?.();
   };
   const orders = sorts || (sort ? [sort] : []);
+  const resizing = useTableColumnResize({
+    columns,
+    widths: savedWidths,
+    onChange: onColumnWidthsChange,
+    viewport: scrollRoot,
+    selection: selectionMode !== 'none',
+    enabled: Boolean(onColumnWidthsChange) && view === 'table' && !blocking,
+  });
+  const presentationItems: MenuItem[] = [
+    ...(onViewChange
+      ? [
+          {
+            id: 'table',
+            label: 'Таблица',
+            group: 'Отображение',
+            icon: <Table2 />,
+            checked: view === 'table',
+            onSelect: () => {
+              if (view !== 'table') onViewChange('table');
+            },
+          },
+          {
+            id: 'tiles',
+            label: 'Плитки',
+            group: 'Отображение',
+            icon: <LayoutGrid />,
+            checked: view === 'tiles',
+            onSelect: () => {
+              if (view !== 'tiles') onViewChange('tiles');
+            },
+          },
+        ]
+      : []),
+    ...(pagination
+      ? [
+          {
+            id: 'pages',
+            label: 'По страницам',
+            group: 'Загрузка',
+            icon: <Rows3 />,
+            checked: pagination.mode === 'pages',
+            onSelect: () => pagination.onModeChange('pages'),
+          },
+          {
+            id: 'infinite',
+            label: 'При прокрутке',
+            group: 'Загрузка',
+            icon: <ListEnd />,
+            checked: pagination.mode === 'infinite',
+            onSelect: () => pagination.onModeChange('infinite'),
+          },
+        ]
+      : []),
+    ...(pagination
+      ? [
+          {
+            id: 'navigation',
+            label: 'Расположение навигации',
+            group: 'Настройки',
+            icon: <Rows3 />,
+            description: placementLabels[navigationPlacement],
+            children: (['top', 'bottom', 'both'] as const).map((placement) => ({
+              id: `navigation-${placement}`,
+              label: placementLabels[placement],
+              checked: navigationPlacement === placement,
+              onSelect: () => {
+                setNavigationPlacement(placement);
+                pagination.onPlacementChange?.(placement);
+              },
+            })),
+          },
+        ]
+      : []),
+    ...(onToolsOpen
+      ? [
+          {
+            id: 'columns',
+            label: view === 'tiles' ? 'Поля плиток' : 'Столбцы таблицы',
+            group: 'Настройки',
+            icon: <Columns3 />,
+            onSelect: () => {
+              const anchor = presentationRoot.current?.querySelector('button');
+              if (anchor) onToolsOpen('columns', anchor);
+            },
+          },
+          {
+            id: 'group',
+            label: 'Группировка',
+            group: 'Настройки',
+            description: grouping?.label,
+            icon: <Group />,
+            onSelect: () => {
+              const anchor = presentationRoot.current?.querySelector('button');
+              if (anchor) onToolsOpen('group', anchor);
+            },
+          },
+        ]
+      : []),
+    ...(onColumnWidthsChange && view === 'table'
+      ? [
+          {
+            id: 'reset-widths',
+            label: 'Стандартная ширина колонок',
+            group: 'Настройки',
+            icon: <RotateCcw />,
+            disabled: !Object.keys(savedWidths).length,
+            onSelect: () => onColumnWidthsChange({}),
+          },
+        ]
+      : []),
+  ];
   const columnWidths = columns.map((column) =>
-    column.utility === 'actions'
-      ? 'var(--basis-comp-table-column-actions-width)'
-      : column.description && (column.sortable || column.filter)
-        ? `max(${column.width}px, var(--basis-comp-table-header-min-width))`
-        : `${column.width}px`,
+    onColumnWidthsChange
+      ? `${column.utility === 'actions' ? resizing.actionWidth : resizing.sizes[column.id]}px`
+      : column.utility === 'actions'
+        ? 'var(--basis-comp-table-column-actions-width)'
+        : column.description && (column.sortable || column.filter)
+          ? `max(${column.width}px, var(--basis-comp-table-header-min-width))`
+          : `${column.width}px`,
   );
   const selectionGroup = useId(),
     rowActionHint = useId();
@@ -206,7 +402,7 @@ export function DataTable<T>({
     some = visibleSelected > 0 && !all;
   useEffect(() => {
     if (selectAll.current) selectAll.current.indeterminate = some;
-  }, [some]);
+  }, [some, view, state]);
   const toggleAll = () => {
     const next = new Set(selected);
     selectable.forEach((row) => (all ? next.delete(getRowId(row)) : next.add(getRowId(row))));
@@ -224,79 +420,208 @@ export function DataTable<T>({
     else next.add(id);
     onSelectionChange(next);
   };
-  const renderRow = (row: T) => {
-    const id = getRowId(row),
-      tone = rowTone?.(row);
+  // Both presentations share interactions, selection and grouping state.
+  const itemProps = (row: T) => ({
+    'data-row-id': getRowId(row),
+    'data-tone': rowTone?.(row),
+    'data-selected': selected.has(getRowId(row)),
+    'data-preview': getRowId(row) === previewRowId,
+    'data-selectable': selectOnRowClick && isRowSelectable(row),
+    'data-activatable': canActivateRow,
+    tabIndex: canActivateRow ? 0 : undefined,
+    'aria-describedby': canActivateRow ? rowActionHint : undefined,
+    onClick:
+      selectOnRowClick || canActivateRow
+        ? (event: MouseEvent<HTMLElement>) => {
+            const target = event.target as Element;
+            const control = target.closest(
+              'button,a,input,select,textarea,label,summary,[tabindex],[role="button"],[role="link"],[role="checkbox"],[role="radio"],[role="switch"],[role="combobox"],[contenteditable]:not([contenteditable="false"]),[data-row-action-ignore]',
+            );
+            if (
+              event.defaultPrevented ||
+              !event.currentTarget.contains(target) ||
+              (control &&
+                control !== event.currentTarget &&
+                event.currentTarget.contains(control)) ||
+              event.altKey ||
+              event.ctrlKey ||
+              event.metaKey ||
+              event.shiftKey ||
+              window.getSelection()?.isCollapsed === false
+            )
+              return;
+            if (selectOnRowClick) toggleRow(row);
+            else if (!target.closest('.basis-data-table__select')) {
+              event.currentTarget.focus({ preventScroll: true });
+              onRowActivate?.(row, event.currentTarget);
+            }
+          }
+        : undefined,
+    onKeyDown: canActivateRow
+      ? (event: KeyboardEvent<HTMLElement>) => {
+          if (
+            event.target !== event.currentTarget ||
+            event.defaultPrevented ||
+            event.repeat ||
+            event.altKey ||
+            event.ctrlKey ||
+            event.metaKey ||
+            event.shiftKey ||
+            !['Enter', ' '].includes(event.key)
+          )
+            return;
+          event.preventDefault();
+          onRowActivate?.(row, event.currentTarget);
+        }
+      : undefined,
+  });
+  const selectionInput = (row: T) => (
+    <input
+      type={selectionMode === 'single' ? 'radio' : 'checkbox'}
+      name={selectionMode === 'single' ? selectionGroup : undefined}
+      disabled={!isRowSelectable(row)}
+      aria-label={`Выбрать ${getRowLabel(row)}`}
+      checked={selected.has(getRowId(row))}
+      onChange={() => toggleRow(row)}
+    />
+  );
+  const selectAllInput = (
+    <input
+      ref={selectAll}
+      type="checkbox"
+      aria-label={
+        infinite
+          ? 'Выбрать все загруженные строки'
+          : grouping
+            ? 'Выбрать все строки на странице'
+            : 'Выбрать все видимые строки'
+      }
+      checked={all}
+      disabled={selectable.length === 0 || blocking}
+      onChange={toggleAll}
+    />
+  );
+  const renderGroupHeading = (group: TableRowGroup<T>) => {
+    if (!grouping) return null;
+    const closed = collapsed.has(group.key);
+    const total = grouping.totalCounts?.get(group.key) ?? group.rows.length;
+    const groupSelectable = group.rows.filter(isRowSelectable);
+    const checkedCount = groupSelectable.filter((row) => selected.has(getRowId(row))).length;
+    const checked = groupSelectable.length > 0 && checkedCount === groupSelectable.length;
     return (
-      <tr
-        key={id}
-        data-row-id={id}
-        data-tone={tone}
-        data-selected={selected.has(id)}
-        data-preview={id === previewRowId}
-        data-selectable={selectOnRowClick && isRowSelectable(row)}
-        data-activatable={canActivateRow}
-        tabIndex={canActivateRow ? 0 : undefined}
-        aria-describedby={canActivateRow ? rowActionHint : undefined}
-        onClick={
-          selectOnRowClick || canActivateRow
-            ? (event) => {
-                const target = event.target as Element;
-                const control = target.closest(
-                  'button,a,input,select,textarea,label,summary,[tabindex],[role="button"],[role="link"],[role="checkbox"],[role="radio"],[role="switch"],[role="combobox"],[contenteditable]:not([contenteditable="false"]),[data-row-action-ignore]',
-                );
-                if (
-                  event.defaultPrevented ||
-                  !event.currentTarget.contains(target) ||
-                  (control &&
-                    control !== event.currentTarget &&
-                    event.currentTarget.contains(control)) ||
-                  event.altKey ||
-                  event.ctrlKey ||
-                  event.metaKey ||
-                  event.shiftKey ||
-                  window.getSelection()?.isCollapsed === false
-                )
-                  return;
-                if (selectOnRowClick) toggleRow(row);
-                else if (!target.closest('.basis-data-table__select')) {
-                  event.currentTarget.focus({ preventScroll: true });
-                  onRowActivate?.(row, event.currentTarget);
-                }
-              }
-            : undefined
-        }
-        onKeyDown={
-          canActivateRow
-            ? (event) => {
-                if (
-                  event.target !== event.currentTarget ||
-                  event.defaultPrevented ||
-                  event.repeat ||
-                  event.altKey ||
-                  event.ctrlKey ||
-                  event.metaKey ||
-                  event.shiftKey ||
-                  !['Enter', ' '].includes(event.key)
-                )
-                  return;
-                event.preventDefault();
-                onRowActivate?.(row, event.currentTarget);
-              }
-            : undefined
-        }
-      >
-        {selectionMode !== 'none' && (
-          <td className="basis-data-table__select">
+      <div className="basis-data-table__group-heading">
+        {selectionMode === 'multiple' && (
+          <span className="basis-data-table__group-select">
             <input
-              type={selectionMode === 'single' ? 'radio' : 'checkbox'}
-              name={selectionMode === 'single' ? selectionGroup : undefined}
-              disabled={!isRowSelectable(row)}
-              aria-label={`Выбрать ${getRowLabel(row)}`}
-              checked={selected.has(id)}
-              onChange={() => toggleRow(row)}
+              type="checkbox"
+              checked={checked}
+              disabled={!groupSelectable.length}
+              ref={(element) => {
+                if (element) element.indeterminate = checkedCount > 0 && !checked;
+              }}
+              aria-label={`Выбрать группу «${group.label}» ${infinite ? 'среди загруженных' : 'на странице'}`}
+              onChange={() => {
+                const next = new Set(selected);
+                groupSelectable.forEach((row) =>
+                  checked ? next.delete(getRowId(row)) : next.add(getRowId(row)),
+                );
+                onSelectionChange(next);
+              }}
             />
-          </td>
+          </span>
+        )}
+        <Button
+          size="sm"
+          variant="ghost"
+          leadingIcon={closed ? <ChevronRight /> : <ChevronDown />}
+          aria-label={`${closed ? 'Развернуть' : 'Свернуть'} группу «${group.label}»`}
+          aria-expanded={!closed}
+          onClick={() => toggleGroup(group.key)}
+        >
+          {group.label}
+        </Button>
+        <Badge
+          count={total}
+          max={Number.MAX_SAFE_INTEGER}
+          tone="neutral"
+          label={`Ресурсов в группе: ${total}`}
+        />
+        {group.rows.length < total && (
+          <span className="basis-data-table__group-partial">
+            {infinite ? 'Загружено' : 'На странице'}: {group.rows.length} из {total}
+          </span>
+        )}
+      </div>
+    );
+  };
+  const identity =
+    columns.find((column) => column.pinned === 'start' && !column.utility) ??
+    columns.find((column) => !column.utility);
+  const tileFields = columns.filter(
+    (column) => column !== identity && column.utility !== 'actions',
+  );
+  const tileActions = columns.filter((column) => column.utility === 'actions');
+  const renderTile = (row: T) => (
+    <article
+      key={getRowId(row)}
+      className="basis-data-table__tile"
+      aria-label={getRowLabel(row)}
+      {...itemProps(row)}
+    >
+      <header className="basis-data-table__tile-header">
+        {selectionMode !== 'none' && (
+          <span className="basis-data-table__tile-select">{selectionInput(row)}</span>
+        )}
+        <div className="basis-data-table__tile-identity">
+          {identity?.render(row) ?? getRowLabel(row)}
+        </div>
+        {tileActions.map((column) => (
+          <div key={column.id} className="basis-data-table__tile-actions">
+            {column.render(row)}
+          </div>
+        ))}
+      </header>
+      {tileFields.length > 0 && (
+        <dl className="basis-data-table__tile-fields">
+          {tileFields.map((column) => (
+            <div
+              key={column.id}
+              className="basis-data-table__tile-field"
+              data-span={column.tile?.span}
+              data-emphasis={column.tile?.emphasis}
+            >
+              <dt>
+                {column.description ? (
+                  <Tooltip content={column.description}>
+                    <span
+                      className="basis-data-table__tile-label"
+                      tabIndex={0}
+                      aria-label={`О поле «${column.header}»`}
+                    >
+                      {column.header.includes(' ') &&
+                        `${column.header.slice(0, column.header.lastIndexOf(' '))} `}
+                      <span className="basis-data-table__tile-label-end">
+                        {column.header.slice(column.header.lastIndexOf(' ') + 1)}
+                        <Info aria-hidden="true" />
+                      </span>
+                    </span>
+                  </Tooltip>
+                ) : (
+                  column.header
+                )}
+              </dt>
+              <dd>{column.render(row)}</dd>
+            </div>
+          ))}
+        </dl>
+      )}
+    </article>
+  );
+  const renderRow = (row: T) => {
+    return (
+      <tr key={getRowId(row)} {...itemProps(row)}>
+        {selectionMode !== 'none' && (
+          <td className="basis-data-table__select">{selectionInput(row)}</td>
         )}
         {columns.map((column) => (
           <td
@@ -317,13 +642,23 @@ export function DataTable<T>({
       className="basis-data-table"
       data-selection={selectionMode}
       data-state={state}
+      data-view={view}
+      data-fill-height={view === 'tiles' || infinite || undefined}
+      data-resizing={resizing.resizing || undefined}
     >
       {canActivateRow && (
         <span id={rowActionHint} className="basis-visually-hidden">
-          Enter или пробел — быстрый просмотр. Ссылки открывают страницы, чекбоксы выбирают строки.
+          Enter или пробел — быстрый просмотр. Ссылки открывают страницы, чекбоксы выбирают ресурсы.
+        </span>
+      )}
+      {onColumnWidthsChange && (
+        <span id={`${rowActionHint}-resize`} className="basis-visually-hidden">
+          Перетащите границу или используйте стрелки влево и вправо. Shift увеличивает шаг. Двойное
+          нажатие или Home возвращает стандартную ширину. Escape отменяет перетаскивание.
         </span>
       )}
       <span className="basis-visually-hidden" role="status" aria-live="polite">
+        {onViewChange && `Вид: ${view === 'tiles' ? 'Плитки' : 'Таблица'}. `}
         {state === 'loading'
           ? 'Загружаем данные таблицы'
           : state === 'refreshing'
@@ -334,7 +669,8 @@ export function DataTable<T>({
       </span>
       <div
         className="basis-data-table__toolbar"
-        data-refresh={Boolean(onRefresh)}
+        data-persistent={Boolean(onRefresh || onViewChange || pagination)}
+        data-tools={Boolean(tools)}
         data-selected={replaceToolbarOnSelection && selected.size > 0 && !blocking}
       >
         <div
@@ -350,23 +686,55 @@ export function DataTable<T>({
         >
           {bulkToolbar}
         </div>
-        {onRefresh && (
-          <div className="basis-data-table__refresh">
-            <Tooltip
-              content={
-                busy ? 'Получаем свежие данные' : 'Обновить данные · настройки и выбор сохранятся'
-              }
-            >
-              <IconButton
-                ref={refreshButton}
-                size="sm"
-                variant="ghost"
-                icon={<RefreshCw />}
-                aria-label="Обновить данные таблицы"
-                loading={busy}
-                onClick={onRefresh}
+        {tools && <div className="basis-data-table__tools">{tools}</div>}
+        {(onViewChange || onRefresh || pagination) && (
+          <div className="basis-data-table__persistent">
+            {presentationItems.length > 0 && (
+              <span ref={presentationRoot} className="basis-data-table__presentation">
+                <Tooltip
+                  content={`Представление · ${view === 'table' ? 'таблица' : 'плитки'}${pagination ? (pagination.mode === 'pages' ? ', по страницам' : ', при прокрутке') : ''}`}
+                >
+                  <Menu
+                    compact
+                    size="sm"
+                    variant="ghost"
+                    label="Представление списка"
+                    icon={view === 'table' ? <Table2 /> : <LayoutGrid />}
+                    align="end"
+                    items={presentationItems}
+                  />
+                </Tooltip>
+              </span>
+            )}
+            {pagination && navigationPlacement !== 'bottom' && (
+              <TablePageNavigation
+                pagination={pagination}
+                compact
+                disabled={busy || blocking}
+                unavailable={blocking}
               />
-            </Tooltip>
+            )}
+            {onRefresh && (
+              <div className="basis-data-table__refresh">
+                <Tooltip
+                  content={
+                    busy
+                      ? 'Получаем свежие данные'
+                      : 'Обновить данные · настройки и выбор сохранятся'
+                  }
+                >
+                  <IconButton
+                    ref={refreshButton}
+                    size="sm"
+                    variant="ghost"
+                    icon={<RefreshCw />}
+                    aria-label="Обновить данные таблицы"
+                    loading={busy}
+                    onClick={onRefresh}
+                  />
+                </Tooltip>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -398,7 +766,7 @@ export function DataTable<T>({
               size="sm"
               variant="ghost"
               disabled={!groups.length || blocking}
-              aria-label={`${allCollapsed ? 'Развернуть' : 'Свернуть'} все группы на странице`}
+              aria-label={`${allCollapsed ? 'Развернуть' : 'Свернуть'} все группы ${infinite ? 'среди загруженных' : 'на странице'}`}
               onClick={() =>
                 setFolded({
                   field: grouping.id,
@@ -425,235 +793,258 @@ export function DataTable<T>({
         </div>
       )}
       <div
+        ref={scrollRoot}
         className="basis-data-table__scroll"
         tabIndex={0}
         role="region"
         aria-label={caption}
         aria-busy={busy}
       >
-        <table
-          style={{
-            minWidth: `calc(${selectionMode === 'none' ? '0px' : 'var(--basis-sys-table-selection-width)'} + ${columnWidths.length ? columnWidths.join(' + ') : '0px'})`,
-          }}
-        >
-          <caption className="basis-visually-hidden">{caption}</caption>
-          <colgroup>
-            {selectionMode !== 'none' && (
-              <col style={{ width: 'var(--basis-sys-table-selection-width)' }} />
-            )}
-            {columns.map((column, index) => (
-              <col
-                key={column.id}
-                style={{
-                  width:
-                    index === columns.findIndex((item) => !item.utility)
-                      ? undefined
-                      : columnWidths[index],
-                }}
-              />
-            ))}
-          </colgroup>
-          <thead>
-            <tr>
-              {selectionMode !== 'none' && (
-                <th className="basis-data-table__select">
-                  {selectionMode === 'multiple' ? (
-                    <input
-                      ref={selectAll}
-                      type="checkbox"
-                      aria-label={
-                        grouping ? 'Выбрать все строки на странице' : 'Выбрать все видимые строки'
-                      }
-                      checked={all}
-                      disabled={selectable.length === 0 || blocking}
-                      onChange={toggleAll}
-                    />
-                  ) : (
-                    <span className="basis-visually-hidden">Выбор</span>
-                  )}
-                </th>
+        {view === 'tiles' ? (
+          <>
+            <div className="basis-data-table__tile-bar">
+              {selectionMode === 'multiple' && (
+                <Tooltip
+                  content={
+                    infinite
+                      ? 'Выбрать все загруженные ресурсы. Новые порции не выбираются автоматически.'
+                      : 'Выбрать все ресурсы на текущей странице'
+                  }
+                >
+                  <label>
+                    {selectAllInput}
+                    <span>Выбрать все</span>
+                  </label>
+                </Tooltip>
               )}
-              {columns.map((column) => {
-                const priority = orders.findIndex((rule) => rule.column === column.id);
-                const currentSort = orders[priority];
-                const heading = column.sortable ? (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="basis-data-table__sort"
-                    data-sorted={Boolean(currentSort)}
-                    aria-label={`Сортировать: ${column.header}${priority >= 0 && orders.length > 1 ? ` · приоритет ${priority + 1}` : ''}`}
-                    trailingIcon={
-                      currentSort ? (
-                        currentSort.direction === 'asc' ? (
-                          <ArrowUp />
-                        ) : (
-                          <ArrowDown />
-                        )
-                      ) : (
-                        <ArrowUpDown />
-                      )
-                    }
-                    onClick={(event) =>
-                      onSortChange?.(
-                        {
-                          column: column.id,
-                          direction: currentSort?.direction === 'asc' ? 'desc' : 'asc',
-                        },
-                        event.shiftKey,
-                      )
-                    }
-                  >
-                    <span className="basis-data-table__header-label">{column.header}</span>
-                    {priority >= 0 && orders.length > 1 && (
-                      <sup className="basis-data-table__priority">{priority + 1}</sup>
-                    )}
-                  </Button>
-                ) : (
-                  <span className="basis-data-table__title">{column.header}</span>
-                );
-                return (
-                  <th
-                    key={column.id}
-                    scope="col"
-                    data-align={column.align}
-                    data-pinned={column.pinned}
-                    data-utility={column.utility}
-                    aria-sort={
-                      column.sortable
-                        ? priority === 0
-                          ? currentSort.direction === 'asc'
-                            ? 'ascending'
-                            : 'descending'
-                          : 'none'
-                        : undefined
-                    }
-                  >
-                    {column.utility === 'actions' ? (
-                      <span className="basis-visually-hidden">{column.header}</span>
-                    ) : (
-                      <div className="basis-data-table__heading">
-                        {heading}
-                        {column.description && (
-                          <Tooltip content={column.description}>
-                            <IconButton
-                              size="sm"
-                              variant="ghost"
-                              aria-label={`О поле «${column.header}»`}
-                              icon={<Info />}
-                            />
-                          </Tooltip>
-                        )}
-                        {column.filter && (
-                          <Tooltip content={`Фильтр: ${column.header}`}>
-                            <IconButton
-                              size="sm"
-                              variant="ghost"
-                              aria-label={`Фильтр: ${column.header}`}
-                              aria-pressed={column.filter.active || false}
-                              icon={<ListFilter />}
-                              onClick={column.filter.onClick}
-                            />
-                          </Tooltip>
-                        )}
+              <span>
+                {blocking
+                  ? 'Плитки ресурсов'
+                  : `${infinite ? 'Загружено' : 'На странице'}: ${rows.length}`}
+              </span>
+            </div>
+            {state === 'loading' ? (
+              <div className="basis-data-table__tiles" aria-hidden="true">
+                {Array.from({ length: Math.max(1, Math.min(20, loadingRows)) }, (_, index) => (
+                  <div key={index} className="basis-data-table__tile">
+                    <div className="basis-data-table__tile-header">
+                      <Skeleton width="70%" />
+                      <Skeleton width="var(--basis-sys-control-sm-height)" />
+                    </div>
+                    {tileFields.length > 0 && (
+                      <div className="basis-data-table__tile-fields">
+                        {tileFields.map((column) => (
+                          <div
+                            key={column.id}
+                            className="basis-data-table__tile-field"
+                            data-span={column.tile?.span}
+                            data-emphasis={column.tile?.emphasis}
+                          >
+                            <Skeleton width="50%" />
+                            <Skeleton width="80%" />
+                          </div>
+                        ))}
                       </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : state === 'error' || !rows.length ? null : grouping ? (
+              groups.map((group) => (
+                <section
+                  key={`${grouping.id}:${group.key}`}
+                  className="basis-data-table__tile-group"
+                  data-group-key={group.key}
+                  aria-label={`Группа «${group.label}»`}
+                >
+                  {renderGroupHeading(group)}
+                  {!collapsed.has(group.key) && (
+                    <div className="basis-data-table__tiles">{group.rows.map(renderTile)}</div>
+                  )}
+                </section>
+              ))
+            ) : (
+              <div className="basis-data-table__tiles">{rows.map(renderTile)}</div>
+            )}
+          </>
+        ) : (
+          <table
+            style={{
+              width: onColumnWidthsChange ? `${resizing.tableWidth}px` : undefined,
+              minWidth: `calc(${selectionMode === 'none' ? '0px' : 'var(--basis-sys-table-selection-width)'} + ${columnWidths.length ? columnWidths.join(' + ') : '0px'})`,
+            }}
+          >
+            <caption className="basis-visually-hidden">{caption}</caption>
+            <colgroup>
+              {selectionMode !== 'none' && (
+                <col style={{ width: 'var(--basis-sys-table-selection-width)' }} />
+              )}
+              {columns.map((column, index) => (
+                <col
+                  key={column.id}
+                  style={{
+                    width:
+                      !onColumnWidthsChange && index === columns.findIndex((item) => !item.utility)
+                        ? undefined
+                        : columnWidths[index],
+                  }}
+                />
+              ))}
+            </colgroup>
+            <thead>
+              <tr>
+                {selectionMode !== 'none' && (
+                  <th className="basis-data-table__select">
+                    {selectionMode === 'multiple' ? (
+                      selectAllInput
+                    ) : (
+                      <span className="basis-visually-hidden">Выбор</span>
                     )}
                   </th>
-                );
-              })}
-            </tr>
-          </thead>
-          {state === 'loading' ? (
-            <tbody aria-hidden="true" className="basis-data-table__skeleton">
-              {Array.from({ length: Math.max(1, Math.min(20, loadingRows)) }, (_, rowIndex) => (
-                <tr key={rowIndex}>
-                  {selectionMode !== 'none' && (
-                    <td className="basis-data-table__select">
-                      <Skeleton
-                        shape="block"
-                        width="var(--basis-comp-checkbox-size)"
-                        height="var(--basis-comp-checkbox-size)"
-                        className="basis-data-table__skeleton-check"
-                      />
-                    </td>
-                  )}
-                  {columns.map((column, index) => (
-                    <td key={column.id} data-pinned={column.pinned} data-utility={column.utility}>
-                      <Skeleton width={['72%', '48%', '62%'][(rowIndex + index) % 3]} />
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          ) : state === 'error' ? null : grouping ? (
-            groups.map((group) => {
-              const closed = collapsed.has(group.key);
-              const total = grouping.totalCounts?.get(group.key) ?? group.rows.length;
-              const groupSelectable = group.rows.filter(isRowSelectable);
-              const checkedCount = groupSelectable.filter((row) =>
-                selected.has(getRowId(row)),
-              ).length;
-              const checked = groupSelectable.length > 0 && checkedCount === groupSelectable.length;
-              return (
-                <tbody key={`${grouping.id}:${group.key}`} data-group-key={group.key}>
-                  <tr className="basis-data-table__group-row">
-                    <th
-                      scope="rowgroup"
-                      colSpan={columns.length + (selectionMode === 'none' ? 0 : 1)}
+                )}
+                {columns.map((column) => {
+                  const priority = orders.findIndex((rule) => rule.column === column.id);
+                  const currentSort = orders[priority];
+                  const heading = column.sortable ? (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="basis-data-table__sort"
+                      data-sorted={Boolean(currentSort)}
+                      aria-label={`Сортировать: ${column.header}${priority >= 0 && orders.length > 1 ? ` · приоритет ${priority + 1}` : ''}`}
+                      trailingIcon={
+                        currentSort ? (
+                          currentSort.direction === 'asc' ? (
+                            <ArrowUp />
+                          ) : (
+                            <ArrowDown />
+                          )
+                        ) : (
+                          <ArrowUpDown />
+                        )
+                      }
+                      onClick={(event) =>
+                        onSortChange?.(
+                          {
+                            column: column.id,
+                            direction: currentSort?.direction === 'asc' ? 'desc' : 'asc',
+                          },
+                          event.shiftKey,
+                        )
+                      }
                     >
-                      <div className="basis-data-table__group-heading">
-                        {selectionMode === 'multiple' && (
-                          <span className="basis-data-table__group-select">
-                            <input
-                              type="checkbox"
-                              checked={checked}
-                              disabled={!groupSelectable.length}
-                              ref={(element) => {
-                                if (element) element.indeterminate = checkedCount > 0 && !checked;
-                              }}
-                              aria-label={`Выбрать группу «${group.label}» на странице`}
-                              onChange={() => {
-                                const next = new Set(selected);
-                                groupSelectable.forEach((row) =>
-                                  checked ? next.delete(getRowId(row)) : next.add(getRowId(row)),
-                                );
-                                onSelectionChange(next);
-                              }}
-                            />
-                          </span>
-                        )}
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          leadingIcon={closed ? <ChevronRight /> : <ChevronDown />}
-                          aria-label={`${closed ? 'Развернуть' : 'Свернуть'} группу «${group.label}»`}
-                          aria-expanded={!closed}
-                          onClick={() => toggleGroup(group.key)}
-                        >
-                          {group.label}
-                        </Button>
-                        <Badge
-                          count={total}
-                          max={Number.MAX_SAFE_INTEGER}
-                          tone="neutral"
-                          label={`Ресурсов в группе: ${total}`}
+                      <span className="basis-data-table__header-label">{column.header}</span>
+                      {priority >= 0 && orders.length > 1 && (
+                        <sup className="basis-data-table__priority">{priority + 1}</sup>
+                      )}
+                    </Button>
+                  ) : (
+                    <span className="basis-data-table__title">{column.header}</span>
+                  );
+                  return (
+                    <th
+                      key={column.id}
+                      scope="col"
+                      data-align={column.align}
+                      data-pinned={column.pinned}
+                      data-utility={column.utility}
+                      data-column-id={column.id}
+                      data-resizable={Boolean(onColumnWidthsChange && !column.utility)}
+                      aria-sort={
+                        column.sortable
+                          ? priority === 0
+                            ? currentSort.direction === 'asc'
+                              ? 'ascending'
+                              : 'descending'
+                            : 'none'
+                          : undefined
+                      }
+                    >
+                      {column.utility === 'actions' ? (
+                        <span className="basis-visually-hidden">{column.header}</span>
+                      ) : (
+                        <div className="basis-data-table__heading">
+                          {heading}
+                          {column.description && (
+                            <Tooltip content={column.description}>
+                              <IconButton
+                                size="sm"
+                                variant="ghost"
+                                aria-label={`О поле «${column.header}»`}
+                                icon={<Info />}
+                              />
+                            </Tooltip>
+                          )}
+                          {column.filter && (
+                            <Tooltip content={`Фильтр: ${column.header}`}>
+                              <IconButton
+                                size="sm"
+                                variant="ghost"
+                                aria-label={`Фильтр: ${column.header}`}
+                                aria-pressed={column.filter.active || false}
+                                icon={<ListFilter />}
+                                onClick={column.filter.onClick}
+                              />
+                            </Tooltip>
+                          )}
+                        </div>
+                      )}
+                      {onColumnWidthsChange && !column.utility && (
+                        <span
+                          className="basis-data-table__resize"
+                          aria-describedby={`${rowActionHint}-resize`}
+                          {...resizing.handleProps(column)}
                         />
-                        {group.rows.length < total && (
-                          <span className="basis-data-table__group-partial">
-                            На странице: {group.rows.length} из {total}
-                          </span>
-                        )}
-                      </div>
+                      )}
                     </th>
+                  );
+                })}
+              </tr>
+            </thead>
+            {state === 'loading' ? (
+              <tbody aria-hidden="true" className="basis-data-table__skeleton">
+                {Array.from({ length: Math.max(1, Math.min(20, loadingRows)) }, (_, rowIndex) => (
+                  <tr key={rowIndex}>
+                    {selectionMode !== 'none' && (
+                      <td className="basis-data-table__select">
+                        <Skeleton
+                          shape="block"
+                          width="var(--basis-comp-checkbox-size)"
+                          height="var(--basis-comp-checkbox-size)"
+                          className="basis-data-table__skeleton-check"
+                        />
+                      </td>
+                    )}
+                    {columns.map((column, index) => (
+                      <td key={column.id} data-pinned={column.pinned} data-utility={column.utility}>
+                        <Skeleton width={['72%', '48%', '62%'][(rowIndex + index) % 3]} />
+                      </td>
+                    ))}
                   </tr>
-                  {!closed && group.rows.map(renderRow)}
-                </tbody>
-              );
-            })
-          ) : (
-            <tbody>{rows.map(renderRow)}</tbody>
-          )}
-        </table>
+                ))}
+              </tbody>
+            ) : state === 'error' ? null : grouping ? (
+              groups.map((group) => {
+                const closed = collapsed.has(group.key);
+                return (
+                  <tbody key={`${grouping.id}:${group.key}`} data-group-key={group.key}>
+                    <tr className="basis-data-table__group-row">
+                      <th
+                        scope="rowgroup"
+                        colSpan={columns.length + (selectionMode === 'none' ? 0 : 1)}
+                      >
+                        {renderGroupHeading(group)}
+                      </th>
+                    </tr>
+                    {!closed && group.rows.map(renderRow)}
+                  </tbody>
+                );
+              })
+            ) : (
+              <tbody>{rows.map(renderRow)}</tbody>
+            )}
+          </table>
+        )}
         {state === 'error' ? (
           <div className="basis-data-table__empty">
             <TableEmptyState
@@ -673,11 +1064,51 @@ export function DataTable<T>({
         ) : state === 'refreshing' && rows.length === 0 ? (
           <div className="basis-data-table__empty">{empty || <TableEmptyState />}</div>
         ) : null}
+        {infinite && !blocking && rows.length > 0 && (
+          <div
+            ref={sentinel}
+            className="basis-data-table__load-more"
+            data-error={Boolean(pagination?.loadMoreError)}
+          >
+            {hasMore ? (
+              <>
+                <span role={pagination?.loadMoreError ? 'alert' : 'status'}>
+                  {pagination?.loadMoreError
+                    ? `Не удалось загрузить ещё. ${pagination.loadMoreError}`
+                    : pagination?.loadingMore
+                      ? 'Загружаем следующую порцию…'
+                      : 'Следующая порция появится при прокрутке'}
+                </span>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  loading={pagination?.loadingMore}
+                  disabled={busy}
+                  onClick={pagination?.onLoadMore}
+                >
+                  {pagination?.loadMoreError ? 'Повторить подгрузку' : 'Загрузить ещё'}
+                </Button>
+              </>
+            ) : (
+              <span role="status">Все ресурсы загружены · {pagination?.total}</span>
+            )}
+          </div>
+        )}
       </div>
-      {footer && (
+      {(footer || pagination) && (
         <div className="basis-data-table__footer" data-blocked={blocking}>
           <div className="basis-data-table__footer-content" inert={blocking} aria-hidden={blocking}>
-            {footer}
+            {pagination ? (
+              <TablePagingFooter
+                pagination={pagination}
+                disabled={busy}
+                showNavigation={navigationPlacement !== 'top'}
+              >
+                {footer}
+              </TablePagingFooter>
+            ) : (
+              footer
+            )}
           </div>
           {blocking && (
             <span className="basis-data-table__footer-status">

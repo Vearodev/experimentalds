@@ -18,54 +18,64 @@
         "workspace": {
           "$type": "color",
           "$value": "{sys.color.surface.subtle}",
-          "$description": "Фон между отделёнными секциями облачной платформы. Светлая тема использует мягкий холодный тон."
+          "$description": "Спокойный фон вокруг шапки, навигации и единой рабочей поверхности."
         },
         "canvas": {
           "$type": "color",
           "$value": "{ref.color.neutral.50}",
-          "$description": "Смысловая роль surface.canvas."
+          "$description": "Рабочее полотно между секциями данных. На нём размещаются заголовки, локальная навигация и вспомогательный контекст."
         },
         "base": {
           "$type": "color",
           "$value": "{ref.color.neutral.0}",
-          "$description": "Смысловая роль surface.base."
+          "$description": "Основная поверхность таблиц, форм, конфигурации и контекстных окон. Светлее рабочего полотна."
         },
         "subtle": {
           "$type": "color",
           "$value": "{ref.color.neutral.100}",
-          "$description": "Смысловая роль surface.subtle."
+          "$description": "Спокойная вложенная или служебная область, не требующая отдельного акцента."
         },
         "hover": {
           "$type": "color",
           "$value": "{ref.color.blue.0}",
-          "$description": "Смысловая роль surface.hover."
+          "$description": "Временная подложка наведения на интерактивный элемент. Не обозначает постоянный выбор."
         },
         "selected": {
           "$type": "color",
           "$value": "{ref.color.blue.50}",
-          "$description": "Смысловая роль surface.selected."
+          "$description": "Заметная подложка выбранных данных: строк таблицы, пунктов выбора и сохранённых наборов."
+        },
+        "selected-subtle": {
+          "$type": "color",
+          "$value": "{ref.color.blue.0}",
+          "$description": "Мягкая подложка активной вкладки или текущего локального контекста. Выбор данных использует surface.selected."
         },
         "inverse": {
           "$type": "color",
           "$value": "{ref.color.navy.900}",
           "$description": "Смысловая роль surface.inverse."
+        },
+        "emphasis": {
+          "$type": "color",
+          "$value": "{ref.color.blue.0}",
+          "$description": "Локальная подложка ключевой сводки или значения. Не означает статус, выбор строки или действие."
         }
       },
       "text": {
         "primary": {
           "$type": "color",
-          "$value": "{ref.color.navy.800}",
-          "$description": "Смысловая роль text.primary."
+          "$value": "{ref.color.neutral.950}",
+          "$description": "Заголовки и основные значения. Максимальный текстовый акцент, нейтральный относительно фирменного цвета."
         },
         "secondary": {
           "$type": "color",
-          "$value": "{ref.color.neutral.700}",
-          "$description": "Смысловая роль text.secondary."
+          "$value": "{ref.color.neutral.600}",
+          "$description": "Подписи полей и второстепенный текст. Читается уверенно, не конкурирует с основными значениями."
         },
         "muted": {
           "$type": "color",
           "$value": "{ref.color.neutral.500}",
-          "$description": "Смысловая роль text.muted."
+          "$description": "Пояснения, метаданные и служебные подписи с сохранением читаемого контраста."
         },
         "placeholder": {
           "$type": "color",
@@ -866,8 +876,8 @@
       "navigation": {
         "background": {
           "$type": "color",
-          "$value": "{sys.color.surface.base}",
-          "$description": "Отдельная поверхность основного меню, согласованная с шапкой и рабочей областью."
+          "$value": "{sys.color.surface.canvas}",
+          "$description": "Спокойная поверхность навигации: второстепенна относительно данных рабочей области."
         },
         "foreground": {
           "$type": "color",
@@ -886,8 +896,8 @@
         },
         "selected": {
           "$type": "color",
-          "$value": "{sys.color.surface.selected}",
-          "$description": "Подложка активного раздела."
+          "$value": "{sys.color.surface.base}",
+          "$description": "Нейтральная подложка текущего раздела; фирменный акцент остаётся у маркера и иконки."
         },
         "accent": {
           "$type": "color",
@@ -911,7 +921,7 @@
         },
         "selected-border": {
           "$type": "color",
-          "$value": "{sys.color.border.selected}",
+          "$value": "{sys.color.border.default}",
           "$description": "Тонкая граница активного раздела."
         },
         "count-background": {

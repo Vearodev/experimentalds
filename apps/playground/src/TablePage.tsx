@@ -10,28 +10,24 @@ import { columnDescriptions, columnIds, toolColumns, toolFields } from './table-
 import { useDesign } from './DesignContext';
 import { ComponentTokens } from './TokenPanel';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import {
-  ChevronLeft,
-  ChevronRight,
-  Cloud,
-  ArrowLeft,
-  Info,
-  Power,
-  Search,
-  Server,
-  Square,
-  X,
-} from 'lucide-react';
+import { Cloud, ArrowLeft, Info, Power, Search, Server, Square, X } from 'lucide-react';
 import {
   Button,
   ContextPanel,
   DataTable,
+  useIncrementalPages,
+  useTableFilterPresets,
+  loadDefaultFilterRules,
+  type TablePagingMode,
+  type TableNavigationPlacement,
   IconButton,
+  Input,
   Message,
   Menu,
   Select,
   TableEmptyState,
   type DataTableState,
+  type DataTableView,
   StatusBadge,
   TableToolsPanel,
   TableToolbarActions,
@@ -142,11 +138,25 @@ export function TablePage() {
   }, []);
   const columnWidth = (name: string) => resolved[`comp.table.column.${name}.width`].value.value;
   const [filterField, setFilterField] = useState<FilterField | null>(null);
-  const [rows, setRows] = useState(initial),
+  const [rows, setRows] = useState(() => [
+      ...initial,
+      ...Array.from({ length: 16 }, (_, i): VM => ({
+        ...initial[i % initial.length],
+        id: `vm-${String(i + 9).padStart(3, '0')}`,
+        name: initial[i % initial.length].name.replace(/\d+$/, String(i + 3).padStart(2, '0')),
+        ip: `10.50.${Math.floor(i / initial.length)}.${i + 10}`,
+      })),
+    ]),
     [selected, setSelected] = useState(new Set<string>()),
     [query, setQuery] = useState('');
   const [sorts, setSorts] = useState<SortState[]>([{ column: 'name', direction: 'asc' }]);
   const [grouping, setGrouping] = useState<TableGroupRule | null>(null);
+  const [view, setView] = useState<DataTableView>('table');
+  const [paging, setPaging] = useState<TablePagingMode>('pages');
+  const [navigationPlacement, setNavigationPlacement] = useState<TableNavigationPlacement>('both');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(4);
+  const [columnWidths, setColumnWidths] = useState<Record<string, number>>({});
   const [scenario, setScenario] = useState('ready');
   const [requestPhase, setRequestPhase] = useState<DataTableState | null>(null);
   const refreshTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -165,11 +175,29 @@ export function TablePage() {
     refreshTimer.current = null;
     setRequestPhase(null);
     setScenario(value);
+    setCurrentPage(1);
+    if (value === 'append-error') setPaging('infinite');
     setSelected(new Set());
   };
   const [columnOrder, setColumnOrder] = useState(columnIds);
   const [panelAnchor, setPanelAnchor] = useState<HTMLElement | null>(null);
-  const [filters, setFilters] = useState<Filters>(blank);
+  const [filters, setFilters] = useState<Filters>(
+    () =>
+      loadDefaultFilterRules<FilterField>('basis.filter-presets.v1:playground:table', (rule) =>
+        toolFields.some((f) => f.id === rule.field) ? filterError(rule) : 'Поле недоступно',
+      ) || blank,
+  );
+  const [presetAction, setPresetAction] = useState<'library' | 'save' | undefined>();
+  const validateSavedFilter = (rule: Filters[number]) =>
+    toolFields.some((f) => f.id === rule.field) ? filterError(rule) : 'Поле недоступно';
+  const savedFilters = useTableFilterPresets<FilterField>(
+    'basis.filter-presets.v1:playground:table',
+    validateSavedFilter,
+  );
+  const describeSavedFilter = (rule: Filters[number]) =>
+    toolFields.some((f) => f.id === rule.field)
+      ? formatFilter(rule)
+      : `Поле «${rule.field}» недоступно`;
   const [panel, setPanel] = useState<TableToolsMode | null>(null),
     [hidden, setHidden] = useState(new Set<string>()),
     [previewId, setPreviewId] = useState<string | null>(null);
@@ -197,7 +225,7 @@ export function TablePage() {
     );
     return sortResources(result, sorts);
   }, [rows, query, filters, sorts]);
-  const displayRows = ['empty', 'filtered'].includes(scenario) ? [] : filtered;
+  const resultRows = ['empty', 'filtered'].includes(scenario) ? [] : filtered;
   const tableState: DataTableState =
     requestPhase ??
     (['loading', 'refreshing', 'error', 'stale'].includes(scenario)
@@ -218,6 +246,41 @@ export function TablePage() {
       onClear: () => setGrouping(null),
     };
   };
+  const resultGroups = grouping
+    ? groupTableRows(resultRows, groupConfig(grouping).getValue, grouping.direction)
+    : [];
+  const ordered = grouping ? resultGroups.flatMap((group) => group.rows) : resultRows;
+  const pages = Math.max(1, Math.ceil(ordered.length / pageSize));
+  const page = Math.min(currentPage, pages);
+  const displayRows = ordered.slice(
+    paging === 'infinite' ? 0 : (page - 1) * pageSize,
+    page * pageSize,
+  );
+  const resultKey = JSON.stringify([query, filters, sorts, grouping, scenario]);
+  const pagingKey = JSON.stringify([resultKey, pageSize]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [resultKey]);
+  const failedBatch = useRef({ failed: false });
+  useEffect(() => {
+    failedBatch.current = { failed: false };
+  }, [pagingKey]);
+  const incremental = useIncrementalPages({
+    mode: paging,
+    page,
+    pages,
+    resetKey: pagingKey,
+    disabled: tableState !== 'ready' && tableState !== 'stale',
+    onPageChange: setCurrentPage,
+    loadPage: async () => {
+      const attempt = failedBatch.current;
+      await new Promise((resolve) => setTimeout(resolve, 700));
+      if (scenario === 'append-error' && !attempt.failed) {
+        attempt.failed = true;
+        throw new Error('Сервис временно недоступен. Повторите запрос.');
+      }
+    },
+  });
   const startable = rows.filter((row) => selected.has(row.id) && row.status !== 'running');
   const stoppable = rows.filter((row) => selected.has(row.id) && row.status === 'running');
   const perform = (ids: string[], status: VM['status']) => {
@@ -237,6 +300,7 @@ export function TablePage() {
     }, 1800);
   };
   const openFilters = (field: FilterField | null = null, anchor?: HTMLElement) => {
+    setPresetAction(undefined);
     setFilterField(field);
     setPanelAnchor(anchor || (document.activeElement as HTMLElement));
     setPanel('filters');
@@ -271,6 +335,7 @@ export function TablePage() {
     },
     {
       id: 'status',
+      tile: { span: 'full' },
       header: filterLabels.status,
       width: columnWidth('status'),
       sortable: true,
@@ -291,6 +356,7 @@ export function TablePage() {
     },
     {
       id: 'cpu',
+      tile: { emphasis: 'metric' },
       header: filterLabels.cpu,
       width: columnWidth('numeric'),
       filter: {
@@ -311,6 +377,7 @@ export function TablePage() {
     },
     {
       id: 'ram',
+      tile: { emphasis: 'metric' },
       header: filterLabels.ram,
       width: columnWidth('numeric'),
       filter: {
@@ -400,7 +467,7 @@ export function TablePage() {
       <PageHeading
         category="Составной компонент / DataTable"
         title="Таблицы"
-        description="Плотная работа с ресурсами. Общие кнопки, поля, состояния и предсказуемые действия."
+        description="Таблица и плитки — два вида одного реестра. Общие поля, настройки, выбор и действия."
       />
       <div className="table-context">
         <div>
@@ -429,7 +496,7 @@ export function TablePage() {
             {
               value: 'loading',
               label: 'Первая загрузка',
-              description: 'Скелетон по сетке колонок',
+              description: 'Скелетон в выбранном виде',
             },
             {
               value: 'refreshing',
@@ -443,6 +510,11 @@ export function TablePage() {
               description: 'Поиск или фильтры не дали результата',
             },
             { value: 'error', label: 'Ошибка загрузки', description: 'Данные ещё не получены' },
+            {
+              value: 'append-error',
+              label: 'Ошибка подгрузки',
+              description: 'Первая порция доступна. Повторный запрос успешен.',
+            },
             {
               value: 'stale',
               label: 'Ошибка обновления',
@@ -474,72 +546,77 @@ export function TablePage() {
                 icon={<X />}
                 onClick={() => {
                   setFilters(filters.filter((item) => item.field !== rule.field));
-                  setSelected(new Set());
                 }}
               />
             </div>
           ))}
         </div>
       )}
-      <DataTable
-        rows={displayRows}
-        state={tableState}
-        error={
-          tableState === 'error' || tableState === 'stale'
-            ? 'Сервис ресурсов временно недоступен. Повторите запрос.'
-            : undefined
-        }
-        onRefresh={refreshTable}
-        onRowActivate={(row, origin) => {
-          setPreviewAnchor(origin);
-          setPreviewId(row.id);
-        }}
-        previewRowId={previewId || undefined}
-        loadingRows={8}
-        columns={columnOrder
-          .map((id) => columns.find((column) => column.id === id)!)
-          .filter((column) => !hidden.has(column.id))}
-        getRowId={(row) => row.id}
-        getRowLabel={(row) => row.name}
-        caption="Виртуальные машины — пример композиции"
-        selected={selected}
-        onSelectionChange={setSelected}
-        sorts={sorts}
-        grouping={grouping ? groupConfig(grouping) : undefined}
-        onSortChange={changeSort}
-        rowTone={(row) =>
-          row.status === 'error' ? 'error' : row.cpu >= 80 ? 'warning' : undefined
-        }
-        toolbar={
-          <>
-            <label className="table-search">
-              <Search size={16} />
-              <input
-                aria-label="Поиск виртуальных машин"
-                placeholder="Имя, IP-адрес или проект"
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                  setSelected(new Set());
-                }}
-              />
-              {query && (
-                <IconButton
-                  size="sm"
-                  variant="ghost"
-                  aria-label="Очистить поиск"
-                  icon={<X />}
-                  onClick={() => {
-                    setQuery('');
-                    setSelected(new Set());
-                  }}
-                />
-              )}
-            </label>
+      <div className="table-showcase">
+        <DataTable
+          view={view}
+          onViewChange={setView}
+          pagination={{
+            mode: paging,
+            placement: navigationPlacement,
+            onPlacementChange: setNavigationPlacement,
+            page,
+            pageSize,
+            pageSizeOptions: [4, 8, 12, 24],
+            onPageSizeChange: (size) => {
+              setCurrentPage(
+                paging === 'infinite' ? 1 : Math.floor(((page - 1) * pageSize) / size) + 1,
+              );
+              setPageSize(size);
+            },
+            total: ordered.length,
+            resetKey: pagingKey,
+            onModeChange: (mode) => {
+              if (mode !== paging) {
+                setPaging(mode);
+                setCurrentPage(1);
+              }
+            },
+            onPageChange: setCurrentPage,
+            ...incremental,
+          }}
+          rows={displayRows}
+          state={tableState}
+          error={
+            tableState === 'error' || tableState === 'stale'
+              ? 'Сервис ресурсов временно недоступен. Повторите запрос.'
+              : undefined
+          }
+          onRefresh={refreshTable}
+          onRowActivate={(row, origin) => {
+            setPreviewAnchor(origin);
+            setPreviewId(row.id);
+          }}
+          previewRowId={previewId || undefined}
+          loadingRows={pageSize}
+          columnWidths={columnWidths}
+          onColumnWidthsChange={setColumnWidths}
+          onToolsOpen={(mode, anchor) => {
+            setPanelAnchor(anchor);
+            setPanel(mode);
+          }}
+          tools={
             <TableToolbarActions
+              presets={{
+                library: savedFilters,
+                rules: filters,
+                describe: describeSavedFilter,
+                validate: validateSavedFilter,
+                onApply: setFilters,
+                onManage: (action, anchor) => {
+                  openFilters(null, anchor);
+                  setPresetAction(action);
+                },
+              }}
+              primaryOnly
+              view={view}
               filterCount={filterCount}
               sortCount={sorts.length}
-              groupLabel={grouping ? filterLabels[grouping.field as FilterField] : undefined}
               onOpen={(mode, anchor) => {
                 if (mode === 'filters') openFilters(null, anchor);
                 else {
@@ -548,111 +625,126 @@ export function TablePage() {
                 }
               }}
             />
-          </>
-        }
-        bulkToolbar={
-          <>
-            <div className="bulk-label">
-              <span>{selected.size}</span>выбрано
-              <IconButton
+          }
+          columns={columnOrder
+            .map((id) => columns.find((column) => column.id === id)!)
+            .filter((column) => !hidden.has(column.id))}
+          getRowId={(row) => row.id}
+          getRowLabel={(row) => row.name}
+          caption="Виртуальные машины — пример композиции"
+          selected={selected}
+          onSelectionChange={setSelected}
+          sorts={sorts}
+          grouping={
+            grouping
+              ? {
+                  ...groupConfig(grouping),
+                  totalGroups: resultGroups.length,
+                  totalCounts: new Map(resultGroups.map((group) => [group.key, group.rows.length])),
+                }
+              : undefined
+          }
+          onSortChange={changeSort}
+          rowTone={(row) =>
+            row.status === 'error' ? 'error' : row.cpu >= 80 ? 'warning' : undefined
+          }
+          toolbar={
+            <>
+              <Input
+                className="table-search-field"
                 size="sm"
-                variant="ghost"
-                aria-label="Снять выделение"
-                icon={<X />}
-                onClick={() => setSelected(new Set())}
+                leadingIcon={<Search />}
+                aria-label="Поиск виртуальных машин"
+                placeholder="Имя, IP-адрес или проект"
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                }}
+                onClear={query ? () => setQuery('') : undefined}
               />
-            </div>
-            <div className="bulk-actions">
-              <Button
-                size="sm"
-                variant="primary"
-                leadingIcon={<Power />}
-                loading={pending === 'running'}
-                tone="brand"
-                disabled={pending === 'off' || !startable.length}
-                onClick={() =>
-                  perform(
-                    startable.map((row) => row.id),
-                    'running',
-                  )
-                }
-              >
-                Запустить{startable.length ? ` · ${startable.length}` : ''}
-              </Button>
-              <Button
-                size="sm"
-                leadingIcon={<Square />}
-                loading={pending === 'off'}
-                tone="neutral"
-                disabled={pending === 'running' || !stoppable.length}
-                onClick={() =>
-                  perform(
-                    stoppable.map((row) => row.id),
-                    'off',
-                  )
-                }
-              >
-                Выключить{stoppable.length ? ` · ${stoppable.length}` : ''}
-              </Button>
-            </div>
-            <span className="bulk-hint">Действия для доступных ВМ</span>
-          </>
-        }
-        empty={
-          scenario === 'empty' ? (
-            <TableEmptyState
-              title="Виртуальных машин пока нет"
-              description="После создания машины её состояние и ресурсы появятся здесь."
-              action={
-                <Button onClick={() => changeScenario('ready')}>Показать пример с данными</Button>
-              }
-            />
-          ) : (
-            <TableEmptyState
-              kind="filtered"
-              action={
+            </>
+          }
+          bulkToolbar={
+            <>
+              <div className="bulk-label">
+                <span>{selected.size}</span>выбрано
+                <IconButton
+                  size="sm"
+                  variant="ghost"
+                  aria-label="Снять выделение"
+                  icon={<X />}
+                  onClick={() => setSelected(new Set())}
+                />
+              </div>
+              <div className="bulk-actions">
                 <Button
                   size="sm"
-                  onClick={() => {
-                    setQuery('');
-                    setFilters(blank);
-                    changeScenario('ready');
-                  }}
+                  variant="primary"
+                  leadingIcon={<Power />}
+                  loading={pending === 'running'}
+                  tone="brand"
+                  disabled={pending === 'off' || !startable.length}
+                  onClick={() =>
+                    perform(
+                      startable.map((row) => row.id),
+                      'running',
+                    )
+                  }
                 >
-                  Сбросить поиск и фильтры
+                  Запустить{startable.length ? ` · ${startable.length}` : ''}
                 </Button>
-              }
-            />
-          )
-        }
-        footer={
-          <>
-            <span>
-              Показано {displayRows.length} из {scenario === 'empty' ? 0 : rows.length}
-            </span>
-            <span>
-              Строка 40 px <i /> единая плотность
-            </span>
-            <div className="basis-table-pagination">
-              <IconButton
-                size="lg"
-                variant="secondary"
-                aria-label="Предыдущая страница"
-                icon={<ChevronLeft />}
-                disabled
+                <Button
+                  size="sm"
+                  leadingIcon={<Square />}
+                  loading={pending === 'off'}
+                  tone="neutral"
+                  disabled={pending === 'running' || !stoppable.length}
+                  onClick={() =>
+                    perform(
+                      stoppable.map((row) => row.id),
+                      'off',
+                    )
+                  }
+                >
+                  Выключить{stoppable.length ? ` · ${stoppable.length}` : ''}
+                </Button>
+              </div>
+              <span className="bulk-hint">
+                {[...selected].some((id) => !displayRows.some((row) => row.id === id))
+                  ? `${[...selected].filter((id) => !displayRows.some((row) => row.id === id)).length} вне результата`
+                  : 'Действия для доступных ВМ'}
+              </span>
+            </>
+          }
+          empty={
+            scenario === 'empty' ? (
+              <TableEmptyState
+                title="Виртуальных машин пока нет"
+                description="После создания машины её состояние и ресурсы появятся здесь."
+                action={
+                  <Button onClick={() => changeScenario('ready')}>Показать пример с данными</Button>
+                }
               />
-              <span>1 / 1</span>
-              <IconButton
-                size="lg"
-                variant="secondary"
-                aria-label="Следующая страница"
-                icon={<ChevronRight />}
-                disabled
+            ) : (
+              <TableEmptyState
+                kind="filtered"
+                action={
+                  <Button
+                    size="sm"
+                    onClick={() => {
+                      setQuery('');
+                      setFilters(blank);
+                      changeScenario('ready');
+                    }}
+                  >
+                    Сбросить поиск и фильтры
+                  </Button>
+                }
               />
-            </div>
-          </>
-        }
-      />
+            )
+          }
+        />
+      </div>
       <div className="table-message" role="status">
         <Info size={14} />
         {message}
@@ -668,8 +760,8 @@ export function TablePage() {
             <span>01</span>
             <h3>Геометрия сохраняется</h3>
             <p>
-              Массовые действия занимают место основной панели. Заголовок и строки остаются на
-              месте.
+              Массовые действия занимают место поиска. Фильтры, сортировка и настройки остаются
+              доступны, заголовок и строки не сдвигаются.
             </p>
           </article>
           <article>
@@ -702,9 +794,77 @@ export function TablePage() {
             <span>06</span>
             <h3>Предсказуемый просмотр</h3>
             <p>
-              Нажатие на строку или Enter / пробел открывает быстрый просмотр справа. Ссылка в имени
-              ведёт на страницу ресурса, чекбокс выбирает строку, кнопки выполняют свои действия.
-              После закрытия просмотра фокус возвращается к строке.
+              Нажатие на строку, плитку или Enter / пробел открывает быстрый просмотр справа. Ссылка
+              в имени ведёт на страницу ресурса, чекбокс выбирает строку, кнопки выполняют свои
+              действия. После закрытия просмотра фокус возвращается к строке.
+            </p>
+          </article>
+          <article>
+            <span>07</span>
+            <h3>Меняется только представление</h3>
+            <p>
+              Таблица помогает сравнивать значения по столбцам, плитки — читать каждый ресурс
+              целиком. Поиск, фильтры, сортировка, группы, страница и выбор общие. Переключатель
+              доступен и при массовых действиях.
+            </p>
+          </article>
+          <article>
+            <span>08</span>
+            <h3>Поля под вашим контролем</h3>
+            <p>
+              Видимость и порядок общие для обоих видов. Имя и действия закреплены в шапке плитки.
+              Пояснения берутся из описаний колонок, а числовые показатели используют второе
+              семейство шрифта.
+            </p>
+          </article>
+          <article>
+            <span>09</span>
+            <h3>Один навигатор в двух местах</h3>
+            <p>
+              Текущая страница и общее число страниц видны сразу в одну строку. Диапазон и общее
+              количество записей находятся слева в подвале. Стрелки листают, счётчик открывает
+              переход по номеру и выбор количества ресурсов. Блок одинаков в шапке и внизу. В меню
+              представления выберите одно или оба расположения. При последовательной загрузке вместо
+              страниц доступны прогресс и следующая порция.
+            </p>
+          </article>
+          <article>
+            <span>10</span>
+            <h3>Управление шириной</h3>
+            <p>
+              Перетаскивайте правую границу заголовка. Чекбоксы и меню действий имеют фиксированную
+              ширину. Двойное нажатие возвращает ширину колонки, а меню представления — всех
+              колонок. С клавиатуры: ← / →, Shift увеличивает шаг, Home сбрасывает ширину, Escape
+              отменяет жест.
+            </p>
+          </article>
+          <article>
+            <span>11</span>
+            <h3>Настройки собраны вместе</h3>
+            <p>
+              Меню представления объединяет вид, загрузку, поля, группировку и расположение
+              навигации. Размер страницы сохраняет положение в списке. Смена режима или размера
+              порции при прокрутке начинает с первой порции, сохраняя фильтры и выбранные ресурсы.
+            </p>
+          </article>
+          <article>
+            <span>12</span>
+            <h3>Выбор имеет границы</h3>
+            <p>
+              «Выбрать все» действует на текущую страницу или загруженные ресурсы. Новые порции не
+              выбираются автоматически. Ошибка подгрузки оставляет список доступным и предлагает
+              повторить запрос.
+            </p>
+          </article>
+          <article>
+            <span>13</span>
+            <h3>Свои наборы фильтров</h3>
+            <p>
+              Сохраните условия под названием и применяйте их через стрелку у кнопки «Фильтры».
+              Здесь же компактный флажок «Запомнить выбор» назначает фильтр по умолчанию. Поиск,
+              сортировка, вид и выбор ресурсов сохраняются. В «Моих наборах» доступны поиск,
+              переименование, копирование, обновление и удаление с отменой. Наборы хранятся в этом
+              браузере.
             </p>
           </article>
         </div>
@@ -730,6 +890,10 @@ export function TablePage() {
       </section>
       {panel && (
         <TableToolsPanel
+          filterPresets={savedFilters}
+          presetAction={presetAction}
+          describeFilter={describeSavedFilter}
+          view={view}
           mode={panel}
           field={panel === 'filters' ? filterField : null}
           anchor={panelAnchor}
@@ -754,7 +918,6 @@ export function TablePage() {
           onApply={(next) => {
             if (panel === 'filters') {
               setFilters(next.filters);
-              setSelected(new Set());
             } else if (panel === 'sort') setSorts(next.sorts);
             else if (panel === 'group') setGrouping(next.grouping ?? null);
             else {
@@ -762,7 +925,10 @@ export function TablePage() {
               setHidden(next.hidden);
             }
           }}
-          onClose={() => setPanel(null)}
+          onClose={() => {
+            savedFilters.dismiss();
+            setPanel(null);
+          }}
         />
       )}
       <ContextPanel
